@@ -1,0 +1,29 @@
+{
+  "files": {
+    "main.css": "/static/css/main.8f28f36a.css",
+    "main.js": "/static/js/main.4334f06d.js",
+    "static/js/607.b85a252a.chunk.js": "/static/js/607.b85a252a.chunk.js",
+    "static/js/22.23bff9ca.chunk.js": "/static/js/22.23bff9ca.chunk.js",
+    "static/js/787.fff9c6cd.chunk.js": "/static/js/787.fff9c6cd.chunk.js",
+    "static/media/floorplan.png": "/static/media/floorplan.2fb8663746e70a029cdb.png",
+    "static/media/icon-areas.png": "/static/media/icon-areas.06a76dcd0882b1b00925.png",
+    "static/media/logo-placeholder.png": "/static/media/logo-placeholder.bf28c706afc2c8160e55.png",
+    "static/media/icon-ShareOwn.png": "/static/media/icon-ShareOwn.a88617b0df89441aadf4.png",
+    "static/media/icon-savings.png": "/static/media/icon-savings.34c6cad48405ab530a78.png",
+    "static/media/icon-rent.png": "/static/media/icon-rent.ee5a533f1b2d945ab8a7.png",
+    "static/media/icon-3-placeholder.png": "/static/media/icon-3-placeholder.5d6ebfd9363b4339323f.png",
+    "static/media/icon-cheque.png": "/static/media/icon-cheque.d3082fc934444ae77c78.png",
+    "static/media/icon-job.png": "/static/media/icon-job.7786a712b08132a92659.png",
+    "static/media/icon-1-placeholder.png": "/static/media/icon-1-placeholder.2fa6ffe9886e4833af48.png",
+    "index.html": "/index.html",
+    "main.8f28f36a.css.map": "/static/css/main.8f28f36a.css.map",
+    "main.4334f06d.js.map": "/static/js/main.4334f06d.js.map",
+    "607.b85a252a.chunk.js.map": "/static/js/607.b85a252a.chunk.js.map",
+    "22.23bff9ca.chunk.js.map": "/static/js/22.23bff9ca.chunk.js.map",
+    "787.fff9c6cd.chunk.js.map": "/static/js/787.fff9c6cd.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8f28f36a.css",
+    "static/js/main.4334f06d.js"
+  ]
+}
