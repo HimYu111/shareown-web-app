@@ -41,6 +41,7 @@ function Results2({ hasChosenNo, result }) {
     "accumulated_wealth" in result &&
     "transformed_wealth" in result &&
     "initial_share" in result &&
+    "age_at_25_percent_SO" in result &&
     "shared_ownership_share" in result;
   const hasError = result && typeof result === "object" && "error" in result;
 
@@ -146,13 +147,7 @@ function Results2({ hasChosenNo, result }) {
             <br />
             <div>
               <p>
-                You can now buy a {result.initial_share ? result.initial_share.toFixed(0) : 'N/A'}% share in a SO property. See below graph for stair casing progress.
-              </p>
-            </div>
-            <br />
-            <div>
-              <p>
-                If you carry on saving {result.x ? result.x : 'N/A'}% of your post tax income, you would be able to buy 100% of your shared ownership property when you are{" "}
+                If you carry on saving {result.x ? result.x : 'N/A'}% of your post tax income, you would be able to buy your first 25% of a shared ownership property at {result.age_at_25_percent_SO ? result.age_at_25_percent_SO.toFixed() : 'N/A'} and 100% of your shared ownership property when you are{" "}
                 {result.age_at_SO ? result.age_at_SO.toFixed() : 'N/A'}.
               </p>
             </div>
@@ -165,7 +160,7 @@ function Results2({ hasChosenNo, result }) {
             <br />
             <div>
               <p>
-                Accounting for inflation, that is approximately £{result.transformed_wealth ? result.transformed_wealth.toFixed() : 'N/A'} currently. See graph 1 for wealth breakdown quarter by quarter.
+                Accounting for inflation, that is approximately £{result.transformed_wealth ? result.transformed_wealth.toFixed() : 'N/A'} currently. See graphs for wealth breakdown quarter by quarter.
               </p>
             </div>
             <br />
@@ -194,4 +189,5 @@ Results2.propTypes = {
 };
 
 export default Results2;
+
 
