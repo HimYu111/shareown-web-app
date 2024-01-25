@@ -35,7 +35,7 @@ function Question({ setResult, hasChosenNo, setHasChosenNo }) {
       };
 
       const response = await axios.post(
-        "http://localhost:5000/predict",
+        "https://shareown-backend.onrender.com/predict",
         postData,
       );
       setResult(response.data);

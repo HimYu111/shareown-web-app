@@ -73,7 +73,7 @@ function Input({ setResult, setResult2 }) {
 
       // Send POST request
       const response = await axios.post(
-        "http://localhost:5000/predict",
+        "https://shareown-backend.onrender.com/predict",
         postData,
       );
       setResult(response.data);
