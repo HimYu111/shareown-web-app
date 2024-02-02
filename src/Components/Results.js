@@ -11,23 +11,24 @@ function Results({ result }) {
   const hasError = result && typeof result === "object" && "error" in result;
 
   return (
-    <div className="bg-slate-800 py-20 ">
-      <div className="text-white text-4xl  " id="results">
+    <div className="bg-slate-800 py-20">
+      <div className="text-white text-4xl" id="results">
         {hasResults ? (
           <div>
-            <p>Buying a home on the open market is currently {result.affordability_status} with your current assets</p>
-            <p>
+            <p className="text-xl">Buying a home on the open market is currently {result.affordability_status} with your current assets</p>
+            <p className="text-lg">
               Accumulated wealth at retirement is estimated to be £
               {result.accumulated_wealth_at_67.toFixed(0)}
             </p>
           </div>
         ) : hasError ? (
-          <p>Error: {result.error}</p>
+          <p className="text-md">Error: {result.error}</p>
         ) : (
-          <p>No results to display</p>
+          <p className="text-sm">No results to display</p>
         )}
       </div>
     </div>
+
   );
 }
 
