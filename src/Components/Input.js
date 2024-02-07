@@ -814,11 +814,11 @@ function Input({ setResult, setResult2 }) {
           className="carousel-item relative w-full flex justify-center"
         >
           {/* Content for slide 10, if needed */}
-          <div className="flex justify-center px-5 my-10">
+          {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">
             <button className="btn" onClick={() => handleInputs()}>
               Submit
             </button>
-          </div>
+          </div>}
         </div>
       </div>
     </div>
