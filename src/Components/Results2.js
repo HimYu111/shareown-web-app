@@ -159,7 +159,7 @@ function Results2({ hasChosenNo, result }) {
             </div>
             <br />
             <div>
-              <p>
+              <p className="text-4xl">
                 Accounting for inflation, that is approximately £{result.transformed_wealth ? result.transformed_wealth.toFixed() : 'N/A'} currently. See graphs for wealth breakdown quarter by quarter.
               </p>
             </div>
