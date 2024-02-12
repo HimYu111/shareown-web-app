@@ -26,7 +26,6 @@ function Input({ setResult, setResult2 }) {
   const [loading, setLoading] = useState(false);
   const [scrollToResults, setScrollToResults] = useState(false);
   const [submitted, setSubmitted] = useState(false);
-
   const loadingRef = useRef(null);
 
   const scrollToLoading = () => {
@@ -607,25 +606,14 @@ function Input({ setResult, setResult2 }) {
                 What is your monthly household income after tax?
               </span>
             </label>
-            <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
-              <div className="p-4">
-                <span className="text-sm"> £ </span>
-                <span className="text-sm text-black"> {sliderValue} </span>
-                <input
-                  id="input-5"
-                  className="w-full accent-indigo-600"
-                  type="range"
-                  min="0"
-                  max="15000"
-                  step="1"
-                  onChange={handleSliderChange}
-                />
-                <div className="-mt-2 flex w-full justify-between">
-                  <span className="text-sm text-gray-600"> £0 </span>
-                  <span className="text-sm text-gray-600"> £15000 </span>
-                </div>
-              </div>
-            </div>
+            <input
+              id="input-5"
+              className="input input-bordered w-full max-w-xs"
+              type="number" // Change to numerical input
+              min="0"
+              max="15000"
+              placeholder="Enter amount in £"
+            />
           </div>
           <div className="flex justify-between px-5 my-10">
             <button className="btn" onClick={() => scrollCarousel(4)}>
@@ -649,25 +637,14 @@ function Input({ setResult, setResult2 }) {
                 How much of your post-tax income is spent on non-housing expenses (%)?
               </span>
             </label>
-            <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
-              <div className="p-4">
-                <span className="text-sm text-black"> {sliderValue} </span>
-                <span className="text-sm"> % </span>
-                <input
-                  id="input-6"
-                  className="w-full accent-indigo-600"
-                  type="range"
-                  min="1"
-                  max="100"
-                  step="1"
-                  onChange={handleSliderChange}
-                />
-                <div className="-mt-2 flex w-full justify-between">
-                  <span className="text-sm text-gray-600"> 1% </span>
-                  <span className="text-sm text-gray-600"> 100% </span>
-                </div>
-              </div>
-            </div>
+            <input
+              id="input-6"
+              className="input input-bordered w-full max-w-xs"
+              type="number" // Change to numerical input
+              min="1"
+              max="100"
+              placeholder="Enter percentage"
+            />
           </div>
           <div className="flex justify-between px-5 my-10">
             <button className="btn" onClick={() => scrollCarousel(5)}>
@@ -773,26 +750,14 @@ function Input({ setResult, setResult2 }) {
             <label className="label">
               <span className="text-black">What is your current rent?</span>
             </label>
-
-            <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
-              <div className="p-4">
-                <span className="text-sm"> £ </span>
-                <span className="text-sm text-black"> {sliderValue} </span>
-                <input
-                  id="input-9"
-                  className="w-full accent-indigo-600"
-                  type="range"
-                  min="0"
-                  max="10000"
-                  step="1"
-                  onChange={handleSliderChange}
-                />
-                <div className="-mt-2 flex w-full justify-between">
-                  <span className="text-sm text-gray-600"> £0 </span>
-                  <span className="text-sm text-gray-600"> £10000 </span>
-                </div>
-              </div>
-            </div>
+            <input
+              id="input-9"
+              className="input input-bordered w-full max-w-xs"
+              type="number" // Changed from "range" to "number"
+              min="0" // Minimum value for the input
+              max="10000" // Maximum value for the input
+              placeholder="Enter your current rent in £"
+            />
           </div>
           <div className="flex justify-between px-5 my-10">
             <button className="btn" onClick={() => scrollCarousel(8)}>
