@@ -164,11 +164,14 @@ function Results2({ hasChosenNo, result }) {
               </p>
             </div>
             <br />
+            <div>
+            <p>Staircasing in shared ownership is the process of gradually increasing the ownership share of a property over time by purchasing additional percentages, thereby reducing the amount of rent paid on the remaining share.</p>
+            </div>
+            <br />
             {renderAccumulatedWealthChart()}
             <br />
             {renderSharedOwnershipShareChart()}
             <br />
-            <p>Staircasing in shared ownership is the process of gradually increasing the ownership share of a property over time by purchasing additional percentages, thereby reducing the amount of rent paid on the remaining share.</p>
           </div>
         ) : hasError ? (
           <p>Error: {result.error}</p>
