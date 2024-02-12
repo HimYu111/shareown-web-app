@@ -34,6 +34,7 @@ function Results2({ hasChosenNo, result }) {
   const hasResults2 = result &&
     typeof result === "object" &&
     "accumulated_wealth_at_67" in result &&
+    "SOaccumulated_wealth_at_67" in result &&
     "x" in result &&
     "house_price" in result &&
     "age_at_SO" in result &&
@@ -154,7 +155,7 @@ function Results2({ hasChosenNo, result }) {
             <br />
             <div>
               <p>
-                At retirement, your accumulated wealth would be: £{result.accumulated_wealth_at_67 ? result.accumulated_wealth_at_67.toFixed(0) : 'N/A'} at 67 years of age.
+                At retirement, your accumulated wealth would be: £{result.SOaccumulated_wealth_at_67 ? result.SOaccumulated_wealth_at_67.toFixed(0) : 'N/A'} at 67 years of age.
               </p>
             </div>
             <br />
