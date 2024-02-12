@@ -736,7 +736,7 @@ function Input({ setResult, setResult2 }) {
           <img src={rent} className="h-32" alt="rent icon"/>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="text-black">What is your current rent?</span>
+              <span className="text-black">What is your current monthly rent?</span>
             </label>
             <input
               id="input-9"

@@ -15,8 +15,8 @@ function Results({ result }) {
       <div className="text-white text-4xl" id="results">
         {hasResults ? (
           <div>
-            <p className="text-xl">Buying a home on the open market is currently {result.affordability_status} with your current assets</p>
-            <p className="text-lg">
+            <p className="text-3xl">Buying a home on the open market is currently {result.affordability_status} with your current assets</p>
+            <p className="text-2xl">
               Accumulated wealth at retirement is estimated to be £
               {result.accumulated_wealth_at_67.toFixed(0)}
             </p>
