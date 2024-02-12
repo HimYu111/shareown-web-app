@@ -634,7 +634,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How much of your post-tax income is spent on non-housing expenses? (E.g. 35%)
+                How much do you think you spend each month (excluding housing)? (E.g. £500)
               </span>
             </label>
             <input
@@ -670,20 +670,18 @@ function Input({ setResult, setResult2 }) {
             </label>
             <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
               <div className="p-4">
-                <span className="text-sm"> </span>
-                <span className="text-sm text-black"> {sliderValue} </span>
                 <input
                   id="input-7"
-                  className="w-full accent-indigo-600"
-                  type="range"
+                  className="input input-bordered input-md w-full max-w-xs"
+                  type="number"
                   min="18"
                   max="67"
-                  step="1"
-                  onChange={handleSliderChange}
+                  value={sliderValue} // Ensure this is controlled with the state
+                  onChange={handleSliderChange} // Ensure your handler can process direct input changes
                 />
                 <div className="-mt-2 flex w-full justify-between">
-                  <span className="text-sm text-gray-600"> 18 </span>
-                  <span className="text-sm text-gray-600"> 67 </span>
+                  <span className="text-sm text-gray-600">Min: 18</span>
+                  <span className="text-sm text-gray-600">Max: 67</span>
                 </div>
               </div>
             </div>
@@ -697,7 +695,6 @@ function Input({ setResult, setResult2 }) {
             </button>
           </div>
         </div>
-
         {/* Slide 8: Current Savings (used) */}
         <div
           id="slide8"
