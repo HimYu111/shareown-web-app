@@ -3,7 +3,6 @@ import axios from "axios";
 import icon from "../Assets/icon-1-placeholder.png";
 import icon2 from "../Assets/icon-2-placeholder.png";
 import icon3 from "../Assets/icon-3-placeholder.png";
-import logo from "../Assets/logo-placeholder.png";
 import floorplan from "../Assets/floorplan.png";
 import areas from "../Assets/icon-areas.png";
 import cheque from "../Assets/icon-cheque.png";
@@ -13,7 +12,6 @@ import savings from "../Assets/icon-savings.png";
 
 
 import Loading from "../Components/Loading";
-import Results from "../Components/Results";
 
 function scrollCarousel(targetImageNumber) {
   let carouselElement = document.getElementById("carousel");
@@ -27,6 +25,7 @@ function Input({ setResult, setResult2 }) {
   // State declarations
   const [loading, setLoading] = useState(false);
   const [scrollToResults, setScrollToResults] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
 
   const loadingRef = useRef(null);
 
@@ -84,6 +83,7 @@ function Input({ setResult, setResult2 }) {
       setResult("An error occurred while fetching data.");
     } finally {
       setLoading(false);
+      setSubmitted(true); // Add this line  
     }
   };
 
@@ -449,11 +449,7 @@ function Input({ setResult, setResult2 }) {
     "Terrace House",
   ];
 
-  // Handle skip action
-  const handleSkip = () => {
-    document.getElementById("input-5").value = 35;
-    scrollCarousel(6); // Assuming scrollCarousel is a function that changes the slide
-  };
+
 
   const [sliderValue, setSliderValue] = useState(1);
 
@@ -815,8 +811,12 @@ function Input({ setResult, setResult2 }) {
         >
           {/* Content for slide 10, if needed */}
           {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">
-            <button className="btn" onClick={() => handleInputs()}>
-              Submit
+          <button
+              className="btn"
+              onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
+              disabled={loading || submitted} // Disable button during loading or after submission
+            >
+              {submitted ? 'Submitted' : 'Submit'}
             </button>
           </div>}
         </div>
