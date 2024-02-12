@@ -710,25 +710,13 @@ function Input({ setResult, setResult2 }) {
                 How much do you have in current savings?
               </span>
             </label>
-            <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
-              <div className="p-4">
-                <span className="text-sm"> £ </span>
-                <span className="text-sm text-black"> {sliderValue} </span>
-                <input
-                  id="input-8"
-                  className="w-full accent-indigo-600"
-                  type="range"
-                  min="0"
-                  max="100000"
-                  step="1"
-                  onChange={handleSliderChange}
-                />
-                <div className="-mt-2 flex w-full justify-between">
-                  <span className="text-sm text-gray-600"> £0 </span>
-                  <span className="text-sm text-gray-600"> £100,000 </span>
-                </div>
-              </div>
-            </div>
+            <input
+              id="input-8"
+              className="input input-bordered w-full max-w-xs"
+              type="number" // Changed from "range" to "number"
+              min="0" // Minimum value for the input, can be adjusted as needed
+              placeholder="Enter your current savings in £"
+            />
           </div>
           <div className="flex justify-between px-5 my-10">
             <button className="btn" onClick={() => scrollCarousel(7)}>
