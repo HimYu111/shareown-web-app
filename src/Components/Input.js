@@ -603,7 +603,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                What is your monthly household income after tax?
+                What is your monthly household income after tax? (E.g. £2,000)
               </span>
             </label>
             <input
@@ -634,7 +634,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How much of your post-tax income is spent on non-housing expenses (%)?
+                How much of your post-tax income is spent on non-housing expenses? (E.g. 35%)
               </span>
             </label>
             <input
@@ -707,7 +707,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How much do you have in current savings?
+                How much do you have in current savings? (E.g. £30,000)
               </span>
             </label>
             <input
@@ -736,7 +736,7 @@ function Input({ setResult, setResult2 }) {
           <img src={rent} className="h-32" alt="rent icon"/>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="text-black">What is your current monthly rent?</span>
+              <span className="text-black">What is your current monthly rent? (E.g. £1,100)</span>
             </label>
             <input
               id="input-9"
