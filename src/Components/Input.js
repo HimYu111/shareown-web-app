@@ -658,33 +658,24 @@ function Input({ setResult, setResult2 }) {
 
         {/* Slide 7: Age of Head of Household (used) */}
         <div
-          id="slide7"
+          id="slide7" // Make sure this ID is unique and correctly sequenced if it's part of a carousel
           className="carousel-item relative w-full flex justify-center"
         >
           <img src={icon} className="h-32" alt="head of household icon"/>
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                What is the age of your head of household?
+                How old is your head of household? 
               </span>
             </label>
-            <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
-              <div className="p-4">
-                <input
-                  id="input-7"
-                  className="input input-bordered input-md w-full max-w-xs"
-                  type="number"
-                  min="18"
-                  max="67"
-                  value={sliderValue} // Ensure this is controlled with the state
-                  onChange={handleSliderChange} // Ensure your handler can process direct input changes
-                />
-                <div className="-mt-2 flex w-full justify-between">
-                  <span className="text-sm text-gray-600">Min: 18</span>
-                  <span className="text-sm text-gray-600">Max: 67</span>
-                </div>
-              </div>
-            </div>
+            <input
+              id="input-7" // Corrected ID to match the slide number
+              className="input input-bordered w-full max-w-xs"
+              type="number" // Correct for age input
+              min="18" // Assuming 18 is the minimum age you want to enforce
+              max="80" // Assuming 120 as a reasonable maximum age, adjust as needed
+              placeholder="Enter age of head of household" // Corrected placeholder text
+            />
           </div>
           <div className="flex justify-between px-5 my-10">
             <button className="btn" onClick={() => scrollCarousel(6)}>
@@ -695,6 +686,8 @@ function Input({ setResult, setResult2 }) {
             </button>
           </div>
         </div>
+
+
         {/* Slide 8: Current Savings (used) */}
         <div
           id="slide8"
