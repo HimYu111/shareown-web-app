@@ -603,7 +603,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                What is your monthly household income after tax? (E.g. £2,000)
+                What is your annual gross household income? (E.g. £2,000)
               </span>
             </label>
             <input
