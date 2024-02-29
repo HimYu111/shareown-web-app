@@ -3,7 +3,9 @@ import axios from "axios";
 import icon from "../Assets/icon-1-placeholder.png";
 import icon2 from "../Assets/icon-2-placeholder.png";
 import icon3 from "../Assets/icon-3-placeholder.png";
+import moving from "../Assets/moving.png";
 import floorplan from "../Assets/floorplan.png";
+import housecost from "../Assets/house-price.png";
 import areas from "../Assets/icon-areas.png";
 import cheque from "../Assets/icon-cheque.png";
 import rent from "../Assets/icon-rent.png";
@@ -52,21 +54,26 @@ function Input({ setResult, setResult2 }) {
       const answer3 = document.getElementById("input-3").value;
       const answer4 = document.getElementById("input-4").value;
       const answer5 = parseFloat(document.getElementById("input-5").value);
-      const answer6 = parseFloat(document.getElementById("input-6").value);
+      const answer6 = document.getElementById("input-6").value === "Yes"? 1:0;
       const answer7 = parseFloat(document.getElementById("input-7").value);
       const answer8 = parseFloat(document.getElementById("input-8").value);
       const answer9 = parseFloat(document.getElementById("input-9").value);
+      const answer10 = parseFloat(document.getElementById("input-10").value);
+      const answer11 = parseFloat(document.getElementById("input-11").value);
+
 
       const postData = {
         postcode: answer1,
         propertyType: answer2,
         bedrooms: answer3,
         occupation: answer4,
-        monthlyIncome: answer5,
-        expensePercentage: answer6,
-        headOfHouseholdAge: answer7,
-        savings: answer8,
-        currentRent: answer9,
+        housePrice: answer5,
+        isFirstTimeBuyer: answer6,
+        income: answer7,
+        monthspending: answer8,
+        headOfHouseholdAge: answer9,
+        savings: answer10,
+        currentRent: answer11,        
       };
 
       // Send POST request
@@ -441,12 +448,7 @@ function Input({ setResult, setResult2 }) {
   ];
 
   const bedroomOptions = ["1", "2", "3", "4+"];
-  const propertyTypeOptions = [
-    "Apartment",
-    "Detached House",
-    "Semi-detached House",
-    "Terrace House",
-  ];
+  const propertyTypeOptions = ["Apartment", "Detached House", "Semi-detached House", "Terrace House"];
 
 
 
@@ -594,9 +596,42 @@ function Input({ setResult, setResult2 }) {
           </div>
         </div>
 
-        {/* Slide 5: Monthly Household Income After Tax (used) */}
+        {/* Slide 5: Current Price of the House */}
+        <div id="slide5" className="carousel-item relative w-full flex justify-center">
+          <img src={housecost} className="h-32" alt="house price icon" />
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="text-black">What is the current price of the house you wish to purchase?</span>
+            </label>
+            <input id="input-5" className="input input-bordered w-full max-w-xs" type="number" min="0" placeholder="Enter house price in £" />
+          </div>
+          <div className="flex justify-between px-5 my-10">
+            <button className="btn" onClick={() => scrollCarousel(4)}>Back</button>
+            <button className="btn" onClick={() => scrollCarousel(6)}>Next</button>
+          </div>
+        </div>
+        
+        {/* Slide 6: First Time Buyer */}
+        <div id="slide6" className="carousel-item relative w-full flex justify-center">
+          <img src={moving} className="h-32" alt="moving icon" />
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="text-black">Are you a first-time buyer?</span>
+            </label>
+            <select id="input-6" className="input input-bordered w-full max-w-xs">
+              <option value="Yes">Yes</option>
+              <option value="No">No</option>
+            </select>
+          </div>
+          <div className="flex justify-between px-5 my-10">
+            <button className="btn" onClick={() => scrollCarousel(5)}>Back</button>
+            <button className="btn" onClick={() => scrollCarousel(7)}>Next</button>
+          </div>
+        </div>
+
+        {/* Slide 7: Monthly Household Income After Tax (used) */}
         <div
-          id="slide5"
+          id="slide7"
           className="carousel-item relative w-full flex justify-center"
         >
           <img src={cheque} className="h-32" alt="income icon"/>
@@ -607,74 +642,12 @@ function Input({ setResult, setResult2 }) {
               </span>
             </label>
             <input
-              id="input-5"
+              id="input-7"
               className="input input-bordered w-full max-w-xs"
               type="number" // Change to numerical input
               min="0"
               max="15000"
               placeholder="Enter amount in £"
-            />
-          </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(4)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(6)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 6: Post Tax Income Spent on Expenses (%) (used) */}
-        <div
-          id="slide6"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={icon3} className="h-32" alt="pound sign icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                How much do you think you spend each month (excluding housing)? (E.g. £500)
-              </span>
-            </label>
-            <input
-              id="input-6"
-              className="input input-bordered w-full max-w-xs"
-              type="number" // Change to numerical input
-              min="1"
-              max="100"
-              placeholder="Enter percentage"
-            />
-          </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(5)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(7)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 7: Age of Head of Household (used) */}
-        <div
-          id="slide7" // Make sure this ID is unique and correctly sequenced if it's part of a carousel
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={icon} className="h-32" alt="head of household icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                How old is your head of household? 
-              </span>
-            </label>
-            <input
-              id="input-7" // Corrected ID to match the slide number
-              className="input input-bordered w-full max-w-xs"
-              type="number" // Correct for age input
-              min="18" // Assuming 18 is the minimum age you want to enforce
-              max="80" // Assuming 120 as a reasonable maximum age, adjust as needed
-              placeholder="Enter age of head of household" // Corrected placeholder text
             />
           </div>
           <div className="flex justify-between px-5 my-10">
@@ -687,25 +660,25 @@ function Input({ setResult, setResult2 }) {
           </div>
         </div>
 
-
-        {/* Slide 8: Current Savings (used) */}
+        {/* Slide 8: Post Tax Income Spent on Expenses (%) (used) */}
         <div
           id="slide8"
           className="carousel-item relative w-full flex justify-center"
         >
-          <img src={savings} className="h-32" alt="savings icon"/>
+          <img src={icon3} className="h-32" alt="pound sign icon"/>
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How much do you have in current savings? (E.g. £30,000)
+                How much do you think you spend each month (excluding housing)? (E.g. £500)
               </span>
             </label>
             <input
               id="input-8"
               className="input input-bordered w-full max-w-xs"
-              type="number" // Changed from "range" to "number"
-              min="0" // Minimum value for the input, can be adjusted as needed
-              placeholder="Enter your current savings in £"
+              type="number" // Change to numerical input
+              min="1"
+              max="100"
+              placeholder="Enter percentage"
             />
           </div>
           <div className="flex justify-between px-5 my-10">
@@ -718,23 +691,25 @@ function Input({ setResult, setResult2 }) {
           </div>
         </div>
 
-        {/* Slide 9: Current Rent (unused) */}
+        {/* Slide 9: Age of Head of Household (used) */}
         <div
-          id="slide9"
+          id="slide9" // Make sure this ID is unique and correctly sequenced if it's part of a carousel
           className="carousel-item relative w-full flex justify-center"
         >
-          <img src={rent} className="h-32" alt="rent icon"/>
+          <img src={icon} className="h-32" alt="head of household icon"/>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="text-black">What is your current monthly rent? (E.g. £1,100)</span>
+              <span className="text-black">
+                How old is your head of household? 
+              </span>
             </label>
             <input
-              id="input-9"
+              id="input-9" // Corrected ID to match the slide number
               className="input input-bordered w-full max-w-xs"
-              type="number" // Changed from "range" to "number"
-              min="0" // Minimum value for the input
-              max="10000" // Maximum value for the input
-              placeholder="Enter your current rent in £"
+              type="number" // Correct for age input
+              min="18" // Assuming 18 is the minimum age you want to enforce
+              max="80" // Assuming 120 as a reasonable maximum age, adjust as needed
+              placeholder="Enter age of head of household" // Corrected placeholder text
             />
           </div>
           <div className="flex justify-between px-5 my-10">
@@ -747,12 +722,72 @@ function Input({ setResult, setResult2 }) {
           </div>
         </div>
 
-        {/* Slide 10: Final Confirmation */}
+
+        {/* Slide 10: Current Savings (used) */}
         <div
           id="slide10"
           className="carousel-item relative w-full flex justify-center"
         >
-          {/* Content for slide 10, if needed */}
+          <img src={savings} className="h-32" alt="savings icon"/>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="text-black">
+                How much do you have in current savings? (E.g. £30,000)
+              </span>
+            </label>
+            <input
+              id="input-10"
+              className="input input-bordered w-full max-w-xs"
+              type="number" // Changed from "range" to "number"
+              min="0" // Minimum value for the input, can be adjusted as needed
+              placeholder="Enter your current savings in £"
+            />
+          </div>
+          <div className="flex justify-between px-5 my-10">
+            <button className="btn" onClick={() => scrollCarousel(9)}>
+              Back
+            </button>
+            <button className="btn" onClick={() => scrollCarousel(11)}>
+              Next
+            </button>
+          </div>
+        </div>
+
+        {/* Slide 11: Current Rent (unused) */}
+        <div
+          id="slide11"
+          className="carousel-item relative w-full flex justify-center"
+        >
+          <img src={rent} className="h-32" alt="rent icon"/>
+          <div className="form-control w-full max-w-xs">
+            <label className="label">
+              <span className="text-black">What is your current monthly rent? (E.g. £1,100)</span>
+            </label>
+            <input
+              id="input-11"
+              className="input input-bordered w-full max-w-xs"
+              type="number" // Changed from "range" to "number"
+              min="0" // Minimum value for the input
+              max="10000" // Maximum value for the input
+              placeholder="Enter your current rent in £"
+            />
+          </div>
+          <div className="flex justify-between px-5 my-10">
+            <button className="btn" onClick={() => scrollCarousel(10)}>
+              Back
+            </button>
+            <button className="btn" onClick={() => scrollCarousel(12)}>
+              Next
+            </button>
+          </div>
+        </div>
+
+        {/* Slide 12: Final Confirmation */}
+        <div
+          id="slide12"
+          className="carousel-item relative w-full flex justify-center"
+        >
+          {/* Content for slide 12, if needed */}
           {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">
           <button
               className="btn"
