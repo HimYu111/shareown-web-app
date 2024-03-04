@@ -601,7 +601,7 @@ function Input({ setResult, setResult2 }) {
           <img src={housecost} className="h-32" alt="house price icon" />
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="text-black">What is the current price of the house you wish to purchase?</span>
+              <span className="text-black">What is the price of the home you wish to purchase?</span>
             </label>
             <input id="input-5" className="input input-bordered w-full max-w-xs" type="number" min="0" placeholder="Enter house price in £" />
           </div>
@@ -638,7 +638,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                What is your annual gross household income? (E.g. £2,000)
+                What is the current annual gross income of the household buying the home (indicate the total amount if more than one person buying the home)?
               </span>
             </label>
             <input
@@ -678,7 +678,7 @@ function Input({ setResult, setResult2 }) {
               type="number" // Change to numerical input
               min="1"
               max="100"
-              placeholder="Enter percentage"
+              placeholder="Enter amount in £"
             />
           </div>
           <div className="flex justify-between px-5 my-10">
@@ -700,7 +700,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How old is your head of household? 
+                How old is the main buyer?
               </span>
             </label>
             <input
@@ -709,7 +709,7 @@ function Input({ setResult, setResult2 }) {
               type="number" // Correct for age input
               min="18" // Assuming 18 is the minimum age you want to enforce
               max="80" // Assuming 120 as a reasonable maximum age, adjust as needed
-              placeholder="Enter age of head of household" // Corrected placeholder text
+              placeholder="Enter age of main buyer" // Corrected placeholder text
             />
           </div>
           <div className="flex justify-between px-5 my-10">
@@ -732,7 +732,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How much do you have in current savings? (E.g. £30,000)
+                How much are the savings of the buyers?
               </span>
             </label>
             <input
@@ -740,7 +740,7 @@ function Input({ setResult, setResult2 }) {
               className="input input-bordered w-full max-w-xs"
               type="number" // Changed from "range" to "number"
               min="0" // Minimum value for the input, can be adjusted as needed
-              placeholder="Enter your current savings in £"
+              placeholder="Enter savings amount in £"
             />
           </div>
           <div className="flex justify-between px-5 my-10">
@@ -761,7 +761,7 @@ function Input({ setResult, setResult2 }) {
           <img src={rent} className="h-32" alt="rent icon"/>
           <div className="form-control w-full max-w-xs">
             <label className="label">
-              <span className="text-black">What is your current monthly rent? (E.g. £1,100)</span>
+              <span className="text-black">What is your current monthly rent?</span>
             </label>
             <input
               id="input-11"
@@ -769,7 +769,7 @@ function Input({ setResult, setResult2 }) {
               type="number" // Changed from "range" to "number"
               min="0" // Minimum value for the input
               max="10000" // Maximum value for the input
-              placeholder="Enter your current rent in £"
+              placeholder="Enter rent amount in £"
             />
           </div>
           <div className="flex justify-between px-5 my-10">
