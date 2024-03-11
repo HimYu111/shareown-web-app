@@ -1,5 +1,7 @@
 import React from "react";
 import Navbar from "../Components/Navbar.js";
+import Footer from "../Components/Footer.js";
+
 
 function Blog() {
   return (
@@ -38,6 +40,7 @@ function Blog() {
           </p>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

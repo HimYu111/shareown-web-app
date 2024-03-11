@@ -1,10 +1,33 @@
-import React, { useEffect } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect } from "react"; // Keep this as you're using useEffect
+import PropTypes from "prop-types"; // Import once
+import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
+import 'chart.js/auto';
+
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+
+// Register Chart.js components
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Tooltip,
+  Legend
+);
+
 
 function Results({ result }) {
   useEffect(() => {
     if (result && typeof result === "object") {
-      // Log each result property
       console.log("Results log:", {
         TO_age: result.TO_age,
         TO_time: result.TO_time,
@@ -18,12 +41,20 @@ function Results({ result }) {
         SO_liquid: result.SO_liquid,
         SO_housing: result.SO_housing,
         age_at_time_data: result.age_at_time_data,
-        affordability_status: result.affordability_status,
-        accumulated_wealth_at_67: result.accumulated_wealth_at_67
-        // Add more properties here if needed
+        staircasing_data: result.staircasing_data,
+        mortgage_data: result.mortgage_data,
+        TO_wealth_data: result.TO_wealth_data,
+        SO_wealth_data: result.SO_wealth_data 
       });
     }
   }, [result]);
+
+  const age_at_time_data = result.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
+  const staircasing_data = result.staircasing_data ? JSON.parse(result.staircasing_data) : [];
+  const mortgage_data = result.mortgage_data ? JSON.parse(result.mortgage_data) : [];
+  const TO_wealth_data = result.TO_wealth_data ? JSON.parse(result.TO_wealth_data) : [];
+  const SO_wealth_data = result.SO_wealth_data ? JSON.parse(result.SO_wealth_data) : [];
+
 
   const hasResults =
     result &&
@@ -39,70 +70,65 @@ function Results({ result }) {
     "SO_mortgage_finish" in result &&
     "SO_liquid" in result &&
     "SO_housing" in result &&
-    "age_at_time_data" in result;
+    "age_at_time_data" in result &&
+    "staircasing_data" in result &&
+    "mortgage_data" in result &&
+    "TO_wealth_data" in result &&
+    "SO_wealth_data" in result 
+    ;
 
   const hasError = result && typeof result === "object" && "error" in result;
+
+  const ageLabels = result.age_at_time_data.map(data => `Age ${data.age}`);
+  
+  const staircasingDataset = {
+    labels: ageLabels,
+    datasets: [{
+      label: 'Staircasing Data',
+      data: result.staircasing_data,
+      backgroundColor: 'rgba(54, 162, 235, 0.5)',
+    }],
+  };
+
+  const mortgageDataset = {
+    labels: ageLabels,
+    datasets: [{
+      label: 'Mortgage Data',
+      data: result.mortgage_data,
+      backgroundColor: 'rgba(255, 99, 132, 0.5)',
+    }],
+  };
+
+  const wealthDataset = {
+    labels: ageLabels,
+    datasets: [
+      {
+        label: 'TO Wealth Data',
+        data: TO_wealth_data.map(data => data.value), // Ensuring `.value` is correctly accessed
+        borderColor: 'rgba(255, 206, 86, 0.5)',
+        backgroundColor: 'rgba(255, 206, 86, 0.5)',
+        fill: false,
+      },
+      {
+        label: 'SO Wealth Data',
+        data: SO_wealth_data.map(data => data.value), // Ensuring `.value` is correctly accessed
+        borderColor: 'rgba(75, 192, 192, 0.5)',
+        backgroundColor: 'rgba(75, 192, 192, 0.5)',
+        fill: false,
+      }
+    ],
+  };
 
   return (
     <div className="bg-slate-800 py-20">
       <div className="text-white" id="results">
-        {hasResults ? (
-          <>
-            <p className="text-3xl mb-4">Results:</p>
-            <table className="table-auto w-full">
-              <tbody>
-                <tr>
-                  <td>You can afford to buy by the age of: </td>
-                  <td>{result.TO_age}</td>
-                </tr>
-                <tr>
-                  <td>You can afford to buy at the age of: </td>
-                  <td>{result.TO_time}</td>
-                </tr>
-                <tr>
-                  <td>You will be able to repay your mortgage by the age of </td>
-                  <td>{result.TO_finish}</td>
-                </tr>
-                <tr>
-                  <td>By retirement age (67), your liquid wealth would be: </td>
-                  <td>{result.TO_liquid}</td>
-                </tr>
-                <tr>
-                  <td>By retirement age (67), your housing wealth would be: </td>
-                  <td>{result.TO_housing}</td>
-                </tr>
-                <tr>
-                  <td>You can afford to buy into shared ownership by the age of: </td>
-                  <td>{result.SO_start_age}</td>
-                </tr>
-                <tr>
-                  <td>You can afford to buy your first share in a shared ownership property at the age of: </td>
-                  <td>{result.SO_time}</td>
-                </tr>
-                <tr>
-                  <td>You will be able to staircase to full ownership by the age of: </td>
-                  <td>{result.SO_staircase_finish}</td>
-                </tr>
-                <tr>
-                  <td>You will be able to repay your mortgage by the age of: </td>
-                  <td>{result.SO_mortgage_finish}</td>
-                </tr>
-                <tr>
-                  <td>By retirement age (67), your liquid wealth would be: </td>
-                  <td>{result.SO_liquid}</td>
-                </tr>
-                <tr>
-                  <td>By retirement age (67), your housing wealth would be: </td>
-                  <td>{result.SO_housing}</td>
-                </tr>
-              </tbody>
-            </table>
-          </>
-        ) : hasError ? (
-          <p>Error: {result.error}</p>
-        ) : (
-          <p>No results to display</p>
-        )}
+        <p className="text-xl mb-4">Your first paragraph here.</p>
+        <p className="text-xl mb-4">Your second paragraph here.</p>
+        <Bar data={staircasingDataset} />
+        <p className="text-xl mb-4">Your third paragraph here.</p>
+        <Bar data={mortgageDataset} />
+        <p className="text-xl mb-4">Your fourth paragraph here.</p>
+        <Line data={wealthDataset} />
       </div>
     </div>
   );
