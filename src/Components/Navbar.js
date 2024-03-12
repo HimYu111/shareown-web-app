@@ -2,6 +2,7 @@ import React from "react";
 import logo from "../Assets/icon-ShareOwn.png";
 import homeIcon from "../Assets/home-icon.png";
 import blogIcon from "../Assets/blog-icon.png";
+import vidIcon from "../Assets/question-icon.png";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -20,6 +21,10 @@ function Navbar() {
             <li>
               <img className="absolute -ml-8" src={blogIcon} alt="blog icon"/>
               <Link to="/blog"> Blog </Link>
+            </li>
+            <li>
+              <img className="absolute -ml-8" src={vidIcon} alt="vid icon"/>
+              <Link to="/vid"> Vid </Link>
             </li>
           </ul>
         </div>
