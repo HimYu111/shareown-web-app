@@ -4,6 +4,7 @@ import Navbar from "./Components/Navbar";
 import Intro from "./Components/Intro";
 import Input from "./Components/Input";
 import Results from "./Components/Results";
+import Email from "./Components/Email";
 import Footer from "./Components/Footer";
 import Scroll from "./Components/Scroll";
 
@@ -19,6 +20,7 @@ function App() {
         <Intro />
         <Input setResult={setResult} />
         <Results result={result} />
+        <Email />
       </div>
       <Footer />
     </div>
