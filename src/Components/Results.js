@@ -27,6 +27,28 @@ ChartJS.register(
 
 function Results({ result }) {
   console.log('Current result:', result);
+  const hasResults =
+    result &&
+    typeof result === "object" &&
+    "TO_age" in result &&
+    "TO_time" in result &&
+    "TO_finish" in result &&
+    "TO_liquid" in result &&
+    "TO_housing" in result &&
+    "SO_start_age" in result &&
+    "SO_time" in result &&
+    "SO_staircase_finish" in result &&
+    "SO_mortgage_finish" in result &&
+    "SO_liquid" in result &&
+    "SO_housing" in result &&
+    "age_at_time_data" in result &&
+    "staircasing_data" in result &&
+    "mortgage_data" in result &&
+    "TO_wealth_data" in result &&
+    "SO_wealth_data" in result 
+    ;
+
+  const hasError = result && typeof result === "object" && "error" in result;
 
   useEffect(() => {
     if (result && typeof result === "object") {
@@ -51,29 +73,6 @@ function Results({ result }) {
       });
     }
   }, [result]);
-
-  const hasResults =
-    result &&
-    typeof result === "object" &&
-    "TO_age" in result &&
-    "TO_time" in result &&
-    "TO_finish" in result &&
-    "TO_liquid" in result &&
-    "TO_housing" in result &&
-    "SO_start_age" in result &&
-    "SO_time" in result &&
-    "SO_staircase_finish" in result &&
-    "SO_mortgage_finish" in result &&
-    "SO_liquid" in result &&
-    "SO_housing" in result &&
-    "age_at_time_data" in result &&
-    "staircasing_data" in result &&
-    "mortgage_data" in result &&
-    "TO_wealth_data" in result &&
-    "SO_wealth_data" in result 
-    ;
-
-  const hasError = result && typeof result === "object" && "error" in result;
 
   const age_at_time_data = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
   const staircasing_data = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];
