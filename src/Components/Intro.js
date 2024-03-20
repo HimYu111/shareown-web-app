@@ -13,7 +13,7 @@ function Intro() {
   };
 
   return (
-    <div className="bg-gray-900" style={{ minHeight: 'calc(130vh + 100px)' }}>
+    <div className="bg-gray-900" style={{ minHeight: 'calc(140vh + 100px)' }}>
       <div className="translate-y-[10rem]">
         <h1 className="text-5xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'left' }}>
           Housing Affordability <i>Lifetime Wealth</i> Calculator
