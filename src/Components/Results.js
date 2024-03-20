@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"; // Keep this as you're using useEffect
+
 import PropTypes from "prop-types"; // Import once
 import { Bar } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
@@ -58,154 +58,7 @@ function Results({ hasChosenNo, result }) {
 
   const hasError = result && typeof result === "object" && "error" in result;
 
-  if ("age_at_time_data" in result &&
-    "staircasing_data" in result &&
-    "mortgage_data" in result &&
-    "TO_wealth_data" in result &&
-    "SO_wealth_data" in result) {
-    console.log("Age at time data:", result.age_at_time_data, 
-                "Staircasing data:", result.staircasing_data, 
-                "Mortgage data:", result.mortgage_data, 
-                "TO wealth data:", result.TO_wealth_data, 
-                "SO wealth data:", result.SO_wealth_data);
-}
-  const renderstairchart = () => {
-    const data = {
-      labels: [...age_at_time_data],  
-      datasets: [
-        {
-          label: 'Ownership Percentage (%)',
-          data: [...staircasing_data],  
-          backgroundColor: 'blue',
-          borderColor: 'blue',
-          borderWidth: 1,
-        }
-      ]
-    };
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Shared Ownership Progression via Staircasing'
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Age'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Ownership Percentage (%)'
-          }
-        }
-      }
-    };
-    return <Bar data={data} options={options} />;
-  };
-
-  const renderloanchart = () => {
-    const data = {
-      labels: [...age_at_time_data],  
-      datasets: [
-        {
-          label: 'Outstanding Loan Balance (£)',
-          data: [...mortgage_data],  
-          backgroundColor: 'blue',
-          borderColor: 'blue',
-          borderWidth: 1,
-        }
-      ]
-    };
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Outstanding Loan Balance Over Time For Shared Ownership'
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Age'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Outstanding Loan Balance'
-          }
-        }
-      }
-    };
-    return <Bar data={data} options={options} />;
-  };
-
-
-  const rendercompchart = () => {
-    const data = {
-      labels: [...age_at_time_data], // Assuming this is an array of ages for the x-axis
-      datasets: [
-        {
-          label: 'Total Ownership Wealth Data (£)',
-          data: [...TO_wealth_data], 
-          borderColor: 'red',
-          backgroundColor: 'rgba(255, 0, 0, 0.5)',
-          borderWidth: 1,
-          fill: false, 
-        },
-        {
-          label: 'Shared Ownership Wealth Data (£)',
-          data: [...SO_wealth_data], // Replace with your actual data array for Shared Ownership
-          borderColor: 'green',
-          backgroundColor: 'rgba(0, 255, 0, 0.5)',
-          borderWidth: 1,
-          fill: false, 
-        }
-      ]
-    };
-    
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Wealth Comparison: Total Ownership vs Shared Ownership'
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Age'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Wealth Data (£)'
-          }
-        }
-      }
-    };
-    
-    return <Line data={data} options={options} />;
-  };
+ 
 
 
   return (
@@ -237,7 +90,6 @@ function Results({ hasChosenNo, result }) {
         Below is a graph of the staircasing shares year by year.</p>
         </div>
         <div>
-        {renderstairchart()}
         </div>
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
@@ -248,7 +100,6 @@ function Results({ hasChosenNo, result }) {
         Below is a graph on the outstanding loan balance.</p>
         </div>
         <div>
-        {renderloanchart()}
         </div>
 
         <div className="text-white" id="results">
@@ -264,7 +115,6 @@ function Results({ hasChosenNo, result }) {
         See the graph below for comparison of the current value of non-housing wealth between Shared Ownership and open market purchase over time. </p>
         </div>
         <div>
-        {rendercompchart()}
         </div>
 
       <div>
