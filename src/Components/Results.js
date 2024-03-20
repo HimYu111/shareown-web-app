@@ -112,7 +112,7 @@ function Results({ hasChosenNo, result }) {
         <p className="text-xl mb-4">
         This means you can buy in {result.TO_time ? result.TO_time.toFixed(0) : 'N/A'} years. </p>
         <p className="text-xl mb-4">
-        However, you can buy a Shared Ownership home at the age of {result.SO_age ? result.SO_age.toFixed(0) : 'N/A'} (this is assuming a minimum share of 25%).</p> 
+        However, you can buy a Shared Ownership home at the age of {result.SO_start_age ? result.SO_start_age.toFixed(0) : 'N/A'} (this is assuming a minimum share of 25%).</p> 
         <p className="text-xl mb-4">
         This means, you can afford to buy Shared Ownership {result.SO_time ? result.SO_time.toFixed(0) : 'N/A'} years from now. 
         </p>
@@ -122,9 +122,7 @@ function Results({ hasChosenNo, result }) {
         <p className="text-xl mb-4">
         Shared ownership is a scheme designed to help individuals afford homeownership by purchasing an initial share of 25% to 75% of a home and paying reduced rent on the remainder. </p>
         <p className="text-xl mb-4">
-        This option allows buyers with limited savings to get onto the property ladder by offering the flexibility to buy additional shares, </p>
-        <p className="text-xl mb-4">
-        through a process known as ‘staircasing,’ towards full ownership as their financial situation improves. </p>
+        This option allows buyers with limited savings to get onto the property ladder by offering the flexibility to buy additional shares, through a process known as ‘staircasing,’ towards full ownership as their financial situation improves. </p>
         <p className="text-xl mb-4">
         It provides an accessible path to homeownership, accommodating various personal circumstances and market conditions, and is supported by the ability to secure mortgage loans similarly to outright purchases. </p>
         <p className="text-xl mb-4">
