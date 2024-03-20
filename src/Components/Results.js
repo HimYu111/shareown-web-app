@@ -58,30 +58,6 @@ function Results({ hasChosenNo, result }) {
 
   const hasError = result && typeof result === "object" && "error" in result;
 
-  useEffect(() => {
-    if (result && typeof result === "object") {
-      console.log("Results log:", {
-        TO_age: result.TO_age,
-        TO_time: result.TO_time,
-        TO_finish: result.TO_finish,
-        TO_liquid: result.TO_liquid,
-        TO_housing: result.TO_housing,
-        SO_start_age: result.SO_start_age,
-        SO_time: result.SO_time,
-        SO_staircase_finish: result.SO_staircase_finish,
-        SO_mortgage_finish: result.SO_mortgage_finish,
-        SO_liquid: result.SO_liquid,
-        SO_housing: result.SO_housing,
-
-        age_at_time_data: result.age_at_time_data,
-        staircasing_data: result.staircasing_data,
-        mortgage_data: result.mortgage_data,
-        TO_wealth_data: result.TO_wealth_data,
-        SO_wealth_data: result.SO_wealth_data 
-      });
-    }
-  }, [result]);
-
 
   
   // Ensure ageLabels is computed safely, accounting for the possibility of missing or undefined data
