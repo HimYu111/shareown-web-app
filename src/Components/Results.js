@@ -56,7 +56,18 @@ function Results({ hasChosenNo, result }) {
     ;
 
   const hasError = result && typeof result === "object" && "error" in result;
-
+  
+  if ("age_at_time_data" in result &&
+    "staircasing_data" in result &&
+    "mortgage_data" in result &&
+    "TO_wealth_data" in result &&
+    "SO_wealth_data" in result) {
+    console.log("Age at time data:", result.age_at_time_data, 
+                "Staircasing data:", result.staircasing_data, 
+                "Mortgage data:", result.mortgage_data, 
+                "TO wealth data:", result.TO_wealth_data, 
+                "SO wealth data:", result.SO_wealth_data);
+}
   const renderstairchart = () => {
     const data = {
       labels: [...age_at_time_data],  
