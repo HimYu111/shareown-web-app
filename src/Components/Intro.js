@@ -13,7 +13,7 @@ function Intro() {
   };
 
   return (
-    <div className="bg-gray-900 min-h-screen">
+    <div className="bg-gray-900 min-h-screen overflow-auto">
       <div className="translate-y-[10rem]">
         <h1 className="text-5xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'left' }}>
           Housing Affordability <i>Lifetime Wealth</i> Calculator
