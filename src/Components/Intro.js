@@ -13,14 +13,14 @@ function Intro() {
   };
 
   return (
-    <div className="bg-gray-900 h-screen">
+    <div className="bg-gray-900 min-h-screen">
       <div className="translate-y-[10rem]">
         <h1 className="text-5xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'left' }}>
           Housing Affordability <i>Lifetime Wealth</i> Calculator
         </h1>
         <p className="text-2xl text-white py-20" style={{ textAlign: 'left' }}>
           Our interactive housing affordability lifetime wealth calculator will help show you the wealth you accumulate during the rest of your working life when you own a property outright versus using Shared Ownership 
-          <a href="#find-out-more" style={{ textDecoration: 'underline' }}>find out more about Shared Ownership</a>.
+          <a href="#find-out-more" style={{ textDecoration: 'underline' }}> find out more about Shared Ownership</a>.
         </p>
         <h2 className="text-4xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'left'}}>
           You can use our Lifetime Wealth Calculator to better understand your housing affordability.
