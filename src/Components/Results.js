@@ -28,11 +28,7 @@ function Results({ hasChosenNo, result }) {
   if (!result) {
     return <p>Loading data...</p>; // Display loading or placeholder content
   }
-  const age_at_time_data = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
-  const staircasing_data = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];
-  const mortgage_data = result?.mortgage_data ? JSON.parse(result.mortgage_data) : [];
-  const TO_wealth_data = result?.TO_wealth_data ? JSON.parse(result.TO_wealth_data) : [];
-  const SO_wealth_data = result?.SO_wealth_data ? JSON.parse(result.SO_wealth_data) : [];
+
 
   const hasResults =
     result &&
@@ -55,6 +51,12 @@ function Results({ hasChosenNo, result }) {
     "TO_wealth_data" in result &&
     "SO_wealth_data" in result 
     ;
+
+    const age_at_time_data = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
+    const staircasing_data = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];
+    const mortgage_data = result?.mortgage_data ? JSON.parse(result.mortgage_data) : [];
+    const TO_wealth_data = result?.TO_wealth_data ? JSON.parse(result.TO_wealth_data) : [];
+    const SO_wealth_data = result?.SO_wealth_data ? JSON.parse(result.SO_wealth_data) : [];
 
   const hasError = result && typeof result === "object" && "error" in result;
   console.log(age_at_time_data, staircasing_data, mortgage_data, TO_wealth_data, SO_wealth_data);
