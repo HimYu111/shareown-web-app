@@ -26,6 +26,8 @@ ChartJS.register(
 
 
 function Results({ result }) {
+  console.log('Current result:', result);
+
   useEffect(() => {
     if (result && typeof result === "object") {
       console.log("Results log:", {
@@ -81,12 +83,15 @@ function Results({ result }) {
   
   // Ensure ageLabels is computed safely, accounting for the possibility of missing or undefined data
   const ageLabels = age_at_time_data?.map(data => `Age ${data.age}`) ?? [];
+  const staircasingLabels = staircasing_data.map(staircasing => `Staircasing ${staircasing.age}`);
+  const mortgageLabels = mortgage_data.map(mortgage => `Mortgage ${mortgage.age}`);
+
   
   const staircasingDataset = {
     labels: ageLabels,
     datasets: [{
       label: 'Staircasing Data',
-      data: result.staircasing_data,
+      data: staircasingLabels,
       backgroundColor: 'rgba(54, 162, 235, 0.5)',
     }],
   };
@@ -95,7 +100,7 @@ function Results({ result }) {
     labels: ageLabels,
     datasets: [{
       label: 'Mortgage Data',
-      data: result.mortgage_data,
+      data: mortgageLabels,
       backgroundColor: 'rgba(255, 99, 132, 0.5)',
     }],
   };
