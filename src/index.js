@@ -4,7 +4,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-//import "./index.css";
 import App from "./App";
 import Blog from "./Pages/Blog.js";
 import Vid from "./Pages/Vid.js"
