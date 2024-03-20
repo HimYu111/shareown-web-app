@@ -55,16 +55,23 @@
   text-align: center;
   border-radius: 6px;
   padding: 5px;
-
+  white-space: normal; /* Allows text to wrap */
+  
+  /* Dynamic width adjustments */
+  min-width: 120px; /* Minimum width of the tooltip */
+  max-width: 300px; /* Maximum width to prevent it from getting too wide */
+  width: auto; /* Allows the width to grow with content, up to max-width */
+  
   /* Position the tooltip */
   position: absolute;
   z-index: 1;
   bottom: 125%; /* Adjust based on your needs */
   left: 50%;
-  margin-left: -60px; /* Adjust based on the width of the text */
+  transform: translateX(-50%); /* Dynamically centers the tooltip */
   
-  /* Optional: adding arrow */
-  width: 120px; /* Adjust based on content */
+  /* Transition for smoother visibility change */
+  opacity: 0;
+  transition: opacity 0.3s, visibility 0.3s;
 }
 
 /* Tooltip arrow */
@@ -82,4 +89,5 @@
 /* Show the tooltip text when you mouse over the tooltip container */
 .tooltip:hover .tooltiptext {
   visibility: visible;
+  opacity: 1;
 }

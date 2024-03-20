@@ -1,4 +1,3 @@
-import React, { useEffect } from "react"; // Keep this as you're using useEffect
 import PropTypes from "prop-types"; // Import once
 import { Bar } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
@@ -24,7 +23,6 @@ ChartJS.register(
   Legend
 );
 
-
 function Results({ hasChosenNo, result }) {
   if (!result) {
     return <p>Loading data...</p>; // Display loading or placeholder content
@@ -49,6 +47,7 @@ function Results({ hasChosenNo, result }) {
     "SO_mortgage_finish" in result &&
     "SO_liquid" in result &&
     "SO_housing" in result &&
+    "Mortgage_size" in result &&
     "age_at_time_data" in result &&
     "staircasing_data" in result &&
     "mortgage_data" in result &&
@@ -58,51 +57,144 @@ function Results({ hasChosenNo, result }) {
 
   const hasError = result && typeof result === "object" && "error" in result;
 
-
-  
-  // Ensure ageLabels is computed safely, accounting for the possibility of missing or undefined data
-  const ageLabels = age_at_time_data?.map(data => `Age ${data.age}`) ?? [];
-  const staircasingLabels = staircasing_data.map(staircasing => `Staircasing ${staircasing.age}`);
-  const mortgageLabels = mortgage_data.map(mortgage => `Mortgage ${mortgage.age}`);
-
-  
-  const staircasingDataset = {
-    labels: ageLabels,
-    datasets: [{
-      label: 'Staircasing Data',
-      data: staircasingLabels,
-      backgroundColor: 'rgba(54, 162, 235, 0.5)',
-    }],
-  };
-
-  const mortgageDataset = {
-    labels: ageLabels,
-    datasets: [{
-      label: 'Mortgage Data',
-      data: mortgageLabels,
-      backgroundColor: 'rgba(255, 99, 132, 0.5)',
-    }],
-  };
-
-  const wealthDataset = {
-    labels: ageLabels,
-    datasets: [
-      {
-        label: 'TO Wealth Data',
-        data: TO_wealth_data.map(data => data.value), // Ensuring `.value` is correctly accessed
-        borderColor: 'rgba(255, 206, 86, 0.5)',
-        backgroundColor: 'rgba(255, 206, 86, 0.5)',
-        fill: false,
+  const renderstairchart = () => {
+    const data = {
+      labels: [...age_at_time_data],  
+      datasets: [
+        {
+          label: 'Ownership Percentage (%)',
+          data: [...staircasing_data],  
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+          borderWidth: 1,
+        }
+      ]
+    };
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Shared Ownership Progression via Staircasing'
+        }
       },
-      {
-        label: 'SO Wealth Data',
-        data: SO_wealth_data.map(data => data.value), // Ensuring `.value` is correctly accessed
-        borderColor: 'rgba(75, 192, 192, 0.5)',
-        backgroundColor: 'rgba(75, 192, 192, 0.5)',
-        fill: false,
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Ownership Percentage (%)'
+          }
+        }
       }
-    ],
+    };
+    return <Bar data={data} options={options} />;
   };
+
+  const renderloanchart = () => {
+    const data = {
+      labels: [...age_at_time_data],  
+      datasets: [
+        {
+          label: 'Outstanding Loan Balance (£)',
+          data: [...mortgage_data],  
+          backgroundColor: 'blue',
+          borderColor: 'blue',
+          borderWidth: 1,
+        }
+      ]
+    };
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Outstanding Loan Balance Over Time For Shared Ownership'
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Outstanding Loan Balance'
+          }
+        }
+      }
+    };
+    return <Bar data={data} options={options} />;
+  };
+
+
+  const rendercompchart = () => {
+    const data = {
+      labels: [...age_at_time_data], // Assuming this is an array of ages for the x-axis
+      datasets: [
+        {
+          label: 'Total Ownership Wealth Data (£)',
+          data: [...TO_wealth_data], 
+          borderColor: 'red',
+          backgroundColor: 'rgba(255, 0, 0, 0.5)',
+          borderWidth: 1,
+          fill: false, 
+        },
+        {
+          label: 'Shared Ownership Wealth Data (£)',
+          data: [...SO_wealth_data], // Replace with your actual data array for Shared Ownership
+          borderColor: 'green',
+          backgroundColor: 'rgba(0, 255, 0, 0.5)',
+          borderWidth: 1,
+          fill: false, 
+        }
+      ]
+    };
+    
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+        },
+        title: {
+          display: true,
+          text: 'Wealth Comparison: Total Ownership vs Shared Ownership'
+        }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age'
+          }
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Wealth Data (£)'
+          }
+        }
+      }
+    };
+    
+    return <Line data={data} options={options} />;
+  };
+
 
   return (
     <div className="bg-slate-800 py-20">
@@ -114,7 +206,7 @@ function Results({ hasChosenNo, result }) {
         <p className="text-xl mb-4">
         However, you can buy a Shared Ownership home at the age of {result.SO_start_age ? result.SO_start_age.toFixed(0) : 'N/A'} (this is assuming a minimum share of 25%).</p> 
         <p className="text-xl mb-4">
-        This means, you can afford to buy Shared Ownership {result.SO_time ? result.SO_time.toFixed(0) : 'N/A'} years from now. 
+        This means, you can afford to buy Shared Ownership {result.SO_time ? result.SO_time.toFixed(0) : '0'} years from now. 
         </p>
         </div>
 
@@ -133,17 +225,17 @@ function Results({ hasChosenNo, result }) {
         Below is a graph of the staircasing shares year by year.</p>
         </div>
         
-        <Bar data={staircasingDataset} />
+        {renderstairchart()}
 
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
-        Given your deposit is 5% of your house value, you will need to get a mortgage of XYZ. </p>
+        Given your deposit is 5% of your house value, you will need to get a mortgage of {result.Mortgage_size ? result.Mortgage_size.toFixed(0) : 'N/A'}. </p>
         <p className="text-xl mb-4">
         Assuming an interest rate of 3%, a mortgage rate of 4% and a above staircasing behaviour, you will be able to repay your Shared Ownership mortgage by the age of {result.SO_mortgage_finish ? result.SO_mortgage_finish.toFixed(0) : 'N/A'}. </p>
         <p className="text-xl mb-4">
         Below is a graph on the outstanding loan balance.</p>
         </div>
-        <Bar data={mortgageDataset} />
+        {renderloanchart()}
         
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
@@ -156,7 +248,7 @@ function Results({ hasChosenNo, result }) {
         In comparison, the current value of your non-housing wealth if you were to wait until you could buy on the open market will be only {result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'}. </p>
         <p className="text-xl mb-4">
         See the graph below for comparison of the current value of non-housing wealth between Shared Ownership and open market purchase over time. </p>
-        <Line data={wealthDataset} />
+        {rendercompchart()}
         </div>
 
       <div>
