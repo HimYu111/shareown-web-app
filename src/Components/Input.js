@@ -732,7 +732,7 @@ function Input({ setResult, setResult2 }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How much are the savings of the buyers?
+                How much savings do the buyers have?
               </span>
             </label>
             <input

@@ -57,6 +57,7 @@ function Results({ hasChosenNo, result }) {
     ;
 
   const hasError = result && typeof result === "object" && "error" in result;
+  console.log(age_at_time_data, staircasing_data, mortgage_data, TO_wealth_data, SO_wealth_data);
 
  
 
@@ -93,7 +94,7 @@ function Results({ hasChosenNo, result }) {
         </div>
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
-        Given your deposit is 5% of your house value, you will need to get a mortgage of {result.Mortgage_size ? result.Mortgage_size.toFixed(0) : 'N/A'}. </p>
+        Given your deposit is 5% of your house value, you will need to get a mortgage of £{result.Mortgage_size ? result.Mortgage_size.toFixed(0) : 'N/A'}. </p>
         <p className="text-xl mb-4">
         Assuming an interest rate of 3%, a mortgage rate of 4% and a above staircasing behaviour, you will be able to repay your Shared Ownership mortgage by the age of {result.SO_mortgage_finish ? result.SO_mortgage_finish.toFixed(0) : 'N/A'}. </p>
         <p className="text-xl mb-4">
@@ -108,9 +109,9 @@ function Results({ hasChosenNo, result }) {
         <p className="text-xl mb-4">
         The benefit of Shared Ownership is that you will accrue more non-housing wealth (through savings) up until you retire (at the age of 67). </p>
         <p className="text-xl mb-4">
-        The current value of your non-housing wealth will be {result.SO_liquid ? result.SO_liquid.toFixed(0) : 'N/A'} if you were to buy the Shared Ownership property (and staircased in the suggested way). </p>
+        The current value of your non-housing wealth will be £{result.SO_liquid ? result.SO_liquid.toFixed(0) : 'N/A'} if you were to buy the Shared Ownership property (and staircased in the suggested way). </p>
         <p className="text-xl mb-4">
-        In comparison, the current value of your non-housing wealth if you were to wait until you could buy on the open market will be only {result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'}. </p>
+        In comparison, the current value of your non-housing wealth if you were to wait until you could buy on the open market will be only £{result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'}. </p>
         <p className="text-xl mb-4">
         See the graph below for comparison of the current value of non-housing wealth between Shared Ownership and open market purchase over time. </p>
         </div>
