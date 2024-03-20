@@ -59,144 +59,6 @@ function Results({ hasChosenNo, result }) {
   const hasError = result && typeof result === "object" && "error" in result;
   console.log(ageattimedata, staircasingdata, mortgagedata, TO_wealthdata, SO_wealthdata);
 
-  const renderstairchart = () => {
-    const data = {
-      labels: [...ageattimedata],  
-      datasets: [
-        {
-          label: 'Ownership Percentage (%)',
-          data: [...staircasingdata],  
-          backgroundColor: 'blue',
-          borderColor: 'blue',
-          borderWidth: 1,
-        }
-      ]
-    };
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Shared Ownership Progression via Staircasing'
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Age'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Ownership Percentage (%)'
-          }
-        }
-      }
-    };
-    return <Bar data={data} options={options} />;
-  };
-
-  const renderloanchart = () => {
-    const data = {
-      labels: [...ageattimedata],  
-      datasets: [
-        {
-          label: 'Outstanding Loan Balance (£)',
-          data: [...mortgagedata],  
-          backgroundColor: 'blue',
-          borderColor: 'blue',
-          borderWidth: 1,
-        }
-      ]
-    };
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Outstanding Loan Balance Over Time For Shared Ownership'
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Age'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Outstanding Loan Balance'
-          }
-        }
-      }
-    };
-    return <Bar data={data} options={options} />;
-  };
-
-
-  const rendercompchart = () => {
-    const data = {
-      labels: [...ageattimedata], // Assuming this is an array of ages for the x-axis
-      datasets: [
-        {
-          label: 'Total Ownership Wealth Data (£)',
-          data: [...TO_wealthdata], 
-          borderColor: 'red',
-          backgroundColor: 'rgba(255, 0, 0, 0.5)',
-          borderWidth: 1,
-          fill: false, 
-        },
-        {
-          label: 'Shared Ownership Wealth Data (£)',
-          data: [...SO_wealthdata], // Replace with your actual data array for Shared Ownership
-          borderColor: 'green',
-          backgroundColor: 'rgba(0, 255, 0, 0.5)',
-          borderWidth: 1,
-          fill: false, 
-        }
-      ]
-    };
-    
-    const options = {
-      responsive: true,
-      plugins: {
-        legend: {
-          position: 'top',
-        },
-        title: {
-          display: true,
-          text: 'Wealth Comparison: Total Ownership vs Shared Ownership'
-        }
-      },
-      scales: {
-        x: {
-          title: {
-            display: true,
-            text: 'Age'
-          }
-        },
-        y: {
-          title: {
-            display: true,
-            text: 'Wealth Data (£)'
-          }
-        }
-      }
-    };
-    
-    return <Line data={data} options={options} />;
-  };
-
 
   return (
     <div className="bg-slate-800 py-20">
@@ -212,10 +74,6 @@ function Results({ hasChosenNo, result }) {
         </p>
         </div>
 
-        <div>
-        {renderstairchart()}
-        </div>
-        
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
         Shared ownership is a scheme designed to help individuals afford homeownership by purchasing an initial share of 25% to 75% of a home and paying reduced rent on the remainder. </p>
@@ -230,7 +88,8 @@ function Results({ hasChosenNo, result }) {
         <p className="text-xl mb-4">
         Below is a graph of the staircasing shares year by year.</p>
         </div>
-
+        <div>
+        </div>
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
         Given your deposit is 5% of your house value, you will need to get a mortgage of £{result.Mortgage_size ? result.Mortgage_size.toFixed(0) : 'N/A'}. </p>
@@ -240,7 +99,6 @@ function Results({ hasChosenNo, result }) {
         Below is a graph on the outstanding loan balance.</p>
         </div>
         <div>
-        {renderloanchart()}
         </div>
 
         <div className="text-white" id="results">
@@ -256,11 +114,10 @@ function Results({ hasChosenNo, result }) {
         See the graph below for comparison of the current value of non-housing wealth between Shared Ownership and open market purchase over time. </p>
         </div>
         <div>
-        {rendercompchart()}
         </div>
 
       <div>
-      <p className="text-l mb-4">
+      <p className="text-xl mb-4">
         Please note that above calculations are based on a model designed by UCL and University of Durham academics and contains a number of 
         <span className="tooltip"> assumptions
           <span className="tooltiptext">
