@@ -1,3 +1,4 @@
+import React, { useEffect } from "react"; // Keep this as you're using useEffect
 import PropTypes from "prop-types"; // Import once
 import { Bar } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
@@ -56,7 +57,7 @@ function Results({ hasChosenNo, result }) {
     ;
 
   const hasError = result && typeof result === "object" && "error" in result;
-  
+
   if ("age_at_time_data" in result &&
     "staircasing_data" in result &&
     "mortgage_data" in result &&
@@ -235,9 +236,9 @@ function Results({ hasChosenNo, result }) {
         <p className="text-xl mb-4">
         Below is a graph of the staircasing shares year by year.</p>
         </div>
-        
+        <div>
         {renderstairchart()}
-
+        </div>
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
         Given your deposit is 5% of your house value, you will need to get a mortgage of {result.Mortgage_size ? result.Mortgage_size.toFixed(0) : 'N/A'}. </p>
@@ -246,8 +247,10 @@ function Results({ hasChosenNo, result }) {
         <p className="text-xl mb-4">
         Below is a graph on the outstanding loan balance.</p>
         </div>
+        <div>
         {renderloanchart()}
-        
+        </div>
+
         <div className="text-white" id="results">
         <p className="text-xl mb-4">
         However, if you decide not to buy a Shared Ownership property and wait until you are able to buy on the open market, you will only be able to repay your mortgage by the age of {result.TO_finish ? result.TO_finish.toFixed(0) : 'N/A'}. </p>
@@ -259,6 +262,8 @@ function Results({ hasChosenNo, result }) {
         In comparison, the current value of your non-housing wealth if you were to wait until you could buy on the open market will be only {result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'}. </p>
         <p className="text-xl mb-4">
         See the graph below for comparison of the current value of non-housing wealth between Shared Ownership and open market purchase over time. </p>
+        </div>
+        <div>
         {rendercompchart()}
         </div>
 
