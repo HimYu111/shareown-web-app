@@ -22,6 +22,7 @@ function Results({ result }) {
     // Loading state or placeholder content
     return <p>Loading data...</p>;
   }
+  console.log('Results received:', result);
 
   // Extract and parse data if present, else default to fallback values
   const ageAtTimeData = result.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
