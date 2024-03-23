@@ -1,4 +1,5 @@
 
+
 import PropTypes from "prop-types"; // Import once
 import { Bar } from 'react-chartjs-2';
 import { Line } from 'react-chartjs-2';
@@ -55,7 +56,8 @@ function Results({ hasChosenNo, result }) {
     "TO_wealth_data" in result &&
     "SO_wealth_data" in result 
     ;
-  
+  console.log("Result prop received:", result);
+
   console.log("Result prop:", result);
   const hasError = result && typeof result === "object" && "error" in result;
   console.log(ageattimedata, staircasingdata, mortgagedata, TO_wealthdata, SO_wealthdata);

@@ -4,7 +4,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 import { Routes, Route } from "react-router-dom";
-import App from "./App";
+import App from "./App.js";
 import Blog from "./Pages/Blog.js";
 import Vid from "./Pages/Vid.js"
 import reportWebVitals from "./reportWebVitals";
