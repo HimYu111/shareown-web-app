@@ -17,7 +17,7 @@ import {
 // Registering necessary chart components
 ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Tooltip, Legend);
 
-function Results({ results }) {
+function results({ results }) {
   if (!results) {
     // Loading state or placeholder content
     return <p>Loading data...</p>;
@@ -119,8 +119,8 @@ function Results({ results }) {
   );
 }
 
-Results.propTypes = {
+results.propTypes = {
   results: PropTypes.object,
 };
 
-export default Results;
+export default results;
