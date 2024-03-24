@@ -23,7 +23,7 @@ function scrollCarousel(targetImageNumber) {
   carouselElement.scrollTo({ left: targetXPixel, behavior: "smooth" });
 }
 
-function Input({ setResult, setResult2 }) {
+function Input({ setResult }) {
   // State declarations
   const [loading, setLoading] = useState(false);
   const [scrollToResults, setScrollToResults] = useState(false);
@@ -78,9 +78,11 @@ function Input({ setResult, setResult2 }) {
 
       // Send POST request
       const response = await axios.post(
-        "https://shareown-backend.onrender.com/predict",
+        // "https://shareown-backend.onrender.com/predict",
+        "http://127.0.0.1:10000/predict",
         postData,
       );
+      console.log(response.data)
       setResult(response.data);
 
       setScrollToResults(true);
@@ -788,13 +790,15 @@ function Input({ setResult, setResult2 }) {
           className="carousel-item relative w-full flex justify-center"
         >
           {/* Content for slide 12, if needed */}
-          {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">
+          {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">  
           <button
               className="btn"
-              onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
-              disabled={loading || submitted} // Disable button during loading or after submission
+              // onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
+              onClick={handleInputs}
+              // disabled={loading || submitted} // Disable button during loading or after submission
             >
-              {submitted ? 'Submitted' : 'Submit'}
+              {/* {submitted ? 'Submitted' : 'Submit'} */}
+              Submit
             </button>
           </div>}
         </div>

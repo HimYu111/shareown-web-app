@@ -10,6 +10,7 @@ import Scroll from "./Components/Scroll";
 
 function App() {
   const [result, setResult] = useState();
+  console.log(result)
   const [hasChosenNo, setHasChosenNo] = useState(false);
 
   return (

@@ -7,7 +7,7 @@ function EmailForm() {
   const handleSubmit = async (event) => {
     event.preventDefault(); // Prevents the default form submit action
     try {
-      const response = await axios.post('http://yourbackend.com/api/emails', { email });
+      const response = await axios.post('https://www.shareown.info/api/submit-email', { email });
       console.log('Email saved:', response.data);
       // Handle success (e.g., showing a success message)
     } catch (error) {
