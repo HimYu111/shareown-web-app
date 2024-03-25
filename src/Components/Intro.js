@@ -23,15 +23,20 @@ function Intro() {
           <a href="#find-out-more" style={{ textDecoration: 'underline' }}>Find out more about Shared Ownership</a>.
         </p>
         <h2 className="text-4xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center'}}>
-          What it is.
+          What it is 
         </h2>
         <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
-        Pathways to homeownership. Our interactive housing affordability lifetime wealth calculator will help calculate your future home ownership path scenarios. 
+        Our  housing affordability lifetime wealth calculator will help calculate your future home ownership path scenarios. 
         It will also show you the wealth you accumulate during the rest of your working life in two scenarios, under full home ownership versus shared ownership.
          </p>
         <h2 className="text-4xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center'}}>
-          How it works.
+          How it works
         </h2>
+        <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
+        Our  housing affordability lifetime wealth calculator will help calculate your future home ownership path scenarios. 
+        It will also show you the wealth you accumulate during the rest of your working life in two scenarios, under full home ownership versus shared ownership.
+         </p>
+         
         <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
         Enter your details
         We will ask you to provide some basic information about your income, desired location of property, property price, age, and more, before the calculator is able to ‘run the numbers’.  
