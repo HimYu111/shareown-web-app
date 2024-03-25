@@ -533,7 +533,7 @@ function Input({ setResult }) {
           <div className="form-control w-full max-w-xs">
             <label className="label">
               <span className="text-black">
-                How many bedrooms does your desired house have?
+                How many bedrooms does your desired home have?
               </span>
             </label>
             <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
@@ -792,9 +792,9 @@ function Input({ setResult }) {
           {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">  
           <button
               className="btn"
-              // onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
-              onClick={handleInputs}
-              // disabled={loading || submitted} // Disable button during loading or after submission
+              onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
+              //onClick={handleInputs}
+              disabled={loading || submitted} // Disable button during loading or after submission
             >
               {/* {submitted ? 'Submitted' : 'Submit'} */}
               Submit
