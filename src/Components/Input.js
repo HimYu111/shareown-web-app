@@ -460,8 +460,8 @@ function Input({ setResult }) {
   };
 
   return (
-    <div id="input" className="bg-gray-200 min-h-screen">
-      <div id="carousel" className="carousel w-full py-60">
+    <div id="input" className="input-carousel">
+      <div id="carousel" className="carousel w-full">
         {/* Slide 1: Postcode (unused) */}
         <div
           id="slide1"

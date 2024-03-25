@@ -17,7 +17,7 @@ function App() {
     <div className="App">
       <Scroll />
       <Navbar />
-      <div className="border-x-[16px] border-white max-sm:border-0">
+      <div className="main">
         <Intro />
         <Input setResult={setResult} />
         <Results result={result} />

@@ -26,7 +26,7 @@ ChartJS.register(
 
 function Results({ result }) {
   if (!result) {
-    return <p>Loading data...</p>; // Display loading or placeholder content
+    return <div class="loading-data"><p>Loading data...</p></div>; // Display loading or placeholder content
   }
   const ageattimedata = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
   const staircasingdata = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];

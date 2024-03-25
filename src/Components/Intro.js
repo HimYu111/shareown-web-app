@@ -13,47 +13,106 @@ function Intro() {
   };
 
   return (
-    <div className="bg-gray-900" style={{ minHeight: 'calc(150vh + 100px)' }}>
-      <div className="translate-y-[10rem]">
-        <h1 className="text-5xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center' }}>
+    <div className="intro-and-3cols-wrapper">
+      <div className="bg-gray-900 main-intro-wrapper">
+      <div className="main-intro">
+        <h1 className="text-6xl text-white py-10" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center' }}>
           Housing Affordability <i>Lifetime Wealth</i> Calculator
         </h1>
-        <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
-        Calculate Your Future Home Ownership Path and Lifetime Wealth Under Various Ownership Scenarios 
-          <a href="#find-out-more" style={{ textDecoration: 'underline' }}>Find out more about Shared Ownership</a>.
-        </p>
-        <h2 className="text-4xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center'}}>
-          What it is 
-        </h2>
-        <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
-        Our  housing affordability lifetime wealth calculator will help calculate your future home ownership path scenarios. 
-        It will also show you the wealth you accumulate during the rest of your working life in two scenarios, under full home ownership versus shared ownership.
-         </p>
-        <h2 className="text-4xl text-white py-20" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center'}}>
-          How it works
-        </h2>
-        <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
-        Our  housing affordability lifetime wealth calculator will help calculate your future home ownership path scenarios. 
-        It will also show you the wealth you accumulate during the rest of your working life in two scenarios, under full home ownership versus shared ownership.
-         </p>
-         
-        <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
-        Enter your details
-        We will ask you to provide some basic information about your income, desired location of property, property price, age, and more, before the calculator is able to ‘run the numbers’.  
-        </p>
-        
-        <p className="text-2xl text-white py-20" style={{ textAlign: 'center' }}>
-          <i>The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®</i>
-        </p>
-        <div className="flex justify-end pr-20">
+        <div className="main-underheading">        
+        <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
+        Calculate your lifetime wealth under various ownership scenarios 
+        </p></div>
+
+
+        <div className="button-wrapper">
           <button
             onClick={() => scrollToSection("input")}
-            style={{ cursor: "pointer", backgroundColor: '#00BFFF' }} // Example button color change, adjust as needed
-            className="btn btn-lg text-neutral"
+            className="btn btn-lg text-neutral "
           >
             Start Now
           </button>
         </div>
+      </div>
+
+      </div>
+      <div className="main-3-cols">
+        <div className="main-col1 main-col" >
+          <div>
+            <h2 className="text-4xl ">
+          What it is 
+          </h2>
+          </div>
+          <div>          
+            <p >
+            Learn how your home ownership decisions will impact your lifetime wealth
+           </p>
+           </div>
+
+        </div>
+        <div className="main-col2 main-col">        
+        <div><h2 className="text-4xl">
+          How it works
+        </h2>
+        </div>
+        <div> <p >
+        We will ask you to provide some basic information about your income, desired location of property, property price, age, and more, before the calculator is able to ‘run the numbers’.
+         </p>
+         </div>
+
+
+
+
+        </div>
+        <div className="main-col3 main-col">
+        <div>
+          <h2 className="text-4xl ">
+          What you find out
+          </h2>
+        </div>
+        <div>          
+          <p>
+          The calculator compares pathways to home ownership considering renting, buying using shared ownership and full ownership. 
+           </p>
+        </div>
+
+        <div className="col3-additional-info">
+          <h3 className="text-2xl">
+          Pathway to home ownership
+          </h3>
+        
+                
+          <p>
+          You will see at what age you will be able to buy your property or shared ownership as well as when you would fully own your home. 
+           </p>
+        
+
+        
+          <h3 className="text-2xl">
+          Staircasing
+          </h3>
+
+          <p>
+          You will be provided with a timeline of optimal staircasing under shared ownership.
+           </p>
+        
+           <h3 className="text-2xl">
+           Lifetime wealth
+          </h3>
+
+          <p>
+          You will be provided with a comparison graph of your lifetime wealth under shared ownership versus full ownership.
+           </p>
+        
+        </div>
+        </div>
+
+        <div className="cols-last-sentance">        
+        <p >
+          <i>The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®</i>
+        </p>
+        </div>
+        
       </div>
     </div>
   );
