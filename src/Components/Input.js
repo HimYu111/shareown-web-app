@@ -78,8 +78,7 @@ function Input({ setResult }) {
 
       // Send POST request
       const response = await axios.post(
-        // "https://shareown-backend.onrender.com/predict",
-        "http://127.0.0.1:10000/predict",
+        "https://shareown-backend.onrender.com/predict",
         postData,
       );
       console.log(response.data)
