@@ -797,7 +797,7 @@ function Input({ setResult }) {
               disabled={loading || submitted} // Disable button during loading or after submission
             >
               {/* {submitted ? 'Submitted' : 'Submit'} */}
-              Submit
+              Calculate
             </button>
           </div>}
         </div>

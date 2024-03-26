@@ -1,9 +1,6 @@
-
-import PropTypes from "prop-types"; // Import once
-import { Bar } from 'react-chartjs-2';
-import { Line } from 'react-chartjs-2';
+import PropTypes from "prop-types";
+import { Bar, Line } from 'react-chartjs-2';
 import 'chart.js/auto';
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -26,7 +23,7 @@ ChartJS.register(
 
 function Results({ result }) {
   if (!result) {
-    return <p>Loading data...</p>; // Display loading or placeholder content
+    return <p>Loading data...</p>;
   }
   const ageattimedata = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
   const staircasingdata = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];
@@ -36,13 +33,13 @@ function Results({ result }) {
 
   const renderstairchart = () => {
     const data = {
-      labels: [...ageattimedata],  
+      labels: [...ageattimedata],
       datasets: [
         {
           label: 'Ownership Percentage (%)',
-          data: [...staircasingdata],  
-          backgroundColor: 'blue',
-          borderColor: 'blue',
+          data: [...staircasingdata],
+          backgroundColor: 'white',
+          borderColor: 'white',
           borderWidth: 1,
         }
       ]
@@ -52,39 +49,60 @@ function Results({ result }) {
       plugins: {
         legend: {
           position: 'top',
+          labels: {
+            color: 'white',
+          },
         },
         title: {
           display: true,
-          text: 'Shared Ownership Progression via Staircasing'
-        }
+          text: 'Shared Ownership Progression via Staircasing',
+          color: 'white',
+          font: {
+            size: 24,
+          },
+        },
       },
       scales: {
         x: {
           title: {
             display: true,
-            text: 'Age'
-          }
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
         },
         y: {
           title: {
             display: true,
-            text: 'Ownership Percentage (%)'
-          }
+            text: 'Ownership Percentage (%)',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
         }
       }
     };
     return <Bar data={data} options={options} />;
   };
-
+  
   const renderloanchart = () => {
     const data = {
-      labels: [...ageattimedata],  
+      labels: [...ageattimedata],
       datasets: [
         {
           label: 'Outstanding Loan Balance (£)',
-          data: [...mortgagedata],  
-          backgroundColor: 'blue',
-          borderColor: 'blue',
+          data: [...mortgagedata],
+          backgroundColor: 'white',
+          borderColor: 'white',
           borderWidth: 1,
         }
       ]
@@ -94,151 +112,191 @@ function Results({ result }) {
       plugins: {
         legend: {
           position: 'top',
+          labels: {
+            color: 'white',
+          },
         },
         title: {
           display: true,
-          text: 'Outstanding Loan Balance Over Time For Shared Ownership'
-        }
+          text: 'Outstanding Loan Balance Over Time For Shared Ownership',
+          color: 'white',
+          font: {
+            size: 24,
+          },
+        },
       },
       scales: {
         x: {
           title: {
             display: true,
-            text: 'Age'
-          }
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
         },
         y: {
           title: {
             display: true,
-            text: 'Outstanding Loan Balance'
-          }
+            text: 'Outstanding Loan Balance',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
         }
       }
     };
     return <Bar data={data} options={options} />;
   };
-
-
+  
   const rendercompchart = () => {
     const data = {
-      labels: [...ageattimedata], // Assuming this is an array of ages for the x-axis
+      labels: [...ageattimedata],
       datasets: [
         {
           label: 'Total Ownership Wealth Data (£)',
-          data: [...TO_wealthdata], 
+          data: [...TO_wealthdata],
           borderColor: 'red',
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
           borderWidth: 1,
-          fill: false, 
+          fill: false,
         },
         {
           label: 'Shared Ownership Wealth Data (£)',
-          data: [...SO_wealthdata], // Replace with your actual data array for Shared Ownership
+          data: [...SO_wealthdata],
           borderColor: 'green',
           backgroundColor: 'rgba(0, 255, 0, 0.5)',
           borderWidth: 1,
-          fill: false, 
+          fill: false,
         }
       ]
     };
-    
     const options = {
       responsive: true,
       plugins: {
         legend: {
           position: 'top',
+          labels: {
+            color: 'white',
+          },
         },
         title: {
           display: true,
-          text: 'Wealth Comparison: Total Ownership vs Shared Ownership'
-        }
+          text: 'Wealth Comparison: Total Ownership vs Shared Ownership',
+          color: 'white',
+          font: {
+            size: 24,
+          },
+        },
       },
       scales: {
         x: {
           title: {
             display: true,
-            text: 'Age'
-          }
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
         },
         y: {
           title: {
             display: true,
-            text: 'Wealth Data (£)'
-          }
+            text: 'Wealth Data (£)',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
         }
       }
     };
-    
     return <Line data={data} options={options} />;
   };
+  
 
-
+  // React component with two columns of styled text
+const renderTwoColumnsText = () => {
   return (
-    <div className="bg-slate-800 py-20">
-      <div className="text-white" id="results">
-        <p className="text-xl mb-4">
-        You can afford to buy your first home at the age of {result.TO_age ? result.TO_age.toFixed(0) : 'N/A'} years old. </p>
-        <p className="text-xl mb-4">
-        This means you can buy in {result.TO_time ? result.TO_time.toFixed(0) : 'N/A'} years. </p>
-        <p className="text-xl mb-4">
-        However, you can buy a Shared Ownership home at the age of {result.SO_start_age ? result.SO_start_age.toFixed(0) : 'N/A'} (this is assuming a minimum share of 25%).</p> 
-        <p className="text-xl mb-4">
-        This means, you can afford to buy Shared Ownership {result.SO_time ? result.SO_time.toFixed(0) : '0'} years from now. 
-        </p>
-        </div>
+    <div className="flex justify-center my-8">
+      <div className="flex-grow px-6" style={{ maxWidth: '80%' }}>
+        <div className="flex justify-between space-x-4">
+          <div className="w-1/2 text-left">
+            {/* Column 1 */}
+            <h2 className="text-2xl font-bold mb-4">Full ownership</h2>
+            <p className="font-bold mb-2">Deposit</p>
+            <p className="text-lg italic mb-2">£{result.TO_deposit ? result.TO_deposit.toFixed(0) : 'N/A'}</p>
+            <p>5% of home value.</p>
+            <p className="italic mb-2">You can afford the deposit in {result.TO_time ? result.TO_time.toFixed(0) : 'N/A'} years</p>
+            {/*<p className="font-bold mb-2">Monthly costs</p>
+             <p className="text-xl italic mb-2">£1,500</p>
+            <p>Mortgage payment (assuming repayment for 30 years)</p>*/}
+            <p className="font-bold mb-2">Lifetime wealth</p>
+            <p className="font-bold mb-2">By retirement age, you would have</p>
+            <p className="text-xl font-bold">£{result.TO_housing ? result.TO_housing.toFixed(0) : 'N/A'} in housing wealth</p>
+            <p className="text-xl font-bold mb-2">£{result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'} in savings</p>
+            <p className="mb-2">If you wait to buy on the open market and do not use shared ownership you will accrue this savings over your life time, which is what they will be worth it in current money. Current wealth estimate (inflation adjusted) given assumed house price appreciation of 5% and current mortgage rate of 4%. <a href="#comp" className="text-blue-500 hover:underline mb-4 inline-block">See here your lifetime wealth over time</a></p>
+            <p className="font-bold mb-2">Repayment structure</p>
+            <p>Mortgage free by the age of {result.TO_finish ? result.TO_finish.toFixed(0) : 'N/A'}</p>
+            <p>Assuming you use all your savings to make prepayments.</p>
+          </div>
+          <div className="w-1/2 text-left">
 
-        <div>
-        {renderstairchart()}
-        </div>
-        
-        <div className="text-white" id="results">
-        <p className="text-xl mb-4">
-        Shared ownership is a scheme designed to help individuals afford homeownership by purchasing an initial share of 25% to 75% of a home and paying reduced rent on the remainder. </p>
-        <p className="text-xl mb-4">
-        This option allows buyers with limited savings to get onto the property ladder by offering the flexibility to buy additional shares, through a process known as ‘staircasing,’ towards full ownership as their financial situation improves. </p>
-        <p className="text-xl mb-4">
-        It provides an accessible path to homeownership, accommodating various personal circumstances and market conditions, and is supported by the ability to secure mortgage loans similarly to outright purchases. </p>
-        <p className="text-xl mb-4">
-        Our calculator tools assess the benefits of shared ownership compared to traditional homeownership, aiding families in managing their lifetime wealth.</p>
-        <p className="text-xl mb-4">
-        If you decide to buy a Shared Ownership property you will be able to staircase to full ownership by the age of  {result.SO_staircase_finish ? result.SO_staircase_finish.toFixed(0) : 'N/A'}. </p>
-        <p className="text-xl mb-4">
-        Below is a graph of the staircasing shares year by year.</p>
-        </div>
 
-        <div className="text-white" id="results">
-        <p className="text-xl mb-4">
-        Given your deposit is 5% of your house value, you will need to get a mortgage of £{result.Mortgage_size ? result.Mortgage_size.toFixed(0) : 'N/A'}. </p>
-        <p className="text-xl mb-4">
-        Assuming an interest rate of 3%, a mortgage rate of 4% and a above staircasing behaviour, you will be able to repay your Shared Ownership mortgage by the age of {result.SO_mortgage_finish ? result.SO_mortgage_finish.toFixed(0) : 'N/A'}. </p>
-        <p className="text-xl mb-4">
-        Below is a graph on the outstanding loan balance.</p>
-        </div>
-        <div>
-        {renderloanchart()}
-        </div>
 
-        <div className="text-white" id="results">
-        <p className="text-xl mb-4">
-        However, if you decide not to buy a Shared Ownership property and wait until you are able to buy on the open market, you will only be able to repay your mortgage by the age of {result.TO_finish ? result.TO_finish.toFixed(0) : 'N/A'}. </p>
-        <p className="text-xl mb-4">
-        The benefit of Shared Ownership is that you will accrue more non-housing wealth (through savings) up until you retire (at the age of 67). </p>
-        <p className="text-xl mb-4">
-        The current value of your non-housing wealth will be £{result.SO_liquid ? result.SO_liquid.toFixed(0) : 'N/A'} if you were to buy the Shared Ownership property (and staircased in the suggested way). </p>
-        <p className="text-xl mb-4">
-        In comparison, the current value of your non-housing wealth if you were to wait until you could buy on the open market will be only £{result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'}. </p>
-        <p className="text-xl mb-4">
-        See the graph below for comparison of the current value of non-housing wealth between Shared Ownership and open market purchase over time. </p>
-        </div>
-        <div>
-        {rendercompchart()}
-        </div>
 
-      <div>
-      <p className="text-l mb-4">
-        Please note that above calculations are based on a model designed by UCL and University of Durham academics and contains a number of 
+            {/* Column 2 */}
+            <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
+            <p className="font-bold mb-2">Deposit</p>
+            <p className="text-lg italic mb-2">£{result.SO_deposit ? result.SO_deposit.toFixed(0) : 'N/A'}</p>
+            <p>5% of the minimum equity share (25% x home value) </p>
+            <p className="font-bold mb-2"> You can afford the deposit in {result.SO_time ? result.SO_time.toFixed(0) : 'N/A'} years</p>
+            <p className="font-bold mb-2">100% Ownership</p>
+            <p className="text-xl mb-2">Staircase to 100% ownership by the age of {result.SO_staircase_finish ? result.SO_staircase_finish.toFixed(0) : 'N/A'}</p>
+            <p className="text-rg mb-2">(assuming you use all your savings to staircase)</p>
+            <a href="#staircasing" className="text-blue-500 hover:underline mb-4 inline-block">See here how you can staircase over time</a>
+            {/*<p className="font-bold">Monthly costs</p>
+            <p className="italic">£1,200</p>
+            <p>Includes mortgage payment (assuming repayment for 30 years), rent and service charge, and no staircasing.</p>*/}
+            <p className="font-bold mb-2">Lifetime wealth</p>
+            <p>By retirement age, you would have</p>
+            <p className="text-xl font-bold">£{result.SO_housing ? result.SO_housing.toFixed(0) : 'N/A'} in housing wealth</p>
+            <p className="text-xl font-bold mb-2">£{result.SO_liquid ? result.SO_liquid.toFixed(0) : 'N/A'} in savings</p>
+            <p className="mb-2">If you wait to buy on the open market and do not use shared ownership you will accrue this savings over your life time, which is what they will be worth it in current money. Current wealth estimate (inflation adjusted) given assumed house price appreciation of 5% and current mortgage rate of 4%. <a href="#comp" className="text-blue-500 hover:underline">See here your lifetime wealth over time</a></p>
+            <p className="font-bold">Repayment structure</p>
+            <p>Mortgage free by the age of {result.SO_mortgage_finish ? result.SO_mortgage_finish.toFixed(0) : 'N/A'}</p>
+            <p>Assuming you use all your savings to make prepayments.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+
+return (
+  <div className="bg-slate-800 py-20">
+    {renderTwoColumnsText()}
+    <div className="text-l mb-4 mx-8">
+      <p>
+        Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of assumptions used:_
         <span className="tooltip"> assumptions
-          <span className="tooltiptext">
+          <span className="tooltiptext" style={{ width: '1500px' }}>
           • Savings rate: 3%<br />
           • Inflation: 3%<br />
           • Mortgage rate: 4%<br />
@@ -257,12 +315,28 @@ function Results({ result }) {
           • Affordability constraint: 40%
           </span>
         </span>
-        and is only indicative but is not financial advice.
-      </p>
+      </p>      
     </div>
+    <div className="flex-grow px-8 mx-32">
+        {/* First row of charts */}
+        <div className="flex justify-center gap-4" style={{ height: '400px' }}>
+          <div id="staircasing" className="w-2/3 md:w-full px-4">
+            {renderstairchart()}
+          </div>
+          <div id="loan" className="w-2/3 md:w-full px-4" style={{ height: '400px' }}>
+            {renderloanchart()}
+          </div>
+        </div>
+        {/* Second row for the third chart */}
+        <div className="flex justify-center">
+          <div id="comp" className="w-1/7 md:w-1/2 px-4" style={{ height: '400px' }}>
+            {rendercompchart()}
+          </div>
+        </div>
+      </div>
     </div>
-    );
-  }
+  );
+}
 
 Results.propTypes = {
   result: PropTypes.object,
