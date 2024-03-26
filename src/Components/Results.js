@@ -233,7 +233,7 @@ function Results({ result }) {
   // React component with two columns of styled text
 const renderTwoColumnsText = () => {
   return (
-    <div className="flex justify-center my-8">
+    <div className="flex justify-center my-8 text-white">
       <div className="flex-grow px-6" style={{ maxWidth: '80%' }}>
         <div className="flex justify-between space-x-4">
           <div className="w-1/2 text-left">
@@ -290,7 +290,7 @@ const renderTwoColumnsText = () => {
 
 
 return (
-  <div className="bg-slate-800 py-20">
+  <div className="bg-slate-800 py-20 text-white">
     {renderTwoColumnsText()}
     <div className="text-l mb-4 mx-8">
       <p>
