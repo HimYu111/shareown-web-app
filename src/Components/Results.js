@@ -281,6 +281,8 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Repayment structure</p>
             <p>Mortgage free by the age of {result.SO_mortgage_finish ? result.SO_mortgage_finish.toFixed(0) : 'N/A'}</p>
             <p>Assuming you use all your savings to make prepayments.</p>
+            <p><a href="#loan" className="text-blue-500 hover:underline">See your standing loan balance over time</a></p>
+
           </div>
         </div>
       </div>
