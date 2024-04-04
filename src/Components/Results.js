@@ -257,9 +257,6 @@ const renderTwoColumnsText = () => {
           </div>
           <div className="w-1/2 text-left">
 
-
-
-
             {/* Column 2 */}
             <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
             <p className="font-bold mb-2">Deposit</p>
