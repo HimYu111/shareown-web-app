@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../Assets/logo-new.png";
+import logo from "../Assets/icon-ShareOwn.png";
 import homeIcon from "../Assets/home-icon.png";
 import blogIcon from "../Assets/blog-icon.png";
 import vidIcon from "../Assets/question-icon.png";
