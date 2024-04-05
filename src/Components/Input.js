@@ -792,9 +792,9 @@ function Input({ setResult }) {
           {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">  
           <button
               className="btn"
-              onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
-              //onClick={handleInputs}
-              disabled={loading || submitted} // Disable button during loading or after submission
+              //onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
+              onClick={handleInputs}
+              //disabled={loading || submitted} // Disable button during loading or after submission
             >
               {/* {submitted ? 'Submitted' : 'Submit'} */}
               Calculate

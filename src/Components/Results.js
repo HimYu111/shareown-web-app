@@ -233,6 +233,7 @@ function Results({ result }) {
   // React component with two columns of styled text
 const renderTwoColumnsText = () => {
   return (
+    <div id="results">
     <div className="flex justify-center my-8 text-white">
       <div className="flex-grow px-6" style={{ maxWidth: '80%' }}>
         <div className="flex justify-between space-x-4">
@@ -247,7 +248,7 @@ const renderTwoColumnsText = () => {
              <p className="text-xl italic mb-2">£1,500</p>
             <p>Mortgage payment (assuming repayment for 30 years)</p>*/}
             <p className="font-bold mb-2">Lifetime wealth</p>
-            <p className="font-bold mb-2">By retirement age, you would have</p>
+            <p className="font-bold mb-2">By retirement age, you would have approximately</p>
             <p className="text-xl font-bold">£{result.TO_housing ? result.TO_housing.toFixed(0) : 'N/A'} in housing wealth</p>
             <p className="text-xl font-bold mb-2">£{result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'} in savings</p>
             <p className="mb-2">If you wait to buy on the open market and do not use shared ownership you will accrue this savings over your life time, which is what they will be worth it in current money. Current wealth estimate (inflation adjusted) given assumed house price appreciation of 5% and current mortgage rate of 4%. <a href="#comp" className="text-blue-500 hover:underline mb-4 inline-block">See here your lifetime wealth over time</a></p>
@@ -262,7 +263,7 @@ const renderTwoColumnsText = () => {
             <p className="font-bold mb-2">Deposit</p>
             <p className="text-lg italic mb-2">£{result.SO_deposit ? result.SO_deposit.toFixed(0) : 'N/A'}</p>
             <p>5% of the minimum equity share (25% x home value) </p>
-            <p className="font-bold mb-2"> You can afford the deposit in {result.SO_time ? result.SO_time.toFixed(0) : 'N/A'} years</p>
+            <p className="font-bold mb-2"> You can afford the deposit in {result.SO_time ? result.SO_time.toFixed(0) : '0'} years</p>
             <p className="font-bold mb-2">100% Ownership</p>
             <p className="text-xl mb-2">Staircase to 100% ownership by the age of {result.SO_staircase_finish ? result.SO_staircase_finish.toFixed(0) : 'N/A'}</p>
             <p className="text-rg mb-2">(assuming you use all your savings to staircase)</p>
@@ -271,7 +272,7 @@ const renderTwoColumnsText = () => {
             <p className="italic">£1,200</p>
             <p>Includes mortgage payment (assuming repayment for 30 years), rent and service charge, and no staircasing.</p>*/}
             <p className="font-bold mb-2">Lifetime wealth</p>
-            <p>By retirement age, you would have</p>
+            <p>By retirement age, you would have approximately</p>
             <p className="text-xl font-bold">£{result.SO_housing ? result.SO_housing.toFixed(0) : 'N/A'} in housing wealth</p>
             <p className="text-xl font-bold mb-2">£{result.SO_liquid ? result.SO_liquid.toFixed(0) : 'N/A'} in savings</p>
             <p className="mb-2">If you wait to buy on the open market and do not use shared ownership you will accrue this savings over your life time, which is what they will be worth it in current money. Current wealth estimate (inflation adjusted) given assumed house price appreciation of 5% and current mortgage rate of 4%. <a href="#comp" className="text-blue-500 hover:underline">See here your lifetime wealth over time</a></p>
@@ -284,6 +285,7 @@ const renderTwoColumnsText = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 
