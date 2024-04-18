@@ -15,14 +15,6 @@ import savings from "../Assets/icon-savings.png";
 
 import Loading from "../Components/Loading";
 
-function scrollCarousel(targetImageNumber) {
-  let carouselElement = document.getElementById("carousel");
-  let carouselWidth = carouselElement.clientWidth;
-  let targetImage = targetImageNumber - 1;
-  let targetXPixel = carouselWidth * targetImage;
-  carouselElement.scrollTo({ left: targetXPixel, behavior: "smooth" });
-}
-
 function Input({ setResult }) {
   // State declarations
   const [loading, setLoading] = useState(false);
@@ -30,19 +22,6 @@ function Input({ setResult }) {
   const [submitted, setSubmitted] = useState(false);
   const loadingRef = useRef(null);
 
-  const scrollToLoading = () => {
-    return new Promise((resolve) => {
-      if (loadingRef.current) {
-        window.scrollTo({
-          behavior: "smooth",
-          top: loadingRef.current.offsetTop,
-        });
-        setTimeout(() => {
-          resolve();
-        }, 1000);
-      }
-    });
-  };
 
   const handleInputs = async () => {
     setLoading(true);
@@ -453,356 +432,152 @@ function Input({ setResult }) {
 
 
 
-  const [sliderValue, setSliderValue] = useState(1);
-
-  const handleSliderChange = (event) => {
-    setSliderValue(event.target.value);
-  };
-
   return (
     <div id="input" className="bg-gray-200 min-h-screen">
-      <div id="carousel" className="carousel w-full py-60">
-        {/* Slide 1: Postcode (unused) */}
-        <div
-          id="slide1"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={areas} className="h-32" alt="london areas map" />
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                What postcode do you want to live in?
-              </span>
+      <div className="flex justify-center pt-20">
+        {/* Column 1 */}
+        <div className="w-4/12 p-12 pl-4">
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              What postcode do you want to live in?
             </label>
-            <select
-              className="input input-bordered w-full max-w-xs"
-              id="input-1"
-            >
-              {options.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
+            <select className="input input-bordered w-full" id="input-1">
+                {options.map((postcode, index) => (
+                  <option key={index} value={postcode}>{postcode}</option>
               ))}
             </select>
           </div>
-          <div className="flex justify-end px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(2)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 2: Property Type (unused) */}
-        <div
-          id="slide2"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={icon2} className="h-32" alt="house icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                What kind of property do you want to live in?
-              </span>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              What kind of property do you want to live in?
             </label>
-            <select
-              className="input input-bordered w-full max-w-xs"
-              id="input-2"
-            >
-              <option value="Apartment">Apartment</option>
-              <option value="Terraced House">Terraced House</option>
-              <option value="Semi-detached House">Semi-detached House</option>
-              <option value="Detached House">Detached House</option>
-            </select>
-          </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(1)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(3)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 3: Bedrooms (unused) */}
-        <div
-          id="slide3"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={floorplan} className="h-32" alt="floorplan"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                How many bedrooms does your desired home have?
-              </span>
-            </label>
-            <div className="rounded-lg p-4 shadow-lg max-w-[300px]">
-              <div className="p-4">
-                <span className="text-sm"> </span>
-                <span className="text-sm text-black"> {sliderValue} </span>
-                <input
-                  id="input-3"
-                  className="w-full accent-indigo-600"
-                  type="range"
-                  min="1"
-                  max="4"
-                  step="1"
-                  onChange={handleSliderChange}
-                />
-                <div className="-mt-2 flex w-full justify-between">
-                  <span className="text-sm text-gray-600"> 1 </span>
-                  <span className="text-sm text-gray-600"> 4+ </span>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(2)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(4)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 4: Occupation (unused) */}
-        <div
-          id="slide4"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={job} className="h-32" alt="job icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">What is your occupation?</span>
-            </label>
-            <select
-              className="input input-bordered w-full max-w-xs"
-              id="input-4"
-            >
-              {joboptions.map((option) => (
-                <option key={option} value={option}>
-                  {option}
-                </option>
+            <select className="input input-bordered w-full" id="input-2">
+              {propertyTypeOptions.map((option, index) => (
+                <option key={index} value={option}>{option}</option>
               ))}
             </select>
           </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(3)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(5)}>
-              Next
-            </button>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              How many bedrooms does your desired home have?
+            </label>
+            <select className="input input-bordered w-full" id="input-3">
+              {bedroomOptions.map((option, index) => (
+                <option key={index} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              What is your occupation?
+            </label>
+            <select className="input input-bordered w-full" id="input-4">
+            {joboptions.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              What is the price of the home you wish to purchase?
+            </label>
+            <input
+              id="input-5"
+              className="input input-bordered w-full"
+              type="number"
+              min="0"
+              placeholder="Enter house price in £"
+            />
           </div>
         </div>
-
-        {/* Slide 5: Current Price of the House */}
-        <div id="slide5" className="carousel-item relative w-full flex justify-center">
-          <img src={housecost} className="h-32" alt="house price icon" />
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">What is the price of the home you wish to purchase?</span>
+        {/* Column 2 */}
+        <div className="w-4/12 p-4 pl-12">
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              Are you a first-time buyer?
             </label>
-            <input id="input-5" className="input input-bordered w-full max-w-xs" type="number" min="0" placeholder="Enter house price in £" />
-          </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(4)}>Back</button>
-            <button className="btn" onClick={() => scrollCarousel(6)}>Next</button>
-          </div>
-        </div>
-        
-        {/* Slide 6: First Time Buyer */}
-        <div id="slide6" className="carousel-item relative w-full flex justify-center">
-          <img src={moving} className="h-32" alt="moving icon" />
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">Are you a first-time buyer?</span>
-            </label>
-            <select id="input-6" className="input input-bordered w-full max-w-xs">
+            <select className="input input-bordered w-full" id="input-6">
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
           </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(5)}>Back</button>
-            <button className="btn" onClick={() => scrollCarousel(7)}>Next</button>
-          </div>
-        </div>
-
-        {/* Slide 7: Monthly Household Income After Tax (used) */}
-        <div
-          id="slide7"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={cheque} className="h-32" alt="income icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                What is the current annual gross income of the household buying the home (indicate the total amount if more than one person buying the home)?
-              </span>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              What is the current annual gross income of the household buying the home (indicate the total amount if more than one person buying the home)?
             </label>
             <input
               id="input-7"
-              className="input input-bordered w-full max-w-xs"
-              type="number" // Change to numerical input
+              className="input input-bordered w-full"
+              type="number"
               min="0"
               max="15000"
-              placeholder="Enter amount in £"
+              placeholder="Enter income in £"
             />
           </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(6)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(8)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 8: Post Tax Income Spent on Expenses (%) (used) */}
-        <div
-          id="slide8"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={icon3} className="h-32" alt="pound sign icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                How much do you think you spend each month (excluding housing)? (E.g. £500)
-              </span>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              How much do you think you spend each month (excluding housing)?
             </label>
             <input
               id="input-8"
-              className="input input-bordered w-full max-w-xs"
-              type="number" // Change to numerical input
+              className="input input-bordered w-full"
+              type="number"
               min="1"
               max="100"
               placeholder="Enter amount in £"
             />
           </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(7)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(9)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 9: Age of Head of Household (used) */}
-        <div
-          id="slide9" // Make sure this ID is unique and correctly sequenced if it's part of a carousel
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={icon} className="h-32" alt="head of household icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                How old is the main buyer?
-              </span>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              How old is the main buyer?
             </label>
             <input
-              id="input-9" // Corrected ID to match the slide number
-              className="input input-bordered w-full max-w-xs"
-              type="number" // Correct for age input
-              min="18" // Assuming 18 is the minimum age you want to enforce
-              max="80" // Assuming 120 as a reasonable maximum age, adjust as needed
-              placeholder="Enter age of main buyer" // Corrected placeholder text
+              id="input-9"
+              className="input input-bordered w-full"
+              type="number"
+              min="18"
+              max="80"
+              placeholder="Enter age"
             />
           </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(8)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(10)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-
-        {/* Slide 10: Current Savings (used) */}
-        <div
-          id="slide10"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={savings} className="h-32" alt="savings icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">
-                How much in savings do the buyers have?
-              </span>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              How much in savings do the buyers have?
             </label>
             <input
               id="input-10"
-              className="input input-bordered w-full max-w-xs"
-              type="number" // Changed from "range" to "number"
-              min="0" // Minimum value for the input, can be adjusted as needed
+              className="input input-bordered w-full"
+              type="number"
+              min="0"
               placeholder="Enter savings amount in £"
             />
           </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(9)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(11)}>
-              Next
-            </button>
-          </div>
-        </div>
-
-        {/* Slide 11: Current Rent (unused) */}
-        <div
-          id="slide11"
-          className="carousel-item relative w-full flex justify-center"
-        >
-          <img src={rent} className="h-32" alt="rent icon"/>
-          <div className="form-control w-full max-w-xs">
-            <label className="label">
-              <span className="text-black">What is your current monthly rent?</span>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              What is your current monthly rent?
             </label>
             <input
               id="input-11"
-              className="input input-bordered w-full max-w-xs"
-              type="number" // Changed from "range" to "number"
-              min="0" // Minimum value for the input
-              max="10000" // Maximum value for the input
+              className="input input-bordered w-full"
+              type="number"
+              min="0"
+              max="10000"
               placeholder="Enter rent amount in £"
             />
           </div>
-          <div className="flex justify-between px-5 my-10">
-            <button className="btn" onClick={() => scrollCarousel(10)}>
-              Back
-            </button>
-            <button className="btn" onClick={() => scrollCarousel(12)}>
-              Next
-            </button>
-          </div>
         </div>
-
-        {/* Slide 12: Final Confirmation */}
-        <div
-          id="slide12"
-          className="carousel-item relative w-full flex justify-center"
+      </div>
+      <div className="flex justify-center mt-4">
+        <button
+          className="btn btn-primary mb-10"
+          onClick={handleInputs}
+          disabled={loading}
         >
-          {/* Content for slide 12, if needed */}
-          {loading ? <Loading/> : <div className="flex justify-center px-5 my-10">  
-          <button
-              className="btn"
-              //onClick={!submitted ? handleInputs : null} // Prevent function if already submitted
-              onClick={handleInputs}
-              //disabled={loading || submitted} // Disable button during loading or after submission
-            >
-              {/* {submitted ? 'Submitted' : 'Submit'} */}
-              Calculate
-            </button>
-          </div>}
-        </div>
+          {loading ? <Loading /> : "Submit"}
+        </button>
       </div>
     </div>
   );
 }
+
 export default Input;

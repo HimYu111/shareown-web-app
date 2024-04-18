@@ -19,6 +19,23 @@ function Blog() {
               title="Embedded Video">
             </iframe>
           </div>
+          <div>
+            <h2 className="text-lg font-bold mb-2">Recommended information sources</h2>
+            <ul className="list-disc pl-6">
+              <li>
+                <a href="https://www.moneysavingexpert.com/mortgages/mortgage-guide/" target="_blank" rel="noopener noreferrer">Money Saving Expert - Mortgage Guide</a>
+              </li>
+              <li>
+                <a href="https://www.moneysavingexpert.com/mortgages/buying-a-home-timeline/" target="_blank" rel="noopener noreferrer">Money Saving Expert - Buying a Home Timeline</a>
+              </li>
+              <li>
+                <a href="https://www.gov.uk/shared-ownership-scheme" target="_blank" rel="noopener noreferrer">GOV.UK - Shared Ownership Scheme</a>
+              </li>
+              <li>
+                <a href="https://www.gov.uk/affordable-home-ownership-schemes" target="_blank" rel="noopener noreferrer">GOV.UK - Affordable Home Ownership Schemes</a>
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
       <Footer />

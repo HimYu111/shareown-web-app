@@ -3,6 +3,7 @@ import logo from "../Assets/icon-ShareOwn.png";
 import homeIcon from "../Assets/home-icon.png";
 import blogIcon from "../Assets/blog-icon.png";
 import vidIcon from "../Assets/question-icon.png";
+import TCsIcon from "../Assets/TCs-icon.png";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -15,22 +16,26 @@ function Navbar() {
         <div className="text-logo">
         Lifetime Wealth Calculator
         </div>
-        {/* <div className="flex-none">
+        <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li>
+            <li className="mr-4">
               <img className="absolute -ml-10" src={homeIcon} alt="home button"/>
               <Link to="/">Home</Link>
             </li>
-           <li>
-              <img className="absolute -ml-8" src={blogIcon} alt="blog icon"/>
-              <Link to="/blog"> Blog </Link>
+            <li className="mr-4">
+                <img className="absolute -ml-8" src={blogIcon} alt="blog icon"/>
+                <Link to="/blog"> Blog </Link>
             </li>
-            <li>
+            <li className="mr-4">
               <img className="absolute -ml-8" src={vidIcon} alt="vid icon"/>
               <Link to="/vid"> Vid </Link>
-  </li> 
+            </li> 
+            <li className="mr-4">
+              <img className="absolute -ml-8" src={TCsIcon} alt="TCs icon"/>
+              <Link to="/TCs"> TCs </Link>
+            </li> 
           </ul>
-        </div>*/}
+        </div>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { Routes, Route } from "react-router-dom";
 import App from "./App.js";
 import Blog from "./Pages/Blog.js";
 import Vid from "./Pages/Vid.js"
+import TCs from "./Pages/TCs.js"
 import reportWebVitals from "./reportWebVitals";
 import "tw-elements-react/dist/css/tw-elements-react.min.css";
 
@@ -23,6 +24,9 @@ ReactDOM.render(
         </Route>
         <Route path="/vid" element={<Vid />}>
           {" "}
+        </Route>
+        <Route path="/TCs" element={<TCs />}>
+        {" "}
         </Route>
       </Routes>
     </BrowserRouter>
