@@ -368,18 +368,23 @@ const renderTwoColumnsText = () => {
                     </span>
                   </span>
                   </p>
-                  <p className="text-2xl italic mb-3">£{result.TO_mortgage ? result.TO_mortgage.toFixed(0) : 'N/A'}
-                  </p>
+                  <p className="text-2xl italic mb-3">£{result.TO_mortgage >= 0 ? result.TO_mortgage.toFixed(0) : '0'}</p>
                   <p className="text-xl font-bold mb-3">Lifetime wealth</p>
                   <p className="text-2xl">By retirement age, you would have approximately</p>
-                  <p className="text-2xl">£{result.TO_housing ? result.TO_housing.toFixed(0) : 'N/A'} in housing wealth</p>
-                  <p className="text-2xl mb-1">£{result.TO_liquid ? result.TO_liquid.toFixed(0) : 'N/A'} in savings</p>
+                  <p className="text-2xl">£{result.TO_housing ? result.TO_housing.toFixed(0) : '0'} in housing wealth</p>
+                  <p className="text-2xl mb-1">£{result.TO_liquid ? result.TO_liquid.toFixed(0) : '0'} in savings</p>
                   <p className="mb-3"> Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                     <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>
                   <p className="text-xl font-bold">Repayment structure</p>
-                  <p className="text-2xl">Mortgage free by the age of </p>
-                  <p className="text-2xl mb-3">{result.TO_finish ? result.TO_finish.toFixed(0) : 'N/A'}</p>
+                  <p className="text-2xl">Mortgage free: </p>
                   <p>
+                  <p className="text-2xl mb-3">
+                    {result.TO_finish < 1
+                      ? `Now`
+                      : `by the age of  ${result.TO_finish ? result.TO_finish.toFixed(0) : "0"} years`}
+                  </p>
+
+
                   <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
                     Assuming you use all your savings to make prepayments.              
@@ -427,8 +432,8 @@ const renderTwoColumnsText = () => {
                   <p className="text-2xl italic mb-3">£{result.SO_mortgage ? result.SO_mortgage.toFixed(0) : 'N/A'}</p>
                   <p className="text-xl font-bold mb-3">Lifetime wealth</p>
                   <p className="text-2xl">By retirement age, you would have approximately</p>
-                  <p className="text-2xl">£{result.SO_housing ? result.SO_housing.toFixed(0) : 'N/A'} in housing wealth</p>
-                  <p className="text-2xl mb-1">£{result.SO_liquid ? result.SO_liquid.toFixed(0) : 'N/A'} in savings</p>
+                  <p className="text-2xl">£{result.SO_housing ? result.SO_housing.toFixed(0) : '0'} in housing wealth</p>
+                  <p className="text-2xl mb-1">£{result.SO_liquid ? result.SO_liquid.toFixed(0) : '0'} in savings</p>
                   <p className="mb-3"> Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                     <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>            
                   <p className="text-xl font-bold">Repayment structure</p>
