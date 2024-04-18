@@ -339,21 +339,25 @@ const renderTwoColumnsText = () => {
     <div id="results">
       <div className="flex justify-center my-8 mb-20 text-white">
         <div className="flex-grow px-6" style={{ maxWidth: '80%' }}>
-        <div className="flex justify-between space-x-4" style={{ display: 'flex' }}>
-          <div style={{ flex: '1 1 50%' }} className="text-left">
+        <div className="flex justify-between space" style={{ display: 'flex' }}>
+        <div className="flex justify-between space-x-4">
             {result.TO_housing === 0 ? (
-              <div className="w-1/2 text-left">
+              <div className="text-left">
                 <h2 className="text-2xl font-bold mb-4">Full ownership</h2>
                 <p>You cannot buy full ownership with the current inputs.</p>
               </div>
             ) : (
-              <div className="w-1/2 text-left">
+              <div className="w-3/4 text-left">
                 <h2 className="text-2xl font-bold mb-1">Full ownership</h2>
                   <p className="text-xl font-bold">Minimum Deposit</p>
                   <p className="text-2xl">£{result.TO_deposit ? result.TO_deposit.toFixed(0) : 'N/A'}</p>
                   <p className="text-xl italic mb-3"> 5% of home value.</p>
-                  <p className="text-2xl">You can afford to buy in </p>
-                  <p className="text-2xl font-bold mb-3">{result.TO_time ? result.TO_time.toFixed(0) : 'N/A'} years</p>
+                  <p className="text-2xl">You can afford to begin your mortgage</p>
+                  <p className="text-2xl mb-6">
+                    {result.TO_time < 1
+                      ? `Now`
+                      : `in ${result.TO_time ? result.TO_time.toFixed(0) : "0"} years`}
+                  </p>
                   <p className="text-xl font-bold">100% Ownership:</p>
                   <p className="text-2xl">Get on the property ladder by the age of</p>
                   <p className="text-2xl mb-3">{result.TO_age ? result.TO_age.toFixed(0) : 'N/A'} </p>
@@ -383,24 +387,24 @@ const renderTwoColumnsText = () => {
                   </span></p>
                   <a href="#loan" className="text-blue-500 hover:underline">See your standing loan balance over time</a>
                 </div>
-              
-            )}
+              )}
+          </div>
 
-          <div style={{ flex: '1 1 50%' }} className="text-left">
+          <div className="flex justify-between space-x-4">
             {result.SO_housing === 0 ? (
-              <div className="w-1/2 text-left">
+              <div className="text-left">
                 <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
                 <p>You cannot staircase to 100% through shared ownership with the current inputs.</p>
               </div>
             ) : (
-              <div className="w-1/2 text-left">
-                <div className="w-1/2 text-left">
+              <div className="w-3/4 text-left">
+                <div className="">
                   <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
                   <p className="text-xl font-bold">Minimum Deposit</p>
                   <p className="text-2xl">£{result.SO_deposit ? result.SO_deposit.toFixed(0) : 'N/A'}</p>
                   <p className="text-xl italic mb-1">5% of the minimum equity share (25% of home value)</p>
-                  <p className="text-xl italic mb-3">
-                    {result.SO_share < 0.25
+                  <p className="text-xl italic mb-12">
+                    {result.SO_share > 0.25
                       ? `You can afford to buy a share of 25% now"`
                       : `You can afford shared ownership in ${result.SO_time ? result.SO_time.toFixed(0) : "0"} years`}
                   </p>
@@ -442,8 +446,6 @@ const renderTwoColumnsText = () => {
               </div>
             )}
           </div>
-          </div>
-
           </div>
         </div>
       </div>
