@@ -339,9 +339,8 @@ const renderTwoColumnsText = () => {
     <div id="results">
       <div className="flex justify-center my-8 mb-20 text-white">
         <div className="flex-grow px-6" style={{ maxWidth: '80%' }}>
-          <div className="flex justify-between space-x-4">
-
-            {/* Conditionally render Full Ownership Column or message */}
+        <div className="flex justify-between space-x-4" style={{ display: 'flex' }}>
+          <div style={{ flex: '1 1 50%' }} className="text-left">
             {result.TO_housing === 0 ? (
               <div className="w-1/2 text-left">
                 <h2 className="text-2xl font-bold mb-4">Full ownership</h2>
@@ -384,9 +383,10 @@ const renderTwoColumnsText = () => {
                   </span></p>
                   <a href="#loan" className="text-blue-500 hover:underline">See your standing loan balance over time</a>
                 </div>
+              
             )}
 
-            {/* Conditionally render Shared Ownership Column or message */}
+          <div style={{ flex: '1 1 50%' }} className="text-left">
             {result.SO_housing === 0 ? (
               <div className="w-1/2 text-left">
                 <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
@@ -441,6 +441,8 @@ const renderTwoColumnsText = () => {
               </div>
               </div>
             )}
+          </div>
+          </div>
 
           </div>
         </div>
