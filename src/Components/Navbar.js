@@ -16,25 +16,26 @@ function Navbar() {
         <div className="text-logo">
         Lifetime Wealth Calculator
         </div>
+
         <div className="flex-none">
           <ul className="menu menu-horizontal px-1">
-            <li className="mr-4">
-              <img className="absolute -ml-10" src={homeIcon} alt="home button"/>
+          <img className="mt-1 w-7 h-7" src={homeIcon} alt="home button"/>
+            <li>
               <Link to="/">Home</Link>
             </li>
+          <img className="mt-1 w-7 h-7" src={blogIcon} alt="blog icon"/>
             <li className="mr-4">
-                <img className="absolute -ml-8" src={blogIcon} alt="blog icon"/>
                 <Link to="/blog"> Blog </Link>
             </li>
+            <img className="mt-1 w-7 h-7" src={vidIcon} alt="vid icon"/>
             <li className="mr-4">
-              <img className="absolute -ml-8" src={vidIcon} alt="vid icon"/>
-              <Link to="/vid"> Vid </Link>
+              <Link to="/vid"> Video Guide </Link>
             </li> 
+              <img className="mt-1 w-7 h-7" src={TCsIcon} alt="TCs icon"/>
             <li className="mr-4">
-              <img className="absolute -ml-8" src={TCsIcon} alt="TCs icon"/>
               <Link to="/TCs"> TCs </Link>
             </li> 
-          </ul>
+            </ul>
         </div>
       </div>
     </div>

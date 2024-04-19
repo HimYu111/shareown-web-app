@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Footer() {
   return (
@@ -11,8 +12,11 @@ function Footer() {
               University College London, Bartlett School of Sustainable Construction
             </a>
             . All Rights Reserved.
+
+            
+            <Link to="/TCs" className="mx-2 font-bold"> T&Cs </Link>  {/* Added margin to the left and right */}
           </span>
-          <ul className="flex flex-wrap items-center mt-3 text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
+          <ul className="flex flex-wrap items-center text-sm text-gray-500 dark:text-gray-400 sm:mt-0">
             <li>
                 s.milcheva@ucl.ac.uk
             </li>

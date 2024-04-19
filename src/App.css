@@ -223,6 +223,12 @@ button.btn.btn-lg.text-neutral:hover
   transition: border-color 0.3s ease;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .submit-button {
   width: 100%;
   padding: 10px;

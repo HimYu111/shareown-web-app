@@ -479,21 +479,6 @@ function Input({ setResult }) {
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              What is the price of the home you wish to purchase?
-            </label>
-            <input
-              id="input-5"
-              className="input input-bordered w-full"
-              type="number"
-              min="0"
-              placeholder="Enter house price in £"
-            />
-          </div>
-        </div>
-        {/* Column 2 */}
-        <div className="w-4/12 p-4 pl-12">
-          <div className="mb-4">
-            <label className="block text-black mb-2">
               Are you a first-time buyer?
             </label>
             <select className="input input-bordered w-full" id="input-6">
@@ -501,6 +486,21 @@ function Input({ setResult }) {
               <option value="No">No</option>
             </select>
           </div>
+        </div>
+        {/* Column 2 */}
+        <div className="w-4/12 p-4 pl-12">
+          <div className="mb-4">
+              <label className="block text-black mb-2">
+                What is the price of the home you wish to purchase?
+              </label>
+              <input
+                id="input-5"
+                className="input input-bordered w-full"
+                type="number"
+                min="0"
+                placeholder="Enter house price in £"
+              />
+            </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
               What is the current annual gross income of the household buying the home (indicate the total amount if more than one person buying the home)?
@@ -529,7 +529,7 @@ function Input({ setResult }) {
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              How old is the main buyer?
+              How old are you?
             </label>
             <input
               id="input-9"

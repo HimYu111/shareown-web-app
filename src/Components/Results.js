@@ -288,6 +288,9 @@ const FAQSection = () => {
             It will also determine the age at which you will be mortgage-free. Finally, it estimates how much money you'll 
             have saved in a savings account by the time you retire, which it assumes will be at age 67.
           </p>
+          <div className="bg-white h-screen flex justify-center items-center">
+          <img src={flowchart} alt="Damian Flowchart"  className="w-1/2 h-auto"/>
+          </div>  
         </>
       )
     }
@@ -337,6 +340,8 @@ const renderTwoColumnsText = () => {
 
   return (
     <div id="results">
+      <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price? result.house_price.toFixed(0) : 'N/A'}</h1>
+
       <div className="flex justify-center my-8 mb-20 text-white">
         <div className="flex-grow px-6" style={{ maxWidth: '80%' }}>
         <div className="flex justify-between space" style={{ display: 'flex' }}>
@@ -437,9 +442,13 @@ const renderTwoColumnsText = () => {
                   <p className="mb-3"> Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                     <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>            
                   <p className="text-xl font-bold">Repayment structure</p>
-                  <p className="text-2xl">Mortgage free by the age of </p>
-                  <p className="text-2xl mb-3">{result.SO_mortgage_finish ? result.SO_mortgage_finish.toFixed(0) : 'N/A'}</p>
+                  <p className="text-2xl">Mortgage free: </p>
                   <p>
+                  <p className="text-2xl mb-3">
+                    {result.TO_finish < 1
+                      ? `Now`
+                      : `by the age of  ${result.TO_finish ? result.TO_finish.toFixed(0) : "0"} years`}
+                  </p>
                   <p>
                   <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
@@ -547,9 +556,6 @@ return (
         </div>
       </div>
     <FAQSection />
-    <div className="bg-white h-screen flex justify-center items-center">
-    <img src={flowchart} alt="Damian Flowchart" />
-    </div>  
     </div>
   );
 }
