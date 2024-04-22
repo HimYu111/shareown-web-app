@@ -255,3 +255,10 @@ button#btn-up:hover, button#btn-down:hover {
   background-color: #264d5a !important;
   border-color: #264d5a !important;
 }
+
+.loading-container {
+  width: 100%; /* Full width of the container */
+  padding: 20px; /* Some padding */
+  text-align: center; /* Center the content */
+  background: #f3f3f3; /* Light background */
+}
