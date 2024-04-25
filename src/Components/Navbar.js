@@ -25,7 +25,7 @@ function Navbar() {
             </li>
           <img className="mt-1 w-7 h-7" src={blogIcon} alt="blog icon"/>
             <li className="mr-4">
-                <Link to="/blog"> Blog </Link>
+                <Link to="/blog"> More </Link>
             </li>
             <img className="mt-1 w-7 h-7" src={vidIcon} alt="vid icon"/>
             <li className="mr-4">

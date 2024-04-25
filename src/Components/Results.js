@@ -269,6 +269,29 @@ const FAQSection = () => {
       answer: `The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®`
     },
     {
+      question: "What are the model assumptions?",
+      answer: 
+        <span className="tooltiptext" style={{ width: '1500px', textAlign: 'right' }}>
+          • Savings rate: 3%<br />
+          • Inflation: 3%<br />
+          • Mortgage rate: 4%<br />
+          • House price appreciation: 5%<br />
+          • House maintenance cost: 1%<br />
+          • Mortgage term: 30 years<br />
+          • Transaction cost: 0%<br />
+          • Loan to Value (LTV): 95%<br />
+          • Loan ratio: 4.5x<br />
+          • Maximum income to expenditure ratio (max inc to exp): 40%<br />
+          • Rent appreciation: 3.5%<br />
+          • Minimum initial share: 25%<br />
+          • Initial rent percent: 2.75%<br />
+          • Staircase administration fee: £1000<br />
+          • Service charge: 1%<br />
+          • Affordability constraint: 40% <br />
+          • The model assumes you will retire at 67, and will not work after this point. 
+          </span>
+    },
+    {
       question: "How does the calculator work?",
       answer: (
         <>
@@ -332,7 +355,9 @@ const renderTwoColumnsText = () => {
     return (
       <div className="text-center my-8">
         <h2 className="text-xl font-bold text-white">
-          You cannot buy full ownership or shared ownership with the current inputs.
+          <p>You cannot afford full ownership with the current inputs and the assumptions of the model. However, under different assumptions and inputs you might be able to afford full ownership. 
+                    We suggest you change the price of the home, or vary your deposit or income. (Find out more about the assumptions of the model 
+                      <a href="#faqs" className="text-blue-500 hover:underline"> here</a>.).</p>
         </h2>
       </div>
     );
@@ -349,7 +374,7 @@ const renderTwoColumnsText = () => {
             {result.TO_housing === 0 ? (
               <div className="text-left">
                 <h2 className="text-2xl font-bold mb-4">Full ownership</h2>
-                <p>You cannot buy full ownership with the current inputs.</p>
+                <p>You cannot afford full ownership with the current inputs.</p>
               </div>
             ) : (
               <div className="w-3/4 text-left">
@@ -381,7 +406,7 @@ const renderTwoColumnsText = () => {
                   <p className="mb-3"> Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                     <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>
                   <p className="text-xl font-bold">Repayment structure</p>
-                  <p className="text-2xl">Mortgage free: </p>
+                  <p className="text-2xl">Mortgage free </p>
                   <p>
                   <p className="text-2xl mb-3">
                     {result.TO_finish < 1
@@ -395,7 +420,7 @@ const renderTwoColumnsText = () => {
                     Assuming you use all your savings to make prepayments.              
                     </span>
                   </span></p>
-                  <a href="#loan" className="text-blue-500 hover:underline">See your standing loan balance over time</a>
+                  <a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a>
                 </div>
               )}
           </div>
@@ -404,7 +429,7 @@ const renderTwoColumnsText = () => {
             {result.SO_housing === 0 ? (
               <div className="text-left">
                 <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
-                <p>You cannot staircase to 100% through shared ownership with the current inputs.</p>
+                <p>You cannot afford staircase to 100% through shared ownership with the current inputs.</p>
               </div>
             ) : (
               <div className="w-3/4 text-left">
@@ -442,7 +467,7 @@ const renderTwoColumnsText = () => {
                   <p className="mb-3"> Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                     <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>            
                   <p className="text-xl font-bold">Repayment structure</p>
-                  <p className="text-2xl">Mortgage free: </p>
+                  <p className="text-2xl">Mortgage free </p>
                   <p>
                   <p className="text-2xl mb-3">
                     {result.TO_finish < 1
@@ -455,7 +480,7 @@ const renderTwoColumnsText = () => {
                     Assuming you use all your savings to make prepayments.              
                     </span>
                   </span></p>
-                  <a href="#loan" className="text-blue-500 hover:underline">See your standing loan balance over time</a></p>
+                  <a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
               </div>
               </div>
             )}
@@ -528,9 +553,10 @@ return (
           • Rent appreciation: 3.5%<br />
           • Minimum initial share: 25%<br />
           • Initial rent percent: 2.75%<br />
-          • Staircase administration fee: $1000<br />
+          • Staircase administration fee: £1000<br />
           • Service charge: 1%<br />
-          • Affordability constraint: 40%
+          • Affordability constraint: 40% <br />
+          • The model assumes you will retire at 67, and will not work after this point. 
           </span>
         </span>
       </p>      
@@ -555,7 +581,9 @@ return (
           </div>
         </div>
       </div>
+    <div id="faqs" className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white' }}>
     <FAQSection />
+    </div>
     </div>
   );
 }

@@ -108,9 +108,6 @@ function Intro() {
         </div>
 
         <div className="cols-last-sentance">        
-        <p >
-          <i>The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®</i>
-        </p>
         </div>
         
       </div>

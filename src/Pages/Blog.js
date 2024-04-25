@@ -9,6 +9,18 @@ function Blog() {
       <Navbar />
       <div className="bg-gray-900 h-full flex justify-center items-start translate-y-100">
         <div className="text-white p-4 w-2/3" style={{ width: "60%" }}> 
+          <h1 className="text-2xl font-bold mb-4">More Information </h1>
+            <p className="text-base mb-7 italic" style={{ paddingLeft: '30px' }}>The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®</p>
+            <p className="text-base mb-7" style={{ paddingLeft: '30px' }}>
+              If you want to find out more about shared ownership, you can read the report by main author, UCL’s professor Stanimira Miicheva, and main contact person for this website. The key findings of the report are summarised below.
+              <br /> {/* New line */}
+              <a href="https://discovery.ucl.ac.uk/id/eprint/10183951/1/so_market_ucl.pdf" 
+                className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+                target="_blank" 
+                rel="noopener noreferrer"> 
+                Find the report here
+              </a>
+            </p>
           <h1 className="text-2xl font-bold mb-4">The Maturing Shared Ownership Market: A Data-Led Analysis - Milcheva S., Damianov D., Williams P. </h1>
           <h2 className="text-xl font-bold mt-4 mb-2">Executive Summary</h2>
             <p className="text-base mb-7" style={{ paddingLeft: '30px' }}> • This study synthesizes current public and private data sources to provide an overview of the Shared Ownership (SO) market from 2012 to 2022.</p>
@@ -28,6 +40,7 @@ function Blog() {
             <p className="text-base mb-7" style={{ paddingLeft: '30px' }}> • Between 2013 and 2018, the share of monthly rent arrears out of total rent roll has been fairly steady at ca. 2%. With the onset of the Covid-19 pandemic, we have seen the share doubling.</p>
             <p className="text-base mb-7" style={{ paddingLeft: '30px' }}> • Rent arrears are often of a technical nature with median monthly values around £100-150. The share of SO tenants in monthly rent arrears higher than £400 can be as high as an average of 11% increasing in the last two years following the Covid pandemic.</p>
             <p className="text-base mb-7" style={{ paddingLeft: '30px' }}> • Repossessions happen in less than 1% of total stock between 2009 and 2019 and clearly remain a last resort resolution.</p>
+            <p className="text-base mb-7">For more information get in touch with Stani at s.milcheva@ucl.ac.uk.</p>
         </div>
       </div>
       <Footer />
