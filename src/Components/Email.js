@@ -19,16 +19,17 @@ function EmailForm() {
   return (
     <div className='email-form-container'>
       <form onSubmit={handleSubmit} className='email-form'>
-      <input
-        type="email"
-        value={email}
-        className='email-input'
-        onChange={(e) => setEmail(e.target.value)}
-        placeholder="Enter your email"
-        required
-      />
-      <button className='submit-button text-neutral' type="submit">Submit</button>
-    </form>
+        <p className="prompt-text">Share your email to receive this report</p>
+        <input
+          type="email"
+          value={email}
+          className='email-input'
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="Enter your email"
+          required
+        />
+        <button className='submit-button text-neutral' type="submit">Submit</button>
+      </form>
     </div>
   );
 }

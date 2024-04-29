@@ -1,75 +1,61 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import icon from "../Assets/icon-1-placeholder.png";
-import icon2 from "../Assets/icon-2-placeholder.png";
-import icon3 from "../Assets/icon-3-placeholder.png";
-import moving from "../Assets/moving.png";
-import floorplan from "../Assets/floorplan.png";
-import housecost from "../Assets/house-price.png";
-import areas from "../Assets/icon-areas.png";
-import cheque from "../Assets/icon-cheque.png";
-import rent from "../Assets/icon-rent.png";
-import job from "../Assets/icon-job.png";
-import savings from "../Assets/icon-savings.png";
-
-
 import Loading from "../Components/Loading";
 
 function Input({ setResult }) {
-  // State declarations
   const [loading, setLoading] = useState(false);
   const [scrollToResults, setScrollToResults] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-  const loadingRef = useRef(null);
+  const [errorMessage, setErrorMessage] = useState("");
 
+  const validateInputs = () => {
+    const inputs = [
+      document.getElementById("input-1").value,
+      document.getElementById("input-2").value,
+      document.getElementById("input-3").value,
+      document.getElementById("input-4").value,
+      document.getElementById("input-5").value,
+      document.getElementById("input-6").value,
+      document.getElementById("input-7").value,
+      document.getElementById("input-8").value,
+      document.getElementById("input-9").value,
+      document.getElementById("input-10").value,
+      document.getElementById("input-11").value,
+    ];
+    return inputs.every(input => input !== "" && input !== null);
+  };
 
   const handleInputs = async () => {
+    if (!validateInputs()) {
+      setErrorMessage("Please fill in all fields before submitting.");
+      setLoading(false);
+      return;
+    }
+
     setLoading(true);
-    // await scrollToLoading();
+    setErrorMessage(""); // Clear any previous error messages
     try {
-      // Gather the input values
-      const answer1 = document.getElementById("input-1").value;
-      const answer2 = document.getElementById("input-2").value;
-      const answer3 = document.getElementById("input-3").value;
-      const answer4 = document.getElementById("input-4").value;
-      const answer5 = parseFloat(document.getElementById("input-5").value);
-      const answer6 = document.getElementById("input-6").value === "Yes"? 1:0;
-      const answer7 = parseFloat(document.getElementById("input-7").value);
-      const answer8 = parseFloat(document.getElementById("input-8").value);
-      const answer9 = parseFloat(document.getElementById("input-9").value);
-      const answer10 = parseFloat(document.getElementById("input-10").value);
-      const answer11 = parseFloat(document.getElementById("input-11").value);
-
-
       const postData = {
-        postcode: answer1,
-        propertyType: answer2,
-        bedrooms: answer3,
-        occupation: answer4,
-        housePrice: answer5,
-        isFirstTimeBuyer: answer6,
-        income: answer7,
-        monthspending: answer8,
-        headOfHouseholdAge: answer9,
-        savings: answer10,
-        currentRent: answer11,        
+        postcode: document.getElementById("input-1").value,
+        propertyType: document.getElementById("input-2").value,
+        bedrooms: document.getElementById("input-3").value,
+        occupation: document.getElementById("input-4").value,
+        housePrice: parseFloat(document.getElementById("input-5").value),
+        isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
+        income: parseFloat(document.getElementById("input-7").value),
+        monthspending: parseFloat(document.getElementById("input-8").value),
+        headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
+        savings: parseFloat(document.getElementById("input-10").value),
+        currentRent: parseFloat(document.getElementById("input-11").value),
       };
 
-      // Send POST request
-      const response = await axios.post(
-        "https://shareown-backend.onrender.com/predict",
-        postData,
-      );
-      console.log(response.data)
+      const response = await axios.post("https://shareown-backend.onrender.com/predict", postData);
       setResult(response.data);
-
       setScrollToResults(true);
     } catch (error) {
       console.error("Error:", error);
       setResult("An error occurred while fetching data.");
     } finally {
       setLoading(false);
-      setSubmitted(true); // Add this line  
     }
   };
 
@@ -542,7 +528,7 @@ function Input({ setResult }) {
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              How much in savings do the buyers have?
+              How much in savings do you have?
             </label>
             <input
               id="input-10"
@@ -576,6 +562,7 @@ function Input({ setResult }) {
           {loading ? <Loading /> : "Submit"}
         </button>
       </div>
+      {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
     </div>
   );
 }
