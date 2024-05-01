@@ -384,7 +384,7 @@ const renderTwoColumnsText = () => {
     return (
       <div className="text-center my-8">
         <h2 className="text-xl font-bold text-white">
-          <p>You cannot afford full ownership with the current inputs and the assumptions of the model. However, under different assumptions and inputs you might be able to afford full ownership. 
+          <p>You cannot afford full ownership or shared ownership with the current inputs and the assumptions of the model. However, under different assumptions and inputs you might be able to afford full ownership. 
                     We suggest you change the price of the home, or vary your deposit or income. (Find out more about the assumptions of the model 
                       <a href="#faqs" className="text-blue-500 hover:underline"> here</a>.).</p>
         </h2>
