@@ -8,7 +8,7 @@ function Blog() {
     <div>
       <Navbar />
       <div className="bg-gray-900 h-full flex justify-center items-start translate-y-100">
-        <div className="text-white p-4 w-2/3" style={{ width: "60%" }}> 
+        <div className="text-white blog-wrapper" > 
           <h1 className="text-2xl font-bold mb-4">More Information </h1>
             <p className="text-base mb-7 italic" style={{ paddingLeft: '30px' }}>The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®</p>
             <p className="text-base mb-7" style={{ paddingLeft: '30px' }}>

@@ -7,7 +7,7 @@ function TCs() {
     <div>
       <Navbar />
       <div className="bg-gray-900 h-full flex justify-center items-start translate-y-100">
-        <div className="text-white p-4" style={{ width: "66.666%" }}>
+        <div className="text-white tc-wrapper">
           <h1 className="text-2xl font-bold mb-4">TERMS FOR ShareOwn</h1>
           <p className="text-base font-bold mb-4"> When you use ShareOwn, these terms (“Terms”) websitely and constitute an agreement between ShareOwn (“ShareOwn”, “we”, “us” and “our”) and you as a user of our Service (“you”) regarding the service described below (the “Service”). Each time you use the Service, you will be required to accept the current version of the Terms. Do not use the Service if you do not want to be bound by these Terms. These Terms do not websitely to ShareOwn's payment options. If you choose to pay with one of ShareOwn's payment options, there are additional Terms that websitely specifically to the payment.
           </p>
