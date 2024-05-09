@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, {useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "../Components/Loading";
 
@@ -417,12 +417,36 @@ function Input({ setResult }) {
   const propertyTypeOptions = ["Apartment", "Detached House", "Semi-detached House", "Terrace House"];
 
 
+  const [isVisible, setIsVisible] = useState(false);
+  const headerRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (headerRef.current) {
+        const topPosition = headerRef.current.getBoundingClientRect().top;
+        const isVisible = topPosition < window.innerHeight;
+        setIsVisible(isVisible);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll(); // Check initial position
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   return (
-    <div id="input" className="bg-gray-200 min-h-screen">
-      <div className="flex justify-center pt-20">
+    <div id="input" className="input-wrapper min-h-screen">
+    <div className="input-header-wrapper" ref={headerRef}>
+      <h2 className={`input-header-txt ${isVisible ? "slide-in" : ""}`}>
+        We have a couple of questions that will help us calculate your wealth
+      </h2>
+    </div>
+      <div className="flex justify-center pt-20 input-cols">
         {/* Column 1 */}
-        <div className="w-4/12 p-12 pl-4">
+        <div className="input-cols-1">
           <div className="mb-4">
             <label className="block text-black mb-2">
               What postcode do you want to live in?
@@ -474,7 +498,7 @@ function Input({ setResult }) {
           </div>
         </div>
         {/* Column 2 */}
-        <div className="w-4/12 p-4 pl-12">
+        <div className="input-cols-2">
           <div className="mb-4">
               <label className="block text-black mb-2">
                 What is the price of the home you wish to purchase?
@@ -553,16 +577,18 @@ function Input({ setResult }) {
           </div>
         </div>
       </div>
-      <div className="flex justify-center mt-4">
+      <div className="flex justify-center mt-4 input-btn-wrapper">
+      {errorMessage && <div className="text-error-message">{errorMessage}</div>}
         <button
-          className="btn btn-primary mb-10"
+          className="input-btn mb-10"
           onClick={handleInputs}
-          disabled={loading}
+          disabled={loading} 
         >
-          {loading ? <Loading /> : "Submit"}
+           Submit
         </button>
+     <div className="loading-container-wrapper">{loading ? <Loading /> : ""}</div>
       </div>
-      {errorMessage && <p className="text-red-500 text-center">{errorMessage}</p>}
+      
     </div>
   );
 }

@@ -340,7 +340,7 @@ const FAQSection = () => {
             It will also determine the age at which you will be mortgage-free. Finally, it estimates how much money you'll 
             have saved in a savings account by the time you retire, which it assumes will be at age 67.
           </p>
-          <div className="bg-white h-screen flex justify-center items-center">
+          <div className="bg-white flex justify-center items-center faq-img">
           <img src={flowchart} alt="Damian Flowchart"  className="w-1/2 h-auto"/>
           </div>  
         </>
@@ -393,141 +393,134 @@ const renderTwoColumnsText = () => {
   }
 
   return (
-    <div id="results">
+    <div className="results">
       <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
 
-      <div className="flex justify-center my-8 mb-20 text-white">
-        <div className="flex-grow px-6" style={{ maxWidth: '80%' }}>
+      <div className="flex justify-center my-8 mb-20 text-white results-2cols">
+     {/*   <div className="flex-grow px-6">
         <div className="flex justify-between space" style={{ display: 'flex' }}>
-        <div className="flex justify-between space-x-4">
+  <div className="flex justify-between space-x-4 results-1st-col-wrapper">*/}
             {result.TO_housing === 0 ? (
-              <div className="text-left">
-                <h2 className="text-2xl font-bold mb-4">Full ownership</h2>
+              <div className="results-1st-col">
+                <h2 className="results-fullOwn font-bold">Full ownership</h2>
                 <p>You cannot afford full ownership with the current inputs.</p>
               </div>
             ) : (
-              <div className=" text-left">
-                <h2 className="text-2xl font-bold mb-1">Full ownership</h2>
-                  <p className="text-xl font-bold">Minimum Deposit</p>
-                  <p className="text-2xl">£{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</p>
-                  <p className="text-xl italic mb-3">Find out more about the model assumptions<a href="#faqs" className="text-blue-500 hover:underline">[?]</a>.</p>
-                  <p className="text-2xl">You can afford to begin your mortgage</p>
-                  <p className="text-2xl mb-6">
-                    {result.TO_time < 1
-                      ? `Now`
-                      : `in ${result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years`}
-                  </p>
-                  <p className="text-xl font-bold">100% Ownership:</p>
-                  <p className="text-2xl">Get on the property ladder by the age of</p>
-                  <p className="text-2xl mb-3">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'} </p>
-                  <p className="font-bold">Monthly costs            
+              <div className="results-1st-col">
+                <h2 className="results-fullOwn font-bold">Full ownership</h2>
+
+                  <p className="font-bold">Minimum Deposit: £{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</p>
+                  <p className="italic"><a href="#faqs" className="text-blue-500 hover:underline">Find out more about the model assumptions</a></p>
+                  <p className="mb-6">You can afford to begin your mortgage                    {result.TO_time < 1
+                      ? `now`
+                      : `in ${result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years`}</p>
+
+                  <p className="font-bold">100% Ownership:</p>
+                  <p className="mb-6">Get on the property ladder by the age of {result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</p>
+                  <p className="font-bold">Monthly costs&nbsp;             
                     <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
                     Includes the mortgage payment (assuming a repayment over 30 years).
                     </span>
                   </span>
                   </p>
-                  <p className="text-2xl italic mb-3">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</p>
-                  <p className="text-xl font-bold mb-3">Lifetime wealth</p>
-                  <p className="text-2xl">By retirement age, you would have approximately</p>
-                  <p className="text-2xl">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'} in housing wealth</p>
-                  <p className="text-2xl mb-1">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'} in savings</p>
+                  <p className="mb-6">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</p>
+
+                  <p className="font-bold">Lifetime wealth&nbsp;
                   <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
                     Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                     </span>
                     </span>
-                  <p>
-                    <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>
-                  <p className="text-xl font-bold">Repayment structure</p>
-                  <p className="text-2xl">Mortgage free </p>
-                  <p>
-                  <p className="text-2xl mb-3">
-                    {result.TO_finish < 1
-                      ? `Now`
-                      : `by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`}
                   </p>
-
-
+                  <p className="">By retirement age, you would have approximately</p>
+                  <p className="">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'} in housing wealth</p>
+                  <p className="">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'} in savings</p>
+                  <p className="mb-6 italic">
+                    <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>
+                  <p className="font-bold">Repayment structure&nbsp; 
                   <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
                     Assuming you use all your savings to make prepayments.              
                     </span>
                   </span></p>
-                  <a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a>
+                  <p className="">Mortgage free {result.TO_finish < 1
+                      ? `now`
+                      : `by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`}</p>
+                  <p className="italic"><a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
                 </div>
               )}
-          </div>
+         {/* </div>
 
-          <div className="flex justify-between space-x-4">
+          <div className="flex justify-between space-x-4">*/}
             {result.SO_housing === 0 ? (
-              <div className="text-left">
-                <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
+              <div className="results-2nd-col">
+                <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
                 <p>You cannot afford staircase to 100% through shared ownership with the current inputs.</p>
               </div>
             ) : (
-              <div className="text-left">
-                <div className="">
-                  <h2 className="text-2xl font-bold mb-4">Shared Ownership</h2>
-                  <p className="text-xl font-bold">Minimum Deposit</p>
-                  <p className="text-2xl">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</p>
-                  <p className="text-xl italic mb-3">Find out more about the model assumptions<a href="#faqs" className="text-blue-500 hover:underline">[?]</a>.</p>
-                  <p className="text-xl italic mb-12">
+              <div className="results-2nd-col">
+
+                  <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
+                  <p className="font-bold">Minimum Deposit: £{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</p>
+                  <p className="italic"><a href="#faqs" className="text-blue-500 hover:underline">Find out more about the model assumptions</a></p>
+                  <p className="mb-6">
                     {result.SO_share > 0.25
-                      ? `You can afford to buy a share of 25% now"`
+                      ? `You can afford to buy a share of 25% now`
                       : `You can afford shared ownership in ${result.SO_time ?formatNumber(result.SO_time.toFixed(0)) : "0"} years`}
                   </p>
-                  <p className="text-xl font-bold">Buy 100% Ownership by the age of:</p>
-                  <p className="text-2xl"> {result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'}    
-                    <span className="tooltip"> [?]
-                    <span className="tooltiptext" style={{ width: '1500px' }}>
+                  <p className="font-bold ">Buy 100% Ownership by the age of {result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'} 
+                  <span className="tooltip"> [?]
+                  <span className="tooltiptext" style={{ width: '1500px' }}>
                     Assuming you use all your savings to buy additional shares (staircase).
-                    </span>
+                  </span>
                   </span>
                   </p>
-                  <a href="#staircasing" className="text-blue-500 hover:underline mb-4 inline-block">See here how you can staircase over time</a>
-                  <p className="font-bold">Monthly costs            
+                  <p className="italic mb-6"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>
+
+
+                  <p className="font-bold" >Monthly costs&nbsp;           
                     <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
                     Includes the mortgage payment (assuming a repayment over 30 years).
                     </span>
                   </span>
                   </p>
-                  <p className="text-2xl italic mb-3">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</p>
-                  <p className="text-xl font-bold mb-3">Lifetime wealth</p>
-                  <p className="text-2xl">By retirement age, you would have approximately</p>
-                  <p className="text-2xl">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'} in housing wealth</p>
-                  <p className="text-2xl mb-1">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'} in savings</p>        
-                    <span className="tooltip"> [?]
+                  <p className="mb-6">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</p>
+                  <p className="font-bold">Lifetime wealth&nbsp; 
+                  <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
                     Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                     </span>
                     </span>
-                  <p className="mb-3"> 
-                    <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>            
-                  <p className="text-xl font-bold">Repayment structure</p>
-                  <p className="text-2xl">Mortgage free </p>
-                  <p>
-                  <p className="text-2xl mb-3">
-                    {result.TO_finish < 1
-                      ? `Now`
-                      : `by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`}
                   </p>
-                  <p>
+                  <p className="">By retirement age, you would have approximately</p>
+                  <p className="">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'} in housing wealth</p>
+                  <p className="">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'} in savings</p>        
+
+                  <p className="italic mb-6"> 
+                    <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>            
+                  <p className="font-bold">Repayment structure&nbsp;
                   <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
                     Assuming you use all your savings to make prepayments.              
                     </span>
-                  </span></p>
-                  <a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
+                  </span>
+                  
+                  </p>
+                  <p className="">Mortgage free{result.TO_finish < 1
+                      ? `now`
+                      : `by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`} </p>
+
+                  <p className="italic"><a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
               </div>
-              </div>
+
             )}
           </div>
           </div>
-        </div>
-      </div>
-    </div>
+   //      </div>
+    //  </div>
+     //     </div>
   );
 };
 
@@ -535,49 +528,49 @@ const renderTwoColumnsText = () => {
 
 const renderScenariosExplained = () => {
   return (
-    <div className="text-white my-20">
-      <div className="flex flex-col items-center">
-        <h2 className="text-3xl font-bold mt-10">Scenarios Explained</h2>
-        <div className="w-full max-w-4xl px-6">
-          <div className="flex justify-between space-x-4">
-            <div className="w-3/4 text-left">
-              <h3 className="text-2xl font-bold mb-2">Full Ownership</h3>
-              <p className="text-2xl mb-3">
+    <div className="text-white scenarios-wrapper">
+        <h1 className="font-bold ">Scenarios Explained</h1>
+        <div className="scenarios-2cols-wrapper">
+
+            <div className="scenarios-1stcol">
+              <h2 className="results-fullOwn">Full Ownership</h2>
+              <p className="">
                 Full ownership means buying a home outright by making a deposit of at least 5% of property’s value and 
                 financing the rest with a mortgage. The maximum mortgage you can secure is limited to 4.5 times your 
                 total annual gross income.
               </p>
-              <p className="text-2xl">
+              <p className="">
                 The calculator will determine the earliest time you can afford to buy outright.
               </p>
             </div>
-            <div className="w-3/4 text-left">
-              <h3 className="text-2xl font-bold mb-2">Shared Ownership</h3>
-              <p className="text-2xl mb-3">
+            <div className="scenarios-2ndcol">
+              <h2 className="results-sharedOwn">Shared Ownership</h2>
+              <p className="">
                 Shared ownership allows you to purchase between 25% and 75% of a home and pay a reduced rent for the 
                 remaining portion. You can buy additional shares over time and “staircase” to full ownership.
               </p>
-              <p className="text-2xl">
+              <p className="">
                 The calculator will determine the earliest time you can get onto the property ladder and the fastest way 
                 you can staircase to 100% ownership.
               </p>
             </div>
-          </div>
         </div>
       </div>
-    </div>
+
   );
 };
 
 
 return (
-  <div className="bg-slate-800 py-20 text-white">
+  
+  <div className="bg-slate-800 py-20 text-white results-wrapper">
+    <div className="results-container">
     {renderTwoColumnsText()}
     {renderScenariosExplained()}
-    <div className="text-l mb-4 mx-8">
-      <p>
-        Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of assumptions used:_
-        <span className="tooltip"> assumptions
+    <div className="grapics-container-note">
+      <p className="grapics-note">
+        Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of&nbsp;
+        <span className="tooltip text-blue-500 hover:underline"> assumptions used
           <span className="tooltiptext" style={{ width: '1500px' }}>
           • Savings rate: 3%<br />
           • Inflation: 3%<br />
@@ -602,22 +595,23 @@ return (
         </span>
       </p>      
     </div>
-    <div className="flex-grow px-8 mx-32">
+    <div className="charts-container">
+    <div className="charts-wrapper">
         {/* First row of charts */}
-        <div className="flex justify-center">
-          <div id="staircasing" className="w-1/7 md:w-2/3 px-4" style={{ height: '550px' }}>
+        <div className="charts">
+          <div id="staircasing" className="" style={{ height: '450px' }}>
             {renderstairchart()}
           </div>
         </div>
         {/* First row of charts */}
-        <div className="flex justify-center">
-          <div id="comp" className="w-1/7 md:w-2/3 px-4" style={{ height: '550px' }}>
+        <div className="charts">
+          <div id="comp" className="" style={{ height: '450px' }}>
             {rendercompchart()}
           </div>
         </div>
         {/* third chart */}
-        <div className="flex justify-center">
-          <div id="loan" className="w-1/7 md:w-2/3 px-4" style={{ height: '550px' }}>
+        <div className="charts">
+          <div id="loan" className="" style={{ height: '450px' }}>
             {renderloanchart()}
           </div>
         </div>
@@ -626,6 +620,8 @@ return (
     <FAQSection />
     </div>
     </div>
+  </div>
+</div>
   );
 }
 
