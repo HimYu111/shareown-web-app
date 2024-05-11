@@ -61,7 +61,7 @@ function Results({ result }) {
       labels: [...ageattimedata],
       datasets: [
         {
-          label: 'Share (%)',
+          label: 'Share owned (%)',
           data: [...staircasingdata.map(item => parseFloat(item))],
           backgroundColor: 'white',
           borderColor: 'white',
@@ -77,7 +77,7 @@ function Results({ result }) {
         },
         title: {
           display: true,
-          text: 'Shared Ownership Progression via Staircasing',
+          text: 'Buying additional shares (staircasing)',
           color: 'white',
           font: {
             size: 24,
@@ -124,21 +124,22 @@ function Results({ result }) {
     const data = {
       labels: [...ageattimedata],
       datasets: [
-        {
+        ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...mortgagedata2.map(item => parseFloat(item))],
           borderColor: 'red',
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
           borderWidth: 1,
           fill: false,
-        },{
+        }] : []),
+        ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...mortgagedata.map(item => parseFloat(item))],
           borderColor: 'green',
           backgroundColor: 'rgba(0, 255, 0, 0.5)',
           borderWidth: 1,
           fill: false,
-        }
+        }] : []),
       ]
     };
     const options = {
@@ -176,7 +177,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'OLB Progression (£)',
+            text: 'Mortgage Debt (£)',
             color: 'white',
             font: {
               size: 18,
@@ -195,79 +196,74 @@ function Results({ result }) {
     const data = {
       labels: [...ageattimedata],
       datasets: [
-        {
+        ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...TO_wealthdata.map(item => parseFloat(item))],
           borderColor: 'red',
           backgroundColor: 'rgba(255, 0, 0, 0.5)',
           borderWidth: 1,
           fill: false,
-        },
-        {
+        }] : []),
+        ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...SO_wealthdata.map(item => parseFloat(item))],
           borderColor: 'green',
           backgroundColor: 'rgba(0, 255, 0, 0.5)',
           borderWidth: 1,
           fill: false,
-        }
+        }] : []),
       ]
     };
-  
-  const options = {
-    responsive: true,
-    plugins: {
-      legend: {
-        position: 'top',
-        labels: {
-          color: 'white',
-        },
-      },
-      title: {
-        display: true,
-        text: 'Wealth Comparison: Total Ownership vs Shared Ownership',
-        color: 'white',
-        font: {
-          size: 24,
-        },
-      },
-    },
-    scales: {
-      x: {
-        title: {
-          display: true,
-          text: 'Age',
-          color: 'white',
-          font: {
-            size: 18,
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            color: 'white',
           },
         },
-        ticks: {
-          color: 'white',
-        },
-      },
-      y: {
         title: {
           display: true,
-          text: 'Current Lifetime Wealth (£)',
+          text: 'Wealth Comparison: Total Ownership vs Shared Ownership',
           color: 'white',
           font: {
-            size: 18,
+            size: 24,
           },
         },
-        ticks: {
-          color: 'white',
-          // Multiply the tick labels by 100
-          callback: function(value, index, values) {
-            return value;
-          }
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
         },
+        y: {
+          title: {
+            display: true,
+            text: 'Current Lifetime Wealth (£)',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        }
       }
-    }
+    };
+    return <Line data={data} options={options} />;
   };
-
-  return <Line data={data} options={options} />;
-};
+  
 
 const FAQSection = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
@@ -299,7 +295,7 @@ const FAQSection = () => {
       question: "What are the model assumptions?",
       answer: 
         <span className="tooltiptext" style={{ width: '1500px', textAlign: 'right' }}>
-          • Savings rate: 3%<br />
+          • Interest rate on deposits: 3%<br />
           • Inflation: 3%<br />
           • Mortgage rate: 4%<br />
           • House price appreciation: 5%<br />
@@ -385,7 +381,7 @@ const renderTwoColumnsText = () => {
       <div className="text-center my-8">
         <h2 className="text-xl font-bold text-white">
           <p>You cannot afford full ownership or shared ownership with the current inputs and the assumptions of the model. However, under different assumptions and inputs you might be able to afford full ownership. 
-                    We suggest you change the price of the home, or vary your deposit or income. (Find out more about the assumptions of the model 
+                    You can lower the price of the home, or vary your income. (Find out more about the assumptions of the model 
                       <a href="#faqs" className="text-blue-500 hover:underline"> here</a>.).</p>
         </h2>
       </div>
@@ -403,7 +399,7 @@ const renderTwoColumnsText = () => {
             {result.TO_housing === 0 ? (
               <div className="results-1st-col">
                 <h2 className="results-fullOwn font-bold">Full ownership</h2>
-                <p>You cannot afford full ownership with the current inputs.</p>
+                <p>You cannot afford full ownership with the current inputs. You can lower the price of the home, or vary your income.</p>
               </div>
             ) : (
               <div className="results-1st-col">
@@ -456,7 +452,7 @@ const renderTwoColumnsText = () => {
             {result.SO_housing === 0 ? (
               <div className="results-2nd-col">
                 <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
-                <p>You cannot afford staircase to 100% through shared ownership with the current inputs.</p>
+                <p>You cannot afford staircase to 100% through shared ownership with the current inputs. You can lower the price of the home, or vary your income.</p>
               </div>
             ) : (
               <div className="results-2nd-col">
@@ -572,7 +568,7 @@ return (
         Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of&nbsp;
         <span className="tooltip text-blue-500 hover:underline"> assumptions used
           <span className="tooltiptext" style={{ width: '1500px' }}>
-          • Savings rate: 3%<br />
+          • Interest rate on deposits: 3%<br />
           • Inflation: 3%<br />
           • Mortgage rate: 4%<br />
           • House price appreciation: 5%<br />
@@ -597,23 +593,36 @@ return (
     </div>
     <div className="charts-container">
     <div className="charts-wrapper">
-        {/* First row of charts */}
+        {/* first charts */}
         <div className="charts">
-          <div id="staircasing" className="" style={{ height: '450px' }}>
-            {renderstairchart()}
-          </div>
+          {result.SO_housing > 0 ? (
+            <div id="staircasing" className="" style={{ height: '450px' }}>
+              {renderstairchart()}
+            </div>
+          ) : (
+            <p className="text-center text-white">
+            </p>
+          )}
         </div>
-        {/* First row of charts */}
+        {/* second chart */}
         <div className="charts">
+          {result.TO_housing > 0 || result.SO_housing > 0 ? (
           <div id="comp" className="" style={{ height: '450px' }}>
             {rendercompchart()}
           </div>
+            ) : (
+              <p className="text-center text-white"> </p>
+            )}
         </div>
         {/* third chart */}
         <div className="charts">
+          {result.TO_housing > 0 || result.SO_housing > 0 ? (
           <div id="loan" className="" style={{ height: '450px' }}>
             {renderloanchart()}
           </div>
+            ) : (
+              <p className="text-center text-white"> </p>
+            )}
         </div>
       </div>
     <div id="faqs" className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white' }}>
