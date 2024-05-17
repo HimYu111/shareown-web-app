@@ -1,10 +1,11 @@
 import React, {useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "../Components/Loading";
+import { setSessionCookie } from './sessionUtils';
 
 function Input({ setResult }) {
   const [loading, setLoading] = useState(false);
-  const [scrollToResults, setScrollToResults] = useState(false);
+  const [scrollToResults, setScrollToResults] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
 
   const validateInputs = () => {
@@ -33,8 +34,12 @@ function Input({ setResult }) {
 
     setLoading(true);
     setErrorMessage(""); // Clear any previous error messages
+
+    const sessionID = setSessionCookie();
+
     try {
       const postData = {
+        sessionID,
         postcode: document.getElementById("input-1").value,
         propertyType: document.getElementById("input-2").value,
         bedrooms: document.getElementById("input-3").value,
