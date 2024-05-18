@@ -303,6 +303,10 @@ button#btn-up:hover, button#btn-down:hover {
   font-size: 1.1em;
 }
 
+.input-wrapper div.flex {
+  flex:1 0 100%;
+}
+
 .input-cols {
   gap:50px;
   
@@ -319,12 +323,11 @@ button#btn-up:hover, button#btn-down:hover {
 
 .input-btn-wrapper {
   flex: 1 0 100%;
-  max-width: 600px;
   flex-wrap: wrap;
 }
 
 .input-btn {
-  width: 33%;
+  width: 15%;
     font-size: 1.2em;
     font-weight: 500;
     color: white;
@@ -484,18 +487,25 @@ button#btn-up:hover, button#btn-down:hover {
 }
 
 .scenarios-wrapper {
-  margin: 45px 0px 100px;
+  margin: 120px 0px 120px;
 }
 
 p.grapics-note {
   font-size: 1.2em;
-  margin-bottom: 50px;
+  margin: 120px 0px;
 }
 
 .tooltip .tooltiptext {
-  font-size: 0.7em;
-  max-width: 600px;
+  font-size: 0.9em;
   text-align: left;
+  display: block;
+  padding: 15px;
+  background-color: white;
+  color: black;
+}
+
+.tooltip {
+  font-size: 0.8em;
 }
 
 .charts-container {
@@ -506,7 +516,8 @@ p.grapics-note {
 
 .charts {
   flex: 1 0 100%;
-  max-width: 700px;
+  max-width: 900px;
+  margin: 80px 0px;
 }
 
 .charts-wrapper {
@@ -524,4 +535,17 @@ p.grapics-note {
 .blog-wrapper, .tc-wrapper{
   max-width: 1100px;
   margin: 3rem 0px;
+}
+
+span.results-number {
+  font-size: 1.1em;
+}
+
+#faq {
+  width: 80%;
+}
+
+.more-secion-wrapper {
+  background-color: #8ba4ad;
+  color: black;
 }

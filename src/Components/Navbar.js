@@ -54,13 +54,14 @@ function Navbar() {
             <div class="menu-link"> <Link to="/blog"> More </Link></div>     
           </div>
 
-          <div class="menu-video menu-buttons">          
+   {/*       <div class="menu-video menu-buttons">          
             <div class="menu-link"><Link to="/vid"> Video Guide </Link></div>  
           </div>
-
+          
           <div class="menu-TC menu-buttons">          
             <div class="menu-link"><Link to="/TCs"> TCs </Link></div>   
-          </div>
+          </div>*/}
+
 
         </div>
       </div>

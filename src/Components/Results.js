@@ -405,14 +405,14 @@ const renderTwoColumnsText = () => {
               <div className="results-1st-col">
                 <h2 className="results-fullOwn font-bold">Full ownership</h2>
 
-                  <p className="font-bold">Minimum Deposit: £{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</p>
+                  <p className="font-bold">Minimum Deposit: <span className="results-number">£{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</span></p>
                   <p className="italic"><a href="#faqs" className="text-blue-500 hover:underline">Find out more about the model assumptions</a></p>
                   <p className="mb-6">You can afford to begin your mortgage                    {result.TO_time < 1
                       ? `now`
                       : `in ${result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years`}</p>
 
                   <p className="font-bold">100% Ownership:</p>
-                  <p className="mb-6">Get on the property ladder by the age of {result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</p>
+                  <p className="mb-6">Get on the property ladder by the age of <span className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</span></p>
                   <p className="font-bold">Monthly costs&nbsp;             
                     <span className="tooltip"> [?]
                     <span className="tooltiptext" style={{ width: '1500px' }}>
@@ -420,7 +420,7 @@ const renderTwoColumnsText = () => {
                     </span>
                   </span>
                   </p>
-                  <p className="mb-6">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</p>
+                  <p className="mb-6"><span className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</span></p>
 
                   <p className="font-bold">Lifetime wealth&nbsp;
                   <span className="tooltip"> [?]
@@ -430,8 +430,8 @@ const renderTwoColumnsText = () => {
                     </span>
                   </p>
                   <p className="">By retirement age, you would have approximately</p>
-                  <p className="">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'} in housing wealth</p>
-                  <p className="">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'} in savings</p>
+                  <p className=""><span className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</span> in housing wealth</p>
+                  <p className=""><span className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</span> in savings</p>
                   <p className="mb-6 italic">
                     <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>
                   <p className="font-bold">Repayment structure&nbsp; 
@@ -458,7 +458,7 @@ const renderTwoColumnsText = () => {
               <div className="results-2nd-col">
 
                   <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
-                  <p className="font-bold">Minimum Deposit: £{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</p>
+                  <p className="font-bold">Minimum Deposit: <span className="results-number">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</span></p>
                   <p className="italic"><a href="#faqs" className="text-blue-500 hover:underline">Find out more about the model assumptions</a></p>
                   <p className="mb-6">
                     {result.SO_share > 0.25
@@ -466,7 +466,7 @@ const renderTwoColumnsText = () => {
                       : `You can afford shared ownership in ${result.SO_time ?formatNumber(result.SO_time.toFixed(0)) : "0"} years`}
                   </p>
                   <p className="font-bold ">Buy 100% Ownership by the age of {result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'} 
-                  <span className="tooltip"> [?]
+                  <span className="tooltip">&nbsp;[?]
                   <span className="tooltiptext" style={{ width: '1500px' }}>
                     Assuming you use all your savings to buy additional shares (staircase).
                   </span>
@@ -491,8 +491,8 @@ const renderTwoColumnsText = () => {
                     </span>
                   </p>
                   <p className="">By retirement age, you would have approximately</p>
-                  <p className="">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'} in housing wealth</p>
-                  <p className="">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'} in savings</p>        
+                  <p className=""><span className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</span> in housing wealth</p>
+                  <p className=""><span className="results-number">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'}</span> in savings</p>        
 
                   <p className="italic mb-6"> 
                     <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a></p>            
@@ -563,34 +563,7 @@ return (
     <div className="results-container">
     {renderTwoColumnsText()}
     {renderScenariosExplained()}
-    <div className="grapics-container-note">
-      <p className="grapics-note">
-        Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of&nbsp;
-        <span className="tooltip text-blue-500 hover:underline"> assumptions used
-          <span className="tooltiptext" style={{ width: '1500px' }}>
-          • Interest rate on deposits: 3%<br />
-          • Inflation: 3%<br />
-          • Mortgage rate: 4%<br />
-          • House price appreciation: 5%<br />
-          • House maintenance cost: 1%<br />
-          • Mortgage term: 30 years<br />
-          • Transaction cost: 0%<br />
-          • Loan to Value (LTV): You can borrow up to 95% of the home value (for full ownership)<br />
-          • Loan to Value (LTV): You can borrow up to 95% of the value of the share that you're buying (for shared ownership)<br />
-          • Loan ratio: Total mortgage debt cannot exceed more than 4.5 times your annual gross income<br />
-          • Maximum income to expenditure ratio (max inc to exp): 40%<br />
-          • For shared ownership, total housing expenses (mortgage, rent, service charge) cannot exceed 40% of your net annual income<br />
-          • Rent appreciation: 3.5%<br />
-          • Minimum initial share: 25%<br />
-          • Initial rent percent: 2.75%<br />
-          • Staircase administration fee: £1000<br />
-          • Service charge: 1%<br />
-          • Affordability constraint: 40% <br />
-          • The model assumes you will retire at 67, and will not work after this point. 
-          </span>
-        </span>
-      </p>      
-    </div>
+
     <div className="charts-container">
     <div className="charts-wrapper">
         {/* first charts */}
@@ -625,6 +598,35 @@ return (
             )}
         </div>
       </div>
+
+      <div className="grapics-container-note">
+      <p className="grapics-note">
+        Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of&nbsp;
+        <span className="tooltip text-blue-500 hover:underline"> assumptions used
+          <span className="tooltiptext" style={{ width: '1500px' }}>
+          • Interest rate on deposits: 3%<br />
+          • Inflation: 3%<br />
+          • Mortgage rate: 4%<br />
+          • House price appreciation: 5%<br />
+          • House maintenance cost: 1%<br />
+          • Mortgage term: 30 years<br />
+          • Transaction cost: 0%<br />
+          • Loan to Value (LTV): You can borrow up to 95% of the home value (for full ownership)<br />
+          • Loan to Value (LTV): You can borrow up to 95% of the value of the share that you're buying (for shared ownership)<br />
+          • Loan ratio: Total mortgage debt cannot exceed more than 4.5 times your annual gross income<br />
+          • Maximum income to expenditure ratio (max inc to exp): 40%<br />
+          • For shared ownership, total housing expenses (mortgage, rent, service charge) cannot exceed 40% of your net annual income<br />
+          • Rent appreciation: 3.5%<br />
+          • Minimum initial share: 25%<br />
+          • Initial rent percent: 2.75%<br />
+          • Staircase administration fee: £1000<br />
+          • Service charge: 1%<br />
+          • Affordability constraint: 40% <br />
+          • The model assumes you will retire at 67, and will not work after this point. 
+          </span>
+        </span>.
+      </p>      
+    </div>
     <div id="faqs" className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white' }}>
     <FAQSection />
     </div>
