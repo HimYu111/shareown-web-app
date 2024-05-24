@@ -7,19 +7,19 @@ import Results from "./Components/Results";
 import Email from "./Components/Email";
 import Footer from "./Components/Footer";
 import Scroll from "./Components/Scroll";
+import CookieConsent from "./Components/CookieConsent"; // Make sure the path is correct based on your project structure
 
 function App() {
   const [result, setResult] = useState();
-  console.log(result)
-  const [hasChosenNo, setHasChosenNo] = useState(false);
 
   return (
     <div className="App">
       <Scroll />
       <Navbar />
+      <CookieConsent /> {/* Include the CookieConsent component */}
       <div className="border-x-[16px] border-white max-sm:border-0">
         <Intro />
-        <Input setResult={setResult} />
+        <Input setResult={setResult} /> {/* Pass consent status to Input */}
         <Results result={result} />
         <Email />
       </div>

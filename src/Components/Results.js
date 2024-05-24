@@ -249,7 +249,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'Current Lifetime Wealth (£)',
+            text: 'Liquid Wealth (£)',
             color: 'white',
             font: {
               size: 18,

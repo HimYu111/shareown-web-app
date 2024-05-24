@@ -1,37 +1,47 @@
 import React, { useState } from 'react';
-import axios from 'axios'; // Make sure to install axios with `npm install axios`
+import axios from 'axios';
 
-function EmailForm() {
+function Results({ result }) {
   const [email, setEmail] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
-  const handleSubmit = async (event) => {
-    event.preventDefault(); // Prevents the default form submit action
+  const handleEmailSubmit = async (e) => {
+    e.preventDefault();
+    setIsSubmitting(true);
     try {
-      const response = await axios.post('https://www.shareown.info/api/submit-email', { email });
-      console.log('Email saved:', response.data);
-      // Handle success (e.g., showing a success message)
+      
+      await axios.post('https://www.shareown.info/api/submit-results-email', {
+        email,
+        result, // This assumes 'result' contains the data you want to email
+      });
+      alert('Results sent to your email!');
     } catch (error) {
-      console.error('Error saving email:', error);
-      // Handle error (e.g., showing an error message)
+      console.error('Error sending results:', error);
+      alert('Failed to send results.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
   return (
-    <div className='email-form-container'>
-      <form onSubmit={handleSubmit} className='email-form'>
-        <p className="prompt-text">Share your email to receive this report</p>
+    <div>
+      {/* Your existing result rendering code */}
+
+      {/* Email submission form */}
+      <form onSubmit={handleEmailSubmit}>
         <input
           type="email"
           value={email}
-          className='email-input'
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           required
         />
-        <button className='submit-button text-neutral' type="submit">Submit</button>
+        <button type="submit" disabled={isSubmitting}>
+          {isSubmitting ? 'Sending...' : 'Send Results to Email'}
+        </button>
       </form>
     </div>
   );
 }
 
-export default EmailForm;
+export default Results;

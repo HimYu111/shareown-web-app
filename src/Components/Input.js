@@ -1,6 +1,7 @@
 import React, {useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "../Components/Loading";
+import Cookies from 'js-cookie';
 import { setSessionCookie } from './sessionUtils';
 
 function Input({ setResult }) {
@@ -27,42 +28,45 @@ function Input({ setResult }) {
 
   const handleInputs = async () => {
     if (!validateInputs()) {
-      setErrorMessage("Please fill in all fields before submitting.");
-      setLoading(false);
-      return;
+        setErrorMessage("Please fill in all fields before submitting.");
+        setLoading(false);
+        return;
     }
 
     setLoading(true);
     setErrorMessage(""); // Clear any previous error messages
-
-    const sessionID = setSessionCookie();
-
     try {
-      const postData = {
-        sessionID,
-        postcode: document.getElementById("input-1").value,
-        propertyType: document.getElementById("input-2").value,
-        bedrooms: document.getElementById("input-3").value,
-        occupation: document.getElementById("input-4").value,
-        housePrice: parseFloat(document.getElementById("input-5").value),
-        isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
-        income: parseFloat(document.getElementById("input-7").value),
-        monthspending: parseFloat(document.getElementById("input-8").value),
-        headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
-        savings: parseFloat(document.getElementById("input-10").value),
-        currentRent: parseFloat(document.getElementById("input-11").value),
-      };
+        // Check if consent has been given
+        let sessionId = null;
+        if (Cookies.get('consent') === 'true') {
+            sessionId = setSessionCookie(); // Only set session cookie if consented
+        }
 
-      const response = await axios.post("https://shareown-backend.onrender.com/predict", postData);
-      setResult(response.data);
-      setScrollToResults(true);
+        const postData = {
+            sessionId: sessionId,
+            postcode: document.getElementById("input-1").value,
+            propertyType: document.getElementById("input-2").value,
+            bedrooms: document.getElementById("input-3").value,
+            occupation: document.getElementById("input-4").value,
+            housePrice: parseFloat(document.getElementById("input-5").value),
+            isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
+            income: parseFloat(document.getElementById("input-7").value),
+            monthspending: parseFloat(document.getElementById("input-8").value),
+            headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
+            savings: parseFloat(document.getElementById("input-10").value),
+            currentRent: parseFloat(document.getElementById("input-11").value),
+        };
+
+        const response = await axios.post("https://shareown-backend.onrender.com/predict", postData);
+        setResult(response.data);
+        setScrollToResults(true);
     } catch (error) {
-      console.error("Error:", error);
-      setResult("An error occurred while fetching data.");
+        console.error("Error:", error);
+        setResult("An error occurred while fetching data.");
     } finally {
-      setLoading(false);
+        setLoading(false);
     }
-  };
+};
 
   useEffect(() => {
     if (scrollToResults) {
@@ -446,7 +450,7 @@ function Input({ setResult }) {
     <div id="input" className="input-wrapper min-h-screen">
     <div className="input-header-wrapper" ref={headerRef}>
       <h2 className={`input-header-txt ${isVisible ? "slide-in" : ""}`}>
-        We have a couple of questions that will help us calculate your wealth
+        We have a few questions that will help us calculate your wealth
       </h2>
     </div>
       <div className="flex justify-center pt-20 input-cols">
