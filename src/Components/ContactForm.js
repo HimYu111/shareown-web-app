@@ -12,7 +12,7 @@ function ContactForm({ onClose }) {
     setIsSubmitting(true);
     try {
       // Assuming you have an endpoint to handle the form submission
-      await axios.post('https://shareown-backend.onrender.com/send-mail', { name, email, message });
+      await axios.post('https://shareown-backend.onrender.com/send-email', { name, email, message });
       alert('Message sent!');
     } catch (error) {
       alert('Failed to send message.');
