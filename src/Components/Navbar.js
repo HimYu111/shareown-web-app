@@ -1,9 +1,5 @@
 import React, { useEffect } from "react";
 import logo from "../Assets/icon-ShareOwn.png";
-import homeIcon from "../Assets/home-icon.png";
-import blogIcon from "../Assets/blog-icon.png";
-import vidIcon from "../Assets/question-icon.png";
-import TCsIcon from "../Assets/TCs-icon.png";
 import { Link } from "react-router-dom";
 
 function Navbar() {

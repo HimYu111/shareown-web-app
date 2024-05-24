@@ -10,7 +10,7 @@ function Results({ result }) {
     setIsSubmitting(true);
     try {
       
-      await axios.post('https://www.shareown.info/api/submit-results-email', {
+      await axios.post('https://shareown-backend.onrender.com/submit-results-email', {
         email,
         result, // This assumes 'result' contains the data you want to email
       });

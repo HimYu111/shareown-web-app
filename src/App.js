@@ -16,8 +16,9 @@ function App() {
     <div className="App">
       <Scroll />
       <Navbar />
-      <CookieConsent /> {/* Include the CookieConsent component */}
       <div className="border-x-[16px] border-white max-sm:border-0">
+      <CookieConsent />
+
         <Intro />
         <Input setResult={setResult} /> {/* Pass consent status to Input */}
         <Results result={result} />

@@ -525,36 +525,41 @@ const renderTwoColumnsText = () => {
 const renderScenariosExplained = () => {
   return (
     <div className="text-white scenarios-wrapper">
-        <h1 className="font-bold ">Scenarios Explained</h1>
+        <h1 className="font-bold">Scenarios Explained</h1>
         <div className="scenarios-2cols-wrapper">
-
             <div className="scenarios-1stcol">
               <h2 className="results-fullOwn">Full Ownership</h2>
-              <p className="">
-                Full ownership means buying a home outright by making a deposit of at least 5% of property’s value and 
+              <p>
+                Full ownership means buying a home outright by making a deposit of at least 5% of the property’s value and 
                 financing the rest with a mortgage. The maximum mortgage you can secure is limited to 4.5 times your 
                 total annual gross income.
               </p>
-              <p className="">
+              <p>
                 The calculator will determine the earliest time you can afford to buy outright.
               </p>
             </div>
             <div className="scenarios-2ndcol">
               <h2 className="results-sharedOwn">Shared Ownership</h2>
-              <p className="">
+              <p>
                 Shared ownership allows you to purchase between 25% and 75% of a home and pay a reduced rent for the 
                 remaining portion. You can buy additional shares over time and “staircase” to full ownership.
               </p>
-              <p className="">
+              <p>
                 The calculator will determine the earliest time you can get onto the property ladder and the fastest way 
                 you can staircase to 100% ownership.
               </p>
             </div>
         </div>
-      </div>
-
+        <h2 className="results-fullOwn">How is my tax calculated?</h2>
+        <ul>
+          <li><strong>Basic Rate (20%):</strong> Applied to income up to £37,700.</li>
+          <li><strong>Higher Rate (40%):</strong> Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.</li>
+          <li><strong>Additional Rate (45%):</strong> Applied to income above £125,140. Exclusive of any income under the additional rate threshold.</li>
+        </ul>
+    </div>
   );
 };
+
 
 
 return (
