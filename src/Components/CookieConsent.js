@@ -8,7 +8,7 @@ function CookieConsent() {
 
   return (
     <div className="cookie-banner">
-      <p>We use cookies to enhance your experience. By continuing to visit this site you agree to our use of cookies.</p>
+      <p>We use cookies to gather data such as session ids to improve your experience. By clicking agree, you will help us make this website more valuable as an academic tool.</p>
       <button onClick={giveConsent}>Accept Cookies</button>
     </div>
   );
