@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import Cookies from 'cookies-js';
+import Cookies from 'js-cookie';
 
 export function setSessionCookie() {
     if (!Cookies.get('consent') || !(Cookies.get('consent') === 'true')) return null; // Check for consent
