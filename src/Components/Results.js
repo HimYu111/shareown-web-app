@@ -407,7 +407,7 @@ const renderTwoColumnsText = () => {
 
                   <p className="font-bold">Minimum Deposit: <span className="results-number">£{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</span></p>
                   <p className="italic"><a href="#faqs" className="text-blue-500 hover:underline">Find out more about the model assumptions</a></p>
-                  <p className="mb-6">  You {result.TO_time < 1 ? 'have enough savings for the deposit now' 
+                  <p className="mb-6 no-wrap">  You {result.TO_time < 1 ? 'have enough savings for the deposit now' 
                   : `will have enough savings for the deposit in ${result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years`}</p>
                   <p className="font-bold">100% Ownership:</p>
                   <p className="mb-6">Get on the property ladder by the age of <span className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</span></p>
