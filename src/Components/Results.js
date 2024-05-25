@@ -602,7 +602,7 @@ return (
         </div>
       </div>
 
-      <div className="grapics-container-note my-4">
+      <div className="grapics-container-note">
       <p className="grapics-note">
         Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of&nbsp;
         <span className="tooltip text-blue-500 hover:underline"> assumptions used
