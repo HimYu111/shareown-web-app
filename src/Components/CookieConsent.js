@@ -21,7 +21,7 @@ function CookieConsent() {
   }
 
   return (
-    <div className='banner'><p><p>We use cookies to gather data such as session ids to improve your experience. By clicking agree, you will help us make this website more valuable as an academic tool.</p></p><button onClick={giveConsent}>Accept Cookies</button> <button onClick={rejectConsent}>Reject Cookies</button></div>
+    <div className='banner'><p><p>We use cookies to gather only your inputs and session ids in order to further our research. If you decline, you will still be able to access the calculator and all it's functionality.</p></p><button onClick={giveConsent}>Accept Cookies</button> <button onClick={rejectConsent}>Reject Cookies</button></div>
   );
 }
 

@@ -225,7 +225,7 @@ function Results({ result }) {
         },
         title: {
           display: true,
-          text: 'Wealth Comparison: Total Ownership vs Shared Ownership',
+          text: 'Liquid Wealth Comparison: Total Ownership vs Shared Ownership',
           color: 'white',
           font: {
             size: 24,
@@ -249,7 +249,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'Liquid Wealth (£)',
+            text: 'Lifetime Wealth (£)',
             color: 'white',
             font: {
               size: 18,
@@ -407,10 +407,8 @@ const renderTwoColumnsText = () => {
 
                   <p className="font-bold">Minimum Deposit: <span className="results-number">£{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</span></p>
                   <p className="italic"><a href="#faqs" className="text-blue-500 hover:underline">Find out more about the model assumptions</a></p>
-                  <p className="mb-6">You can afford to begin your mortgage                    {result.TO_time < 1
-                      ? `now`
-                      : `in ${result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years`}</p>
-
+                  <p className="mb-6">  You {result.TO_time < 1 ? 'have enough savings for the deposit now' 
+                  : `will have enough savings for the deposit in ${result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years`}</p>
                   <p className="font-bold">100% Ownership:</p>
                   <p className="mb-6">Get on the property ladder by the age of <span className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</span></p>
                   <p className="font-bold">Monthly costs&nbsp;             
@@ -441,8 +439,8 @@ const renderTwoColumnsText = () => {
                     </span>
                   </span></p>
                   <p className="">Mortgage free {result.TO_finish < 1
-                      ? `now`
-                      : `by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`}</p>
+                      ? ` now`
+                      : ` by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`}</p>
                   <p className="italic"><a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
                 </div>
               )}
@@ -465,14 +463,17 @@ const renderTwoColumnsText = () => {
                       ? `You can afford to buy a share of 25% now`
                       : `You can afford shared ownership in ${result.SO_time ?formatNumber(result.SO_time.toFixed(0)) : "0"} years`}
                   </p>
-                  <p className="font-bold ">Buy 100% Ownership by the age of {result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'} 
+
+                  
+                  <p className="font-bold">100% Ownership:</p>
+                  <p className="">Staircase to full ownership by the age of {result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'}
                   <span className="tooltip">&nbsp;[?]
                   <span className="tooltiptext" style={{ width: '1500px' }}>
                     Assuming you use all your savings to buy additional shares (staircase).
                   </span>
                   </span>
                   </p>
-                  <p className="italic mb-6"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>
+                  <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>
 
 
                   <p className="font-bold" >Monthly costs&nbsp;           
@@ -504,9 +505,9 @@ const renderTwoColumnsText = () => {
                   </span>
                   
                   </p>
-                  <p className="">Mortgage free{result.TO_finish < 1
-                      ? `now`
-                      : `by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`} </p>
+                  <p className="">Mortgage free {result.TO_finish < 1
+                      ? ` now`
+                      : ` by the age of  ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`} </p>
 
                   <p className="italic"><a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
               </div>
@@ -563,8 +564,7 @@ const renderScenariosExplained = () => {
 
 
 return (
-  
-  <div className="bg-slate-800 py-20 text-white results-wrapper">
+  <div id="results" className="bg-slate-800 py-20 text-white results-wrapper">
     <div className="results-container">
     {renderTwoColumnsText()}
     {renderScenariosExplained()}

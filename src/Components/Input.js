@@ -3,10 +3,12 @@ import axios from "axios";
 import Loading from "../Components/Loading";
 import Cookies from 'js-cookie';
 import { setSessionCookie } from './sessionUtils';
+import Results from './Results'; // Import the Results component
+
 
 function Input({ setResult }) {
   const [loading, setLoading] = useState(false);
-  const [scrollToResults, setScrollToResults] = useState(true);
+  const [scrollToResults, setScrollToResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
   const validateInputs = () => {
@@ -69,7 +71,7 @@ function Input({ setResult }) {
 };
 
   useEffect(() => {
-    if (scrollToResults) {
+    if (scrollToResults && Results) {
       const element = document.getElementById("results");
       if (element) {
         window.scrollTo({
@@ -77,8 +79,9 @@ function Input({ setResult }) {
           top: element.offsetTop,
         });
       }
+      setScrollToResults(false); // Reset scroll flag
     }
-  }, [scrollToResults]);
+  }, [scrollToResults, Results]);
 
   const options = [
     "E1",
