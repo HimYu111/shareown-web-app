@@ -378,7 +378,7 @@ const renderTwoColumnsText = () => {
   // Case where neither ownership type is possible
   if (result.TO_housing === 0 && result.SO_housing === 0) {
     return (
-      <div className="text-center my-8">
+      <div className="text-center my-4">
         <h2 className="text-xl font-bold text-white">
           <p>You cannot afford full ownership or shared ownership with the current inputs and the assumptions of the model. However, under different assumptions and inputs you might be able to afford full ownership. 
                     You can lower the price of the home, or vary your income. (Find out more about the assumptions of the model 
@@ -392,7 +392,7 @@ const renderTwoColumnsText = () => {
     <div className="results">
       <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
 
-      <div className="flex justify-center my-8 mb-20 text-white results-2cols">
+      <div className="flex justify-center my-4 mb-20 text-white results-2cols">
      {/*   <div className="flex-grow px-6">
         <div className="flex justify-between space" style={{ display: 'flex' }}>
   <div className="flex justify-between space-x-4 results-1st-col-wrapper">*/}
@@ -515,9 +515,7 @@ const renderTwoColumnsText = () => {
             )}
           </div>
           </div>
-   //      </div>
-    //  </div>
-     //     </div>
+
   );
 };
 
@@ -525,7 +523,7 @@ const renderTwoColumnsText = () => {
 
 const renderScenariosExplained = () => {
   return (
-    <div className="text-white scenarios-wrapper">
+    <div className="text-white scenarios-wrapper my-4">
         <h1 className="font-bold">Scenarios Explained</h1>
         <div className="scenarios-2cols-wrapper">
             <div className="scenarios-1stcol">
@@ -585,7 +583,7 @@ return (
         {/* second chart */}
         <div className="charts">
           {result.TO_housing > 0 || result.SO_housing > 0 ? (
-          <div id="comp" className="" style={{ height: '450px' }}>
+          <div id="comp" className="mb-2" style={{ height: '450px' }}>
             {rendercompchart()}
           </div>
             ) : (
@@ -595,7 +593,7 @@ return (
         {/* third chart */}
         <div className="charts">
           {result.TO_housing > 0 || result.SO_housing > 0 ? (
-          <div id="loan" className="" style={{ height: '450px' }}>
+          <div id="loan" className="mb-2" style={{ height: '450px' }}>
             {renderloanchart()}
           </div>
             ) : (
@@ -604,7 +602,7 @@ return (
         </div>
       </div>
 
-      <div className="grapics-container-note">
+      <div className="grapics-container-note my-4">
       <p className="grapics-note">
         Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of&nbsp;
         <span className="tooltip text-blue-500 hover:underline"> assumptions used
