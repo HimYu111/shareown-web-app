@@ -575,6 +575,7 @@ function Input({ setResult }) {
               </label>
               <input
                 id="housePrice"
+                ref={ageInputRef}
                 className="input input-bordered w-full"
                 type="text"
                 placeholder="Enter house price in £"
@@ -588,6 +589,7 @@ function Input({ setResult }) {
             </label>
             <input
               id="income"
+              ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
               placeholder="Enter income in £"
@@ -601,6 +603,7 @@ function Input({ setResult }) {
             </label>
             <input
               id="monthspending"
+              ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
               placeholder="Enter amount in £"
@@ -628,6 +631,7 @@ function Input({ setResult }) {
             </label>
             <input
               id="savings"
+              ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
               placeholder="Enter savings amount in £"
@@ -641,6 +645,7 @@ function Input({ setResult }) {
             </label>
             <input
               id="currentRent"
+              ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
               placeholder="Enter rent amount in £"
