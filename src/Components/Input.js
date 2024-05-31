@@ -24,6 +24,8 @@ function Input({ setResult }) {
     currentRent: "",
   });
 
+  const ageInputRef = useRef(null);
+
   const formatNumber = (value) => {
     if (!value) return "";
     return new Intl.NumberFormat('en-GB').format(value);
@@ -115,6 +117,25 @@ function Input({ setResult }) {
       setScrollToResults(false); // Reset scroll flag
     }
   }, [scrollToResults, Results]);
+
+  useEffect(() => {
+    const handleWheel = (e) => {
+      if (ageInputRef.current && ageInputRef.current.contains(e.target)) {
+        e.preventDefault();
+      }
+    };
+
+    if (ageInputRef.current) {
+      ageInputRef.current.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (ageInputRef.current) {
+        ageInputRef.current.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
+
 
   const options = ["",
     "Not sure yet",
@@ -593,6 +614,7 @@ function Input({ setResult }) {
             </label>
             <input
               id="input-9"
+              ref={ageInputRef}
               className="input input-bordered w-full"
               type="number"
               min="18"
