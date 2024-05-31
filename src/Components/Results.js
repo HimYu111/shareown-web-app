@@ -356,13 +356,13 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white' }}> {/* Set the background to white for better contrast */}
+    <div className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white', width: '100%', maxWidth: '600px', margin: 'auto' }}>
       <h2 className="text-2xl font-bold text-center mb-5" style={{ color: 'black' }}>FAQs</h2>
       {faqs.map((faq, index) => (
         <div key={index} className="mb-4">
           <button
             onClick={() => toggleFAQ(index)}
-            className="text-lg font-bold py-2"
+            className="text-lg font-bold py-2 w-full text-left"
             style={{ color: 'black' }} // Set text color to black
             aria-expanded={openFAQ === index}
             aria-controls={`faq-answer-${index}`}
