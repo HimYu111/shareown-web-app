@@ -292,28 +292,39 @@ const FAQSection = () => {
       answer: `The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®`
     },
     {
+      question: "How is my tax calculated?",
+      answer: 
+        <span className="tooltiptext" style={{ width: '1500px', textAlign: 'right' }}>
+          Allowance: Anything below £12,570 is not taxed.
+          Basic Rate (20%): Applied to income up to £37,700.
+          Higher Rate (40%): Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.
+          Additional Rate (45%): Applied to income above £125,140. Exclusive of any income under the additional rate threshold.
+          </span>
+    },
+    {
       question: "What are the model assumptions?",
       answer: 
         <span className="tooltiptext" style={{ width: '1500px', textAlign: 'right' }}>
-          • Interest rate on deposits: 3%<br />
-          • Inflation: 3%<br />
-          • Mortgage rate: 4%<br />
-          • House price appreciation: 5%<br />
-          • House maintenance cost: 1%<br />
-          • Mortgage term: 30 years<br />
-          • Transaction cost: 0%<br />
-          • Loan to Value (LTV): You can borrow up to 95% of the home value (for full ownership)<br />
-          • Loan to Value (LTV): You can borrow up to 95% of the value of the share that you're buying (for shared ownership)<br />
-          • Loan ratio: Total mortgage debt cannot exceed more than 4.5 times your annual gross income<br />
-          • Maximum income to expenditure ratio (max inc to exp): 40%<br />
-          • For shared ownership, total housing expenses (mortgage, rent, service charge) cannot exceed 40% of your net annual income<br />
-          • Rent appreciation: 3.5%<br />
-          • Minimum initial share: 25%<br />
-          • Initial rent percent: 2.75%<br />
-          • Staircase administration fee: £1000<br />
-          • Service charge: 1%<br />
-          • Affordability constraint: 40% <br />
-          • The model assumes you will retire at 67, and will not work after this point. 
+          • Interest rate on deposits/savings: 3%. <br />
+          • Inflation rate p.a.: 3%. <br />
+          • Mortgage rate p.a.: 4%. <br />
+          • House price appreciation p.a.: 5%. <br />
+          • Market rent appreciation: 3.5%. <br />
+          • Rent paid for Shared Ownership: For the first year it is 2.75% of the initial value of the home. After that it grows with the assumed inflation rate. <br />
+          • Service charge/House maintenance cost p.a.: 1%. <br />
+          • Mortgage term: 30 years. <br />
+          • The model assumes a retirement age at 67. After that no wealth is accumulated. <br />
+          • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
+          • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
+          • Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income. <br />
+          • Affordability constraint: Total housing expenses (mortgage, rent, service charge) cannot exceed 40% of the net annual income. <br /> 
+          • Minimum initial share for Shared Ownership: 25%. <br />
+          • Transaction costs: 0%.<br />
+          • Staircasing fees for Shared Ownership: £1,000. <br />
+          • No tax is applied below £12,570. <br />
+          • The basic 20% tax rate is applied to income between £12,570 and £37,700. <br />
+          • The higher 40% tax rate is applied to income between £37,700 and £125,140. <br />
+          • The additional 45% tax rate is applied to income above £125,140. <br />
           </span>
     },
     {
@@ -380,9 +391,10 @@ const renderTwoColumnsText = () => {
     return (
       <div className="text-center my-4">
         <h2 className="text-xl font-bold text-white">
-          <p>You cannot afford full ownership or shared ownership with the current inputs and the assumptions of the model. However, under different assumptions and inputs you might be able to afford full ownership. 
-                    You can lower the price of the home, or vary your income. (Find out more about the assumptions of the model 
-                      <a href="#faqs" className="text-blue-500 hover:underline"> here</a>.).</p>
+          <p className= "text-xl font-bold text-white mb-6">You cannot afford Shared Ownership or full ownership with the current inputs and the
+                      <a href="#faqs" className="text-blue-500 hover:underline"> assumptions</a>. assumptions of the model.</p>
+
+          <p>You can change some of above inputs like the price of the home, the location, income, etc. to assess when you can afford Shared Ownership or/and full ownership.</p>
         </h2>
       </div>
     );
@@ -399,7 +411,8 @@ const renderTwoColumnsText = () => {
             {result.TO_housing === 0 ? (
               <div className="results-1st-col">
                 <h2 className="results-fullOwn font-bold">Full ownership</h2>
-                <p>You cannot afford full ownership with the current inputs. You can lower the price of the home, or vary your income.</p>
+                <p className= "text-xl font-bold text-white mb-6">You cannot afford full ownership with the current inputs. </p>
+                <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
               </div>
             ) : (
               <div className="results-1st-col">
@@ -450,7 +463,8 @@ const renderTwoColumnsText = () => {
             {result.SO_housing === 0 ? (
               <div className="results-2nd-col">
                 <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
-                <p>You cannot afford staircase to 100% through shared ownership with the current inputs. You can lower the price of the home, or vary your income.</p>
+                <p className= "text-xl font-bold text-white mb-6">You cannot afford staircase to 100% through Shared Ownership with the current inputs.</p>
+                <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
               </div>
             ) : (
               <div className="results-2nd-col">
@@ -461,7 +475,7 @@ const renderTwoColumnsText = () => {
                   <p className="mb-6">
                     {result.SO_share > 0.25
                       ? `You can afford to buy a share of 25% now`
-                      : `You can afford shared ownership in ${result.SO_time ?formatNumber(result.SO_time.toFixed(0)) : "0"} years`}
+                      : `You can afford Shared Ownership in ${result.SO_time ?formatNumber(result.SO_time.toFixed(0)) : "0"} years`}
                   </p>
 
                   
@@ -549,12 +563,6 @@ const renderScenariosExplained = () => {
               </p>
             </div>
         </div>
-        <h2 className="results-fullOwn">How is my tax calculated?</h2>
-        <ul>
-          <li><strong>Basic Rate (20%):</strong> Applied to income up to £37,700.</li>
-          <li><strong>Higher Rate (40%):</strong> Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.</li>
-          <li><strong>Additional Rate (45%):</strong> Applied to income above £125,140. Exclusive of any income under the additional rate threshold.</li>
-        </ul>
     </div>
   );
 };
@@ -564,70 +572,70 @@ const renderScenariosExplained = () => {
 return (
   <div id="results" className="bg-slate-800 py-20 text-white results-wrapper">
     <div className="results-container">
-    {renderTwoColumnsText()}
-    {renderScenariosExplained()}
+      {renderTwoColumnsText()}
+      {renderScenariosExplained()}
 
-    <div className="charts-container">
-    <div className="charts-wrapper">
-        {/* first charts */}
-        <div className="charts">
-          {result.SO_housing > 0 ? (
-            <div id="staircasing" className="" style={{ height: '450px' }}>
-              {renderstairchart()}
+      <div className="charts-container">
+        <div className="charts-wrapper">
+          {/* First chart - Staircasing */}
+          {result.SO_housing > 0 && (
+            <div className="charts">
+              <div id="staircasing" style={{ height: '450px' }}>
+                {renderstairchart()}
+              </div>
             </div>
-          ) : (
-            <p className="text-center text-white">
-            </p>
           )}
-        </div>
-        {/* second chart */}
-        <div className="charts">
-          {result.TO_housing > 0 || result.SO_housing > 0 ? (
-          <div id="comp" className="mb-2" style={{ height: '450px' }}>
-            {rendercompchart()}
-          </div>
-            ) : (
-              <p className="text-center text-white"> </p>
-            )}
-        </div>
-        {/* third chart */}
-        <div className="charts">
-          {result.TO_housing > 0 || result.SO_housing > 0 ? (
-          <div id="loan" className="mb-2" style={{ height: '450px' }}>
-            {renderloanchart()}
-          </div>
-            ) : (
-              <p className="text-center text-white"> </p>
-            )}
+
+          {/* Second chart - Wealth Comparison */}
+          {(result.TO_housing > 0 || result.SO_housing > 0) && (
+            <div className="charts">
+              <div id="comp" className="mb-2" style={{ height: '450px' }}>
+                {rendercompchart()}
+              </div>
+            </div>
+          )}
+
+          {/* Third chart - Loan Balance */}
+          {(result.TO_housing > 0 || result.SO_housing > 0) && (
+            <div className="charts">
+              <div id="loan" className="mb-2" style={{ height: '450px' }}>
+                {renderloanchart()}
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
       <div className="grapics-container-note">
       <p className="grapics-note">
-        Please note that above calculations are based on a model designed by UCL and University of Durham academics and is only indicative and not financial advice. Here is the full list of&nbsp;
-        <span className="tooltip text-blue-500 hover:underline"> assumptions used
+      Please note that the calculations are based on a model designed by professors at University College London and Durham University and does not provide financial advice. The model uses a range of assumptions, which can be found 
+      <p className="italic mb-6"> 
+                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>.</p> 
+      The outputs are indicative and highly dependent on the model assumptions.
+      <span className="tooltip text-blue-500 hover:underline"> 
           <span className="tooltiptext" style={{ width: '1500px' }}>
-          • Interest rate on deposits: 3%<br />
-          • Inflation: 3%<br />
-          • Mortgage rate: 4%<br />
-          • House price appreciation: 5%<br />
-          • House maintenance cost: 1%<br />
-          • Mortgage term: 30 years<br />
-          • Transaction cost: 0%<br />
-          • Loan to Value (LTV): You can borrow up to 95% of the home value (for full ownership)<br />
-          • Loan to Value (LTV): You can borrow up to 95% of the value of the share that you're buying (for shared ownership)<br />
-          • Loan ratio: Total mortgage debt cannot exceed more than 4.5 times your annual gross income<br />
-          • Maximum income to expenditure ratio (max inc to exp): 40%<br />
-          • For shared ownership, total housing expenses (mortgage, rent, service charge) cannot exceed 40% of your net annual income<br />
-          • Rent appreciation: 3.5%<br />
-          • Minimum initial share: 25%<br />
-          • Initial rent percent: 2.75%<br />
-          • Staircase administration fee: £1000<br />
-          • Service charge: 1%<br />
-          • Affordability constraint: 40% <br />
-          • The model assumes you will retire at 67, and will not work after this point. 
+          • Interest rate on deposits/savings: 3%. <br />
+          • Inflation rate p.a.: 3%. <br />
+          • Mortgage rate p.a.: 4%. <br />
+          • House price appreciation p.a.: 5%. <br />
+          • Market rent appreciation: 3.5%. <br />
+          • Rent paid for Shared Ownership: For the first year it is 2.75% of the initial value of the home. After that it grows with the assumed inflation rate. <br />
+          • Service charge/House maintenance cost p.a.: 1%. <br />
+          • Mortgage term: 30 years. <br />
+          • The model assumes a retirement age at 67. After that no wealth is accumulated. <br />
+          • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
+          • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
+          • Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income. <br />
+          • Affordability constraint: Total housing expenses (mortgage, rent, service charge) cannot exceed 40% of the net annual income. <br /> 
+          • Minimum initial share for Shared Ownership: 25%. <br />
+          • Transaction costs: 0%.<br />
+          • Staircasing fees for Shared Ownership: £1,000. <br />
+          • No tax is applied below £12,570. <br />
+          • The basic 20% tax rate is applied to income between £12,570 and £37,700. <br />
+          • The higher 40% tax rate is applied to income between £37,700 and £125,140. <br />
+          • The additional 45% tax rate is applied to income above £125,140. <br />
           </span>
-        </span>.
+        </span>
       </p>      
     </div>
     <div id="faqs" className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white' }}>
@@ -635,7 +643,6 @@ return (
     </div>
     </div>
   </div>
-</div>
   );
 }
 

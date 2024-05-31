@@ -1,15 +1,48 @@
-import React, {useRef, useState, useEffect } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import axios from "axios";
 import Loading from "../Components/Loading";
 import Cookies from 'js-cookie';
 import { setSessionCookie } from './sessionUtils';
 import Results from './Results'; // Import the Results component
 
-
 function Input({ setResult }) {
   const [loading, setLoading] = useState(false);
   const [scrollToResults, setScrollToResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [inputValues, setInputValues] = useState({
+    housePrice: "",
+    income: "",
+    monthspending: "",
+    savings: "",
+    currentRent: "",
+  });
+  const [formattedValues, setFormattedValues] = useState({
+    housePrice: "",
+    income: "",
+    monthspending: "",
+    savings: "",
+    currentRent: "",
+  });
+
+  const formatNumber = (value) => {
+    if (!value) return "";
+    return new Intl.NumberFormat('en-GB').format(value);
+  };
+
+  const handleInputChange = (e) => {
+    const { id, value } = e.target;
+    const numericValue = value.replace(/,/g, '');
+    if (!isNaN(numericValue)) {
+      setInputValues((prevValues) => ({
+        ...prevValues,
+        [id]: numericValue,
+      }));
+      setFormattedValues((prevValues) => ({
+        ...prevValues,
+        [id]: formatNumber(numericValue),
+      }));
+    }
+  };
 
   const validateInputs = () => {
     const inputs = [
@@ -17,13 +50,13 @@ function Input({ setResult }) {
       document.getElementById("input-2").value,
       document.getElementById("input-3").value,
       document.getElementById("input-4").value,
-      document.getElementById("input-5").value,
+      inputValues.housePrice,
       document.getElementById("input-6").value,
-      document.getElementById("input-7").value,
-      document.getElementById("input-8").value,
+      inputValues.income,
+      inputValues.monthspending,
       document.getElementById("input-9").value,
-      document.getElementById("input-10").value,
-      document.getElementById("input-11").value,
+      inputValues.savings,
+      inputValues.currentRent,
     ];
     return inputs.every(input => input !== "" && input !== null);
   };
@@ -50,13 +83,13 @@ function Input({ setResult }) {
             propertyType: document.getElementById("input-2").value,
             bedrooms: document.getElementById("input-3").value,
             occupation: document.getElementById("input-4").value,
-            housePrice: parseFloat(document.getElementById("input-5").value),
+            housePrice: parseFloat(inputValues.housePrice),
             isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
-            income: parseFloat(document.getElementById("input-7").value),
-            monthspending: parseFloat(document.getElementById("input-8").value),
+            income: parseFloat(inputValues.income),
+            monthspending: parseFloat(inputValues.monthspending),
             headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
-            savings: parseFloat(document.getElementById("input-10").value),
-            currentRent: parseFloat(document.getElementById("input-11").value),
+            savings: parseFloat(inputValues.savings),
+            currentRent: parseFloat(inputValues.currentRent),
         };
 
         const response = await axios.post("https://shareown-backend.onrender.com/predict", postData);
@@ -83,7 +116,8 @@ function Input({ setResult }) {
     }
   }, [scrollToResults, Results]);
 
-  const options = [
+  const options = ["",
+    "Not sure yet",
     "E1",
     "E2",
     "E3",
@@ -396,6 +430,8 @@ function Input({ setResult }) {
   ];
 
   const joboptions = [
+    "",
+    "I did not find my occupation in the list",
     "Corporate managers and directors",
     "Other managers and proprietors",
     "Science, research, engineering and technology professionals",
@@ -425,8 +461,8 @@ function Input({ setResult }) {
     "Does not apply",
   ];
 
-  const bedroomOptions = ["1", "2", "3", "4+"];
-  const propertyTypeOptions = ["Apartment", "Detached House", "Semi-detached House", "Terrace House"];
+  const bedroomOptions = ["", "Not sure yet", "1", "2", "3", "4+"];
+  const propertyTypeOptions = ["", "Not sure yet", "Apartment", "Detached House", "Semi-detached House", "Terrace House"];
 
 
   const [isVisible, setIsVisible] = useState(false);
@@ -504,6 +540,7 @@ function Input({ setResult }) {
               Are you a first-time buyer?
             </label>
             <select className="input input-bordered w-full" id="input-6">
+              <option value=""></option>
               <option value="Yes">Yes</option>
               <option value="No">No</option>
             </select>
@@ -516,11 +553,12 @@ function Input({ setResult }) {
                 What is the price of the home you wish to purchase?
               </label>
               <input
-                id="input-5"
+                id="housePrice"
                 className="input input-bordered w-full"
-                type="number"
-                min="0"
+                type="text"
                 placeholder="Enter house price in £"
+                value={formattedValues.housePrice}
+                onChange={handleInputChange}
               />
             </div>
           <div className="mb-4">
@@ -528,12 +566,12 @@ function Input({ setResult }) {
               What is the current annual gross income of the household buying the home (indicate the total amount if more than one person buying the home)?
             </label>
             <input
-              id="input-7"
+              id="income"
               className="input input-bordered w-full"
-              type="number"
-              min="0"
-              max="15000"
+              type="text"
               placeholder="Enter income in £"
+              value={formattedValues.income}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-4">
@@ -541,12 +579,12 @@ function Input({ setResult }) {
               How much do you think you spend each month (excluding housing)?
             </label>
             <input
-              id="input-8"
+              id="monthspending"
               className="input input-bordered w-full"
-              type="number"
-              min="1"
-              max="100"
+              type="text"
               placeholder="Enter amount in £"
+              value={formattedValues.monthspending}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-4">
@@ -567,11 +605,12 @@ function Input({ setResult }) {
               How much in savings do you have?
             </label>
             <input
-              id="input-10"
+              id="savings"
               className="input input-bordered w-full"
-              type="number"
-              min="0"
+              type="text"
               placeholder="Enter savings amount in £"
+              value={formattedValues.savings}
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-4">
@@ -579,12 +618,12 @@ function Input({ setResult }) {
               What is your current monthly rent?
             </label>
             <input
-              id="input-11"
+              id="currentRent"
               className="input input-bordered w-full"
-              type="number"
-              min="0"
-              max="10000"
+              type="text"
               placeholder="Enter rent amount in £"
+              value={formattedValues.currentRent}
+              onChange={handleInputChange}
             />
           </div>
         </div>
@@ -600,7 +639,6 @@ function Input({ setResult }) {
         </button>
      <div className="loading-container-wrapper">{loading ? <Loading /> : ""}</div>
       </div>
-      
     </div>
   );
 }
