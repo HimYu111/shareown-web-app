@@ -312,7 +312,6 @@ const FAQSection = () => {
           • Market rent appreciation: 3.5%. <br />
           • Rent paid for Shared Ownership: For the first year it is 2.75% of the initial value of the home. After that it grows with the assumed inflation rate. <br />
           • Service charge/House maintenance cost p.a.: 1%. <br />
-          • Mortgage term: 30 years. <br />
           • The model assumes a retirement age at 67. After that no wealth is accumulated. <br />
           • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
           • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
@@ -466,6 +465,12 @@ const renderTwoColumnsText = () => {
                 <p className= "text-xl font-bold text-white mb-6">You cannot afford staircase to 100% through Shared Ownership with the current inputs.</p>
                 <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
               </div>
+            ) : 
+            result.SO_housing === 1 ? (
+              <div className="results-2nd-col">
+              <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
+              <p className= "text-xl font-bold text-white mb-6">You do not qualify for Shared Ownership with the current income.</p>
+            </div>
             ) : (
               <div className="results-2nd-col">
 
@@ -621,7 +626,6 @@ return (
           • Market rent appreciation: 3.5%. <br />
           • Rent paid for Shared Ownership: For the first year it is 2.75% of the initial value of the home. After that it grows with the assumed inflation rate. <br />
           • Service charge/House maintenance cost p.a.: 1%. <br />
-          • Mortgage term: 30 years. <br />
           • The model assumes a retirement age at 67. After that no wealth is accumulated. <br />
           • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
           • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
