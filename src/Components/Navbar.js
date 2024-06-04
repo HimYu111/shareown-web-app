@@ -47,7 +47,7 @@ function Navbar() {
           </div>
 
           <div class="menu-blog menu-buttons">          
-            <div class="menu-link"> <Link to="/blog"> More </Link></div>     
+            <div class="menu-link"> <Link to="/blog"> About </Link></div>     
           </div>
 
    {/*       <div class="menu-video menu-buttons">          

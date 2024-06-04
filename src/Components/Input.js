@@ -231,7 +231,7 @@ function Input({ setResult }) {
     <div id="input" className="input-wrapper min-h-screen">
     <div className="input-header-wrapper" ref={headerRef}>
       <h2 className={`input-header-txt ${isVisible ? "slide-in" : ""}`}>
-        We have a few questions that will help us calculate your wealth
+        Calculate your housing options and wealth below
       </h2>
     </div>
       <div className="flex justify-center pt-20 input-cols">
