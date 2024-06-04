@@ -24,7 +24,7 @@ function Intro() {
         <div className="main-underheading">
         <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
         Find out your home ownership options 
-        </p>        
+        </p>     
         <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
         Calculate your lifetime wealth under various ownership scenarios 
         </p></div>
