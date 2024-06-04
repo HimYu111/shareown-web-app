@@ -1,5 +1,7 @@
 import React from "react";
 
+
+
 function Intro() {
   const scrollToSection = (sectionId) => {
     const element = document.getElementById(sectionId);
@@ -17,13 +19,15 @@ function Intro() {
       <div className="bg-gray-900 main-intro-wrapper">
       <div className="main-intro">
         <h1 className="text-6xl text-white py-10" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center' }}>
-          Housing Affordability <i>Lifetime Wealth</i> Calculator
+          Housing Affordability Lifetime Wealth Calculator
         </h1>
-        <div className="main-underheading">        
+        <div className="main-underheading">
+        <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
+        Find out your home ownership options 
+        </p>        
         <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
         Calculate your lifetime wealth under various ownership scenarios 
         </p></div>
-
 
         <div className="button-wrapper">
           <button

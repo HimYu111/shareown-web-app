@@ -6,13 +6,7 @@
   text-align: center;
 }
 
-.banner {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  z-index: 999;
-  background-color: black;
-}
+
 
 .no-wrap {
   white-space: nowrap;
@@ -510,16 +504,12 @@ p.grapics-note {
 }
 
 .tooltip .tooltiptext {
-  font-size: 0.9em;
+  font-size: 0.8em;
   text-align: left;
   display: block;
   padding: 15px;
   background-color: white;
   color: black;
-}
-
-.tooltip {
-  font-size: 0.8em;
 }
 
 .charts-container {
@@ -583,13 +573,82 @@ span.results-number {
 }
 
 .contact-form-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
+  position: relative;
+  top: -19px;
+  right: -131px;
   cursor: pointer;
+  font-size: 1.3em;
+  font-weight: bold;
 }
 
 .contact-form {
   display: flex;
   flex-direction: column;
+}
+
+.banner.banner-text {
+  width: 100%;
+  display: inline-block;
+  text-align: center;
+  max-width: 1100px;
+  background-color: #8ba4ad;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.banner-wrapper {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  font-size: 1.1em;
+}
+
+.banner-buttons-wrapper {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.banner-buttons-wrapper button,.contact-form button{
+    font-weight: 500;
+    color: white;
+    background-color: #264d5a;
+    border-color: #264d5a;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.banner-buttons-wrapper button:hover, .contact-form button:hover {
+  color: #262121;
+  background-color: #e5e7eb;
+  border-color: #e5e7eb;
+}
+
+.contact-form input,.contact-form textarea {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s ease;
+}
+
+.contact-form label {
+  text-align: left;
+}
+
+.contact-form {
+  font-size: 1.1em;
+}
+
+.contact-form button:hover {
+  background-color: #8ba4ad;
+  border-color: #8ba4ad;
 }

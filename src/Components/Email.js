@@ -24,19 +24,20 @@ function Results({ result }) {
   };
 
   return (
-    <div>
+    <div className='email-form-container'>
       {/* Your existing result rendering code */}
 
       {/* Email submission form */}
-      <form onSubmit={handleEmailSubmit}>
+      <form onSubmit={handleEmailSubmit} className='email-form'>
         <input
+          className='email-input'
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
           placeholder="Enter your email"
           required
         />
-        <button type="submit" disabled={isSubmitting}>
+        <button type="submit" disabled={isSubmitting} className='submit-button text-neutral'> 
           {isSubmitting ? 'Sending...' : 'Send Results to Email'}
         </button>
       </form>

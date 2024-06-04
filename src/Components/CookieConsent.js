@@ -21,7 +21,9 @@ function CookieConsent() {
   }
 
   return (
-    <div className='banner'><p><p>We use cookies to gather only your inputs and session ids in order to further our research. If you decline, you will still be able to access the calculator and all it's functionality.</p></p><button onClick={giveConsent}>Accept Cookies</button> <button onClick={rejectConsent}>Reject Cookies</button></div>
+    <div className='banner-wrapper'>
+    <div className='banner banner-text'><p><p>We use cookies to gather only your inputs and session ids in order to further our research. If you decline, you will still be able to access the calculator and all it's functionality.</p></p><div className='banner-buttons-wrapper'><button className='banner-accept' onClick={giveConsent}>Accept Cookies</button> <button className='banner-reject' onClick={rejectConsent}>Reject Cookies</button></div></div>
+    </div>
   );
 }
 

@@ -3,6 +3,9 @@ import React, { useState } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import flowchart from "../Assets/flowchart.png";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenNib,faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
+import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
  
 import {
@@ -422,16 +425,16 @@ const renderTwoColumnsText = () => {
             </p>
             <p className="font-bold">100% Ownership:</p>
             <p className="mb-6">Get on the property ladder by the age of <span className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</span></p>
-            <p className="font-bold">Monthly costs&nbsp;             
-              <span className="tooltip">[?]
+            <p className="font-bold">Monthly costs            
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Includes the mortgage payment (assuming a repayment over 30 years).
                 </span>
               </span>
             </p>
             <p className="mb-6"><span className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</span></p>
-            <p className="font-bold">Lifetime wealth&nbsp;
-              <span className="tooltip">[?]
+            <p className="font-bold">Lifetime wealth
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                 </span>
@@ -443,8 +446,8 @@ const renderTwoColumnsText = () => {
             <p className="mb-6 italic">
               <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a>
             </p>
-            <p className="font-bold">Repayment structure&nbsp; 
-              <span className="tooltip">[?]
+            <p className="font-bold">Repayment structure
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Assuming you use all your savings to make prepayments.              
                 </span>
@@ -478,23 +481,23 @@ const renderTwoColumnsText = () => {
             </p>
             <p className="font-bold">100% Ownership:</p>
             <p className="">Staircase to full ownership by the age of {result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'}
-              <span className="tooltip">&nbsp;[?]
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Assuming you use all your savings to buy additional shares (staircase).
                 </span>
               </span>
             </p>
             <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>
-            <p className="font-bold">Monthly costs&nbsp;           
-              <span className="tooltip">[?]
+            <p className="font-bold">Monthly costs         
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Includes the mortgage payment (assuming a repayment over 30 years).
                 </span>
               </span>
             </p>
             <p className="mb-6">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</p>
-            <p className="font-bold">Lifetime wealth&nbsp; 
-              <span className="tooltip">[?]
+            <p className="font-bold">Lifetime wealth 
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
                 </span>
@@ -506,8 +509,8 @@ const renderTwoColumnsText = () => {
             <p className="italic mb-6">
               <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a>
             </p>
-            <p className="font-bold">Repayment structure&nbsp;
-              <span className="tooltip">[?]
+            <p className="font-bold">Repayment structure
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Assuming you use all your savings to make prepayments.              
                 </span>
