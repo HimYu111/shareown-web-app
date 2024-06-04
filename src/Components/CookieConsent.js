@@ -6,12 +6,12 @@ function CookieConsent() {
   const [showCookieBanner, setShowCookieBanner] = React.useState(!Boolean(Cookies.get('consent')))
 
   const giveConsent = () => {
-    Cookies.set('consent', 'true', { expires: 365 });
+    Cookies.set('consent', 'true', { expires: 1 });
     setShowCookieBanner(false)
   };
 
   const rejectConsent = () => {
-    Cookies.set('consent', 'false', { expires: 365 });
+    Cookies.set('consent', 'false', { expires: 1 });
     setShowCookieBanner(false)
   }
 
