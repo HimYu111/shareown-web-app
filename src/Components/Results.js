@@ -253,7 +253,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'Lifetime Wealth (£)',
+            text: 'Savings (£)',
             color: 'white',
             font: {
               size: 18,
@@ -299,10 +299,10 @@ const FAQSection = () => {
       question: "How is my tax calculated?",
       answer: 
         <span className="tooltiptext" style={{ width: '1500px', textAlign: 'right' }}>
-          Allowance: Anything below £12,570 is not taxed.
-          Basic Rate (20%): Applied to income up to £37,700.
-          Higher Rate (40%): Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.
-          Additional Rate (45%): Applied to income above £125,140. Exclusive of any income under the additional rate threshold.
+          Allowance: Anything below £12,570 is not taxed. <br />
+          Basic Rate (20%): Applied to income up to £37,700. <br />
+          Higher Rate (40%): Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.<br />
+          Additional Rate (45%): Applied to income above £125,140. Exclusive of any income under the additional rate threshold.<br />
           </span>
     },
     {
@@ -428,7 +428,7 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Monthly costs            
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Includes the mortgage payment (assuming a repayment over 30 years).
+                  Includes the mortgage payment. See for model assumptions check the FAQs.
                 </span>
               </span>
             </p>
@@ -436,24 +436,24 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Lifetime wealth
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
+                 Lifetime wealth shows the current value of future savings and housing wealth. For model assumptions check the FAQs.
                 </span>
               </span>
             </p>
             <p className="">By retirement age, you would have approximately</p>
-            <p className=""><span className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</span> in housing wealth</p>
             <p className=""><span className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</span> in savings</p>
+            <p className=""><span className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</span> in housing wealth</p>
             <p className="mb-6 italic">
               <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a>
             </p>
             <p className="font-bold">Repayment structure
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming you use all your savings to make prepayments.              
+                  Assuming all savings are used to make repayments. For further model assumptions check the FAQs.           
                 </span>
               </span>
             </p>
-            <p className="">Mortgage free {result.TO_finish < 1 ? ' now' : ` by the age of ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`}</p>
+            <p className="">Mortgage free {result.TO_finish < 1 ? ' now' : ` by the age of ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}`}</p>
             <p className="italic"><a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
           </div>
         )}
@@ -483,7 +483,7 @@ const renderTwoColumnsText = () => {
             <p className="">Staircase to full ownership by the age of {result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'}
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming you use all your savings to buy additional shares (staircase).
+                  Assuming all savings are used to make repayments. For further model assumptions check the FAQs.
                 </span>
               </span>
             </p>
@@ -491,7 +491,7 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Monthly costs         
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Includes the mortgage payment (assuming a repayment over 30 years).
+                  Includes the mortgage payment. See for model assumptions check the FAQs.
                 </span>
               </span>
             </p>
@@ -499,24 +499,24 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Lifetime wealth 
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
+                  Lifetime wealth shows the current value of future savings and housing wealth. For model assumptions check the FAQs.
                 </span>
               </span>
             </p>
             <p>By retirement age, you would have approximately</p>
-            <p><span className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</span> in housing wealth</p>
             <p><span className="results-number">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'}</span> in savings</p>        
+            <p><span className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</span> in housing wealth</p>
             <p className="italic mb-6">
               <a href="#comp" className="text-blue-500 hover:underline mb-3 inline-block">See here your lifetime wealth over time</a>
             </p>
             <p className="font-bold">Repayment structure
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming you use all your savings to make prepayments.              
+                  Assuming all savings are used to make repayments. For further model assumptions check the FAQs.              
                 </span>
               </span>
             </p>
-            <p>Mortgage free {result.TO_finish < 1 ? ' now' : ` by the age of ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} years`}</p>
+            <p>Mortgage free {result.TO_finish < 1 ? ' now' : ` by the age of ${result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}`}</p>
             <p className="italic"><a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p>
           </div>
         )}
@@ -602,9 +602,9 @@ return (
       <div className="grapics-container-note">
       <p className="grapics-note">
       Please note that the calculations are based on a model designed by professors at University College London and Durham University and does not provide financial advice. The model uses a range of assumptions, which can be found 
-      <p className="italic mb-6"> 
-                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>.</p> 
-      The outputs are indicative and highly dependent on the model assumptions.
+      <p className="italic"> 
+                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>. <br /> </p>
+      <p> The outputs are indicative and highly dependent on the model assumptions.</p> 
       <span className="tooltip text-blue-500 hover:underline"> 
           <span className="tooltiptext" style={{ width: '1500px' }}>
           • Interest rate on deposits/savings: 3%. <br />
