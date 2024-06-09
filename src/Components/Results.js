@@ -320,7 +320,7 @@ const FAQSection = () => {
           • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
           • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
           • Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income. <br />
-          • Affordability constraint: Total housing expenses (mortgage, rent, service charge) cannot exceed 40% of the net annual income. <br /> 
+          • Affordability constraint: We account for the income affordability constraint associated with Shared Ownership following Homes England guidelines. <br /> 
           • Minimum initial share for Shared Ownership: 25%. <br />
           • Transaction costs: 0%.<br />
           • Staircasing fees for Shared Ownership: £1,000. <br />
@@ -618,7 +618,7 @@ return (
           • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
           • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
           • Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income. <br />
-          • Affordability constraint: Total housing expenses (mortgage, rent, service charge) cannot exceed 40% of the net annual income. <br /> 
+          • Affordability constraint: We account for the income affordability constraint associated with Shared Ownership following Homes England guidelines. <br /> 
           • Minimum initial share for Shared Ownership: 25%. <br />
           • Transaction costs: 0%.<br />
           • Staircasing fees for Shared Ownership: £1,000. <br />
