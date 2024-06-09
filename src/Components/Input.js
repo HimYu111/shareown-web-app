@@ -91,16 +91,16 @@ function Input({ setResult }) {
         }
 
         const postData = {
-            sessionId: sessionId,
-            postcode: document.getElementById("input-1").value,
-            propertyType: document.getElementById("input-2").value,
-            bedrooms: document.getElementById("input-3").value,
-            occupation: document.getElementById("input-4").value,
+            sessionId: sessionId, // Assuming sessionId is handled elsewhere in your state
+            postcode: inputValues.postcode,
+            propertyType: inputValues.propertyType,
+            bedrooms: inputValues.bedrooms,
+            occupation: inputValues.occupation,
             housePrice: parseFloat(inputValues.housePrice),
-            isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
+            isFirstTimeBuyer: inputValues.isFirstTimeBuyer ? 1 : 0,
             income: parseFloat(inputValues.income),
             monthspending: parseFloat(inputValues.monthspending),
-            headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
+            headOfHouseholdAge: parseFloat(inputValues.headOfHouseholdAge),
             savings: parseFloat(inputValues.savings),
             currentRent: parseFloat(inputValues.currentRent),
         };
