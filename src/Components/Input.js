@@ -10,6 +10,9 @@ function Input({ setResult }) {
   const [scrollToResults, setScrollToResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValues, setInputValues] = useState({
+    postcode: "",
+    propertyType: "",
+    bedrooms: "",
     housePrice: "",
     income: "",
     monthspending: "",
@@ -44,6 +47,14 @@ function Input({ setResult }) {
         [id]: formatNumber(numericValue),
       }));
     }
+  };
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
   };
 
   const validateInputs = () => {
@@ -236,17 +247,27 @@ function Input({ setResult }) {
             <label className="block text-black mb-2">
               What postcode do you want to live in?
             </label>
-            <select className="input input-bordered w-full" id="input-1">
-                {options.map((postcode, index) => (
-                  <option key={index} value={postcode}>{postcode}</option>
-              ))}
-            </select>
-          </div>
+            <select
+            className="input input-bordered w-full"
+            name="postcode"
+            value={inputValues.postcode}
+            onChange={handleChange}
+          >
+            {options.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
               What kind of property do you want to live in?
             </label>
-            <select className="input input-bordered w-full" id="input-2">
+              <select
+              className="input input-bordered w-full"
+              name="propertyType"
+              value={inputValues.propertyType}
+              onChange={handleChange}
+            >
               {propertyTypeOptions.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
@@ -256,7 +277,12 @@ function Input({ setResult }) {
             <label className="block text-black mb-2">
               How many bedrooms does your desired home have?
             </label>
-            <select className="input input-bordered w-full" id="input-3">
+              <select
+              className="input input-bordered w-full"
+              name="bedrooms"
+              value={inputValues.bedrooms}
+              onChange={handleChange}
+            >
               {bedroomOptions.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
