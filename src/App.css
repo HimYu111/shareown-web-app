@@ -439,15 +439,11 @@ button#btn-up:hover, button#btn-down:hover {
   flex: 1 0 100%;
 }
 
-.results-1st-col, .scenarios-1stcol{
-  text-align: right;
-  flex: 1 0 50%;
-}
-
-.results-2nd-col, .scenarios-2ndcol {
+.std-1stcol, .std-2ndcol, .std-2cols-wrapper div{
   text-align: left;
   flex: 1 0 50%;
 }
+
 
 .results h1 {
   font-size: 1.8rem;
@@ -461,13 +457,13 @@ button#btn-up:hover, button#btn-down:hover {
   font-weight: bold;
 }
 
-.results, .scenarios-wrapper {
+.results,  .std-wrapper{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 }
 
-.results-1st-col p,.results-2nd-col p,.scenarios-1stcol p, .scenarios-2ndcol p{
+.std-1stcol p, .std-2ndcol  p{
   font-size: 1.2em;
 }
 
@@ -483,19 +479,20 @@ button#btn-up:hover, button#btn-down:hover {
   border-bottom: 1px solid;
 }
 
-.scenarios-wrapper h1{
+ .std-wrapper h1{
   font-size: 2.8rem;
   margin-bottom: 50px;
 }
 
-.scenarios-2cols-wrapper {
+ .std-2cols-wrapper {
   display: flex;
   justify-content: center;
   gap: 20px;
 }
 
-.scenarios-wrapper {
+ .std-wrapper {
   margin: 120px 0px 120px;
+
 }
 
 p.grapics-note {
@@ -521,7 +518,7 @@ p.grapics-note {
 .charts {
   flex: 1 0 100%;
   max-width: 900px;
-  margin: 80px 0px;
+  margin-top: 80px;
 }
 
 .charts-wrapper {
@@ -651,4 +648,15 @@ span.results-number {
 .contact-form button:hover {
   background-color: #8ba4ad;
   border-color: #8ba4ad;
+}
+
+.results-number {
+  font-size: 1.7em;
+  color: #3b82f6;
+  margin-bottom: 45px;
+  font-weight: bold;
+}
+
+#faqs {
+  margin:100px auto
 }
