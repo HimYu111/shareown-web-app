@@ -10,9 +10,6 @@ function Input({ setResult }) {
   const [scrollToResults, setScrollToResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValues, setInputValues] = useState({
-    postcode: "",
-    propertyType: "",
-    bedrooms: "",
     housePrice: "",
     income: "",
     monthspending: "",
@@ -49,14 +46,6 @@ function Input({ setResult }) {
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setInputValues(prevState => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
   const validateInputs = () => {
     const inputs = [
       document.getElementById("input-1").value,
@@ -91,16 +80,16 @@ function Input({ setResult }) {
         }
 
         const postData = {
-            sessionId: sessionId, // Assuming sessionId is handled elsewhere in your state
-            postcode: inputValues.postcode,
-            propertyType: inputValues.propertyType,
-            bedrooms: inputValues.bedrooms,
-            occupation: inputValues.occupation,
+            sessionId: sessionId,
+            postcode: document.getElementById("input-1").value,
+            propertyType: document.getElementById("input-2").value,
+            bedrooms: document.getElementById("input-3").value,
+            occupation: document.getElementById("input-4").value,
             housePrice: parseFloat(inputValues.housePrice),
-            isFirstTimeBuyer: inputValues.isFirstTimeBuyer ? 1 : 0,
+            isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
             income: parseFloat(inputValues.income),
             monthspending: parseFloat(inputValues.monthspending),
-            headOfHouseholdAge: parseFloat(inputValues.headOfHouseholdAge),
+            headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
             savings: parseFloat(inputValues.savings),
             currentRent: parseFloat(inputValues.currentRent),
         };
@@ -247,27 +236,17 @@ function Input({ setResult }) {
             <label className="block text-black mb-2">
               What postcode do you want to live in?
             </label>
-            <select
-            className="input input-bordered w-full"
-            name="postcode"
-            value={inputValues.postcode}
-            onChange={handleChange}
-          >
-            {options.map((option, index) => (
-              <option key={index} value={option}>{option}</option>
-            ))}
-          </select>
-        </div>
+            <select className="input input-bordered w-full" id="input-1">
+                {options.map((postcode, index) => (
+                  <option key={index} value={postcode}>{postcode}</option>
+              ))}
+            </select>
+          </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
               What kind of property do you want to live in?
             </label>
-              <select
-              className="input input-bordered w-full"
-              name="propertyType"
-              value={inputValues.propertyType}
-              onChange={handleChange}
-            >
+            <select className="input input-bordered w-full" id="input-2">
               {propertyTypeOptions.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
@@ -277,12 +256,7 @@ function Input({ setResult }) {
             <label className="block text-black mb-2">
               How many bedrooms does your desired home have?
             </label>
-              <select
-              className="input input-bordered w-full"
-              name="bedrooms"
-              value={inputValues.bedrooms}
-              onChange={handleChange}
-            >
+            <select className="input input-bordered w-full" id="input-3">
               {bedroomOptions.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
