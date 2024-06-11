@@ -10,6 +10,9 @@ function Input({ setResult }) {
   const [scrollToResults, setScrollToResults] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const [inputValues, setInputValues] = useState({
+    postcode: "",
+    propertyType: "",
+    bedrooms: "",
     housePrice: "",
     income: "",
     monthspending: "",
@@ -46,6 +49,14 @@ function Input({ setResult }) {
     }
   };
 
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setInputValues(prevState => ({
+      ...prevState,
+      [name]: value
+    }));
+  };
+
   const validateInputs = () => {
     const inputs = [
       document.getElementById("input-1").value,
@@ -80,16 +91,16 @@ function Input({ setResult }) {
         }
 
         const postData = {
-            sessionId: sessionId,
-            postcode: document.getElementById("input-1").value,
-            propertyType: document.getElementById("input-2").value,
-            bedrooms: document.getElementById("input-3").value,
-            occupation: document.getElementById("input-4").value,
+            sessionId: sessionId, // Assuming sessionId is handled elsewhere in your state
+            postcode: inputValues.postcode,
+            propertyType: inputValues.propertyType,
+            bedrooms: inputValues.bedrooms,
+            occupation: inputValues.occupation,
             housePrice: parseFloat(inputValues.housePrice),
-            isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
+            isFirstTimeBuyer: inputValues.isFirstTimeBuyer ? 1 : 0,
             income: parseFloat(inputValues.income),
             monthspending: parseFloat(inputValues.monthspending),
-            headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
+            headOfHouseholdAge: parseFloat(inputValues.headOfHouseholdAge),
             savings: parseFloat(inputValues.savings),
             currentRent: parseFloat(inputValues.currentRent),
         };
@@ -137,38 +148,33 @@ function Input({ setResult }) {
   }, []);
 
 
-  const options = ["",
-    "Barking and Dagenham",
-    "Barnet",
-    "Bexley",
-    "Brent",
-    "Bromley",
-    "Camden",
-    "Croydon",
-    "Ealing",
-    "Enfield",
-    "Greenwich",
-    "Hackney",
-    "Hammersmith and Fulham",
-    "Haringey",
-    "Harrow",
-    "Havering",
-    "Hillingdon",
-    "Hounslow",
-    "Islington",
-    "Kensington and Chelsea",
-    "Kingston upon Thames",
-    "Lambeth",
-    "Lewisham",
-    "Merton",
-    "Newham",
-    "Redbridge",
-    "Richmond upon Thames",
-    "Southwark",
-    "Sutton",
-    "Waltham Forest",
-    "Wandsworth",
-    "Westminster",
+  const options = ["", "Adur", "Amber Valley", "Arun", "Ashfield", "Ashford", "Babergh", "Barking and Dagenham", "Barnet", "Barnsley", 
+    "Barrow-in-Furness", "Basildon", "Basingstoke and Deane", "Bassetlaw", "Bath and North East Somerset", "Bedford", "Birmingham", 
+    "Blackburn with Darwen", "Blackpool", "Blaby", "Blaenau Gwent", "Bolton", "Boston", "Bournemouth, Christchurch and Poole", "Bracknell Forest", "Bradford", 
+    "Braintree", "Breckland", "Brent", "Brentwood", "Bridgend", "Brighton and Hove", "Bristol, City of", "Broadland", "Bromley", "Bromsgrove", "Broxbourne", "Broxtowe", 
+    "Buckinghamshire", "Burnley", "Bury", "Calderdale", "Cambridge", "Camden", "Cannock Chase", "Canterbury", "Carlisle", "Carmarthenshire", "Castle Point", "Central Bedfordshire", 
+    "Ceredigion", "Charnwood", "Chelmsford", "Cheltenham", "Cherwell", "Cheshire East", "Cheshire West and Chester", "Chesterfield", "Chichester", "Chorley", "City of London", 
+    "Colchester", "Conwy", "Copeland", "Corby", "Cotswold", "County Durham", "Coventry", "Craven", "Crawley", "Croydon", "Dacorum", "Darlington", "Dartford", "Derby", 
+    "Derbyshire Dales", "Doncaster", "Dorset", "Dover", "Dudley", "East Cambridgeshire", "East Devon", "East Hampshire", "East Hertfordshire", 
+    "East Lindsey", "East Northamptonshire", "East Riding of Yorkshire", "East Staffordshire", "East Suffolk", "Eastbourne", "Eastleigh", "Eden", "Elmbridge", "Enfield", "Epping Forest", 
+    "Epsom and Ewell", "Erewash", "Exeter", "Fareham", "Fenland", "Folkestone and Hythe", "Forest of Dean", "Fylde", "Gateshead", "Gedling", "Gloucester", "Gosport", "Gravesham", 
+    "Great Yarmouth", "Greenwich", "Guildford", "Gwynedd", "Hackney", "Halton", "Hambleton", "Hammersmith and Fulham", "Harborough", "Haringey", "Harlow", "Harrogate", "Harrow", 
+    "Hart", "Hartlepool", "Hastings", "Havant", "Havering", "Herefordshire, County of", "Hertsmere", "High Peak", "Hillingdon", "Hinckley and Bosworth", "Horsham", "Hounslow", "Huntingdonshire", 
+    "Hyndburn", "Ipswich", "Isle of Anglesey", "Isle of Wight", "Islington", "Kensington and Chelsea", "Kent", "Kettering", "Kingston upon Hull, City of", "Kingston upon Thames", "Kirklees", 
+    "Knowsley", "Lambeth", "Lancaster", "Leeds", "Leicester", "Lewes", "Lewisham", "Lichfield", "Lincoln", "Liverpool", "London", "Luton", "Maldon", "Malvern Hills", "Manchester", "Mansfield", 
+    "Medway", "Melton", "Mendip", "Merton", "Mid Devon", "Mid Suffolk", "Middlesbrough", "Milton Keynes", "Mole Valley", "Monmouthshire", "Newcastle upon Tyne", "Newcastle-under-Lyme", 
+    "Newham", "Newport", "North Devon", "North East Derbyshire", "North East Lincolnshire", "North Hertfordshire", "North Kesteven", "North Lincolnshire", "North Norfolk", "North Somerset", 
+    "North Tyneside", "North Warwickshire", "North West Leicestershire", "Northampton", "Northumberland", "Norwich", "Nottingham", "Nuneaton and Bedworth", "Oadby and Wigston", "Oldham", 
+    "Oxford", "Pendle", "Peterborough", "Plymouth", "Portsmouth", "Preston", "Reading", "Redbridge", "Redcar and Cleveland", "Redditch", "Reigate and Banstead", "Richmond upon Thames", 
+    "Richmondshire", "Ribble Valley", "Rochdale", "Rochford", "Rossendale", "Rother", "Rotherham", "Rugby", "Runnymede", "Rushcliffe", "Rushmoor", "Rutland", "Ryedale", "Salford", 
+    "Sandwell", "Scarborough", "Scunthorpe", "Sefton", "Selby", "Sevenoaks", "Sheffield", "Shepway", "Sherwood", "Shropshire", "Slough", "Solihull", "South Cambridgeshire", "South Derbyshire", 
+    "South Gloucestershire", "South Hams", "South Holland", "South Kesteven", "South Lakeland", "South Norfolk", "South Oxfordshire", "South Ribble", "South Somerset", "South Staffordshire", 
+    "South Tyneside", "Southampton", "Southend-on-Sea", "Southwark", "Spelthorne", "St Albans", "St Helens", "Stafford", "Staffordshire Moorlands", "Stevenage", "Stockport", "Stockton-on-Tees", 
+    "Stoke-on-Trent", "Stratford-on-Avon", "Sunderland", "Surrey Heath", "Sutton", "Swale", "Swansea", "Swindon", "Tameside", "Tamworth", "Tandridge", "Taunton Deane", "Teignbridge", 
+    "Telford and Wrekin", "Tendring", "Test Valley", "Tewkesbury", "Thanet", "Three Rivers", "Thurrock", "Tonbridge and Malling", "Torbay", "Torfaen", "Torridge", "Tower Hamlets", "Trafford", 
+    "Tunbridge Wells", "Uttlesford", "Vale of Glamorgan", "Vale of White Horse", "Wakefield", "Walsall", "Waltham Forest", "Wandsworth", "Warrington", "Warwick", "Watford", "Waverley", 
+    "Wealden", "Welwyn Hatfield", "West Berkshire", "West Devon", "West Dorset", "West Lancashire", "West Lindsey", "West Oxfordshire", "West Somerset", "West Suffolk", "Westminster", 
+    "Weymouth and Portland", "Wigan", "Wiltshire", "Winchester", "Wirral", "Woking", "Wokingham", "Wolverhampton", "Worcester", "Worthing", "Wrexham", "Wychavon", "Wyre", "Wyre Forest", "York",
     "Not sure yet"
   ];
 
@@ -241,17 +247,27 @@ function Input({ setResult }) {
             <label className="block text-black mb-2">
               What postcode do you want to live in?
             </label>
-            <select className="input input-bordered w-full" id="input-1">
-                {options.map((postcode, index) => (
-                  <option key={index} value={postcode}>{postcode}</option>
-              ))}
-            </select>
-          </div>
+            <select
+            className="input input-bordered w-full"
+            name="postcode"
+            value={inputValues.postcode}
+            onChange={handleChange}
+          >
+            {options.map((option, index) => (
+              <option key={index} value={option}>{option}</option>
+            ))}
+          </select>
+        </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
               What kind of property do you want to live in?
             </label>
-            <select className="input input-bordered w-full" id="input-2">
+              <select
+              className="input input-bordered w-full"
+              name="propertyType"
+              value={inputValues.propertyType}
+              onChange={handleChange}
+            >
               {propertyTypeOptions.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}
@@ -261,7 +277,12 @@ function Input({ setResult }) {
             <label className="block text-black mb-2">
               How many bedrooms does your desired home have?
             </label>
-            <select className="input input-bordered w-full" id="input-3">
+              <select
+              className="input input-bordered w-full"
+              name="bedrooms"
+              value={inputValues.bedrooms}
+              onChange={handleChange}
+            >
               {bedroomOptions.map((option, index) => (
                 <option key={index} value={option}>{option}</option>
               ))}

@@ -253,7 +253,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'Lifetime Wealth (£)',
+            text: 'Savings (£)',
             color: 'white',
             font: {
               size: 18,
@@ -299,10 +299,10 @@ const FAQSection = () => {
       question: "How is my tax calculated?",
       answer: 
         <span className="tooltiptext" style={{ width: '1500px', textAlign: 'right' }}>
-          Allowance: Anything below £12,570 is not taxed.
-          Basic Rate (20%): Applied to income up to £37,700.
-          Higher Rate (40%): Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.
-          Additional Rate (45%): Applied to income above £125,140. Exclusive of any income under the additional rate threshold.
+          Allowance: Anything below £12,570 is not taxed. <br />
+          Basic Rate (20%): Applied to income up to £37,700. <br />
+          Higher Rate (40%): Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.<br />
+          Additional Rate (45%): Applied to income above £125,140. Exclusive of any income under the additional rate threshold.<br />
           </span>
     },
     {
@@ -320,7 +320,7 @@ const FAQSection = () => {
           • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
           • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
           • Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income. <br />
-          • Affordability constraint: Total housing expenses (mortgage, rent, service charge) cannot exceed 40% of the net annual income. <br /> 
+          • Affordability constraint: We account for the income affordability constraint associated with Shared Ownership following Homes England guidelines. <br /> 
           • Minimum initial share for Shared Ownership: 25%. <br />
           • Transaction costs: 0%.<br />
           • Staircasing fees for Shared Ownership: £1,000. <br />
@@ -427,7 +427,7 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Monthly costs            
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Includes the mortgage payment (assuming a repayment over 30 years).
+                  Includes the mortgage payment. See for model assumptions check the FAQs.
                 </span>
               </span>
             </p>
@@ -435,9 +435,6 @@ const renderTwoColumnsText = () => {
 
             <p className="font-bold">Full Ownership:</p>
             <p className="mb-6">Get on the property ladder by the age of <div className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</div></p>
-
-
-
           </div>
         )}
 
@@ -465,7 +462,7 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Monthly costs         
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Includes the mortgage payment (assuming a repayment over 30 years).
+                  Assuming all savings are used to make repayments. For further model assumptions check the FAQs.
                 </span>
               </span>
             </p>
@@ -509,7 +506,8 @@ const renderlifetimeWealth = () => {
               <p className="font-bold">Lifetime wealth
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
+
+                  Includes the mortgage payment. See for model assumptions check the FAQs.
                 </span>
               </span>
             </p>
@@ -524,7 +522,7 @@ const renderlifetimeWealth = () => {
               <p className="font-bold">Lifetime wealth 
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Wealth estimates are inflation adjusted and reflect the current value of wealth. Home values are assumed to appreciate at an annual rate of 5%. Inflation is assumed to be 3% and the mortgage rate 4%.
+                  Lifetime wealth shows the current value of future savings and housing wealth. For model assumptions check the FAQs.
                 </span>
               </span>
             </p>
@@ -575,7 +573,7 @@ const rendermortgageRep = () => {
               <p className="font-bold">You will be mortgage free {result.SO_finish < 1 ? '' : 'by the age of'}
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming you use all your savings to make prepayments.              
+                  Assuming all savings are used to make repayments. For further model assumptions check the FAQs.              
                 </span>
               </span>
             
@@ -591,6 +589,7 @@ const rendermortgageRep = () => {
               </div>
             </div>
           )}
+
     </div>
   );
 }
@@ -674,9 +673,9 @@ return (
       <div className="grapics-container-note">
       <p className="grapics-note">
       Please note that the calculations are based on a model designed by professors at University College London and Durham University and does not provide financial advice. The model uses a range of assumptions, which can be found 
-      <p className="italic mb-6"> 
-                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>.</p> 
-      The outputs are indicative and highly dependent on the model assumptions.
+      <p className="italic"> 
+                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>. <br /> </p>
+      <p> The outputs are indicative and highly dependent on the model assumptions.</p> 
       <span className="tooltip text-blue-500 hover:underline"> 
           <span className="tooltiptext" style={{ width: '1500px' }}>
           • Interest rate on deposits/savings: 3%. <br />
@@ -690,7 +689,7 @@ return (
           • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
           • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
           • Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income. <br />
-          • Affordability constraint: Total housing expenses (mortgage, rent, service charge) cannot exceed 40% of the net annual income. <br /> 
+          • Affordability constraint: We account for the income affordability constraint associated with Shared Ownership following Homes England guidelines. <br /> 
           • Minimum initial share for Shared Ownership: 25%. <br />
           • Transaction costs: 0%.<br />
           • Staircasing fees for Shared Ownership: £1,000. <br />
