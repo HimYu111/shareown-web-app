@@ -53,6 +53,8 @@
   position: relative;
   display: inline-block;
   cursor: pointer; /* Optional: adds a cursor indication that this is hoverable */
+  font-weight: normal;
+    font-size: 20px;
 }
 
 /* Tooltip text */
@@ -276,7 +278,7 @@ input::-webkit-inner-spin-button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 22px;
+  font-size: 18px;
 }
 
 .submit-button:hover {
@@ -432,6 +434,7 @@ button#btn-up:hover, button#btn-down:hover {
 
 .results-2cols {
   gap:30px;
+  flex: 0 0 80%;
 }
 
 
@@ -488,6 +491,7 @@ button#btn-up:hover, button#btn-down:hover {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex: 0 0 80%;
 }
 
  .std-wrapper {
@@ -497,7 +501,7 @@ button#btn-up:hover, button#btn-down:hover {
 
 p.grapics-note {
   font-size: 1.2em;
-  margin: 120px 0px;
+  margin: 80px 0px 10px 0px;
 }
 
 .tooltip .tooltiptext {
@@ -659,4 +663,8 @@ span.results-number {
 
 #faqs {
   margin:100px auto
+}
+
+#faqs div.rounded-md {
+  background-color: #8ba4ad85;
 }

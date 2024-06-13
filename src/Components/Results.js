@@ -121,7 +121,7 @@ function Results({ result }) {
         }
       }
     };
-    return <Bar data={data} options={options} />;
+    return <Line data={data} options={options} />;
   };
   
   const renderloanchart = () => {
@@ -131,16 +131,20 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...mortgagedata2.map(item => parseFloat(item))],
-          borderColor: 'red',
-          backgroundColor: 'rgba(255, 0, 0, 0.5)',
+        //  borderColor: 'red',
+        //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
+          borderColor: '#8ba4ad',
+          backgroundColor: '#8ba4ad',
           borderWidth: 1,
           fill: false,
         }] : []),
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...mortgagedata.map(item => parseFloat(item))],
-          borderColor: 'green',
-          backgroundColor: 'rgba(0, 255, 0, 0.5)',
+         // borderColor: 'green',
+         // backgroundColor: 'rgba(0, 255, 0, 0.5)',
+          borderColor: '#264d5a',
+          backgroundColor: '#264d5a',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -153,6 +157,9 @@ function Results({ result }) {
           position: 'top',
           labels: {
             color: 'white',
+            font: {
+              size: 18,
+            },
           },
         },
         title: {
@@ -193,7 +200,7 @@ function Results({ result }) {
         }
       }
     };
-    return <Bar data={data} options={options} />;
+    return <Line data={data} options={options} />;
   };
   
   const rendercompchart = () => {
@@ -203,16 +210,20 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...TO_wealthdata.map(item => parseFloat(item))],
-          borderColor: 'red',
-          backgroundColor: 'rgba(255, 0, 0, 0.5)',
+        //  borderColor: 'red',
+        //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
+        borderColor: '#8ba4ad',
+        backgroundColor: '#8ba4ad',
           borderWidth: 1,
           fill: false,
         }] : []),
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...SO_wealthdata.map(item => parseFloat(item))],
-          borderColor: 'green',
-          backgroundColor: 'rgba(0, 255, 0, 0.5)',
+        //  borderColor: 'green',
+        //  backgroundColor: 'rgba(0, 255, 0, 0.5)',
+        borderColor: '#264d5a',
+        backgroundColor: '#264d5a',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -225,6 +236,9 @@ function Results({ result }) {
           position: 'top',
           labels: {
             color: 'white',
+            font: {
+              size: 18,
+            },
           },
         },
         title: {
@@ -359,13 +373,13 @@ const FAQSection = () => {
   ];
 
   return (
-    <div className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white', width: '100%', maxWidth: '600px', margin: 'auto' }}>
+    <div className="p-4 rounded-md " style={{ backgroundColor: 'white', width: '100%', maxWidth: '600px', margin: 'auto' }}>
       <h2 className="text-2xl font-bold text-center mb-5" style={{ color: 'black' }}>FAQs</h2>
       {faqs.map((faq, index) => (
         <div key={index} className="mb-4">
           <button
             onClick={() => toggleFAQ(index)}
-            className="text-lg font-bold py-2 w-full text-left"
+            className="text-lg  py-2 w-full text-left"
             style={{ color: 'black' }} // Set text color to black
             aria-expanded={openFAQ === index}
             aria-controls={`faq-answer-${index}`}
@@ -427,14 +441,19 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Monthly costs            
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Includes the mortgage payment. See for model assumptions check the FAQs.
+                Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs.
                 </span>
               </span>
             </p>
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
 
-            <p className="font-bold">Full Ownership:</p>
-            <p className="mb-6">Get on the property ladder by the age of <div className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</div></p>
+            <p className="mb-6">You will be mortgage free by the age of
+            <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                <span className="tooltiptext" style={{ width: '1500px' }}>
+                Assumes all savings are used to make repayments. For model assumptions check the FAQs.
+                </span>
+              </span>
+               <div className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</div></p>
           </div>
         )}
 
@@ -462,31 +481,22 @@ const renderTwoColumnsText = () => {
             <p className="font-bold">Monthly costs         
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming all savings are used to make repayments. For further model assumptions check the FAQs.
+                Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs
                 </span>
               </span>
             </p>
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
             
-            <p className="font-bold">100% Ownership:              
+            <p className="">You will be mortgage free by the age of
             <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming you use all your savings to buy additional shares (staircase).
+                Assumes all savings are used to make repayments. For model assumptions check the FAQs.
                 </span>
               </span>
-              </p>
-            <p className="">Staircase to full ownership by the age of <div className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'}</div>            </p>
+            <div className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'}</div>            </p>
            {/* <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>*/}
             
-            {/* First chart - Staircasing */}
-                      {result.SO_housing > 0 && (
-            <div className="charts">
-             {/*  <div id="staircasing" style={{ height: '450px' }}>*/}
-             <div id="staircasing" >
-                {renderstairchart()}
-              </div>
-            </div>
-          )}
+
 
 
           </div>
@@ -496,40 +506,104 @@ const renderTwoColumnsText = () => {
   );
 };
 
-const renderlifetimeWealth = () => {
+const renderstaircasing = () => {
   return (
-    <div className="text-white lifetime-wrapper std-wrapper">
-        <h1 className="font-bold">Lifetime Wealth</h1>
-        <div className="lifetime-2cols-wrapper std-2cols-wrapper">
-            <div className="lifetime-1stcol std-1stcol">
-              <h2 className="results-fullOwn">Full Ownership</h2>
-              <p className="font-bold">Lifetime wealth
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
+    <div className="text-white staircasing-wrapper std-wrapper">
+        <h1 className="font-bold">Shared Ownership Staircasing</h1>
+        <div className="staircasing-2cols-wrapper std-2cols-wrapper">
+            <div className="staircasing-1stcol std-1stcol">
 
-                  Includes the mortgage payment. See for model assumptions check the FAQs.
-                </span>
-              </span>
+              <p className="font-bold">Initial Share {/* fix the number here*/}
             </p>
-            <p className="">By retirement age, your housing wealth would be approximately </p>
+            <p className="">You can afford to buy an initial share of</p>
             <p className=""><div className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</div></p>
-            <p className="">By retirement age, your savings would be approximately  </p>
+            <p className="">at the age of  </p>
             <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
 
             </div>
             <div className="lifetime-2ndcol std-2ndcol">
-              <h2 className="results-sharedOwn">Shared Ownership</h2>
-              <p className="font-bold">Lifetime wealth 
+              <p className="font-bold">100% Ownership  
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Lifetime wealth shows the current value of future savings and housing wealth. For model assumptions check the FAQs.
+                Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs.
                 </span>
               </span>
             </p>
-            <p className="">By retirement age, your housing wealth would be approximately </p>
+            <p className="">Staircase to 100% by the age of  </p>
             <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
-            <p className="">By retirement age, your savings would be approximately  </p>
+   
+            </div>
+        </div>
+
+            {/* First chart - Staircasing */}
+            {result.SO_housing > 0 && (
+            <div className="charts">
+             {/*  <div id="staircasing" style={{ height: '450px' }}>*/}
+             <div id="staircasing" >
+                {renderstairchart()}
+              </div>
+            </div>
+          )}
+    </div>
+  );
+}
+
+
+
+const renderlifetimeWealth = () => {
+  return (
+    <div className="text-white lifetime-wrapper std-wrapper">
+        <div><h1 className="font-bold">Lifetime Wealth
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                <span className="tooltiptext" style={{ width: '1500px' }}>
+                Shows the current value of future savings and future changes to house prices, i.e. housing wealth up until retirement.
+                </span>
+              </span>
+        </h1></div>
+        <div className="lifetime-2cols-wrapper std-2cols-wrapper">
+            <div className="lifetime-1stcol std-1stcol">
+              <h2 className="results-fullOwn">Full Ownership</h2>
+              <p className="font-bold">Savings
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                <span className="tooltiptext" style={{ width: '1500px' }}>
+
+                Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs.
+                </span>
+              </span>
+            </p>
+            <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
+
+              <p className="font-bold">Housing wealth 
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                <span className="tooltiptext" style={{ width: '1500px' }}>
+                Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs.
+                </span>
+              </span>
+            </p>
+            <p className=""><div className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</div></p>
+
+            </div>
+            <div className="lifetime-2ndcol std-2ndcol">
+              <h2 className="results-sharedOwn">Shared Ownership</h2>
+              <p className="font-bold">Savings
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                <span className="tooltiptext" style={{ width: '1500px' }}>
+
+                Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs.
+                </span>
+              </span>
+            </p>
             <p className=""><div className="results-number">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'}</div> </p>
+
+              <p className="font-bold">Housing wealth 
+              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                <span className="tooltiptext" style={{ width: '1500px' }}>
+                Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs.
+                </span>
+              </span>
+            </p>
+            <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
+
 
    
             </div>
@@ -551,7 +625,7 @@ const renderlifetimeWealth = () => {
 const rendermortgageRep = () => {
   return (
     <div className="text-white mortgage-wrapper std-wrapper">
-        <h1 className="font-bold">Mortgage Repayment</h1>
+        <div><h1 className="font-bold">Mortgage Repayment</h1></div>
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
             <div className="mortgage-1stcol std-1stcol">
               <h2 className="results-fullOwn">Full Ownership</h2>
@@ -634,6 +708,7 @@ return (
   <div id="results" className="bg-slate-800 py-20 text-white results-wrapper">
     <div className="results-container">
       {renderTwoColumnsText()}
+      {renderstaircasing()}
       {renderlifetimeWealth()}
       {rendermortgageRep()}
       {renderScenariosExplained()}
