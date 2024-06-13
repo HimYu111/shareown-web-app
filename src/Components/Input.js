@@ -56,7 +56,7 @@ function Input({ setResult }) {
       document.getElementById("input-6").value,
       inputValues.income,
       inputValues.monthspending,
-      document.getElementById("input-9").value,
+      inputValues.age,
       inputValues.savings,
       inputValues.currentRent,
     ];
@@ -89,7 +89,7 @@ function Input({ setResult }) {
             isFirstTimeBuyer: document.getElementById("input-6").value === "Yes" ? 1 : 0,
             income: parseFloat(inputValues.income),
             monthspending: parseFloat(inputValues.monthspending),
-            headOfHouseholdAge: parseFloat(document.getElementById("input-9").value),
+            headOfHouseholdAge: parseFloat(inputValues.age),
             savings: parseFloat(inputValues.savings),
             currentRent: parseFloat(inputValues.currentRent),
         };
@@ -234,7 +234,7 @@ function Input({ setResult }) {
         <div className="input-cols-1">
           <div className="mb-4">
             <label className="block text-black mb-2">
-              What postcode do you want to live in?
+              What local authority do you want to live in?
             </label>
             <select className="input input-bordered w-full" id="input-1">
                 {options.map((postcode, index) => (
@@ -294,7 +294,7 @@ function Input({ setResult }) {
                 ref={ageInputRef}
                 className="input input-bordered w-full"
                 type="text"
-                placeholder="£200,000"
+                placeholder="£250,000"
                 value={formattedValues.housePrice}
                 onChange={handleInputChange}
               />
@@ -308,7 +308,7 @@ function Input({ setResult }) {
               ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
-              placeholder="£45,000"
+              placeholder="£30,000"
               value={formattedValues.income}
               onChange={handleInputChange}
             />
@@ -332,7 +332,7 @@ function Input({ setResult }) {
               How old are you?
             </label>
             <input
-              id="input-9"
+              id="age"
               ref={ageInputRef}
               className="input input-bordered w-full"
               type="number"
