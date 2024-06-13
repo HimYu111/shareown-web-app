@@ -58,6 +58,10 @@ function Results({ result }) {
   const mortgagedata2 = result?.mortgage_data2 ? JSON.parse(result.mortgage_data2) : [];
   const TO_wealthdata = result?.TO_wealth_data ? JSON.parse(result.TO_wealth_data) : [];
   const SO_wealthdata = result?.SO_wealth_data ? JSON.parse(result.SO_wealth_data) : [];
+  const TO_housedata = result?.TO_house_data ? JSON.parse(result.TO_house_data) : [];
+  const SO_housedata = result?.SO_house_data ? JSON.parse(result.SO_house_data) : [];
+  
+
   
 
   const renderstairchart = () => {
@@ -81,7 +85,7 @@ function Results({ result }) {
         },
         title: {
           display: true,
-          text: 'Buying additional shares (staircasing)',
+          text: 'Staircasing',
           color: 'white',
           font: {
             size: 24,
@@ -157,7 +161,7 @@ function Results({ result }) {
         },
         title: {
           display: true,
-          text: 'Outstanding Loan Balance (OLB) Over Time For Full and Shared Ownership',
+          text: 'Mortgage Debt',
           color: 'white',
           font: {
             size: 24,
@@ -229,7 +233,7 @@ function Results({ result }) {
         },
         title: {
           display: true,
-          text: 'Liquid Wealth Comparison: Total Ownership vs Shared Ownership',
+          text: 'Savings',
           color: 'white',
           font: {
             size: 24,
@@ -254,6 +258,78 @@ function Results({ result }) {
           title: {
             display: true,
             text: 'Savings (£)',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        }
+      }
+    };
+    return <Line data={data} options={options} />;
+  };
+
+  const rendercomphchart = () => {
+    const data = {
+      labels: [...ageattimedata],
+      datasets: [
+        ...(result.TO_housing > 0 ? [{
+          label: 'Full Ownership',
+          data: [...TO_housedata.map(item => parseFloat(item))],
+          borderColor: 'red',
+          backgroundColor: 'rgba(255, 0, 0, 0.5)',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+        ...(result.SO_housing > 0 ? [{
+          label: 'Shared Ownership',
+          data: [...SO_housedata.map(item => parseFloat(item))],
+          borderColor: 'green',
+          backgroundColor: 'rgba(0, 255, 0, 0.5)',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+      ]
+    };
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            color: 'white',
+          },
+        },
+        title: {
+          display: true,
+          text: 'Housing Wealth Comparison: Total Ownership vs Shared Ownership',
+          color: 'white',
+          font: {
+            size: 24,
+          },
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Housing Equity (£)',
             color: 'white',
             font: {
               size: 18,
@@ -293,15 +369,15 @@ const FAQSection = () => {
     },
     {
       question: "Is the calculator free to use?",
-      answer: `The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®`
+      answer: `The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and do not provide financial advice. ®`
     },
     {
       question: "How is my tax calculated?",
       answer: 
         <span className="tooltiptext" style={{ width: '1500px', textAlign: 'right' }}>
           Allowance: Anything below £12,570 is not taxed. <br />
-          Basic Rate (20%): Applied to income up to £37,700. <br />
-          Higher Rate (40%): Applied to income from £37,701 to £125,140. Exclusive of any income under the higher threshold.<br />
+          Basic Rate (20%): Applied to income from £12,571 up to £50,270. <br />
+          Higher Rate (40%): Applied to income from £50,271 to £125,140. Exclusive of any income under the higher threshold.<br />
           Additional Rate (45%): Applied to income above £125,140. Exclusive of any income under the additional rate threshold.<br />
           </span>
     },
@@ -325,8 +401,8 @@ const FAQSection = () => {
           • Transaction costs: 0%.<br />
           • Staircasing fees for Shared Ownership: £1,000. <br />
           • No tax is applied below £12,570. <br />
-          • The basic 20% tax rate is applied to income between £12,570 and £37,700. <br />
-          • The higher 40% tax rate is applied to income between £37,700 and £125,140. <br />
+          • The basic 20% tax rate is applied to income between £12,571 and £50,270. <br />
+          • The higher 40% tax rate is applied to income between £50,271 and £125,140. <br />
           • The additional 45% tax rate is applied to income above £125,140. <br />
           </span>
     },
@@ -418,7 +494,7 @@ const renderTwoColumnsText = () => {
         ) : (
           <div className="results-1st-col std-1stcol">
             <h2 className="results-fullOwn font-bold">Full ownership</h2>
-            <p className="font-bold">Minimum Deposit: <div className="results-number">£{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</div></p>
+            <p className="font-bold">Minimum Deposit <div className="results-number">£{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</div></p>
             <p className="no-wrap">
               You {result.TO_time < 1 ? (<>have enough savings for the deposit <div className="results-number">now</div></>) : 
               ( <>can afford to buy in <div className="results-number">{result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years</div></>)}
@@ -433,7 +509,7 @@ const renderTwoColumnsText = () => {
             </p>
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
 
-            <p className="font-bold">Full Ownership:</p>
+            <p className="font-bold">Full Ownership</p>
             <p className="mb-6">Get on the property ladder by the age of <div className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</div></p>
           </div>
         )}
@@ -452,12 +528,17 @@ const renderTwoColumnsText = () => {
         ) : (
           <div className="results-2nd-col std-2ndcol">
             <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
-            <p className="font-bold">Minimum Deposit: <div className="results-number">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</div></p>
+            <p className="font-bold">Minimum Deposit <div className="results-number">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</div></p>
             <p className="mb-6">
               {result.SO_share > 0.25
-                ? (<>You can afford to buy a share of 25% <div className="results-number">now</div></>)
-                : (<>You can afford Shared Ownership in <div className="results-number">${result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
+                ? (<>You can afford to buy in <div className="results-number">now</div></>)
+                : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
             </p>
+
+
+
+
+
 
             <p className="font-bold">Monthly costs         
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
@@ -468,7 +549,7 @@ const renderTwoColumnsText = () => {
             </p>
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
             
-            <p className="font-bold">100% Ownership:              
+            <p className="font-bold">100% Ownership             
             <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Assuming you use all your savings to buy additional shares (staircase).
@@ -499,7 +580,7 @@ const renderTwoColumnsText = () => {
 const renderlifetimeWealth = () => {
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
-        <h1 className="font-bold">Lifetime Wealth</h1>
+        <h1 className="font-bold">Housing Wealth & Savings</h1>
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
             <div className="lifetime-1stcol std-1stcol">
               <h2 className="results-fullOwn">Full Ownership</h2>
@@ -540,6 +621,7 @@ const renderlifetimeWealth = () => {
             <div className="charts">
               <div id="comp" className="mb-2" style={{ height: '450px' }}>
                 {rendercompchart()}
+                {rendercomphchart()}
               </div>
             </div>
           )}
@@ -672,10 +754,10 @@ return (
 */}
       <div className="grapics-container-note">
       <p className="grapics-note">
-      Please note that the calculations are based on a model designed by professors at University College London and Durham University and does not provide financial advice. The model uses a range of assumptions, which can be found 
+      Please note that the calculations are based on a model designed by professors at University College London and Durham University and do not provide financial advice. The model uses a range of assumptions, which can be found 
       <p className="italic"> 
-                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>. <br /> </p>
-      <p> The outputs are indicative and highly dependent on the model assumptions.</p> 
+                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>. 
+                    The outputs are indicative and highly dependent on the model assumptions.<br /> </p>
       <span className="tooltip text-blue-500 hover:underline"> 
           <span className="tooltiptext" style={{ width: '1500px' }}>
           • Interest rate on deposits/savings: 3%. <br />
@@ -694,8 +776,8 @@ return (
           • Transaction costs: 0%.<br />
           • Staircasing fees for Shared Ownership: £1,000. <br />
           • No tax is applied below £12,570. <br />
-          • The basic 20% tax rate is applied to income between £12,570 and £37,700. <br />
-          • The higher 40% tax rate is applied to income between £37,700 and £125,140. <br />
+          • The basic 20% tax rate is applied to income between £12,571 and £50,270. <br />
+          • The higher 40% tax rate is applied to income between £50,271 and £125,140. <br />
           • The additional 45% tax rate is applied to income above £125,140. <br />
           </span>
         </span>
