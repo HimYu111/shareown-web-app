@@ -293,16 +293,16 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...TO_housedata.map(item => parseFloat(item))],
-          borderColor: 'red',
-          backgroundColor: 'rgba(255, 0, 0, 0.5)',
+          borderColor: '#8ba4ad',
+          backgroundColor: '#8ba4ad',
           borderWidth: 1,
           fill: false,
         }] : []),
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...SO_housedata.map(item => parseFloat(item))],
-          borderColor: 'green',
-          backgroundColor: 'rgba(0, 255, 0, 0.5)',
+          borderColor: '#264d5a',
+        backgroundColor: '#264d5a',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -319,7 +319,7 @@ function Results({ result }) {
         },
         title: {
           display: true,
-          text: 'Housing Wealth Comparison: Total Ownership vs Shared Ownership',
+          text: 'Housing Wealth Comparison',
           color: 'white',
           font: {
             size: 24,
@@ -529,7 +529,7 @@ const renderTwoColumnsText = () => {
                 Assumes all savings are used to make repayments. For model assumptions check the FAQs.
                 </span>
               </span>
-               <div className="results-number">{result.TO_age ? formatNumber(result.TO_age.toFixed(0)) : 'N/A'}</div></p>
+               <div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : 'N/A'}</div></p>
 
    
           </div>
@@ -555,12 +555,6 @@ const renderTwoColumnsText = () => {
                 ? (<>You can afford to buy in <div className="results-number">now</div></>)
                 : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
             </p>
-
-
-
-
-
-
             <p className="font-bold">Monthly costs         
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
@@ -571,13 +565,12 @@ const renderTwoColumnsText = () => {
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
             
             <p className="">You will be mortgage free by the age of
-
             <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                 Assumes all savings are used to make repayments. For model assumptions check the FAQs.
                 </span>
               </span>
-            <div className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : 'N/A'}</div>            </p>
+            <div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : 'N/A'}</div>            </p>
            {/* <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>*/}
             
 
@@ -600,9 +593,9 @@ const renderstaircasing = () => {
               <p className="font-bold">Initial Share {/* fix the number here*/}
             </p>
             <p className="">You can afford to buy an initial share of</p>
-            <p className=""><div className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</div></p>
+            <p className=""><div className="results-number">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</div></p>
             <p className="">at the age of  </p>
-            <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
+            <p className=""><div className="results-number">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</div> </p>
 
             </div>
             <div className="lifetime-2ndcol std-2ndcol">
@@ -614,7 +607,7 @@ const renderstaircasing = () => {
               </span>
             </p>
             <p className="">Staircase to 100% by the age of  </p>
-            <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
+            <p className=""><div className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</div></p>
    
             </div>
         </div>
@@ -699,6 +692,12 @@ const renderlifetimeWealth = () => {
             <div className="charts">
               <div id="comp" className="mb-2" style={{ height: '450px' }}>
                 {rendercompchart()}
+              </div>
+            </div>
+          )}
+        {(result.TO_housing > 0 || result.SO_housing > 0) && (
+            <div className="charts">
+              <div id="comp" className="mb-2" style={{ height: '450px' }}>
                 {rendercomphchart()}
               </div>
             </div>
@@ -730,15 +729,15 @@ const rendermortgageRep = () => {
             </div>
             <div className="mortgage-2ndcol std-2ndcol">
               <h2 className="results-sharedOwn">Shared Ownership</h2>
-              <p className="font-bold">You will be mortgage free {result.SO_finish < 1 ? '' : 'by the age of'}
+              <p className="font-bold">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
               <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
                   Assuming all savings are used to make repayments. For further model assumptions check the FAQs.              
                 </span>
               </span>
             
-             {result.SO_finish < 1 ? (<><div className="results-number">now</div></>)  : 
-            (<><div className="results-number">{result.SO_finish ? formatNumber(result.SO_finish.toFixed(0)) : "0"} </div></>) }
+             {result.SO_mortgage_finish < 1 ? (<><div className="results-number">now</div></>)  : 
+            (<><div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"} </div></>) }
             </p>
             </div>
         </div>

@@ -668,3 +668,33 @@ span.results-number {
 #faqs div.rounded-md {
   background-color: #8ba4ad85;
 }
+
+.social-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle; 
+  transition: opacity 0.3s ease;
+}
+
+.social-icon:hover {
+  opacity: 0.7;
+}
+
+.flex {
+  display: flex;
+  flex-direction: row;  
+  align-items: center;  
+  justify-content: center;
+}
+
+.social-icon {
+  vertical-align: bottom; 
+  width: 24px;  
+  height: 24px; 
+  margin-top: -2px; 
+  transition: opacity 0.3s ease;
+}
+
+.social-icon:hover {
+  opacity: 0.7;  
+}

@@ -13,6 +13,7 @@ function Input({ setResult }) {
     housePrice: "",
     income: "",
     monthspending: "",
+    age: "",
     savings: "",
     currentRent: "",
   });
@@ -94,6 +95,11 @@ function Input({ setResult }) {
             currentRent: parseFloat(inputValues.currentRent),
         };
 
+        console.log("Sending data to server:", postData);
+        Object.keys(postData).forEach(key => {
+            console.log(`${key}: ${postData[key]} (Type: ${typeof postData[key]})`);
+        });
+
         const response = await axios.post("https://shareown-backend.onrender.com/predict", postData);
         setResult(response.data);
         setScrollToResults(true);
@@ -119,22 +125,59 @@ function Input({ setResult }) {
   }, [scrollToResults, Results]);
 
   useEffect(() => {
-    const handleWheel = (e) => {
-      if (ageInputRef.current && ageInputRef.current.contains(e.target)) {
-        e.preventDefault();
-      }
-    };
+    // Function to prevent default behavior
+    const handleWheel = (e) => e.preventDefault();
 
-    if (ageInputRef.current) {
-      ageInputRef.current.addEventListener('wheel', handleWheel, { passive: false });
+    const ageInput = ageInputRef.current;
+
+    if (ageInput) {
+      ageInput.addEventListener('wheel', handleWheel, { passive: true });
     }
 
     return () => {
-      if (ageInputRef.current) {
-        ageInputRef.current.removeEventListener('wheel', handleWheel);
+      if (ageInput) {
+        ageInput.removeEventListener('wheel', handleWheel);
       }
     };
   }, []);
+
+  useEffect(() => {
+  const ageInput = ageRef.current;
+
+  const handleWheel = (e) => {
+    e.preventDefault();
+  };
+
+  if (ageInput) {
+    ageInput.addEventListener('wheel', handleWheel, { passive: false });
+  }
+
+  return () => {
+    if (ageInput) {
+      ageInput.removeEventListener('wheel', handleWheel);
+    }
+  };
+}, []);
+
+const ageRef = useRef(null);
+  useEffect(() => {
+    const ageInput = ageRef.current;
+
+    const handleWheel = (e) => {
+      e.preventDefault();
+    };
+
+    if (ageInput) {
+      ageInput.addEventListener('wheel', handleWheel, { passive: false });
+    }
+
+    return () => {
+      if (ageInput) {
+        ageInput.removeEventListener('wheel', handleWheel);
+      }
+    };
+  }, []);
+
 
 
   const options = ["", "Adur", "Amber Valley", "Arun", "Ashfield", "Ashford", "Babergh", "Barking and Dagenham", "Barnet", "Barnsley", 
@@ -199,7 +242,7 @@ function Input({ setResult }) {
   ];
 
   const bedroomOptions = ["", "1", "2", "3", "4+", "Not sure yet"];
-  const propertyTypeOptions = ["", "Apartment", "Detached House", "Semi-detached House", "Terrace House", "Not sure yet"];
+  const propertyTypeOptions = ["", "Detached", "Semi-Detached", "Terraced", "Flats", "Undecided"];
 
 
   const [isVisible, setIsVisible] = useState(false);
@@ -333,12 +376,13 @@ function Input({ setResult }) {
             </label>
             <input
               id="age"
-              ref={ageInputRef}
+              ref={ageRef}
               className="input input-bordered w-full"
-              type="number"
+              type="text"
               min="18"
               max="80"
               placeholder="33"
+              onChange={handleInputChange}
             />
           </div>
           <div className="mb-4">
