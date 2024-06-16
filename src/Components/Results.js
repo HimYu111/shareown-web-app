@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenNib,faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
 
+
  
 import {
   Chart as ChartJS,
@@ -61,9 +62,6 @@ function Results({ result }) {
   const TO_housedata = result?.TO_house_data ? JSON.parse(result.TO_house_data) : [];
   const SO_housedata = result?.SO_house_data ? JSON.parse(result.SO_house_data) : [];
   
-
-  
-
   const renderstairchart = () => {
     const data = {
       labels: [...ageattimedata],
@@ -107,6 +105,7 @@ function Results({ result }) {
           },
         },
         y: {
+          max: 1,
           title: {
             display: true,
             text: 'Share (%)',
@@ -117,11 +116,10 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            // Multiply the tick labels by 100 for stairchart
             callback: function(value, index, values) {
-              return value * 100;
+              return `${(value * 100).toFixed(0)}%`;  // Formatting values to two decimal places
             }
-          },
+          }
         }
       }
     };
@@ -476,15 +474,13 @@ const FAQSection = () => {
   );
 };
 
-  // React component with two columns of styled text
-// React component with two columns of styled text
+
 const renderTwoColumnsText = () => {
-  // Case where neither ownership type is possible
   if (result.TO_housing === 0 && result.SO_housing === 0) {
     return (
       <div className="text-center my-4">
         <h2 className="text-xl font-bold text-white">
-          <p className="text-xl font-bold text-white mb-6">
+          <p className="text-xl font-bold text-white">
             You cannot afford Shared Ownership or full ownership with the current inputs and the
             <a href="#faqs" className="text-blue-500 hover:underline"> assumptions</a> of the model.
           </p>
@@ -493,7 +489,6 @@ const renderTwoColumnsText = () => {
       </div>
     );
   }
-
   return (
     <div className="results">
       <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
@@ -522,7 +517,6 @@ const renderTwoColumnsText = () => {
               </span>
             </p>
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
-
             <p className="mb-6">You will be mortgage free by the age of
             <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
                 <span className="tooltiptext" style={{ width: '1500px' }}>
@@ -530,20 +524,17 @@ const renderTwoColumnsText = () => {
                 </span>
               </span>
                <div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : 'N/A'}</div></p>
-
-   
           </div>
         )}
-
         {result.income >= 90000 ? (
           <div className="results-2nd-col std-2ndcol">
             <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
-            <p className="text-xl font-bold text-white mb-6">You do not qualify for Shared Ownership with your current income.</p>
+            <p className="text-xl font-bold text-white">You do not qualify for Shared Ownership with your current income.</p>
           </div>
         ) : result.SO_housing === 0 ? (
           <div className="results-2nd-col std-2ndcol">
             <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
-            <p className="text-xl font-bold text-white mb-6">You cannot afford to staircase to 100% through Shared Ownership with the current inputs.</p>
+            <p className="text-xl font-bold text-white">You cannot afford to staircase to 100% through Shared Ownership with the current inputs.</p>
             <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
           </div>
         ) : (
@@ -571,11 +562,7 @@ const renderTwoColumnsText = () => {
                 </span>
               </span>
             <div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : 'N/A'}</div>            </p>
-           {/* <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>*/}
-            
-
-
-
+           {/* <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>*/} 
           </div>
         )}
       </div>
@@ -584,50 +571,69 @@ const renderTwoColumnsText = () => {
 };
 
 const renderstaircasing = () => {
+  if (result.TO_housing === 0 && result.SO_housing === 0) {
+    return <div className="text-center my-4"></div>;
+  }
   return (
     <div className="text-white staircasing-wrapper std-wrapper">
-        <h1 className="font-bold">Shared Ownership Staircasing</h1>
-        <div className="staircasing-2cols-wrapper std-2cols-wrapper">
-            <div className="staircasing-1stcol std-1stcol">
-
-              <p className="font-bold">Initial Share {/* fix the number here*/}
-            </p>
-            <p className="">You can afford to buy an initial share of</p>
-            <p className=""><div className="results-number">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</div></p>
-            <p className="">at the age of  </p>
-            <p className=""><div className="results-number">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</div> </p>
-
-            </div>
-            <div className="lifetime-2ndcol std-2ndcol">
-              <p className="font-bold">100% Ownership  
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs.
-                </span>
-              </span>
-            </p>
-            <p className="">Staircase to 100% by the age of  </p>
-            <p className=""><div className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</div></p>
-   
-            </div>
+      <h1 className="font-bold">Shared Ownership Staircasing</h1>
+      {result.income >= 90000 ? (
+        <div className="results-2nd-col std-2ndcol">
+          <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
+          <p className="text-xl font-bold text-white">
+            You do not qualify for Shared Ownership with your current income.
+          </p>
         </div>
-
-            {/* First chart - Staircasing */}
-            {result.SO_housing > 0 && (
-            <div className="charts">
-             {/*  <div id="staircasing" style={{ height: '450px' }}>*/}
-             <div id="staircasing" >
-                {renderstairchart()}
-              </div>
+      ) : result.SO_housing === 0 ? (
+        <div className="results-2nd-col std-2ndcol">
+          <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
+          <p className="text-xl font-bold text-white">
+            You cannot afford to staircase to 100% through Shared Ownership with the current inputs.
+          </p>
+          <p>You can change above inputs, i.e., lower the price of the home, vary income, to see when you can afford full ownership.</p>
+        </div>
+      ) : (
+        <div className="staircasing-2cols-wrapper std-2cols-wrapper">
+          <div className="staircasing-combinedcol std-1stcol">
+            <div className="initial-share">
+              <p className="font-bold">Initial Share</p>
+              <p>You can afford to buy an initial share of</p>
+              <p><span className="results-number">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
+              <p>at the age of</p>
+              <p><span className="results-number">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
             </div>
-          )}
+            <div className="full-ownership">
+              <p className="font-bold">100% Ownership  
+                <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                  <span className="tooltiptext" style={{ width: '1500px' }}>
+                    Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs.
+                  </span>
+                </span>
+              </p>
+              <p>Staircase to 100% by the age of</p>
+              <p><span className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</span></p>
+            </div>
+          </div>
+          <div className="staircasing-chartcol std-2ndcol">
+            <div id="staircasing">
+              {renderstairchart()}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
-}
+};
 
 
 
 const renderlifetimeWealth = () => {
+  if (result.TO_housing === 0 && result.SO_housing === 0) {
+    return (
+      <div className="text-center my-4">
+      </div>
+    );
+  }
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
         <div><h1 className="font-bold">Lifetime Wealth
@@ -681,13 +687,8 @@ const renderlifetimeWealth = () => {
               </span>
             </p>
             <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
-
-
-   
             </div>
         </div>
-
-        {/* Second chart - Wealth Comparison */}
         {(result.TO_housing > 0 || result.SO_housing > 0) && (
             <div className="charts">
               <div id="comp" className="mb-2" style={{ height: '450px' }}>
@@ -708,6 +709,12 @@ const renderlifetimeWealth = () => {
 
 
 const rendermortgageRep = () => {
+  if (result.TO_housing === 0 && result.SO_housing === 0) {
+    return (
+      <div className="text-center my-4">
+      </div>
+    );
+  }
   return (
     <div className="text-white mortgage-wrapper std-wrapper">
         <div><h1 className="font-bold">Mortgage Repayment</h1></div>
