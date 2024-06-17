@@ -839,10 +839,11 @@ return (
 */}
       <div className="grapics-container-note">
       <p className="grapics-note">
-      Please note that the calculations are based on a model designed by professors at University College London and Durham University and do not provide financial advice. The model uses a range of assumptions, which can be found 
-      <p className="italic"> 
-                    <a href="#faqs" className="text-blue-500 hover:underline mb-3 inline-block">here</a>. 
-                    The outputs are indicative and highly dependent on the model assumptions.<br /> </p>
+      Please note that the calculations are based on a model designed by professors at University College London and Durham University and do not provide financial advice. The model uses a range of assumptions, which can be found&nbsp;  
+      <a href="#faqs" className="text-blue-500 hover:underline inline-block"> here</a>. 
+      <p className="italic">
+        The outputs are indicative and highly dependent on the model assumptions.<br />
+      </p>
       <span className="tooltip text-blue-500 hover:underline"> 
           <span className="tooltiptext" style={{ width: '1500px' }}>
           • Interest rate on deposits/savings: 3%. <br />
