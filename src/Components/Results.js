@@ -56,6 +56,8 @@ function Results({ result }) {
   const age_ranges = result?.age_ranges ? JSON.parse(result.age_ranges) : [];
   const mob_TO_wealthdata = result?.net_wealth_ak_list ? JSON.parse(result.net_wealth_ak_list) : [];
   const mob_SO_wealthdata = result?.net_wealth_cd_list ? JSON.parse(result.net_wealth_cd_list) : [];
+  const mob_TO_hwealthdata = result?.net_wealth_al_list ? JSON.parse(result.net_wealth_al_list) : [];
+  const mob_SO_hwealthdata = result?.net_wealth_cc_list ? JSON.parse(result.net_wealth_cc_list) : [];
   const ageattimedata = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
   const staircasingdata = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];
   const mortgagedata = result?.mortgage_data ? JSON.parse(result.mortgage_data) : [];
@@ -437,7 +439,78 @@ function Results({ result }) {
     };
     return <Line data={data} options={options} />;
   };
-  
+
+  const rendercomphchartmob = () => {
+    const data = {
+      labels: [...age_ranges],
+      datasets: [
+        ...(result.TO_housing > 0 ? [{
+          label: 'Full Ownership',
+          data: [...mob_TO_hwealthdata.map(item => parseFloat(item))],
+          borderColor: '#8ba4ad',
+          backgroundColor: '#8ba4ad',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+        ...(result.SO_housing > 0 ? [{
+          label: 'Shared Ownership',
+          data: [...mob_SO_hwealthdata.map(item => parseFloat(item))],
+          borderColor: '#264d5a',
+        backgroundColor: '#264d5a',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+      ]
+    };
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            color: 'white',
+          },
+        },
+        title: {
+          display: true,
+          text: 'Housing Wealth Comparison',
+          color: 'white',
+          font: {
+            size: 24,
+          },
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Housing Equity (£)',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        }
+      }
+    };
+    return <Line data={data} options={options} />;
+  };
 
 const FAQSection = () => {
   const [openFAQ, setOpenFAQ] = useState(null);
