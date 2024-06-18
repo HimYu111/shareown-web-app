@@ -53,7 +53,7 @@ function Results({ result }) {
     });
   };
 
-  const age_ranges = result?.age_ranges ? JSON.parse(result.age_ranges) : [];
+  const mob_age_ranges = result?.age_ranges ? JSON.parse(result.age_ranges) : [];
   const mob_TO_wealthdata = result?.net_wealth_ak_list ? JSON.parse(result.net_wealth_ak_list) : [];
   const mob_SO_wealthdata = result?.net_wealth_cd_list ? JSON.parse(result.net_wealth_cd_list) : [];
   const mob_TO_hwealthdata = result?.net_wealth_al_list ? JSON.parse(result.net_wealth_al_list) : [];
@@ -291,7 +291,7 @@ function Results({ result }) {
 
   const rendercompchartmob = () => {
     const data = {
-      labels: [...age_ranges],
+      labels: [...mob_age_ranges],
       datasets: [
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
@@ -442,7 +442,7 @@ function Results({ result }) {
 
   const rendercomphchartmob = () => {
     const data = {
-      labels: [...age_ranges],
+      labels: [...mob_age_ranges],
       datasets: [
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
