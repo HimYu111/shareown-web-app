@@ -23,10 +23,10 @@ function Footer() {
             © 2024 ShareOwn.info
             <button onClick={openForm} className="ml-10 font-bold">Contact Us</button>
             <Link to="/TCs" className="ml-10 font-bold">T&Cs</Link>
-            {/*<button onClick={() => handleRedirect('https://www.linkedin.com/in/yourprofile')} className="ml-4">
+            <button onClick={() => handleRedirect('https://www.linkedin.com/company/shareown')} className="ml-4">
               <img className="social-icon" src={LIlogo} alt="LinkedIn" />
             </button>
-            <button onClick={() => handleRedirect('https://x.example.com/yourprofile')} className="ml-4">
+            {/*<button onClick={() => handleRedirect('https://x.example.com/yourprofile')} className="ml-4">
               <img className="social-icon" src={Xlogo} alt="X" />
             </button>*/}
           </div>
