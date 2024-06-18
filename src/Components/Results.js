@@ -53,6 +53,9 @@ function Results({ result }) {
     });
   };
 
+  const age_ranges = result?.age_ranges ? JSON.parse(result.age_ranges) : [];
+  const mob_TO_wealthdata = result?.net_wealth_ak_list ? JSON.parse(result.net_wealth_ak_list) : [];
+  const mob_SO_wealthdata = result?.net_wealth_cd_list ? JSON.parse(result.net_wealth_cd_list) : [];
   const ageattimedata = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
   const staircasingdata = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];
   const mortgagedata = result?.mortgage_data ? JSON.parse(result.mortgage_data) : [];
@@ -117,13 +120,13 @@ function Results({ result }) {
           ticks: {
             color: 'white',
             callback: function(value, index, values) {
-              return `${(value * 100).toFixed(0)}%`;  // Formatting values to two decimal places
+              return `${(value * 100).toFixed(0)}%`; 
             }
           }
         }
       }
     };
-    return <Line data={data} options={options} />;
+    return <Bar data={data} options={options} />;
   };
   
   const renderloanchart = () => {
@@ -222,6 +225,85 @@ function Results({ result }) {
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...SO_wealthdata.map(item => parseFloat(item))],
+        //  borderColor: 'green',
+        //  backgroundColor: 'rgba(0, 255, 0, 0.5)',
+        borderColor: '#264d5a',
+        backgroundColor: '#264d5a',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+      ]
+    };
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+        },
+        title: {
+          display: true,
+          text: 'Savings',
+          color: 'white',
+          font: {
+            size: 24,
+          },
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Savings (£)',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        }
+      }
+    };
+    return <Line data={data} options={options} />;
+  };
+
+  const rendercompchartmob = () => {
+    const data = {
+      labels: [...age_ranges],
+      datasets: [
+        ...(result.TO_housing > 0 ? [{
+          label: 'Full Ownership',
+          data: [...mob_TO_wealthdata.map(item => parseFloat(item))],
+        //  borderColor: 'red',
+        //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
+        borderColor: '#8ba4ad',
+        backgroundColor: '#8ba4ad',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+        ...(result.SO_housing > 0 ? [{
+          label: 'Shared Ownership',
+          data: [...mob_SO_wealthdata.map(item => parseFloat(item))],
         //  borderColor: 'green',
         //  backgroundColor: 'rgba(0, 255, 0, 0.5)',
         borderColor: '#264d5a',
@@ -593,25 +675,29 @@ const renderstaircasing = () => {
           <p>You can change above inputs, i.e., lower the price of the home, vary income, to see when you can afford full ownership.</p>
         </div>
       ) : (
-        <div className="staircasing-2cols-wrapper std-2cols-wrapper">
-          <div className="staircasing-combinedcol std-1stcol">
-            <div className="initial-share">
-              <p className="font-bold">Initial Share</p>
-              <p>You can afford to buy an initial share of</p>
-              <p><span className="results-number">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
-              <p>at the age of</p>
-              <p><span className="results-number">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
+        <>
+          <div className="staircasing-2cols-wrapper std-2cols-wrapper">
+            <div className="staircasing-combinedcol std-1stcol">
+              <div className="initial-share">
+                <p className="font-bold">Initial Share</p>
+                <p>You can afford to buy an initial share of</p>
+                <p><span className="results-number">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
+                <p>at the age of</p>
+                <p><span className="results-number">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
+              </div>
             </div>
-            <div className="full-ownership">
-              <p className="font-bold">100% Ownership  
-                <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                  <span className="tooltiptext" style={{ width: '1500px' }}>
-                    Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs.
+            <div className="lifetime-2ndcol std-2ndcol">
+              <div className="full-ownership">
+                <p className="font-bold">100% Ownership  
+                  <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+                    <span className="tooltiptext" style={{ width: '1500px' }}>
+                      Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs.
+                    </span>
                   </span>
-                </span>
-              </p>
-              <p>Staircase to 100% by the age of</p>
-              <p><span className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</span></p>
+                </p>
+                <p>Staircase to 100% by the age of</p>
+                <p><span className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</span></p>
+              </div>
             </div>
           </div>
           <div className="staircasing-chartcol std-2ndcol">
@@ -619,7 +705,7 @@ const renderstaircasing = () => {
               {renderstairchart()}
             </div>
           </div>
-        </div>
+        </>
       )}
     </div>
   );
