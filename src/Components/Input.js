@@ -242,7 +242,7 @@ const ageRef = useRef(null);
   ];
 
   const bedroomOptions = ["", "1", "2", "3", "4+", "Not sure yet"];
-  const propertyTypeOptions = ["", "Detached", "Semi-Detached", "Terraced", "Flats", "Undecided"];
+  const propertyTypeOptions = ["", "Detached", "Semi-Detached", "Terraced", "Apartment", "Undecided"];
 
 
   const [isVisible, setIsVisible] = useState(false);
