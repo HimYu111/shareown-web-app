@@ -58,6 +58,8 @@ function Results({ result }) {
   const mob_SO_wealthdata = result?.net_wealth_cd_list ? JSON.parse(result.net_wealth_cd_list) : [];
   const mob_TO_hwealthdata = result?.net_wealth_al_list ? JSON.parse(result.net_wealth_al_list) : [];
   const mob_SO_hwealthdata = result?.net_wealth_cc_list ? JSON.parse(result.net_wealth_cc_list) : [];
+  const age_stairgraph = result?.age_stairgraph ? JSON.parse(result.age_stairgraph) : [];
+  const share_stairgraph = result?.share_stairgraph ? JSON.parse(result.share_stairgraph) : [];
   const ageattimedata = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
   const staircasingdata = result?.staircasing_data ? JSON.parse(result.staircasing_data) : [];
   const mortgagedata = result?.mortgage_data ? JSON.parse(result.mortgage_data) : [];
@@ -69,11 +71,11 @@ function Results({ result }) {
   
   const renderstairchart = () => {
     const data = {
-      labels: [...ageattimedata],
+      labels: [...age_stairgraph],
       datasets: [
         {
           label: 'Share owned (%)',
-          data: [...staircasingdata.map(item => parseFloat(item))],
+          data: [...share_stairgraph.map(item => parseFloat(item))],
           backgroundColor: 'white',
           borderColor: 'white',
           borderWidth: 1,
