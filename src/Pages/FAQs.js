@@ -1,10 +1,11 @@
-import React from "react";
 import Navbar from "../Components/Navbar.js";
 import Footer from "../Components/Footer.js";
-import flowchart from "../../Assets/flowchart.png";
+import flowchart from "../Assets/flowchart.png";
+import React, { useState } from 'react';
 
 
 const FAQSection = () => {
+
   const faqs = [
     {
       question: "What is Shared Ownership",
@@ -87,17 +88,36 @@ const FAQSection = () => {
     }
   ];
 
+  const [openFAQ, setOpenFAQ] = useState(() => {
+    const initialOpenState = {};
+    faqs.forEach((_, index) => {
+      initialOpenState[index] = true;
+    });
+    return initialOpenState;
+  });
+
+
+
   return (
     <div>
-      {faqs.map((faq, index) => (
-        <div key={index} className="faq-item">
-          <h3>{faq.question}</h3>
-          <div>{faq.answer}</div>
-        </div>
-      ))}
+      <div className="container mx-auto">
+        <h1 className="text-3xl font-bold text-center mb-8">FAQs</h1>
+        {faqs.map((faq, index) => (
+          <div key={index} className="mb-4">
+            <div
+              className="cursor-pointer bg-gray-200 rounded-md p-4"
+              onClick={() => setOpenFAQ({ ...openFAQ, [index]: !openFAQ[index] })}
+            >
+              <h2 className="text-xl font-semibold">{faq.question}</h2>
+              {openFAQ[index] && <p className="mt-2">{faq.answer}</p>}
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
+
 
 function FAQs() {
   return (

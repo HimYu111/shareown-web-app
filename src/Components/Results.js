@@ -85,7 +85,7 @@ function Results({ result }) {
       responsive: true,
       plugins: {
         legend: {
-          display: false, 
+          display: false,
         },
         title: {
           display: true,
@@ -95,6 +95,13 @@ function Results({ result }) {
             size: 24,
           },
         },
+        tooltip: {
+          callbacks: {
+            label: function(tooltipItem) {
+              return `${(tooltipItem.raw.toFixed(2) * 100).toFixed(0)}%`;
+            }
+          }
+        }
       },
       scales: {
         x: {
@@ -123,7 +130,7 @@ function Results({ result }) {
           ticks: {
             color: 'white',
             callback: function(value, index, values) {
-              return `${(value * 100).toFixed(0)}%`; 
+              return `${(value * 100).toFixed(0)}%`;
             }
           }
         }

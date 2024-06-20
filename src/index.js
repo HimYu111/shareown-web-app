@@ -28,9 +28,9 @@ ReactDOM.render(
         </Route>
         <Route path="/TCs" element={<TCs />}>
         {" "}
+        </Route>
         <Route path="/FAQs" element={<FAQs />}>
         {" "}
-        </Route>
         </Route>
       </Routes>
     </BrowserRouter>
