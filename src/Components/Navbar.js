@@ -50,6 +50,10 @@ function Navbar() {
             <div class="menu-link"> <Link to="/blog"> About </Link></div>     
           </div>
 
+          <div class="menu-blog menu-buttons">          
+            <div class="menu-link"> <Link to="/FAQs"> About </Link></div>     
+          </div>
+
    {/*       <div class="menu-video menu-buttons">          
             <div class="menu-link"><Link to="/vid"> Video Guide </Link></div>  
           </div>
