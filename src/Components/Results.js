@@ -87,11 +87,20 @@ function Results({ result }) {
     });
   };
 
+  const parseNumericList = (str) => {
+    // Remove surrounding brackets [ and ]
+    const trimmedStr = str.slice(1, -1);
+    // Split by commas and map to numbers
+    return trimmedStr.split(',').map(item => parseFloat(item.trim()));
+  };
+
   const mob_age_ranges = result?.age_ranges ? JSON.parse(result.age_ranges) : [];
-  const mob_TO_wealthdata = result?.net_wealth_ak_list ? JSON.parse(result.net_wealth_ak_list) : [];
-  const mob_SO_wealthdata = result?.net_wealth_cd_list ? JSON.parse(result.net_wealth_cd_list) : [];
-  const mob_TO_hwealthdata = result?.net_wealth_al_list ? JSON.parse(result.net_wealth_al_list) : [];
-  const mob_SO_hwealthdata = result?.net_wealth_cc_list ? JSON.parse(result.net_wealth_cc_list) : [];
+
+  const net_wealth_cd_list = parseNumericList(result.net_wealth_cd_by_age_range);
+  const net_wealth_ak_list = parseNumericList(result.net_wealth_ak_by_age_range);
+  const net_wealth_al_list = parseNumericList(result.net_wealth_cc_by_age_range);
+  const net_wealth_cc_list = parseNumericList(result.net_wealth_al_by_age_range);
+  
   const age_stairgraph = result?.age_stairgraph ? JSON.parse(result.age_stairgraph) : [];
   const share_stairgraph = result?.share_stairgraph ? JSON.parse(result.share_stairgraph) : [];
   const ageattimedata = result?.age_at_time_data ? JSON.parse(result.age_at_time_data) : [];
@@ -333,31 +342,32 @@ function Results({ result }) {
   };
 
   const rendercompchartmob = () => {
+    if (!Array.isArray(net_wealth_ak_list)) {
+      console.error('net_wealth_ak_list is not an array:', net_wealth_ak_list);
+      return null; // Or handle the error in another appropriate way
+    }
     const data = {
-      labels: [...mob_age_ranges],
+      labels: mob_age_ranges,
       datasets: [
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
-          data: [...mob_TO_wealthdata.map(item => parseFloat(item))],
-        //  borderColor: 'red',
-        //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
-        borderColor: '#8ba4ad',
-        backgroundColor: '#8ba4ad',
+          data: net_wealth_ak_list.map(item => parseFloat(item)),
+          borderColor: '#8ba4ad',
+          backgroundColor: '#8ba4ad',
           borderWidth: 1,
           fill: false,
         }] : []),
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
-          data: [...mob_SO_wealthdata.map(item => parseFloat(item))],
-        //  borderColor: 'green',
-        //  backgroundColor: 'rgba(0, 255, 0, 0.5)',
-        borderColor: '#264d5a',
-        backgroundColor: '#264d5a',
+          data: net_wealth_cc_list.map(item => parseFloat(item)),
+          borderColor: '#264d5a',
+          backgroundColor: '#264d5a',
           borderWidth: 1,
           fill: false,
         }] : []),
       ]
     };
+  
     const options = {
       responsive: true,
       plugins: {
@@ -404,13 +414,17 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
+            callback: function(value, index, values) {
+              return `${value.toFixed(0)}`; 
+            },
           },
-        }
-      }
+        },
+      },
     };
+  
     return <Line data={data} options={options} />;
   };
-
+  
   const rendercomphchart = () => {
     const data = {
       labels: [...ageattimedata],
@@ -489,7 +503,7 @@ function Results({ result }) {
       datasets: [
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
-          data: [...mob_TO_hwealthdata.map(item => parseFloat(item))],
+          data: [...net_wealth_al_list.map(item => parseFloat(item))],
           borderColor: '#8ba4ad',
           backgroundColor: '#8ba4ad',
           borderWidth: 1,
@@ -497,7 +511,7 @@ function Results({ result }) {
         }] : []),
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
-          data: [...mob_SO_hwealthdata.map(item => parseFloat(item))],
+          data: [...net_wealth_cd_list.map(item => parseFloat(item))],
           borderColor: '#264d5a',
         backgroundColor: '#264d5a',
           borderWidth: 1,
@@ -540,7 +554,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'Housing Equity (£)',
+            text: 'Housing Wealth (£)',
             color: 'white',
             font: {
               size: 18,
@@ -852,7 +866,9 @@ const renderScenariosExplained = () => {
   );
 };
 
-
+console.log('mob_age_ranges:', mob_age_ranges);
+console.log('net_wealth_ak_list:', net_wealth_ak_list);
+console.log('net_wealth_cc_list:', net_wealth_cc_list);
 
 return (
 <div className="main-results-container">
