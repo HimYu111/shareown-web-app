@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import ContactForm from "./ContactForm";
 import LIlogo from "../Assets/LinkedIn_icon.png";
-import Xlogo from "../Assets/X_icon.png";
+//import Xlogo from "../Assets/X_icon.png";
 
 function Footer() {
   const [isFormOpen, setIsFormOpen] = useState(false);
@@ -23,6 +23,7 @@ function Footer() {
             © 2024 ShareOwn.info
             <button onClick={openForm} className="ml-10 font-bold">Contact Us</button>
             <Link to="/TCs" className="ml-10 font-bold">T&Cs</Link>
+            <Link to="/FAQs" className="ml-10 font-bold">FAQs</Link>
             <button onClick={() => handleRedirect('https://www.linkedin.com/company/shareown')} className="ml-4">
               <img className="social-icon" src={LIlogo} alt="LinkedIn" />
             </button>

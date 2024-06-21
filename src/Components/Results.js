@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Bar, Line } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPenNib,faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
 import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
-
-
+import { Link } from "react-router-dom";
+import '../App.css';
  
 import {
   Chart as ChartJS,
@@ -30,6 +30,41 @@ ChartJS.register(
 
 function formatNumber(num) {
   return new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(num);
+}
+
+const ToggleText = ({ className, regularText, toggleableText }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const tooltipRef = useRef(null);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
+  const handleClickOutside = (event) => {
+    if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+      setIsVisible(false);
+    }
+  };
+
+  if (isVisible) {
+    document.addEventListener('mousedown', handleClickOutside);
+  } else {
+    document.removeEventListener('mousedown', handleClickOutside);
+  }
+
+  return (
+    <div className="toggle-text-container">
+      <p className={`regular-text ${className}`}>{regularText}</p>
+      <span className="toggle-icon" onClick={toggleVisibility}>
+        <sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+      </span>
+      {isVisible && (
+        <div className="toggleable-text" ref={tooltipRef}>
+          <p>{toggleableText}</p>
+        </div>
+      )}
+    </div>
+  );
 }
 
 function Results({ result }) {
@@ -433,7 +468,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'Housing Equity (£)',
+            text: 'Housing Wealth (£)',
             color: 'white',
             font: {
               size: 18,
@@ -523,21 +558,23 @@ function Results({ result }) {
 const renderTwoColumnsText = () => {
   if (result.TO_housing === 0 && result.SO_housing === 0) {
     return (
-      <div className="text-center my-4">
-        <h2 className="text-xl font-bold text-white">
-          <p className="text-xl font-bold text-white">
-            You cannot afford Shared Ownership or full ownership with the current inputs and the
-            <a href="#faqs" className="text-blue-500 hover:underline"> assumptions</a> of the model.
-          </p>
-          <p>You can change some of the above inputs like the price of the home, the location, income, etc. to assess when you can afford Shared Ownership or/and full ownership.</p>
-        </h2>
+      <div className="results">
+        <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
+        <div className="text-center my-4">
+          <h2 className="text-xl font-bold text-white">
+            <p className="text-xl font-bold text-white">
+              You cannot afford Shared Ownership or full ownership with the current inputs and the
+              <Link to="/FAQs" className="text-blue-500 hover:underline">assumptions</Link> of the model.
+            </p>
+            <p>You can change some of the above inputs like the price of the home, the location, income, etc. to assess when you can afford Shared Ownership or/and full ownership.</p>
+          </h2>
+        </div>
       </div>
     );
   }
   return (
     <div className="results">
       <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
-
       <div className="flex justify-center text-white results-2cols">
         {result.TO_housing === 0 ? (
           <div className="results-1st-col std-1stcol">
@@ -553,22 +590,17 @@ const renderTwoColumnsText = () => {
               You {result.TO_time < 1 ? (<>have enough savings for the deposit <div className="results-number">now</div></>) : 
               ( <>can afford to buy in <div className="results-number">{result.TO_time ? formatNumber(result.TO_time.toFixed(0)) : "0"} years</div></>)}
             </p>
-           
-            <p className="font-bold">Monthly costs            
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs.
-                </span>
-              </span>
-            </p>
+            <ToggleText
+              className="font-bold" 
+              regularText ="Monthly costs "
+              toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
+            />
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
-            <p className="mb-6">You will be mortgage free by the age of
-            <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Assumes all savings are used to make repayments. For model assumptions check the FAQs.
-                </span>
-              </span>
-               <div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : 'N/A'}</div></p>
+            <ToggleText
+              className="font-bold" 
+              regularText ="You will be mortgage free by the age of "
+              toggleableText="Assumes all savings are used to make repayments. For model assumptions check the FAQs."/>
+              <div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : 'never'}</div>
           </div>
         )}
         {result.income >= 90000 ? (
@@ -591,22 +623,18 @@ const renderTwoColumnsText = () => {
                 ? (<>You can afford to buy in <div className="results-number">now</div></>)
                 : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
             </p>
-            <p className="font-bold">Monthly costs         
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs
-                </span>
-              </span>
-            </p>
+            <ToggleText
+              className="font-bold" 
+              regularText ="Monthly costs "
+              toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
+            />
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
-            
-            <p className="">You will be mortgage free by the age of
-            <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Assumes all savings are used to make repayments. For model assumptions check the FAQs.
-                </span>
-              </span>
-            <div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : 'N/A'}</div>            </p>
+            <ToggleText
+              className="font-bold" 
+              regularText ="You will be mortgage free by the age of "
+              toggleableText="Assumes all savings are used to make repayments. For model assumptions check the FAQs"
+            />
+            <div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : 'Never'}</div> 
            {/* <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>*/} 
           </div>
         )}
@@ -651,13 +679,11 @@ const renderstaircasing = () => {
             </div>
             <div className="lifetime-2ndcol std-2ndcol">
               <div className="full-ownership">
-                <p className="font-bold">100% Ownership  
-                  <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                    <span className="tooltiptext" style={{ width: '1500px' }}>
-                      Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs.
-                    </span>
-                  </span>
-                </p>
+                <ToggleText
+                  className="font-bold" 
+                  regularText ="100% Ownership"
+                  toggleableText="Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs."
+                />
                 <p>Staircase to 100% by the age of</p>
                 <p><span className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</span></p>
               </div>
@@ -686,55 +712,42 @@ const renderlifetimeWealth = () => {
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
         <div><h1 className="font-bold">Lifetime Wealth
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Shows the current value of future savings and future changes to house prices, i.e. housing wealth up until retirement.
-                </span>
-              </span>
+        <ToggleText
+          className="font-bold" 
+          regularText =" "
+          toggleableText="Shows the current value of future savings and future changes to house prices, i.e. housing wealth up until retirement."
+        />
         </h1></div>
 
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
             <div className="lifetime-1stcol std-1stcol">
               <h2 className="results-fullOwn">Full Ownership</h2>
-              <p className="font-bold">Savings
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-
-                Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs.
-                </span>
-              </span>
-            </p>
+              <ToggleText
+                className="font-bold" 
+                regularText ="Savings "
+                toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
+              />
             <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
-
-              <p className="font-bold">Housing wealth 
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs.
-                </span>
-              </span>
-            </p>
+              <ToggleText
+                className="font-bold" 
+                regularText ="Housing wealth "
+                toggleableText="Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs."
+              />
             <p className=""><div className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</div></p>
-
             </div>
             <div className="lifetime-2ndcol std-2ndcol">
               <h2 className="results-sharedOwn">Shared Ownership</h2>
-              <p className="font-bold">Savings
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-
-                Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs.
-                </span>
-              </span>
-            </p>
+              <ToggleText
+                className="font-bold" 
+                regularText ="Savings "
+                toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
+              />
             <p className=""><div className="results-number">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'}</div> </p>
-
-              <p className="font-bold">Housing wealth 
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs.
-                </span>
-              </span>
-            </p>
+            <ToggleText
+                className="font-bold" 
+                regularText ="Housing wealth "
+                toggleableText="Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs."
+              />
             <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
             </div>
         </div>
@@ -771,27 +784,24 @@ const rendermortgageRep = () => {
             <div className="mortgage-1stcol std-1stcol">
               <h2 className="results-fullOwn">Full Ownership</h2>
               <p className="font-bold">You will be mortgage free {result.TO_finish < 1 ? '' : 'by the age of'}
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming you use all your savings to make prepayments.              
-                </span>
-              </span>
-            
+              <ToggleText
+                className="font-bold" 
+                regularText =" "
+                toggleableText="Assuming you use all your savings to make prepayments."
+              />
              {result.TO_finish < 1 ? (<><div className="results-number">now</div></>)  : 
             (<><div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"} </div></>) }
             </p>
-          {/* <p className="italic"><a href="#loan" className="text-blue-500 hover:underline">See your outstanding loan balance over time</a></p> */}  
 
             </div>
             <div className="mortgage-2ndcol std-2ndcol">
               <h2 className="results-sharedOwn">Shared Ownership</h2>
               <p className="font-bold">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
-              <span className="tooltip"><sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
-                <span className="tooltiptext" style={{ width: '1500px' }}>
-                  Assuming all savings are used to make repayments. For further model assumptions check the FAQs.              
-                </span>
-              </span>
-            
+              <ToggleText
+                className="font-bold" 
+                regularText =" "
+                toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs.  "
+              />
              {result.SO_mortgage_finish < 1 ? (<><div className="results-number">now</div></>)  : 
             (<><div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"} </div></>) }
             </p>
@@ -853,76 +863,7 @@ return (
       {renderlifetimeWealth()}
       {rendermortgageRep()}
       {renderScenariosExplained()}
-
-{/*
-      <div className="charts-container">
-        <div className="charts-wrapper">
-
-          {result.SO_housing > 0 && (
-            <div className="charts">
-              <div id="staircasing" style={{ height: '450px' }}>
-                {renderstairchart()}
-              </div>
-            </div>
-          )}
-
-
-          {(result.TO_housing > 0 || result.SO_housing > 0) && (
-            <div className="charts">
-              <div id="comp" className="mb-2" style={{ height: '450px' }}>
-                {rendercompchart()}
-              </div>
-            </div>
-          )}
-
-
-          {(result.TO_housing > 0 || result.SO_housing > 0) && (
-            <div className="charts">
-              <div id="loan" className="mb-2" style={{ height: '450px' }}>
-                {renderloanchart()}
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-*/}
-      <div className="grapics-container-note">
-      <p className="grapics-note">
-      Please note that the calculations are based on a model designed by professors at University College London and Durham University and do not provide financial advice. The model uses a range of assumptions, which can be found&nbsp;  
-      <a href="#faqs" className="text-blue-500 hover:underline inline-block"> here</a>. 
-      <p className="italic">
-        The outputs are indicative and highly dependent on the model assumptions.<br />
-      </p>
-      <span className="tooltip text-blue-500 hover:underline"> 
-          <span className="tooltiptext" style={{ width: '1500px' }}>
-          • Interest rate on deposits/savings: 3%. <br />
-          • Inflation rate p.a.: 3%. <br />
-          • Mortgage rate p.a.: 4%. <br />
-          • House price appreciation p.a.: 5%. <br />
-          • Market rent appreciation: 3.5%. <br />
-          • Rent paid for Shared Ownership: For the first year it is 2.75% of the initial value of the home. After that it grows with the assumed inflation rate. <br />
-          • Service charge/House maintenance cost p.a.: 1%. <br />
-          • The model assumes a retirement age at 67. After that no wealth is accumulated. <br />
-          • Loan to Value ratio for full ownership: 95% of the indicated price. <br />
-          • Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share. <br />
-          • Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income. <br />
-          • Affordability constraint: We account for the income affordability constraint associated with Shared Ownership following Homes England guidelines. <br /> 
-          • Minimum initial share for Shared Ownership: 25%. <br />
-          • Transaction costs: 0%.<br />
-          • Staircasing fees for Shared Ownership: £1,000. <br />
-          • No tax is applied below £12,570. <br />
-          • The basic 20% tax rate is applied to income between £12,571 and £50,270. <br />
-          • The higher 40% tax rate is applied to income between £50,271 and £125,140. <br />
-          • The additional 45% tax rate is applied to income above £125,140. <br />
-          </span>
-        </span>
-      </p>      
     </div>
-
-    </div>
-    
-  </div>
-   <div id="faqs" className="p-4 rounded-md shadow-md" style={{ backgroundColor: 'white' }}>
   </div>
 </div>
 

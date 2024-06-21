@@ -11,7 +11,7 @@ function Blog() {
         <div className="blog-wrapper" > 
             <p className=" mb-7 " style={{ paddingLeft: '30px' }}>The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®</p>
             <p className=" mb-7" style={{ paddingLeft: '30px' }}>
-              If you want to find out more about shared ownership, you can read the report by main author, UCL’s professor Stanimira Miicheva, and main contact person for this website. The key findings of the report are summarised below.
+             Find out more about shared ownership here:
               <br /> {/* New line */}
               <a href="https://discovery.ucl.ac.uk/id/eprint/10183951/1/so_market_ucl.pdf" 
                 className="text-blue-600 hover:text-blue-800 visited:text-purple-600"

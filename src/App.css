@@ -504,13 +504,25 @@ p.grapics-note {
   margin: 80px 0px 10px 0px;
 }
 
-.tooltip .tooltiptext {
-  font-size: 0.8em;
-  text-align: left;
+.tooltiptext {
+  display: none;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.3s;
+  position: absolute;
+  z-index: 1;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 10px;
+  width: 150px; /* Adjust width as needed */
+}
+
+.tooltip.show .tooltiptext {
   display: block;
-  padding: 15px;
-  background-color: white;
-  color: black;
+  visibility: visible;
+  opacity: 1;
 }
 
 .charts-container {
@@ -697,4 +709,42 @@ span.results-number {
 
 .social-icon:hover {
   opacity: 0.7;  
+}
+
+.toggle-text-container {
+  position: relative;
+  display: inline-block;
+}
+
+.regular-text {
+  display: inline;
+  margin-right: 5px; /* Adjust spacing between regular text and icon */
+}
+
+.toggle-icon {
+  cursor: pointer;
+}
+
+.toggleable-text {
+  position: absolute;
+  background-color: #000;
+  color: #fff;
+  padding: 10px;
+  border-radius: 6px;
+  width: 400px;
+  z-index: 1;
+  white-space: normal; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+  top: calc(100% + 5px); 
+  left: 0;
+  display: none; 
+  font-size: 12px;
+}
+
+.toggleable-text p {
+  margin: 0; /* Remove default margin */
+}
+
+.toggle-text-container:hover .toggleable-text {
+  display: block; /* Show on hover */
 }
