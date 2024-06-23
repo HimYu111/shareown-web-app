@@ -855,14 +855,14 @@ const renderlifetimeWealth = () => {
       {(result.TO_wealthdata > 0 || result.SO_wealthdata > 0) && (
         <div className="charts">
           <div id="comp" className="mb-2" style={{ height: '450px' }}>
-            {rendercompchartmob()}
+            {rendercompchart()}
           </div>
         </div>
       )}
       {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
           <div id="comp" className="mb-2" style={{ height: '450px' }}>
-            {rendercomphchartmob()}
+            {rendercomphchart()}
           </div>
         </div>
       )}
