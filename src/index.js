@@ -9,6 +9,7 @@ import Blog from "./Pages/Blog.js";
 import Vid from "./Pages/Vid.js"
 import TCs from "./Pages/TCs.js"
 import FAQs from "./Pages/FAQs.js"
+import CookiesDoc from "./Pages/CookiesDoc.js"
 import reportWebVitals from "./reportWebVitals";
 import "tw-elements-react/dist/css/tw-elements-react.min.css";
 
@@ -44,6 +45,9 @@ ReactDOM.render(
         {" "}
         </Route>
         <Route path="/FAQs" element={<FAQs />}>
+        {" "}
+        </Route>
+        <Route path="/CookiesDoc" element={<CookiesDoc />}>
         {" "}
         </Route>
       </Routes>
