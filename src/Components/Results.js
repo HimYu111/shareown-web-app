@@ -187,7 +187,7 @@ function Results({ result }) {
     <div>
     <Bar data={data} options={options} />
       <div>
-        <p className="text-xl font-bold text-white">This graph shows the share of the house you would own. Shared ownership allows you to buy additional shares over time.</p>
+        <p className="undergraph-text text-white">This graph shows the share of the house you would own. Shared ownership allows you to buy additional shares over time.</p>
       </div>
     </div>
     );
@@ -202,8 +202,8 @@ function Results({ result }) {
           data: [...mortgagedata2.map(item => parseFloat(item))],
         //  borderColor: 'red',
         //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
-          borderColor: '#8ba4ad',
-          backgroundColor: '#8ba4ad',
+          borderColor: '#68aac0',
+          backgroundColor: '#68aac0',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -273,7 +273,7 @@ function Results({ result }) {
       <div>
       <Line data={data} options={options} />
         <div>
-          <p className="text-xl font-bold text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
+          <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
         </div>
       </div>
       );
@@ -288,8 +288,8 @@ function Results({ result }) {
           data: [...TO_wealthdata.map(item => parseFloat(item))],
         //  borderColor: 'red',
         //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
-        borderColor: '#8ba4ad',
-        backgroundColor: '#8ba4ad',
+        borderColor: '#68aac0',
+        backgroundColor: '#68aac0',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -359,7 +359,7 @@ function Results({ result }) {
       <div>
       <Line data={data} options={options} />
         <div>
-          <p className="text-xl font-bold text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
         </div>
       </div>
       );
@@ -376,8 +376,8 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: net_wealth_ak_list.map(item => parseFloat(item)),
-          borderColor: '#8ba4ad',
-          backgroundColor: '#8ba4ad',
+          borderColor: '#68aac0',
+          backgroundColor: '#68aac0',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -450,7 +450,7 @@ function Results({ result }) {
       <div>
       <Bar data={data} options={options} />
         <div>
-          <p className="text-xl font-bold text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
         </div>
       </div>
       );
@@ -463,8 +463,8 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...TO_housedata.map(item => parseFloat(item))],
-          borderColor: '#8ba4ad',
-          backgroundColor: '#8ba4ad',
+          borderColor: '#68aac0 ',
+          backgroundColor: '#68aac0 ',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -529,7 +529,7 @@ function Results({ result }) {
       <div>
       <Line data={data} options={options} />
         <div>
-          <p className="text-xl font-bold text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
         </div>
       </div>
       );
@@ -608,7 +608,7 @@ function Results({ result }) {
       <div>
       <Bar data={data} options={options} />
         <div>
-          <p className="text-xl font-bold text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
         </div>
       </div>
       );
@@ -634,7 +634,7 @@ const renderTwoColumnsText = () => {
   return (
     <div className="results">
       <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
-      <div className="flex justify-center text-white results-2cols">
+      <div className="text-white results-2cols">
         {result.TO_housing === 0 ? (
           <div className="results-1st-col std-1stcol">
             <h2 className="results-fullOwn font-bold">Full ownership</h2>
@@ -920,9 +920,6 @@ const rendermortgageRep = () => {
   }
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
-      <div>
-        <h1 className="font-bold">Mortgage Repayment</h1>
-      </div>
       {result.TO_housing === 0 ? (
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
           <div className="mortgage-1stcol std-1stcol">

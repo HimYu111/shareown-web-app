@@ -102,12 +102,12 @@ const FAQSection = () => {
 
   return (
     <div>
-      <div className="container mx-auto">
-        <h1 className="text-3xl font-bold text-center mb-8">FAQs</h1>
+      <div className="container mx-auto faq-wrapper">
+        <h1 className="faq-header">FAQs</h1>
         {faqs.map((faq, index) => (
           <div key={index} className="mb-4">
             <div
-              className="cursor-pointer bg-gray-200 rounded-md p-4"
+              className="cursor-pointer faq-single-wrapper rounded-md p-4"
               onClick={() => setOpenFAQ({ ...openFAQ, [index]: !openFAQ[index] })}
             >
               <h2 className="text-xl font-semibold">{faq.question}</h2>

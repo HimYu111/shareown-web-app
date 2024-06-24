@@ -26,10 +26,11 @@ function Results({ result }) {
 
   return (
     <div className="bg-slate-800 py-20 text-white results-wrapper">
-      <div className="main-results-container">
-        <p className="grapics-note">
-          Enter your email below to get your results sent to you.
-        </p>
+      <div className='email-container'>
+      <div className='email-wrapper'>
+        <div className="grapics-note">
+          <p>Enter your email below to get your results sent to you.</p>
+        </div>
         {/* Email Form Container */}
         <div className="email-form-container">
           <form onSubmit={handleEmailSubmit} className="email-form">
@@ -56,7 +57,7 @@ function Results({ result }) {
           do not provide financial advice. The model uses a range of assumptions, which can be found
           <Link to="/FAQs" className="ml-2 font-bold">here</Link>.
         </p>
-        <p className="italic">
+        <p >
           The outputs are indicative and highly dependent on the model
           assumptions.
         </p>
@@ -94,6 +95,7 @@ function Results({ result }) {
             £125,140. <br />
           </span>
         </span>
+        </div>
       </div>
   );
 }

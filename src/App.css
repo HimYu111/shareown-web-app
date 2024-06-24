@@ -424,15 +424,17 @@ button#btn-up:hover, button#btn-down:hover {
 }
 
 
-.results-container {
+.results-container,.email-container {
   max-width: 1100px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
+
 }
 
 .results-2cols {
+  display: flex;
+  justify-content: center;
   gap:30px;
   flex: 0 0 80%;
 }
@@ -460,7 +462,7 @@ button#btn-up:hover, button#btn-down:hover {
   font-weight: bold;
 }
 
-.results,  .std-wrapper{
+.results,  .std-wrapper , .email-wrapper{
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -480,6 +482,7 @@ button#btn-up:hover, button#btn-down:hover {
   margin-bottom: 35px;
   padding: 3px;
   border-bottom: 1px solid;
+  font-weight: 700;
 }
 
  .std-wrapper h1{
@@ -499,8 +502,8 @@ button#btn-up:hover, button#btn-down:hover {
 
 }
 
-p.grapics-note {
-  font-size: 1.2em;
+.grapics-note {
+  font-size: 1.1em;
   margin: 80px 0px 10px 0px;
 }
 
@@ -747,4 +750,20 @@ span.results-number {
 
 .toggle-text-container:hover .toggleable-text {
   display: block; /* Show on hover */
+}
+
+p.undergraph-text.text-white {
+  padding-top: 25px;
+}
+
+.faq-single-wrapper {
+  background-color: #8ba4ad;
+  color: black;
+}
+
+h1.faq-header {
+  margin: 100px;
+  text-align: center;
+  font-size: 2.5em;
+  font-weight: bold;
 }
