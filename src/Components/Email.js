@@ -25,6 +25,7 @@ function Results({ result }) {
   };
 
   return (
+    <div>
     <div className="bg-slate-800 py-20 text-white results-wrapper">
       <div className='email-container'>
       <div className='email-wrapper'>
@@ -52,15 +53,7 @@ function Results({ result }) {
           </form>
         </div>
       </div>
-        <p className="grapics-note">
-          Please note that the calculations are based on a model designed by professors at University College London and Durham University and
-          do not provide financial advice. The model uses a range of assumptions, which can be found
-          <Link to="/FAQs" className="ml-2 font-bold">here</Link>.
-        </p>
-        <p >
-          The outputs are indicative and highly dependent on the model
-          assumptions.
-        </p>
+
         <span className="tooltip text-blue-500 hover:underline">
           <span className="tooltiptext" style={{ width: "1500px" }}>
             • Interest rate on deposits/savings: 3%. <br />
@@ -97,6 +90,20 @@ function Results({ result }) {
         </span>
         </div>
       </div>
+      <div className="prefooter-wrapper">
+          <p className="grapics-note">
+          Please note that the calculations are based on a model designed by professors at University College London and Durham University and
+          do not provide financial advice. The model uses a range of assumptions, which can be found
+          <Link to="/FAQs" className="ml-2 font-bold">here</Link>.
+        </p>
+        <p >
+          The outputs are indicative and highly dependent on the model
+          assumptions.
+        </p>
+        </div>
+      </div>
+
+      
   );
 }
 

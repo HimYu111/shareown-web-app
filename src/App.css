@@ -557,9 +557,6 @@ button#btn-up:hover, button#btn-down:hover {
   margin: 3rem 0px;
 }
 
-span.results-number {
-  font-size: 1.1em;
-}
 
 #faq {
   width: 80%;
@@ -756,9 +753,11 @@ p.undergraph-text.text-white {
   padding-top: 25px;
 }
 
-.faq-single-wrapper {
+.faq-globalwrapper {
   background-color: #8ba4ad;
   color: black;
+  padding: 40px 0px;
+  border-radius: 10px;
 }
 
 h1.faq-header {
@@ -766,4 +765,14 @@ h1.faq-header {
   text-align: center;
   font-size: 2.5em;
   font-weight: bold;
+}
+.email-wrapper div {
+  flex: 1 0 100%;
+}
+
+.prefooter-wrapper {
+  max-width: 1100px;
+  text-align: center;
+  display: inline-block;
+  margin: 50px auto;
 }
