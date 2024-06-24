@@ -53,12 +53,12 @@ function Navbar() {
           <div class="menu-blog menu-buttons">          
             <div class="menu-link"> <Link to="/FAQs"> FAQs </Link></div>     
           </div>
-
+ {/*   
           <div class="menu-blog menu-buttons">          
             <div class="menu-link"> <Link to="/CookiesDoc"> Cookie Usage </Link></div>     
           </div>
 
-   {/*       <div class="menu-video menu-buttons">          
+          <div class="menu-video menu-buttons">          
             <div class="menu-link"><Link to="/vid"> Video Guide </Link></div>  
           </div>
           

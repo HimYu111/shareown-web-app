@@ -351,7 +351,7 @@ const ageRef = useRef(null);
               ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
-              placeholder="£30,000"
+              placeholder="£40,000"
               value={formattedValues.income}
               onChange={handleInputChange}
             />
