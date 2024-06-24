@@ -69,7 +69,7 @@ const ToggleText = ({ className, regularText, toggleableText }) => {
 
 function Results({ result }) {
   if (!result) {
-    return <p></p>;
+    return <p></p>
   }
   const parseAndFormatData = (data) => {
     if (!data) return [];
@@ -183,7 +183,14 @@ function Results({ result }) {
         }
       }
     };
-    return <Bar data={data} options={options} />;
+    return ( 
+    <div>
+    <Bar data={data} options={options} />
+      <div>
+        <p className="text-xl font-bold text-white">This graph shows the share of the house you would own. Shared ownership allows you to buy additional shares over time.</p>
+      </div>
+    </div>
+    );
   };
   
   const renderloanchart = () => {
@@ -262,7 +269,14 @@ function Results({ result }) {
         }
       }
     };
-    return <Line data={data} options={options} />;
+    return ( 
+      <div>
+      <Line data={data} options={options} />
+        <div>
+          <p className="text-xl font-bold text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
+        </div>
+      </div>
+      );
   };
   
   const rendercompchart = () => {
@@ -341,13 +355,20 @@ function Results({ result }) {
         }
       }
     };
-    return <Line data={data} options={options} />;
+    return ( 
+      <div>
+      <Line data={data} options={options} />
+        <div>
+          <p className="text-xl font-bold text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
+        </div>
+      </div>
+      );
   };
 
   const rendercompchartmob = () => {
     if (!Array.isArray(net_wealth_ak_list)) {
       console.error('net_wealth_ak_list is not an array:', net_wealth_ak_list);
-      return null; // Or handle the error in another appropriate way
+      return null; 
     }
     const data = {
       labels: mob_age_ranges,
@@ -425,7 +446,14 @@ function Results({ result }) {
       },
     };
   
-    return <Bar data={data} options={options} />;
+    return ( 
+      <div>
+      <Bar data={data} options={options} />
+        <div>
+          <p className="text-xl font-bold text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
+        </div>
+      </div>
+      );
   };
   
   const rendercomphchart = () => {
@@ -497,7 +525,14 @@ function Results({ result }) {
         }
       }
     };
-    return <Line data={data} options={options} />;
+    return ( 
+      <div>
+      <Line data={data} options={options} />
+        <div>
+          <p className="text-xl font-bold text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
+        </div>
+      </div>
+      );
   };
 
   const rendercomphchartmob = () => {
@@ -569,7 +604,14 @@ function Results({ result }) {
         }
       }
     };
-    return <Bar data={data} options={options} />;
+    return ( 
+      <div>
+      <Bar data={data} options={options} />
+        <div>
+          <p className="text-xl font-bold text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
+        </div>
+      </div>
+      );
   };
 
 const renderTwoColumnsText = () => {
@@ -662,7 +704,7 @@ const renderTwoColumnsText = () => {
 
 const renderstaircasing = () => {
   if (result.TO_housing === 0 && result.SO_housing === 0) {
-    return <div className="text-center my-4"></div>;
+    return <div className="text-center my-4"></div>
   }
   return (
     <div className="text-white staircasing-wrapper std-wrapper">
