@@ -17,11 +17,12 @@ function CookieConsent() {
 
   return (
     <div className='banner-wrapper'>
-      <div className='banner banner-text' style={{ height: '33vh' }}>
+      {/*<div className='banner banner-text' style={{ height: '33vh' }}> */}
+      <div className='banner banner-text' > 
         <p>Please note that we use cookies to gather the session id and the numbers you input in order to further our research.</p>
         <div className='banner-buttons-wrapper'>
           <button className='banner-accept' onClick={giveConsent}>Accept Cookies</button>
-          <Link to="/CookiesDoc" className="banner-accept" style={{ textDecoration: 'none', display: 'inline-block', textAlign: 'center', lineHeight: 'normal' }}>Find out more</Link>
+          <button className='banner-accept'><Link to="/CookiesDoc" >Find out more</Link></button> 
         </div>
       </div>
     </div>
