@@ -212,8 +212,8 @@ function Results({ result }) {
           data: [...mortgagedata.map(item => parseFloat(item))],
          // borderColor: 'green',
          // backgroundColor: 'rgba(0, 255, 0, 0.5)',
-          borderColor: '#264d5a',
-          backgroundColor: '#264d5a',
+          borderColor: '#2d67b3',
+          backgroundColor: '#2d67b3',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -298,8 +298,8 @@ function Results({ result }) {
           data: [...SO_wealthdata.map(item => parseFloat(item))],
         //  borderColor: 'green',
         //  backgroundColor: 'rgba(0, 255, 0, 0.5)',
-        borderColor: '#264d5a',
-        backgroundColor: '#264d5a',
+        borderColor: '#2d67b3',
+        backgroundColor: '#2d67b3',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -384,8 +384,8 @@ function Results({ result }) {
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: net_wealth_cc_list.map(item => parseFloat(item)),
-          borderColor: '#264d5a',
-          backgroundColor: '#264d5a',
+          borderColor: '#2d67b3',
+          backgroundColor: '#2d67b3',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -471,8 +471,8 @@ function Results({ result }) {
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...SO_housedata.map(item => parseFloat(item))],
-          borderColor: '#264d5a',
-        backgroundColor: '#264d5a',
+          borderColor: '#2d67b3',
+        backgroundColor: '#2d67b3',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -550,8 +550,8 @@ function Results({ result }) {
         ...(result.SO_housing > 0 ? [{
           label: 'Shared Ownership',
           data: [...net_wealth_cd_list.map(item => parseFloat(item))],
-          borderColor: '#264d5a',
-        backgroundColor: '#264d5a',
+          borderColor: '#478194',
+        backgroundColor: '#478194',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -623,7 +623,7 @@ const renderTwoColumnsText = () => {
           <h2 className="text-xl font-bold text-white">
             <p className="text-xl font-bold text-white">
               You cannot afford Shared Ownership or full ownership with the current inputs and the
-              <Link to="/FAQs" className="text-blue-500 hover:underline">assumptions</Link> of the model.
+              <Link to="/FAQs" className="text-blue-500 hover:underline"> assumptions</Link> of the model.
             </p>
             <p>You can change some of the above inputs like the price of the home, the location, income, etc. to assess when you can afford Shared Ownership or/and full ownership.</p>
           </h2>

@@ -101,7 +101,7 @@ const FAQSection = () => {
 
 
   return (
-    <div>
+    <div className="faq-globalwrapper">
       <div className="container mx-auto faq-wrapper">
         <h1 className="faq-header">FAQs</h1>
         {faqs.map((faq, index) => (

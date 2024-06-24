@@ -23,6 +23,7 @@ function App() {
         <Input setResult={setResult} /> {/* Pass consent status to Input */}
         <Results result={result} />
         <Email result={result}/>
+
       </div>
       <Footer />
     </div>
