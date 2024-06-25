@@ -44,8 +44,8 @@ function Intro() {
         <div className="main-col1 main-col" >
           <div>
             <h2 className="text-4xl ">
-          What it is 
-          </h2>
+              Find out your pathway to full home ownership or alternatively, to shared ownership. Find out how your wealth changes over time under home ownership.
+            </h2>
           </div>
           <div>          
             <p >
@@ -70,15 +70,14 @@ function Intro() {
         </div>
         <div className="main-col3 main-col">
         <div>
-          <h2 className="text-4xl ">
-          What you find out
-          </h2>
-        </div>
-        <div>          
-          <p>
-          The calculator compares pathways to home ownership considering renting, buying using shared ownership and full ownership. 
-           </p>
-        </div>
+        <h4 className="text-2xl font-bold text-white">Pathways to home ownership</h4>
+          <p>A comparison between full ownership and shared ownership. See at what age you will be able to become a home owner, when you would fully own your home, the deposit needed and the costs associated with owning.</p>
+          <h4 className="text-2xl font-bold text-white">Staircasing</h4>
+          <p>In the case of shared ownership, find a timeline of optimal purchase of additional shares.</p>
+          <h4 className="text-2xl font-bold text-white">Lifetime wealth</h4>
+          <p> Compare lifetime wealth, savings and housing wealth under shared ownership and full ownership.</p>
+          <h4 className="text-2xl font-bold text-white">Mortgage debt</h4>
+          <p>Find out the outstanding mortgage debt under shared ownership and full ownership.</p>
 
         <div className="col3-additional-info">
           <h3 className="text-2xl">
@@ -113,7 +112,8 @@ function Intro() {
 
         <div className="cols-last-sentance">        
         </div>
-        
+        </div>
+
       </div>
     </div>
   );

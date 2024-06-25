@@ -23,7 +23,7 @@ const FAQSection = () => {
     },
     {
       question: "Is the calculator free to use?",
-      answer: `The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and do not provide financial advice. ®`
+      answer: `The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®`
     },
     {
       question: "How is my tax calculated?",
@@ -74,17 +74,13 @@ const FAQSection = () => {
             money you'll have saved up in a savings account by the time you retire, which it assumes will be at age 67.
           </p>
           <p>
-            <strong>Shared ownership:</strong> The calculator looks ahead to see when you'll be able to buy at least a 25% 
-            share of the home. This happens when you've saved enough for a deposit (at least 5% of the share you buy), and 
-            can get a mortgage for the rest. Once you're a shared owner, the calculator assumes you'll use your savings and 
-            borrow to buy additional shares over time (this is called "staircasing"). It then calculates when you will 
-            staircase to 100%. After that, the calculator helps you pay off your mortgage faster using all your savings. 
-            It will also determine the age at which you will be mortgage-free. Finally, it estimates how much money you'll 
-            have saved in a savings account by the time you retire, which it assumes will be at age 67.
+            <strong>Shared ownership:</strong> The calculator assesses affordability based on which the maximum share a household can buy is calculated. A minimum deposit of 5% of the share price is assumed. 
+            Also, the household should satisfy at the same time the mortgage constraints for the calculated share to be able to buy.
+            Once a shared owner, the calculator assumes the household uses all savings and matches it with additional borrowing at the 
+            95% loan-to-value ratio to buy the maximum additional shares that satisfy the affordability and mortgage constraints. 
+            It also calculates when the household will staircase to 100%. Finally, it estimates how much money you'll have saved in a savings account by 
+            the time the household retires, which it assumes will be at age 67.
           </p>
-          <div className="bg-white flex justify-center items-center faq-img">
-          <img src={flowchart} alt="Damian Flowchart"  className="w-auto h-auto"/>
-          </div>  
         </>
       )
     }
@@ -103,7 +99,7 @@ const FAQSection = () => {
   return (
     <div className="faq-globalwrapper">
       <div className="container mx-auto faq-wrapper">
-        <h1 className="faq-header">FAQs</h1>
+        <h1 className="faq-header">Frequently Asked Questions</h1>
         {faqs.map((faq, index) => (
           <div key={index} className="mb-4">
             <div

@@ -1036,7 +1036,7 @@ const renderScenariosExplained = () => {
                 total annual gross income.
               </p>
               <p>
-                The calculator will determine the earliest time you can afford to buy outright.
+                The calculator will determine the earliest time you can buy on the open market.
               </p>
             </div>
             <div className="scenarios-2ndcol std-2ndcol">
