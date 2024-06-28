@@ -185,7 +185,7 @@ function Results({ result }) {
     };
     return ( 
     <div>
-    <Bar data={data} options={options} />
+    <Bar data={data} options={options} className="stairchart-diagram std-diagram" />
       <div>
         <p className="undergraph-text text-white">This graph shows the share of the house you would own. Shared ownership allows you to buy additional shares over time.</p>
       </div>
@@ -271,7 +271,7 @@ function Results({ result }) {
     };
     return ( 
       <div>
-      <Line data={data} options={options} />
+      <Line data={data} options={options}  className="lonechart-diagram std-diagram"/>
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
         </div>
@@ -357,7 +357,7 @@ function Results({ result }) {
     };
     return ( 
       <div>
-      <Line data={data} options={options} />
+      <Line data={data} options={options} className="rendercompchart-diagram std-diagram"/>
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
         </div>
@@ -448,7 +448,7 @@ function Results({ result }) {
   
     return ( 
       <div>
-      <Bar data={data} options={options} />
+      <Bar data={data} options={options} className="std-diagram"/>
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
         </div>
@@ -527,7 +527,7 @@ function Results({ result }) {
     };
     return ( 
       <div>
-      <Line data={data} options={options} />
+      <Line data={data} options={options} className=" std-diagram" />
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
         </div>
@@ -606,7 +606,7 @@ function Results({ result }) {
     };
     return ( 
       <div>
-      <Bar data={data} options={options} />
+      <Bar data={data} options={options}  className=" std-diagram"/>
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
         </div>
@@ -896,14 +896,14 @@ const renderlifetimeWealth = () => {
       )}
       {(result.TO_wealthdata > 0 || result.SO_wealthdata > 0) && (
         <div className="charts">
-          <div id="comp" className="mb-2" style={{ height: '450px' }}>
+          <div id="comp" className="mb-2"  >
             {rendercompchart()}
           </div>
         </div>
       )}
       {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
-          <div id="comp" className="mb-2" style={{ height: '450px' }}>
+          <div id="comp" className="mb-2"  >
             {rendercomphchart()}
           </div>
         </div>
@@ -1014,7 +1014,7 @@ const rendermortgageRep = () => {
       )}
       {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
-          <div id="loan" className="mb-2" style={{ height: '450px' }}>
+          <div id="loan" className="mb-2"  >
             {renderloanchart()}
           </div>
         </div>
