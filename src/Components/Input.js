@@ -272,7 +272,7 @@ const ageRef = useRef(null);
         Calculate your housing options and wealth below
       </h2>
     </div>
-      <div className="flex justify-center pt-20 input-cols">
+      <div className="pt-20 input-cols">
         {/* Column 1 */}
         <div className="input-cols-1">
           <div className="mb-4">

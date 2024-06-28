@@ -420,6 +420,10 @@ button#btn-up:hover, button#btn-down:hover {
 
 .input-cols {
   max-width: 1100px;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
 }
 
 .loading-container-wrapper {
@@ -451,6 +455,7 @@ button#btn-up:hover, button#btn-down:hover {
   justify-content: center;
   gap:30px;
   flex: 0 0 80%;
+  flex-wrap: wrap;
 }
 
 
@@ -509,6 +514,7 @@ button#btn-up:hover, button#btn-down:hover {
   justify-content: center;
   gap: 20px;
   flex: 0 0 80%;
+  flex-wrap: wrap;
 }
 
  .std-wrapper {
@@ -805,4 +811,139 @@ h1.faq-header {
 
 input.email-input {
   color: black;
+}
+
+@media screen and (max-width:1100px) {
+  .std-wrapper {
+    padding:0px 20px
+  }
+  .std-diagram {
+    max-width: calc(100vw - 5%);
+    width: 100%;
+  }
+  .grapics-note {
+    font-size: 1.2em;
+  }
+
+  #btn-up, #btn-down {
+    display: none;
+  }
+  
+}
+/* 
+@media screen and (max-width:800px) {
+
+ .std-diagram{
+    max-width: calc(100vw - 5%);
+    width: 100%;
+  }
+
+  
+}
+*/ 
+
+
+@media screen and (max-width:400px) {
+
+  .std-diagram{
+    max-width: calc(100vw - 5%);
+    width: 100%;
+  }
+  .navbar {
+    flex-wrap: wrap;
+    padding: 25px 10px;
+  }
+  .navbar .img-logo-wrapper, .navbar .text-logo {
+    flex: 1 0 30%;
+    padding: 20px;
+  }
+
+  .navbar .menu-buttons-wrapper {
+    flex: 1 0 100%;
+  }
+  .text-logo {
+    font-size: 2em;
+  }
+
+  p.text-3xl.text-white.py-10 {
+    font-size: 1.5rem;
+  }
+
+  h1.text-6xl.text-white.py-10 {
+    font-size: 2.5rem;
+  }
+
+  .main-intro-wrapper, .main-3-cols, .input-wrapper, .before-footer-wrapper .results-wrapper, .before-footer-wrapper .prefooter-wrapper , {
+    padding-right:25px;
+    padding-left:25px;
+  }
+  .main-col1, .main-col2 {
+     flex: 1 0 100%; 
+  }
+  .main-col1-2nd-part {
+    padding-top: 50px;
+    padding-bottom: 50px;
+  }
+  .main-col {
+    padding: 0;
+  }
+  .input-header-txt {
+    font-size: 2em;
+  }
+  .input-cols {
+     gap: 0px; 
+  }
+  .input-cols-1, .input-cols-2 {
+    flex: 1 0 100%;
+    height: inherit;
+  }
+  .input-cols-1 div, .input-cols-2 div {
+    margin-bottom: 40px;
+  }
+  .input-btn {
+    width: inherit;
+  }
+
+  div#results {
+    padding: 0px;
+  }
+  .std-wrapper h1 {
+    font-size: 2.2rem;
+  }
+  .std-wrapper, .results {
+    margin: 60px 0px 60px;
+  }
+  .std-1stcol, .std-2ndcol, .std-2cols-wrapper div {
+
+    flex: 1 0 100%;
+  } 
+
+  .toggleable-text {
+    width: calc(100vw - 100px);
+  }
+
+  .results-fullOwn, .results-sharedOwn {
+    font-size: 1.7rem;
+    padding: inherit;
+  }
+  .results-number {
+    font-size: 1.4em;
+    margin-bottom: 25px;
+
+  }
+
+  .results h1 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    width: 60%;
+  }
+
+  h1.faq-header {
+    margin: 10px auto;
+
+    font-size: 2.2em;
+  }
+  .tnc-globalwrapper{
+    padding:25px;
+  }
 }

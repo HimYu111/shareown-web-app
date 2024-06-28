@@ -25,7 +25,7 @@ function Results({ result }) {
   };
 
   return (
-    <div>
+    <div className='before-footer-wrapper'>
     <div className="bg-slate-800 py-20 text-white results-wrapper">
       <div className='email-container'>
       <div className='email-wrapper'>
