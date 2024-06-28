@@ -213,16 +213,30 @@ button.btn.btn-lg.text-neutral:hover
 }
 
 .main-col div {
-  padding: 10px 0px;
   font-size: 1.2em;
 }
-.main-col h2, .main-col h3 {
+.main-col h2, .main-col h3, .main-col h4  {
   color:#264d5a;
   font-weight: bold;
 }
 
 .main-col1,.main-col2 {
-  flex: 1 0 25%;
+  flex: 1 0 50%;
+}
+
+.main-col h2 {
+  padding-bottom: 25px;
+}
+.main-col p {
+  padding: 10px 0px;
+}
+
+.main-col1-2nd-part {
+  padding-top: 100px;
+}
+
+p.main-col2-underheading {
+  padding-bottom: 40px;
 }
 
 .main-col3 {
@@ -503,7 +517,6 @@ button#btn-up:hover, button#btn-down:hover {
 }
 
 .grapics-note {
-  font-size: 1.1em;
   margin: 80px 0px 10px 0px;
 }
 
@@ -775,4 +788,21 @@ h1.faq-header {
   text-align: center;
   display: inline-block;
   margin: 50px auto;
+}
+
+.tnc-globalwrapper {
+  background-color: #8ba4ad;
+  color: black;
+  border-radius: 10px;
+  display: flex;
+  justify-content: flex-start;
+  padding: 100px 150px;
+}
+
+.lifetime-wrapper h1 svg {
+  font-size: 0.5em;
+}
+
+input.email-input {
+  color: black;
 }
