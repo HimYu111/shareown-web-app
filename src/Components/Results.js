@@ -822,9 +822,9 @@ const renderstaircasing = () => {
               <div className="initial-share">
                 <p className="font-bold">Initial Share</p>
                 <p>You can afford to buy an initial share of</p>
-                <p><span className="results-number">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
+                <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
                 <p>at the age of</p>
-                <p><span className="results-number">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
+                <p><span className="results-number mb-3">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
               </div>
             </div>
             <div className="lifetime-2ndcol std-2ndcol">
@@ -835,7 +835,7 @@ const renderstaircasing = () => {
                   toggleableText="Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs."
                 />
                 <p>Staircase to 100% by the age of</p>
-                <p><span className="results-number">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</span></p>
+                <p><span className="results-number mb-3">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</span></p>
               </div>
             </div>
           </div>
@@ -1039,8 +1039,8 @@ const rendermortgageRep = () => {
                 regularText =" "
                 toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
               />
-              {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
-              (<div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
+              {result.SO_mortgage_finish < 1 ? (<div className="results-number mb-3">now</div>) : 
+              (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
             </p>
           </div>
         </div>
@@ -1055,7 +1055,7 @@ const rendermortgageRep = () => {
                 toggleableText="Assuming you use all your savings to make prepayments."
               />
               {result.TO_finish < 1 ? (<div className="results-number">now</div>) : 
-              (<div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
+              (<div className="results-number mb-3">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
             </p>
           </div>
           <div className="mortgage-2ndcol std-2ndcol">
@@ -1076,7 +1076,7 @@ const rendermortgageRep = () => {
                 toggleableText="Assuming you use all your savings to make prepayments."
               />
               {result.TO_finish < 1 ? (<div className="results-number">now</div>) : 
-              (<div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
+              (<div className="results-number mb-3">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
             </p>
           </div>
           <div className="mortgage-2ndcol std-2ndcol">
@@ -1092,26 +1092,26 @@ const rendermortgageRep = () => {
           <div className="mortgage-2cols-wrapper std-2cols-wrapper">
             <div className="mortgage-1stcol std-1stcol">
               <h2 className="results-fullOwn">Full Ownership</h2>
-              <p className="font-bold">You will be mortgage free {result.TO_finish < 1 ? '' : 'by the age of'}
+              <p className="font-bold mb-3">You will be mortgage free {result.TO_finish < 1 ? '' : 'by the age of'}
                 <ToggleText
                   className="font-bold" 
                   regularText =" "
                   toggleableText="Assuming you use all your savings to make prepayments."
                 />
                 {result.TO_finish < 1 ? (<div className="results-number">now</div>) : 
-                (<div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
+                (<div className="results-number mb-3">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
               </p>
             </div>
             <div className="mortgage-2ndcol std-2ndcol">
               <h2 className="results-sharedOwn">Shared Ownership</h2>
-              <p className="font-bold">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
+              <p className="font-bold mb-3">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
                 <ToggleText
                   className="font-bold" 
                   regularText =" "
                   toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
                 />
                 {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
-                (<div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
+                (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
               </p>
             </div>
           </div>
