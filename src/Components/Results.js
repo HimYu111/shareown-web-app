@@ -88,9 +88,7 @@ function Results({ result }) {
   };
 
   const parseNumericList = (str) => {
-    // Remove surrounding brackets [ and ]
     const trimmedStr = str.slice(1, -1);
-    // Split by commas and map to numbers
     return trimmedStr.split(',').map(item => parseFloat(item.trim()));
   };
 
@@ -100,6 +98,8 @@ function Results({ result }) {
   const net_wealth_ak_list = parseNumericList(result.net_wealth_ak_by_age_range);
   const net_wealth_al_list = parseNumericList(result.net_wealth_cc_by_age_range);
   const net_wealth_cc_list = parseNumericList(result.net_wealth_al_by_age_range);
+  const net_wealth_aa_list = parseNumericList(result.net_wealth_aa_by_age_range);
+  const net_wealth_bt_list = parseNumericList(result.net_wealth_bt_by_age_range);
   
   const age_stairgraph = result?.age_stairgraph ? JSON.parse(result.age_stairgraph) : [];
   const share_stairgraph = result?.share_stairgraph ? JSON.parse(result.share_stairgraph) : [];
@@ -272,6 +272,97 @@ function Results({ result }) {
     return ( 
       <div>
       <Line data={data} options={options}  className="lonechart-diagram std-diagram"/>
+        <div>
+          <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
+        </div>
+      </div>
+      );
+  };
+
+  const renderloanchartmob = () => {
+    if (!Array.isArray(net_wealth_ak_list)) {
+      console.error('net_wealth_aa_list is not an array:', net_wealth_aa_list);
+      return null; 
+    }
+    const data = {
+      labels: mob_age_ranges,
+      datasets: [
+        ...(result.TO_housing > 0 ? [{
+          label: 'Full Ownership',
+          data: net_wealth_aa_list.map(item => parseFloat(item)),
+          borderColor: '#68aac0',
+          backgroundColor: '#68aac0',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+        ...(result.SO_housing > 0 ? [{
+          label: 'Shared Ownership',
+          data: net_wealth_bt_list.map(item => parseFloat(item)),
+          borderColor: '#2d67b3',
+          backgroundColor: '#2d67b3',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+      ]
+    };
+  
+    const options = {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top',
+          labels: {
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+        },
+        title: {
+          display: true,
+          text: 'Savings',
+          color: 'white',
+          font: {
+            size: 24,
+          },
+        },
+      },
+      scales: {
+        x: {
+          title: {
+            display: true,
+            text: 'Age',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+          },
+        },
+        y: {
+          title: {
+            display: true,
+            text: 'Savings (£)',
+            color: 'white',
+            font: {
+              size: 18,
+            },
+          },
+          ticks: {
+            color: 'white',
+            callback: function(value, index, values) {
+              return `${value.toFixed(0)}`; 
+            },
+          },
+        },
+      },
+    };
+  
+    return ( 
+      <div>
+      <Bar data={data} options={options} className="std-diagram"/>
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
         </div>
@@ -762,6 +853,9 @@ const renderstaircasing = () => {
 
 
 const renderlifetimeWealth = () => {
+  const isMobileScreen = () => {
+    return window.innerWidth < 500;
+  };
   if (result.TO_housing === 0 && result.SO_housing === 0) {
     return (
       <div className="text-center my-4">
@@ -894,17 +988,25 @@ const renderlifetimeWealth = () => {
           </div>
         </div>
       )}
-      {(result.TO_wealthdata > 0 || result.SO_wealthdata > 0) && (
+      {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
-          <div id="comp" className="mb-2"  >
-            {rendercompchart()}
+          <div id="comp" className="mb-2"  >  
+          {isMobileScreen() ? (
+              <div>{rendercompchartmob()}</div>
+            ) : (
+              <div>{rendercompchart()}</div>
+            )}
           </div>
         </div>
       )}
       {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
           <div id="comp" className="mb-2"  >
-            {rendercomphchart()}
+          {isMobileScreen() ? (
+              <div>{rendercomphchartmob()}</div>
+            ) : (
+              <div>{rendercomphchart()}</div>
+            )}
           </div>
         </div>
       )}
@@ -913,6 +1015,9 @@ const renderlifetimeWealth = () => {
 }
 
 const rendermortgageRep = () => {
+  const isMobileScreen = () => {
+    return window.innerWidth < 500;
+  };
   if (result.TO_housing === 0 && result.SO_housing === 0) {
     return (
       <div className="text-center my-4"></div>
@@ -1015,7 +1120,11 @@ const rendermortgageRep = () => {
       {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
           <div id="loan" className="mb-2"  >
-            {renderloanchart()}
+            {isMobileScreen() ? (
+              <div>{renderloanchartmob()}</div>
+            ) : (
+              <div>{renderloanchart()}</div>
+            )}
           </div>
         </div>
       )}
