@@ -465,7 +465,7 @@ button#btn-up:hover, button#btn-down:hover {
 
 .std-1stcol, .std-2ndcol, .std-2cols-wrapper div{
   text-align: left;
-  flex: 1 0 50%;
+  flex: 1 0 47%;
 }
 
 
