@@ -461,22 +461,23 @@ function Results({ result }) {
       console.error('net_wealth_ak_list is not an array:', net_wealth_ak_list);
       return null; 
     }
+    
     const data = {
       labels: mob_age_ranges,
       datasets: [
         ...(result.TO_housing > 0 ? [{
-          label: 'Full Ownership',
+          label: 'FO',
           data: net_wealth_ak_list.map(item => parseFloat(item)),
-          borderColor: '#68aac0',
-          backgroundColor: '#68aac0',
+          borderColor: '#8ba4ad',
+          backgroundColor: '#8ba4ad',
           borderWidth: 1,
           fill: false,
         }] : []),
         ...(result.SO_housing > 0 ? [{
-          label: 'Shared Ownership',
+          label: 'SO',
           data: net_wealth_cc_list.map(item => parseFloat(item)),
-          borderColor: '#2d67b3',
-          backgroundColor: '#2d67b3',
+          borderColor: '#478194',
+          backgroundColor: '#478194',
           borderWidth: 1,
           fill: false,
         }] : []),
@@ -485,6 +486,7 @@ function Results({ result }) {
   
     const options = {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: 'top',
@@ -536,15 +538,20 @@ function Results({ result }) {
         },
       },
     };
-  
-    return ( 
-      <div>
-      <Bar data={data} options={options} className="std-diagram"/>
+
+    const chartContainerStyle = {
+      height: '50vh', 
+      width: '100%',
+    };
+
+    return (
+      <div style={chartContainerStyle}>
+        <Bar data={data} options={options} className="std-diagram" />
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
         </div>
       </div>
-      );
+    );
   };
   
   const rendercomphchart = () => {
@@ -631,7 +638,7 @@ function Results({ result }) {
       labels: [...mob_age_ranges],
       datasets: [
         ...(result.TO_housing > 0 ? [{
-          label: 'Full Ownership',
+          label: 'FO',
           data: [...net_wealth_al_list.map(item => parseFloat(item))],
           borderColor: '#8ba4ad',
           backgroundColor: '#8ba4ad',
@@ -639,7 +646,7 @@ function Results({ result }) {
           fill: false,
         }] : []),
         ...(result.SO_housing > 0 ? [{
-          label: 'Shared Ownership',
+          label: 'SO',
           data: [...net_wealth_cd_list.map(item => parseFloat(item))],
           borderColor: '#478194',
         backgroundColor: '#478194',
@@ -650,6 +657,7 @@ function Results({ result }) {
     };
     const options = {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: 'top',
@@ -695,8 +703,14 @@ function Results({ result }) {
         }
       }
     };
+
+    const chartContainerStyle = {
+      height: '50vh', 
+      width: '100%',
+    };
+
     return ( 
-      <div>
+      <div style={chartContainerStyle}>
       <Bar data={data} options={options}  className=" std-diagram"/>
         <div>
           <p className="undergraph-text text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
