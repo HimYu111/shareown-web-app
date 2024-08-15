@@ -946,4 +946,8 @@ input.email-input {
   .tnc-globalwrapper{
     padding:25px;
   }
+
+  .std-1stcol, .std-2ndcol, .lifetime-wrapper div#comp {
+    margin-bottom:55px;
+  }
 }
