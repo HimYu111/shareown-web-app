@@ -16,6 +16,7 @@ function Input({ setResult }) {
     age: "",
     savings: "",
     currentRent: "",
+    loan_repayment: "",
   });
   const [formattedValues, setFormattedValues] = useState({
     housePrice: "",
@@ -23,6 +24,7 @@ function Input({ setResult }) {
     monthspending: "",
     savings: "",
     currentRent: "",
+    loan_repayment: "",
   });
 
   const ageInputRef = useRef(null);
@@ -59,6 +61,7 @@ function Input({ setResult }) {
       inputValues.monthspending,
       inputValues.age,
       inputValues.savings,
+      inputValues.loan_repayment,
       inputValues.currentRent,
     ];
     return inputs.every(input => input !== "" && input !== null);
@@ -93,6 +96,7 @@ function Input({ setResult }) {
             headOfHouseholdAge: parseFloat(inputValues.age),
             savings: parseFloat(inputValues.savings),
             currentRent: parseFloat(inputValues.currentRent),
+            loan_repayment: parseFloat(inputValues.loan_repayment),
         };
 
         console.log("Sending data to server:", postData);
@@ -325,6 +329,20 @@ const ageRef = useRef(null);
               <option value="No">No</option>
             </select>
           </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              Do you pay back any other loans, i.e. student/car, and if yes, how much is that per month?
+            </label>
+            <input
+              id="currentRent"
+              ref={ageInputRef}
+              className="input input-bordered w-full"
+              type="text"
+              placeholder="£800"
+              value={formattedValues.currentRent}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
         {/* Column 2 */}
         <div className="input-cols-2">
@@ -358,7 +376,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              How much do you think you spend each month (excluding housing)?
+              How much do you spend each month excluding housing and loans??
             </label>
             <input
               id="monthspending"

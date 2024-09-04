@@ -280,23 +280,34 @@ function Results({ result }) {
   };
 
   const renderloanchartmob = () => {
-    if (!Array.isArray(net_wealth_ak_list)) {
-      console.error('net_wealth_aa_list is not an array:', net_wealth_aa_list);
-      return null; 
+    if (!Array.isArray(net_wealth_aa_list) || !Array.isArray(net_wealth_bt_list)) {
+      console.error('net_wealth_aa_list or net_wealth_bt_list is not an array:', net_wealth_aa_list, net_wealth_bt_list);
+      return null;
     }
+  
+    const isAllZeros = (arr) => arr.every(item => item === 0);
+  
+    const allAaZeros = isAllZeros(net_wealth_aa_list);
+    const allBtZeros = isAllZeros(net_wealth_bt_list);
+  
+    // Do not render if both arrays are all zeros
+    if (allAaZeros && allBtZeros) {
+      return null;
+    }
+  
     const data = {
       labels: mob_age_ranges,
       datasets: [
-        ...(result.TO_housing > 0 ? [{
-          label: 'Full Ownership',
+        ...(result.TO_housing > 0 && !allAaZeros ? [{
+          label: 'FO',
           data: net_wealth_aa_list.map(item => parseFloat(item)),
           borderColor: '#68aac0',
           backgroundColor: '#68aac0',
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 ? [{
-          label: 'Shared Ownership',
+        ...(result.SO_housing > 0 && !allBtZeros ? [{
+          label: 'SO',
           data: net_wealth_bt_list.map(item => parseFloat(item)),
           borderColor: '#2d67b3',
           backgroundColor: '#2d67b3',
@@ -308,6 +319,7 @@ function Results({ result }) {
   
     const options = {
       responsive: true,
+      maintainAspectRatio: false,
       plugins: {
         legend: {
           position: 'top',
@@ -320,7 +332,7 @@ function Results({ result }) {
         },
         title: {
           display: true,
-          text: 'Savings',
+          text: 'Mortgage Debt',
           color: 'white',
           font: {
             size: 24,
@@ -344,7 +356,7 @@ function Results({ result }) {
         y: {
           title: {
             display: true,
-            text: 'Savings (£)',
+            text: 'Mortgage Debt (£)',
             color: 'white',
             font: {
               size: 18,
@@ -360,15 +372,25 @@ function Results({ result }) {
       },
     };
   
+    const chartContainerStyle = {
+      height: '50vh',
+      width: '100%',
+    };
+  
     return ( 
-      <div>
-      <Bar data={data} options={options} className="std-diagram"/>
+      <div style={chartContainerStyle}>
+        <Bar data={data} options={options} className="std-diagram" />
         <div>
-          <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
+          <p className="undergraph-text text-white mb-6">
+            This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.
+          </p>
         </div>
       </div>
-      );
+    );
   };
+  
+  
+  
   
   const rendercompchart = () => {
     const data = {
@@ -457,31 +479,52 @@ function Results({ result }) {
   };
 
   const rendercompchartmob = () => {
-    if (!Array.isArray(net_wealth_ak_list)) {
-      console.error('net_wealth_ak_list is not an array:', net_wealth_ak_list);
-      return null; 
+    if (!Array.isArray(net_wealth_ak_list) || !Array.isArray(net_wealth_cc_list)) {
+      console.error('net_wealth_ak_list or net_wealth_cc_list is not an array:', net_wealth_ak_list, net_wealth_cc_list);
+      return null;
     }
-    
+  
+    const isAllZeros = (arr) => arr.every(item => item === 0);
+  
+    // Prepare datasets based on conditions
+    const datasets = [
+      ...(result.TO_housing > 0 ? [{
+        label: 'FO',
+        data: net_wealth_ak_list.map(item => parseFloat(item)),
+        borderColor: '#8ba4ad',
+        backgroundColor: '#8ba4ad',
+        borderWidth: 1,
+        fill: false,
+      }] : []),
+      ...(result.SO_housing > 0 ? [{
+        label: 'SO',
+        data: net_wealth_cc_list.map(item => parseFloat(item)),
+        borderColor: '#478194',
+        backgroundColor: '#478194',
+        borderWidth: 1,
+        fill: false,
+      }] : []),
+    ];
+  
+    // Determine if any of the datasets have non-zero values
+    // Check if `FO` dataset is included
+    const isFOIncluded = result.TO_housing > 0;
+  
+    // Determine if `SO` dataset is included
+    const isSOIncluded = result.SO_housing > 0;
+  
+    // Check if each included dataset has non-zero values
+    const hasData = (isFOIncluded && !isAllZeros(net_wealth_ak_list)) ||
+                     (isSOIncluded && !isAllZeros(net_wealth_cc_list));
+  
+    // Return null if no meaningful data
+    if (!hasData) {
+      return null;
+    }
+  
     const data = {
-      labels: mob_age_ranges,
-      datasets: [
-        ...(result.TO_housing > 0 ? [{
-          label: 'FO',
-          data: net_wealth_ak_list.map(item => parseFloat(item)),
-          borderColor: '#8ba4ad',
-          backgroundColor: '#8ba4ad',
-          borderWidth: 1,
-          fill: false,
-        }] : []),
-        ...(result.SO_housing > 0 ? [{
-          label: 'SO',
-          data: net_wealth_cc_list.map(item => parseFloat(item)),
-          borderColor: '#478194',
-          backgroundColor: '#478194',
-          borderWidth: 1,
-          fill: false,
-        }] : []),
-      ]
+      labels: [...mob_age_ranges],
+      datasets: datasets,
     };
   
     const options = {
@@ -492,9 +535,6 @@ function Results({ result }) {
           position: 'top',
           labels: {
             color: 'white',
-            font: {
-              size: 18,
-            },
           },
         },
         title: {
@@ -531,19 +571,16 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value, index, values) {
-              return `${value.toFixed(0)}`; 
-            },
           },
-        },
-      },
+        }
+      }
     };
-
+  
     const chartContainerStyle = {
-      height: '50vh', 
+      height: '50vh',
       width: '100%',
     };
-
+  
     return (
       <div style={chartContainerStyle}>
         <Bar data={data} options={options} className="std-diagram" />
@@ -1180,7 +1217,9 @@ const renderScenariosExplained = () => {
 
 console.log('mob_age_ranges:', mob_age_ranges);
 console.log('net_wealth_ak_list:', net_wealth_ak_list);
+console.log('net_wealth_al_list:', net_wealth_al_list);
 console.log('net_wealth_cc_list:', net_wealth_cc_list);
+console.log('net_wealth_cd_list:', net_wealth_cd_list);
 
 return (
 <div className="main-results-container">

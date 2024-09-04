@@ -41,24 +41,12 @@ const FAQSection = () => {
       answer: (
         <div  style={{ width: '100%', textAlign: 'left' }}>
           <p>• Interest rate on deposits/savings: 3%.</p>
-          <p>• Inflation rate p.a.: 3%.</p>
-          <p>• Mortgage rate p.a.: 4%.</p>
-          <p>• House price appreciation p.a.: 5%.</p>
-          <p>• Market rent appreciation: 3.5%.</p>
           <p>• Rent paid for Shared Ownership: For the first year it is 2.75% of the initial value of the home. After that it grows with the assumed inflation rate.</p>
           <p>• Service charge/House maintenance cost p.a.: 1%.</p>
           <p>• The model assumes a retirement age at 67. After that no wealth is accumulated.</p>
-          <p>• Loan to Value ratio for full ownership: 95% of the indicated price.</p>
-          <p>• Loan to Value ratio for Shared Ownership: 95% of the value of the maximum affordable share.</p>
-          <p>• Loan-to-income ratio: Total mortgage debt cannot exceed 4.5 times the indicated annual gross income.</p>
           <p>• Affordability constraint: We account for the income affordability constraint associated with Shared Ownership following Homes England guidelines.</p>
           <p>• Minimum initial share for Shared Ownership: 25%.</p>
-          <p>• Transaction costs: 0%.</p>
           <p>• Staircasing fees for Shared Ownership: £1,000.</p>
-          <p>• No tax is applied below £12,570.</p>
-          <p>• The basic 20% tax rate is applied to income between £12,571 and £50,270.</p>
-          <p>• The higher 40% tax rate is applied to income between £50,271 and £125,140.</p>
-          <p>• The additional 45% tax rate is applied to income above £125,140.</p>
         </div>
       )
     },
