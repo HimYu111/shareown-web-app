@@ -334,12 +334,12 @@ const ageRef = useRef(null);
               Do you pay back any other loans, i.e. student/car, and if yes, how much is that per month?
             </label>
             <input
-              id="currentRent"
+              id="loan_repayment"
               ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
               placeholder="£800"
-              value={formattedValues.currentRent}
+              value={formattedValues.loan_repayment}
               onChange={handleInputChange}
             />
           </div>
