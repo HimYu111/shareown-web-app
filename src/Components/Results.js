@@ -88,18 +88,53 @@ function Results({ result }) {
   };
 
   const parseNumericList = (str) => {
+    console.log('Type of str:', typeof str);  // Log the type of the input
+    console.log('Value of str:', str);        // Log the actual value of the input
+    
+    if (typeof str !== 'string') {
+      console.error('Expected a string but got:', typeof str);
+      return [];
+    }
+  
     const trimmedStr = str.slice(1, -1);
     return trimmedStr.split(',').map(item => parseFloat(item.trim()));
   };
-
+  
+  // Log the type and value for mob_age_ranges
   const mob_age_ranges = result?.age_ranges ? JSON.parse(result.age_ranges) : [];
-
+  console.log('Type of age_ranges:', typeof result?.age_ranges);
+  console.log('Value of age_ranges:', result?.age_ranges);
+  
+  // Log the type and value for net_wealth_cd_by_age_range
+  console.log('Type of net_wealth_cd_by_age_range:', typeof result?.net_wealth_cd_by_age_range);
+  console.log('Value of net_wealth_cd_by_age_range:', result?.net_wealth_cd_by_age_range);
   const net_wealth_cd_list = parseNumericList(result.net_wealth_cd_by_age_range);
+  
+  // Log the type and value for net_wealth_ak_by_age_range
+  console.log('Type of net_wealth_ak_by_age_range:', typeof result?.net_wealth_ak_by_age_range);
+  console.log('Value of net_wealth_ak_by_age_range:', result?.net_wealth_ak_by_age_range);
   const net_wealth_ak_list = parseNumericList(result.net_wealth_ak_by_age_range);
+  
+  // Log the type and value for net_wealth_cc_by_age_range
+  console.log('Type of net_wealth_cc_by_age_range:', typeof result?.net_wealth_cc_by_age_range);
+  console.log('Value of net_wealth_cc_by_age_range:', result?.net_wealth_cc_by_age_range);
   const net_wealth_al_list = parseNumericList(result.net_wealth_cc_by_age_range);
+  
+  // Log the type and value for net_wealth_al_by_age_range
+  console.log('Type of net_wealth_al_by_age_range:', typeof result?.net_wealth_al_by_age_range);
+  console.log('Value of net_wealth_al_by_age_range:', result?.net_wealth_al_by_age_range);
   const net_wealth_cc_list = parseNumericList(result.net_wealth_al_by_age_range);
+  
+  // Log the type and value for net_wealth_aa_by_age_range
+  console.log('Type of net_wealth_aa_by_age_range:', typeof result?.net_wealth_aa_by_age_range);
+  console.log('Value of net_wealth_aa_by_age_range:', result?.net_wealth_aa_by_age_range);
   const net_wealth_aa_list = parseNumericList(result.net_wealth_aa_by_age_range);
+  
+  // Log the type and value for net_wealth_bt_by_age_range
+  console.log('Type of net_wealth_bt_by_age_range:', typeof result?.net_wealth_bt_by_age_range);
+  console.log('Value of net_wealth_bt_by_age_range:', result?.net_wealth_bt_by_age_range);
   const net_wealth_bt_list = parseNumericList(result.net_wealth_bt_by_age_range);
+  
   
   const age_stairgraph = result?.age_stairgraph ? JSON.parse(result.age_stairgraph) : [];
   const share_stairgraph = result?.share_stairgraph ? JSON.parse(result.share_stairgraph) : [];
@@ -388,9 +423,6 @@ function Results({ result }) {
       </div>
     );
   };
-  
-  
-  
   
   const rendercompchart = () => {
     const data = {
@@ -1215,11 +1247,25 @@ const renderScenariosExplained = () => {
   );
 };
 
-console.log('mob_age_ranges:', mob_age_ranges);
-console.log('net_wealth_ak_list:', net_wealth_ak_list);
-console.log('net_wealth_al_list:', net_wealth_al_list);
-console.log('net_wealth_cc_list:', net_wealth_cc_list);
-console.log('net_wealth_cd_list:', net_wealth_cd_list);
+
+console.log("TO_age", result.TO_age);
+console.log("TO_time", result.TO_time);
+console.log("TO_finish", result.TO_finish);
+console.log("TO_liquid", result.TO_liquid);
+console.log("TO_housing", result.TO_housing,);
+console.log("TO_deposit", result.TO_deposit);
+console.log("TO_mortgage", result.TO_mortgage);
+console.log("SO_start_age", result.SO_start_age,);
+console.log("SO_time", result.SO_time);
+console.log("SO_staircase_finish", result.SO_staircase_finish);
+console.log("SO_mortgage_finish", result.SO_mortgage_finish);
+console.log("SO_liquid", result.SO_liquid);
+console.log("SO_housing", result.SO_housing);
+console.log("SO_deposit", result.SO_deposit);
+console.log("SO_mortgage", result.SO_mortgage);
+console.log("SO_share", result.SO_share);
+
+
 
 return (
 <div className="main-results-container">

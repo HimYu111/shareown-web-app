@@ -281,7 +281,7 @@ const ageRef = useRef(null);
         <div className="input-cols-1">
           <div className="mb-4">
             <label className="block text-black mb-2">
-              What local authority do you want to live in?
+              What local authority does your household want to live in?
             </label>
             <select className="input input-bordered w-full" id="input-1">
                 {options.map((postcode, index) => (
@@ -291,7 +291,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              What kind of property do you want to live in?
+              What type of property does your household want to live in?
             </label>
             <select className="input input-bordered w-full" id="input-2">
               {propertyTypeOptions.map((option, index) => (
@@ -331,14 +331,13 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              Do you pay back any other loans, i.e. student/car, and if yes, how much is that per month?
-            </label>
+              Please indicate how much does your household pay per month in loans (student/car/credit card). If there are none, put 0.</label>
             <input
               id="loan_repayment"
               ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
-              placeholder="£800"
+              placeholder="£500"
               value={formattedValues.loan_repayment}
               onChange={handleInputChange}
             />
@@ -348,8 +347,7 @@ const ageRef = useRef(null);
         <div className="input-cols-2">
           <div className="mb-4">
               <label className="block text-black mb-2">
-                What is the price of the home you wish to purchase?
-              </label>
+              What is the price of the home your household wishes to purchase?</label>
               <input
                 id="housePrice"
                 ref={ageInputRef}
@@ -362,7 +360,7 @@ const ageRef = useRef(null);
             </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              What is the gross annual income of yourself and your partner?
+              What is the gross annual income of your household?
             </label>
             <input
               id="income"
@@ -376,7 +374,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              How much do you spend each month excluding housing and loans??
+              How much does your household spend each month excluding housing and loans?
             </label>
             <input
               id="monthspending"
@@ -405,7 +403,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              How much in savings do you have?
+              How much in savings does your household have?
             </label>
             <input
               id="savings"
@@ -419,7 +417,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              What is your current monthly rent or housing expenditure (mortgage)?
+              What is your household’s current monthly housing expenditure (rent/mortgage)?
             </label>
             <input
               id="currentRent"
