@@ -337,7 +337,7 @@ const ageRef = useRef(null);
               ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
-              placeholder="£500"
+              placeholder="£0"
               value={formattedValues.loan_repayment}
               onChange={handleInputChange}
             />

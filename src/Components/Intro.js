@@ -23,7 +23,7 @@ function Intro() {
         </h1>
         <div className="main-underheading">
         <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
-        Find out your home ownership options 
+        Explore your options for owning a home
         </p>     
         <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
         Calculate your lifetime wealth under various ownership scenarios 
@@ -47,7 +47,7 @@ function Intro() {
             What it is
             </h2>
             <p >
-            Find out your pathway to full ownership or alternatively, to shared ownership. 
+            Explore your options for full and shared ownership. 
            </p>
            <p >
            Find out your wealth over time as a home owner.
@@ -75,7 +75,7 @@ function Intro() {
           <p>See at what age you will be able to become a home owner, when you would fully own your home, the deposit needed and the costs associated with owning.
           </p>
           <h4 className="text-2xl font-bold ">Staircasing</h4>
-          <p>In the case of shared ownership, find a timeline of optimal purchase of additional shares.
+          <p>In the case of shared ownership, determine the timeline for buying additional shares.
           </p>
           <h4 className="text-2xl font-bold ">Lifetime wealth</h4>
           <p>Compare lifetime wealth, savings and housing wealth under shared ownership and full ownership.

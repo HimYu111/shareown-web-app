@@ -300,6 +300,9 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
+            callback: function(value) {
+              return value.toLocaleString();
+            },
           },
         }
       }
@@ -308,7 +311,7 @@ function Results({ result }) {
       <div>
       <Line data={data} options={options}  className="lonechart-diagram std-diagram"/>
         <div>
-          <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the house you are buying. Remortgaging allows you to own your house quicker.</p>
+          <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the home you are buying. Remortgaging allows you to own your home quicker.</p>
         </div>
       </div>
       );
@@ -399,8 +402,8 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value, index, values) {
-              return `${value.toFixed(0)}`; 
+            callback: function(value) {
+              return value.toLocaleString();
             },
           },
         },
@@ -496,6 +499,9 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
+            callback: function(value) {
+              return value.toLocaleString();
+            },
           },
         }
       }
@@ -603,6 +609,9 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
+            callback: function(value) {
+              return value.toLocaleString();
+            },
           },
         }
       }
@@ -688,6 +697,9 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
+            callback: function(value) {
+              return value.toLocaleString();
+            },
           },
         }
       }
@@ -768,6 +780,9 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
+            callback: function(value) {
+              return value.toLocaleString();
+            },
           },
         }
       }
@@ -807,7 +822,7 @@ const renderTwoColumnsText = () => {
   }
   return (
     <div className="results">
-      <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
+      <h1 className="text-2xl justify-center text-white">Price of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
       <div className="text-white results-2cols">
         {result.TO_housing === 0 ? (
           <div className="results-1st-col std-1stcol">
