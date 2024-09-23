@@ -147,6 +147,18 @@ function Results({ result }) {
   const TO_housedata = result?.TO_house_data ? JSON.parse(result.TO_house_data) : [];
   const SO_housedata = result?.SO_house_data ? JSON.parse(result.SO_house_data) : [];
   
+  const higherIncomePostcodes = [
+    "City of London", "London", "Barking and Dagenham", "Barnet", "Bexley", "Brent", "Bromley", "Camden", "Croydon", 
+    "Ealing", "Enfield", "Greenwich", "Hackney", "Hammersmith and Fulham", "Haringey", "Harrow", "Havering", 
+    "Hillingdon", "Hounslow", "Islington", "Kensington and Chelsea", "Kingston upon Thames", "Lambeth", "Lewisham", 
+    "Merton", "Newham", "Redbridge", "Richmond upon Thames", "Southwark", "Sutton", "Tower Hamlets", "Waltham Forest", 
+    "Wandsworth", "Westminster"
+  ];
+  
+  // Determine the income threshold based on the postcode
+  const isHigherIncomePostcode = higherIncomePostcodes.includes(result.postcode); // Make sure 'result.postcode' is correct
+  const incomeThreshold = isHigherIncomePostcode ? 90000 : 80000;
+
   const renderstairchart= () => {
     if (age_stairgraph.length <= 1) {
       return null;
@@ -227,7 +239,6 @@ function Results({ result }) {
     </div>
     );
   };
-  
   const renderloanchart = () => {
     const data = {
       labels: [...ageattimedata],
@@ -235,18 +246,14 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...mortgagedata2.map(item => parseFloat(item))],
-        //  borderColor: 'red',
-        //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
           borderColor: '#68aac0',
           backgroundColor: '#68aac0',
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
           label: 'Shared Ownership',
           data: [...mortgagedata.map(item => parseFloat(item))],
-         // borderColor: 'green',
-         // backgroundColor: 'rgba(0, 255, 0, 0.5)',
           borderColor: '#2d67b3',
           backgroundColor: '#2d67b3',
           borderWidth: 1,
@@ -254,6 +261,7 @@ function Results({ result }) {
         }] : []),
       ]
     };
+  
     const options = {
       responsive: true,
       plugins: {
@@ -300,23 +308,26 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value) {
+            callback: function (value) {
               return value.toLocaleString();
             },
           },
-        }
-      }
+        },
+      },
     };
-    return ( 
+  
+    return (
       <div>
-      <Line data={data} options={options}  className="lonechart-diagram std-diagram"/>
+        <Line data={data} options={options} className="lonechart-diagram std-diagram" />
         <div>
-          <p className="undergraph-text text-white mb-6">This graph shows the mortgage on the home you are buying. Remortgaging allows you to own your home quicker.</p>
+          <p className="undergraph-text text-white mb-6">
+            This graph shows the mortgage on the home you are buying. Remortgaging allows you to own your home quicker.
+          </p>
         </div>
       </div>
-      );
+    );
   };
-
+  
   const renderloanchartmob = () => {
     if (!Array.isArray(net_wealth_aa_list) || !Array.isArray(net_wealth_bt_list)) {
       console.error('net_wealth_aa_list or net_wealth_bt_list is not an array:', net_wealth_aa_list, net_wealth_bt_list);
@@ -324,11 +335,9 @@ function Results({ result }) {
     }
   
     const isAllZeros = (arr) => arr.every(item => item === 0);
-  
     const allAaZeros = isAllZeros(net_wealth_aa_list);
     const allBtZeros = isAllZeros(net_wealth_bt_list);
   
-    // Do not render if both arrays are all zeros
     if (allAaZeros && allBtZeros) {
       return null;
     }
@@ -344,7 +353,7 @@ function Results({ result }) {
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 && !allBtZeros ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold  && !allBtZeros ? [{
           label: 'SO',
           data: net_wealth_bt_list.map(item => parseFloat(item)),
           borderColor: '#2d67b3',
@@ -402,7 +411,7 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value) {
+            callback: function (value) {
               return value.toLocaleString();
             },
           },
@@ -415,7 +424,7 @@ function Results({ result }) {
       width: '100%',
     };
   
-    return ( 
+    return (
       <div style={chartContainerStyle}>
         <Bar data={data} options={options} className="std-diagram" />
         <div>
@@ -434,25 +443,22 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...TO_wealthdata.map(item => parseFloat(item))],
-        //  borderColor: 'red',
-        //  backgroundColor: 'rgba(255, 0, 0, 0.5)',
-        borderColor: '#68aac0',
-        backgroundColor: '#68aac0',
+          borderColor: '#68aac0',
+          backgroundColor: '#68aac0',
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
           label: 'Shared Ownership',
           data: [...SO_wealthdata.map(item => parseFloat(item))],
-        //  borderColor: 'green',
-        //  backgroundColor: 'rgba(0, 255, 0, 0.5)',
-        borderColor: '#2d67b3',
-        backgroundColor: '#2d67b3',
+          borderColor: '#2d67b3',
+          backgroundColor: '#2d67b3',
           borderWidth: 1,
           fill: false,
         }] : []),
       ]
     };
+  
     const options = {
       responsive: true,
       plugins: {
@@ -499,23 +505,26 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value) {
+            callback: function (value) {
               return value.toLocaleString();
             },
           },
-        }
-      }
+        },
+      },
     };
-    return ( 
+  
+    return (
       <div>
-      <Line data={data} options={options} className="rendercompchart-diagram std-diagram"/>
+        <Line data={data} options={options} className="rendercompchart-diagram std-diagram" />
         <div>
-          <p className="undergraph-text text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">
+            This graph shows your projected future bank saving (adjusted for inflation).
+          </p>
         </div>
       </div>
-      );
+    );
   };
-
+  
   const rendercompchartmob = () => {
     if (!Array.isArray(net_wealth_ak_list) || !Array.isArray(net_wealth_cc_list)) {
       console.error('net_wealth_ak_list or net_wealth_cc_list is not an array:', net_wealth_ak_list, net_wealth_cc_list);
@@ -524,45 +533,33 @@ function Results({ result }) {
   
     const isAllZeros = (arr) => arr.every(item => item === 0);
   
-    // Prepare datasets based on conditions
-    const datasets = [
-      ...(result.TO_housing > 0 ? [{
-        label: 'FO',
-        data: net_wealth_ak_list.map(item => parseFloat(item)),
-        borderColor: '#8ba4ad',
-        backgroundColor: '#8ba4ad',
-        borderWidth: 1,
-        fill: false,
-      }] : []),
-      ...(result.SO_housing > 0 ? [{
-        label: 'SO',
-        data: net_wealth_cc_list.map(item => parseFloat(item)),
-        borderColor: '#478194',
-        backgroundColor: '#478194',
-        borderWidth: 1,
-        fill: false,
-      }] : []),
-    ];
+    const hasFOData = result.TO_housing > 0 && !isAllZeros(net_wealth_ak_list);
+    const hasSOData = result.SO_housing > 0 && result.income < incomeThreshold  && !isAllZeros(net_wealth_cc_list);
   
-    // Determine if any of the datasets have non-zero values
-    // Check if `FO` dataset is included
-    const isFOIncluded = result.TO_housing > 0;
-  
-    // Determine if `SO` dataset is included
-    const isSOIncluded = result.SO_housing > 0;
-  
-    // Check if each included dataset has non-zero values
-    const hasData = (isFOIncluded && !isAllZeros(net_wealth_ak_list)) ||
-                     (isSOIncluded && !isAllZeros(net_wealth_cc_list));
-  
-    // Return null if no meaningful data
-    if (!hasData) {
+    if (!hasFOData && !hasSOData) {
       return null;
     }
   
     const data = {
-      labels: [...mob_age_ranges],
-      datasets: datasets,
+      labels: mob_age_ranges,
+      datasets: [
+        ...(hasFOData ? [{
+          label: 'FO',
+          data: net_wealth_ak_list.map(item => parseFloat(item)),
+          borderColor: '#8ba4ad',
+          backgroundColor: '#8ba4ad',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+        ...(hasSOData ? [{
+          label: 'SO',
+          data: net_wealth_cc_list.map(item => parseFloat(item)),
+          borderColor: '#478194',
+          backgroundColor: '#478194',
+          borderWidth: 1,
+          fill: false,
+        }] : []),
+      ]
     };
   
     const options = {
@@ -609,12 +606,12 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value) {
+            callback: function (value) {
               return value.toLocaleString();
             },
           },
-        }
-      }
+        },
+      },
     };
   
     const chartContainerStyle = {
@@ -626,7 +623,9 @@ function Results({ result }) {
       <div style={chartContainerStyle}>
         <Bar data={data} options={options} className="std-diagram" />
         <div>
-          <p className="undergraph-text text-white mb-6">This graph shows your projected future bank saving (adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">
+            This graph shows your projected future bank saving (adjusted for inflation).
+          </p>
         </div>
       </div>
     );
@@ -639,21 +638,22 @@ function Results({ result }) {
         ...(result.TO_housing > 0 ? [{
           label: 'Full Ownership',
           data: [...TO_housedata.map(item => parseFloat(item))],
-          borderColor: '#68aac0 ',
-          backgroundColor: '#68aac0 ',
+          borderColor: '#68aac0',
+          backgroundColor: '#68aac0',
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
           label: 'Shared Ownership',
           data: [...SO_housedata.map(item => parseFloat(item))],
           borderColor: '#2d67b3',
-        backgroundColor: '#2d67b3',
+          backgroundColor: '#2d67b3',
           borderWidth: 1,
           fill: false,
         }] : []),
       ]
     };
+  
     const options = {
       responsive: true,
       plugins: {
@@ -697,45 +697,49 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value) {
+            callback: function (value) {
               return value.toLocaleString();
             },
           },
-        }
-      }
+        },
+      },
     };
-    return ( 
+  
+    return (
       <div>
-      <Line data={data} options={options} className=" std-diagram" />
+        <Line data={data} options={options} className="std-diagram" />
         <div>
-          <p className="undergraph-text text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">
+            This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).
+          </p>
         </div>
       </div>
-      );
+    );
   };
-
+  
   const rendercomphchartmob = () => {
     const data = {
       labels: [...mob_age_ranges],
       datasets: [
         ...(result.TO_housing > 0 ? [{
           label: 'FO',
-          data: [...net_wealth_al_list.map(item => parseFloat(item))],
+          data: net_wealth_al_list.map(item => parseFloat(item)),
           borderColor: '#8ba4ad',
           backgroundColor: '#8ba4ad',
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
           label: 'SO',
-          data: [...net_wealth_cd_list.map(item => parseFloat(item))],
+          data: net_wealth_cd_list.map(item => parseFloat(item)),
           borderColor: '#478194',
-        backgroundColor: '#478194',
+          backgroundColor: '#478194',
           borderWidth: 1,
           fill: false,
         }] : []),
       ]
     };
+  
     const options = {
       responsive: true,
       maintainAspectRatio: false,
@@ -780,28 +784,31 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value) {
+            callback: function (value) {
               return value.toLocaleString();
             },
           },
-        }
-      }
+        },
+      },
     };
-
+  
     const chartContainerStyle = {
-      height: '50vh', 
+      height: '50vh',
       width: '100%',
     };
-
-    return ( 
+  
+    return (
       <div style={chartContainerStyle}>
-      <Bar data={data} options={options}  className=" std-diagram"/>
+        <Bar data={data} options={options} className="std-diagram" />
         <div>
-          <p className="undergraph-text text-white mb-6">This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).</p>
+          <p className="undergraph-text text-white mb-6">
+            This graph shows your projected housing wealth (net of mortgage debt and adjusted for inflation).
+          </p>
         </div>
       </div>
-      );
+    );
   };
+  
 
 const renderTwoColumnsText = () => {
   if (result.TO_housing === 0 && result.SO_housing === 0) {
@@ -851,7 +858,7 @@ const renderTwoColumnsText = () => {
               <div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : 'Now'}</div>
           </div>
         )}
-        {result.income >= 90000 ? (
+        {result.income >= incomeThreshold  ? (
           <div className="results-2nd-col std-2ndcol">
             <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
             <p className="text-xl font-bold text-white">You do not qualify for Shared Ownership with your current income.</p>
@@ -898,7 +905,7 @@ const renderstaircasing = () => {
   return (
     <div className="text-white staircasing-wrapper std-wrapper">
       <h1 className="font-bold">Shared Ownership Staircasing</h1>
-      {result.income >= 90000 ? (
+      {result.income >= incomeThreshold  ? (
         <div className="results-2nd-col std-2ndcol">
           <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
           <p className="text-xl font-bold text-white">
@@ -1004,7 +1011,7 @@ const renderlifetimeWealth = () => {
             <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
           </div>
         </div>
-      ) : result.income >= 90000 ? (
+      ) : result.income >= incomeThreshold  ? (
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
@@ -1142,7 +1149,7 @@ const rendermortgageRep = () => {
             </p>
           </div>
         </div>
-      ) : result.income >= 90000 ? (
+      ) : result.income >= incomeThreshold  ? (
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
           <div className="mortgage-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
@@ -1279,6 +1286,7 @@ console.log("SO_housing", result.SO_housing);
 console.log("SO_deposit", result.SO_deposit);
 console.log("SO_mortgage", result.SO_mortgage);
 console.log("SO_share", result.SO_share);
+console.log("Postcode", result.postcode);
 
 
 

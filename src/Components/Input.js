@@ -331,7 +331,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              Please indicate how much does your household pay per month in loans (student/car/credit card). If there are none, put 0.</label>
+              Please indicate how much does your household pay per month in loans (student/car). If there are none, put 0.</label>
             <input
               id="loan_repayment"
               ref={ageInputRef}
