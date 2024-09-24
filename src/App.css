@@ -319,7 +319,7 @@ button#btn-up:hover, button#btn-down:hover {
 }
 
 .input-wrapper {
-  background-color:#8ba4ad;
+  background-color:#c4dbe4;
   border-radius: 10px;
   display: flex;
   flex-wrap: wrap;
@@ -582,7 +582,7 @@ button#btn-up:hover, button#btn-down:hover {
 }
 
 .more-secion-wrapper {
-  background-color: #8ba4ad;
+  background-color: #c4dbe4;
   color: black;
 }
 
@@ -623,7 +623,7 @@ button#btn-up:hover, button#btn-down:hover {
   display: inline-block;
   text-align: center;
   max-width: 1100px;
-  background-color: #8ba4ad;
+  background-color: #c4dbe4;
   border-radius: 10px;
   padding: 15px;
 }
@@ -770,10 +770,12 @@ button#btn-up:hover, button#btn-down:hover {
 
 p.undergraph-text.text-white {
   padding-top: 25px;
+  font-size: 16px;
+  text-align: center;
 }
 
 .faq-globalwrapper {
-  background-color: #8ba4ad;
+  background-color: #c4dbe4;
   color: black;
   padding: 40px 0px;
   border-radius: 10px;
@@ -922,6 +924,10 @@ input.email-input {
     width: calc(100vw - 100px);
   }
 
+  .lifetime-wrapper .toggleable-text {
+    left: -287px;
+  }
+  
   .results-fullOwn, .results-sharedOwn {
     font-size: 1.7rem;
     padding: inherit;
