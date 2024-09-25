@@ -852,7 +852,7 @@ const renderTwoColumnsText = () => {
             />
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
             <ToggleText
-              className="font-bold" 
+              className="" 
               regularText ="You will be mortgage free by the age of "
               toggleableText="Assumes all savings are used to make repayments. For model assumptions check the FAQs."/>
               <div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : 'Now'}</div>
@@ -885,7 +885,7 @@ const renderTwoColumnsText = () => {
             />
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
             <ToggleText
-              className="font-bold" 
+              className="" 
               regularText ="You will be mortgage free by the age of "
               toggleableText="Assumes all savings are used to make repayments. For model assumptions check the FAQs"
             />
