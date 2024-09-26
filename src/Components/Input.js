@@ -197,7 +197,7 @@ const ageRef = useRef(null);
     "Great Yarmouth", "Greenwich", "Guildford", "Gwynedd", "Hackney", "Halton", "Hambleton", "Hammersmith and Fulham", "Harborough", "Haringey", "Harlow", "Harrogate", "Harrow", 
     "Hart", "Hartlepool", "Hastings", "Havant", "Havering", "Herefordshire, County of", "Hertsmere", "High Peak", "Hillingdon", "Hinckley and Bosworth", "Horsham", "Hounslow", "Huntingdonshire", 
     "Hyndburn", "Ipswich", "Isle of Anglesey", "Isle of Wight", "Islington", "Kensington and Chelsea", "Kent", "Kettering", "Kingston upon Hull, City of", "Kingston upon Thames", "Kirklees", 
-    "Knowsley", "Lambeth", "Lancaster", "Leeds", "Leicester", "Lewes", "Lewisham", "Lichfield", "Lincoln", "Liverpool", "London", "Luton", "Maldon", "Malvern Hills", "Manchester", "Mansfield", 
+    "Knowsley", "Lambeth", "Lancaster", "Leeds", "Leicester", "Lewes", "Lewisham", "Lichfield", "Lincoln", "Liverpool", "Luton", "Maldon", "Malvern Hills", "Manchester", "Mansfield", 
     "Medway", "Melton", "Mendip", "Merton", "Mid Devon", "Mid Suffolk", "Middlesbrough", "Milton Keynes", "Mole Valley", "Monmouthshire", "Newcastle upon Tyne", "Newcastle-under-Lyme", 
     "Newham", "Newport", "North Devon", "North East Derbyshire", "North East Lincolnshire", "North Hertfordshire", "North Kesteven", "North Lincolnshire", "North Norfolk", "North Somerset", 
     "North Tyneside", "North Warwickshire", "North West Leicestershire", "Northampton", "Northumberland", "Norwich", "Nottingham", "Nuneaton and Bedworth", "Oadby and Wigston", "Oldham", 
