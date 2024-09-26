@@ -814,7 +814,7 @@ const renderTwoColumnsText = () => {
   if (result.TO_housing === 0 && result.SO_housing === 0) {
     return (
       <div className="results">
-        <h1 className="text-2xl justify-center text-white">Value of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
+        <h1 className="text-2xl justify-center text-white">Price of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
         <div className="text-center my-4">
           <h2 className="text-xl font-bold text-white">
             <p className="text-xl font-bold text-white">
