@@ -995,10 +995,10 @@ const renderlifetimeWealth = () => {
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
       <div>
-        <h1 className="font-bold">Lifetime Wealth
+        <h1 className="font-bold">
           <ToggleText
             className="font-bold" 
-            regularText =" "
+            regularText ="Lifetime Wealth "
             toggleableText="Shows the current value of future savings and future changes to house prices, i.e. housing wealth up until retirement."
           />
         </h1>
