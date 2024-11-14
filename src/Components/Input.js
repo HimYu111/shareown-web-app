@@ -4,6 +4,43 @@ import Loading from "../Components/Loading";
 import Cookies from 'js-cookie';
 import { setSessionCookie } from './sessionUtils';
 import Results from './Results'; // Import the Results component
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPenNib,faCircleQuestion } from '@fortawesome/free-solid-svg-icons'
+
+const ToggleText = ({ className, regularText, toggleableText }) => {
+  const [isVisible, setIsVisible] = useState(false);
+  const tooltipRef = useRef(null);
+
+  const toggleVisibility = () => {
+    setIsVisible(!isVisible);
+  };
+
+  const handleClickOutside = (event) => {
+    if (tooltipRef.current && !tooltipRef.current.contains(event.target)) {
+      setIsVisible(false);
+    }
+  };
+
+  if (isVisible) {
+    document.addEventListener('mousedown', handleClickOutside);
+  } else {
+    document.removeEventListener('mousedown', handleClickOutside);
+  }
+
+  return (
+    <div className="toggle-text-container">
+      <p className={`regular-text ${className}`}>{regularText}</p>
+      <span className="toggle-icon" onClick={toggleVisibility}>
+        <sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+      </span>
+      {isVisible && (
+        <div className="toggleable-text" ref={tooltipRef}>
+          <p>{toggleableText}</p>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function Input({ setResult }) {
   const [loading, setLoading] = useState(false);
@@ -26,6 +63,8 @@ function Input({ setResult }) {
     currentRent: "",
     loan_repayment: "",
   });
+
+  
 
   const ageInputRef = useRef(null);
 
@@ -271,11 +310,11 @@ const ageRef = useRef(null);
 
   return (
     <div id="input" className="input-wrapper min-h-screen">
-    <div className="input-header-wrapper" ref={headerRef}>
-      <h2 className={`input-header-txt ${isVisible ? "slide-in" : ""}`}>
-        Calculate your housing options and wealth below
-      </h2>
-    </div>
+      <div className="input-header-wrapper" ref={headerRef}>
+        <h2 className={`input-header-txt ${isVisible ? "slide-in" : ""}`}>
+          Calculate your housing options and wealth below
+        </h2>
+      </div>
       <div className="pt-20 input-cols">
         {/* Column 1 */}
         <div className="input-cols-1">
@@ -284,8 +323,8 @@ const ageRef = useRef(null);
               What local authority does your household want to live in?
             </label>
             <select className="input input-bordered w-full" id="input-1">
-                {options.map((postcode, index) => (
-                  <option key={index} value={postcode}>{postcode}</option>
+              {options.map((postcode, index) => (
+                <option key={index} value={postcode}>{postcode}</option>
               ))}
             </select>
           </div>
@@ -311,11 +350,25 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
+              What is the price of the home your household wishes to purchase?
+            </label>
+            <input
+              id="housePrice"
+              ref={ageInputRef}
+              className="input input-bordered w-full"
+              type="text"
+              placeholder="£250,000"
+              value={formattedValues.housePrice}
+              onChange={handleInputChange}
+            />
+          </div>  
+          <div className="mb-4">
+            <label className="block text-black mb-2">
               What is your occupation?
             </label>
             <select className="input input-bordered w-full" id="input-4">
-            {joboptions.map((option, index) => (
-              <option key={index} value={option}>{option}</option>
+              {joboptions.map((option, index) => (
+                <option key={index} value={option}>{option}</option>
               ))}
             </select>
           </div>
@@ -331,61 +384,22 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              Please indicate how much does your household pay per month in loans (student/car). If there are none, put 0.</label>
+             How many people are in your household?
+            </label>
             <input
-              id="loan_repayment"
-              ref={ageInputRef}
+              id="HouseholdNo"
+              ref={ageRef}
               className="input input-bordered w-full"
               type="text"
-              placeholder="£0"
-              value={formattedValues.loan_repayment}
+              min="1"
+              max="10"
+              placeholder="3"
               onChange={handleInputChange}
-            />
-          </div>
+              />
+           </div>
         </div>
         {/* Column 2 */}
         <div className="input-cols-2">
-          <div className="mb-4">
-              <label className="block text-black mb-2">
-              What is the price of the home your household wishes to purchase?</label>
-              <input
-                id="housePrice"
-                ref={ageInputRef}
-                className="input input-bordered w-full"
-                type="text"
-                placeholder="£250,000"
-                value={formattedValues.housePrice}
-                onChange={handleInputChange}
-              />
-            </div>
-          <div className="mb-4">
-            <label className="block text-black mb-2">
-              What is the gross annual income of your household?
-            </label>
-            <input
-              id="income"
-              ref={ageInputRef}
-              className="input input-bordered w-full"
-              type="text"
-              placeholder="£40,000"
-              value={formattedValues.income}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-black mb-2">
-              How much does your household spend each month excluding housing and loans?
-            </label>
-            <input
-              id="monthspending"
-              ref={ageInputRef}
-              className="input input-bordered w-full"
-              type="text"
-              placeholder="£1,100"
-              value={formattedValues.monthspending}
-              onChange={handleInputChange}
-            />
-          </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
               How old are you?
@@ -403,15 +417,29 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              How much in savings does your household have?
+              What is the gross annual income of your household?
             </label>
             <input
-              id="savings"
+              id="income"
               ref={ageInputRef}
               className="input input-bordered w-full"
               type="text"
-              placeholder="£10,000"
-              value={formattedValues.savings}
+              placeholder="£40,000"
+              value={formattedValues.income}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              Please indicate how much does your household pay per month in loans (student/car). If there are none, put 0.
+            </label>
+            <input
+              id="loan_repayment"
+              ref={ageInputRef}
+              className="input input-bordered w-full"
+              type="text"
+              placeholder="£0"
+              value={formattedValues.loan_repayment}
               onChange={handleInputChange}
             />
           </div>
@@ -429,21 +457,53 @@ const ageRef = useRef(null);
               onChange={handleInputChange}
             />
           </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              <ToggleText
+                regularText="How much does your household spend each month excluding housing and loans?"
+                toggleableText="This means spending on food and drinks, council tax, utilities, travel and transport, communications and subscriptions, clothing, and other essentials."
+              />
+            </label>
+            <input
+              id="monthspending"
+              ref={ageInputRef}
+              className="input input-bordered w-full"
+              type="text"
+              placeholder="£1,500"
+              value={formattedValues.monthspending}
+              onChange={handleInputChange}
+            />
+          </div>
+          <div className="mb-4">
+            <label className="block text-black mb-2">
+              How much in savings does your household have?
+            </label>
+            <input
+              id="savings"
+              ref={ageInputRef}
+              className="input input-bordered w-full"
+              type="text"
+              placeholder="£10,000"
+              value={formattedValues.savings}
+              onChange={handleInputChange}
+            />
+          </div>
         </div>
       </div>
       <div className="flex justify-center mt-4 input-btn-wrapper">
-      {errorMessage && <div className="text-error-message">{errorMessage}</div>}
+        {errorMessage && <div className="text-error-message">{errorMessage}</div>}
         <button
           className="input-btn mb-10"
           onClick={handleInputs}
           disabled={loading} 
         >
-           Submit
+          Submit
         </button>
-     <div className="loading-container-wrapper">{loading ? <Loading /> : ""}</div>
+        <div className="loading-container-wrapper">{loading ? <Loading /> : ""}</div>
       </div>
     </div>
   );
+  
 }
 
 export default Input;

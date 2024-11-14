@@ -159,10 +159,11 @@ function Results({ result }) {
   const isHigherIncomePostcode = higherIncomePostcodes.includes(result.postcode); // Make sure 'result.postcode' is correct
   const incomeThreshold = isHigherIncomePostcode ? 90000 : 80000;
 
-  const renderstairchart= () => {
+  const renderstairchart = () => {
     if (age_stairgraph.length <= 1) {
       return null;
     }
+  
     const data = {
       labels: [...age_stairgraph],
       datasets: [
@@ -175,23 +176,16 @@ function Results({ result }) {
         }
       ]
     };
+  
     const options = {
       responsive: true,
       plugins: {
         legend: {
           display: false,
         },
-        title: {
-          display: true,
-          text: 'Staircasing',
-          color: 'white',
-          font: {
-            size: 24,
-          },
-        },
         tooltip: {
           callbacks: {
-            label: function(tooltipItem) {
+            label: function (tooltipItem) {
               return `${(tooltipItem.raw.toFixed(2) * 100).toFixed(0)}%`;
             }
           }
@@ -223,20 +217,29 @@ function Results({ result }) {
           },
           ticks: {
             color: 'white',
-            callback: function(value, index, values) {
+            callback: function (value, index, values) {
               return `${(value * 100).toFixed(0)}%`;
             }
           }
         }
       }
     };
-    return ( 
-    <div>
-    <Bar data={data} options={options} className="stairchart-diagram std-diagram" />
+  
+    return (
       <div>
-        <p className="undergraph-text text-white">This graph shows the share of the house you would own. Shared ownership allows you to buy additional shares over time.</p>
+      <div className="results-sharedOwn font-bold">
+          <ToggleText
+            regularText="Staircasing"
+            toggleableText="Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs."
+          />
+        </div>
+        <Bar data={data} options={options} className="stairchart-diagram std-diagram" />
+                <div>
+          <p className="undergraph-text text-white">
+            This graph shows the share of the house you would own. Shared ownership allows you to buy additional shares over time.
+          </p>
+        </div>
       </div>
-    </div>
     );
   };
   const renderloanchart = () => {
@@ -816,13 +819,18 @@ const renderTwoColumnsText = () => {
       <div className="results">
         <h1 className="text-2xl justify-center text-white">Price of home: £{result.house_price ? formatNumber(result.house_price.toFixed(0)) : 'N/A'}</h1>
         <div className="text-center my-4">
-          <h2 className="text-xl font-bold text-white">
-            <p className="text-xl font-bold text-white">
-              You cannot afford Shared Ownership or full ownership with the current inputs and the
-              <Link to="/FAQs" className="text-blue-500 hover:underline"> assumptions</Link> of the model.
-            </p>
-            <p>You can change some of the above inputs like the price of the home, the location, income, etc. to assess when you can afford Shared Ownership or/and full ownership.</p>
-          </h2>
+        <h2 className="text-xl font-bold text-white">
+          <p className="mb-4 text-xl font-bold text-white">
+            The indication of the model is that you most likely would not be able to afford Shared Ownership or Full Ownership with the current inputs and the
+            <Link to="/FAQs" className="text-blue-500 hover:underline"> assumptions</Link> of the model.
+          </p>
+          <p className="mb-4">
+            You can also assess various scenarios by changing some of the above inputs, like the price of the home, the location, income, savings, etc. to assess when Shared Ownership or/and Full Ownership will become attainable.
+          </p>
+          <p>
+            Please note that even if the output indicated you might not be able to afford ownership at this point, it does not mean it is not affordable to you. You should consult with a professional such as a mortgage broker or a housing association to understand best whether you can buy a home.
+          </p>
+        </h2>
         </div>
       </div>
     );
@@ -833,13 +841,21 @@ const renderTwoColumnsText = () => {
       <div className="text-white results-2cols">
         {result.TO_housing === 0 ? (
           <div className="results-1st-col std-1stcol">
-            <h2 className="results-fullOwn font-bold">Full ownership</h2>
-            <p className="text-xl font-bold text-white mb-6">You cannot afford full ownership with the current inputs.</p>
-            <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
+          <h2 className="results-fullOwn font-bold">Full Ownership</h2>
+            <p className="mb-4 text-xl font-bold text-white">
+              The indication of the model is that you most likely would not be able to afford Full Ownership with the current inputs and the
+              <Link to="/FAQs" className="text-blue-500 hover:underline"> assumptions</Link> of the model.
+            </p>
+            <p className="mb-4">
+              You can also assess various scenarios by changing some of the above inputs, like the price of the home, the location, income, savings, etc. to assess when Shared Ownership or/and Full Ownership will become attainable.
+            </p>
+            <p>
+              Please note that even if the output indicated you might not be able to afford ownership at this point, it does not mean it is not affordable to you. You should consult with a professional such as a mortgage broker or a housing association to understand best whether you can buy a home.
+            </p>
           </div>
         ) : (
           <div className="results-1st-col std-1stcol">
-            <h2 className="results-fullOwn font-bold">Full ownership</h2>
+            <h2 className="results-fullOwn font-bold">Full Ownership</h2>
             <p className="font-bold">Minimum Deposit <div className="results-number">£{result.TO_deposit ? formatNumber(result.TO_deposit.toFixed(0)) : 'N/A'}</div></p>
             <p className="no-wrap">
               You {result.TO_time < 1 ? (<>have enough savings for the deposit <div className="results-number">now</div></>) : 
@@ -851,31 +867,47 @@ const renderTwoColumnsText = () => {
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
-            <ToggleText
-              className="" 
-              regularText ="You will be mortgage free by the age of "
-              toggleableText="Assumes all savings are used to make repayments. For model assumptions check the FAQs."/>
-              <div className="results-number">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : 'Now'}</div>
           </div>
         )}
         {result.income >= incomeThreshold  ? (
           <div className="results-2nd-col std-2ndcol">
-            <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
-            <p className="text-xl font-bold text-white">You do not qualify for Shared Ownership with your current income.</p>
+            <h2 className="results-sharedOwn font-bold">
+              <ToggleText
+                regularText="Shared Ownership"
+                toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>
+            <p className="text-xl font-bold text-white">
+              You do not qualify for Shared Ownership with your current income.
+            </p>
           </div>
         ) : result.SO_housing === 0 ? (
           <div className="results-2nd-col std-2ndcol">
-            <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
+            <h2 className="results-sharedOwn font-bold">
+              <ToggleText
+                regularText="Shared Ownership"
+                toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>
             <p className="text-xl font-bold text-white">You cannot afford to staircase to 100% through Shared Ownership with the current inputs.</p>
             <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
           </div>
         ) : (
           <div className="results-2nd-col std-2ndcol">
-            <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
+            <h2 className="results-sharedOwn font-bold">
+              <ToggleText
+                regularText="Shared Ownership"
+                toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>
             <p className="font-bold">Minimum Deposit <div className="results-number">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</div></p>
             <p className="mb-6">
               {result.SO_share > 0.25
-                ? (<>You can afford to buy in <div className="results-number">now</div></>)
+                ? (<>You can afford to buy in <div className="results-number">
+                  <ToggleText
+                    regularText="Not eligible"
+                    toggleableText="Since you can afford this property under Full Ownership, you are not eligible for it under Shared Ownership according to the eligibility criteria for government funded Shared Ownership. Please check with a mortgage broker to explore further outcomes."
+                  /></div></>)
                 : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
             </p>
             <ToggleText
@@ -884,13 +916,6 @@ const renderTwoColumnsText = () => {
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
-            <ToggleText
-              className="" 
-              regularText ="You will be mortgage free by the age of "
-              toggleableText="Assumes all savings are used to make repayments. For model assumptions check the FAQs"
-            />
-            <div className="results-number">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : 'Now'}</div> 
-           {/* <p className="italic mb-0"><a href="#staircasing" className="text-blue-500 hover:underline inline-block">See here how you can staircase over time</a></p>*/} 
           </div>
         )}
       </div>
@@ -996,7 +1021,12 @@ const renderlifetimeWealth = () => {
             <p>You cannot afford full ownership. You can change above inputs, i.e., lower the price of the home, vary income, to see when you can afford full ownership.</p>
           </div>
           <div className="lifetime-2ndcol std-2ndcol">
-            <h2 className="results-sharedOwn">Shared Ownership</h2>
+            <h2 className="results-sharedOwn font-bold">
+              <ToggleText
+                regularText="Shared Ownership"
+                toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>            
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
@@ -1014,7 +1044,12 @@ const renderlifetimeWealth = () => {
       ) : result.income >= incomeThreshold  ? (
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
-            <h2 className="results-fullOwn">Full Ownership</h2>
+            <h2 className="results-sharedOwn font-bold">
+                <ToggleText
+                  regularText="Shared Ownership"
+                  toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>            
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
@@ -1029,7 +1064,12 @@ const renderlifetimeWealth = () => {
             <p className=""><div className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</div></p>
           </div>
           <div className="lifetime-2ndcol std-2ndcol">
-            <h2 className="results-sharedOwn">Shared Ownership</h2>
+            <h2 className="results-sharedOwn font-bold">
+              <ToggleText
+                regularText="Shared Ownership"
+                toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>             
             <p className="text-xl font-bold text-white">
               You do not qualify for Shared Ownership with your current income.
             </p>
@@ -1077,7 +1117,12 @@ const renderlifetimeWealth = () => {
             <p className=""><div className="results-number">£{result.TO_housing ? formatNumber(result.TO_housing.toFixed(0)) : '0'}</div></p>
           </div>
           <div className="lifetime-2ndcol std-2ndcol">
-            <h2 className="results-sharedOwn">Shared Ownership</h2>
+              <h2 className="results-sharedOwn font-bold">
+              <ToggleText
+                regularText="Shared Ownership"
+                toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>             
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
@@ -1208,8 +1253,13 @@ const rendermortgageRep = () => {
               </p>
             </div>
             <div className="mortgage-2ndcol std-2ndcol">
-              <h2 className="results-sharedOwn">Shared Ownership</h2>
-              <p className="font-bold mb-3">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
+              <h2 className="results-sharedOwn font-bold">
+                <ToggleText
+                  regularText="Shared Ownership"
+                  toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+                />
+              </h2>               
+            <p className="font-bold mb-3">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
                 <ToggleText
                   className="font-bold" 
                   regularText =" "
@@ -1250,7 +1300,7 @@ const renderScenariosExplained = () => {
                 total annual gross income.
               </p>
               <p>
-                The calculator will determine the earliest time you can buy on the open market.
+                The simulator will determine the earliest time you can buy on the open market.
               </p>
             </div>
             <div className="scenarios-2ndcol std-2ndcol">
@@ -1260,7 +1310,7 @@ const renderScenariosExplained = () => {
                 remaining portion. You can buy additional shares over time and “staircase” to full ownership.
               </p>
               <p>
-                The calculator will determine the earliest time you can get onto the property ladder and the fastest way 
+                The simulator will determine the earliest time you can get onto the property ladder and the fastest way 
                 you can staircase to 100% ownership.
               </p>
             </div>

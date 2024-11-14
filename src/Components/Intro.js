@@ -19,7 +19,7 @@ function Intro() {
       <div className="bg-gray-900 main-intro-wrapper">
       <div className="main-intro">
         <h1 className="text-6xl text-white py-10" style={{ color: 'lightblue', fontWeight: 'bold', textAlign: 'center' }}>
-          Housing Affordability Lifetime Wealth Calculator
+          Housing Affordability Lifetime Wealth Simulator
         </h1>
         <div className="main-underheading">
         <p className="text-3xl text-white py-10" style={{ textAlign: 'center' }}>
@@ -58,7 +58,7 @@ function Intro() {
             How it works
             </h2>          
             <p >
-            We will ask you to provide some basic information about your income, desired location of property, property price, age, and more, before the calculator is able to ‘run the numbers’.
+            We will ask you to provide some basic information about your income, desired location of property, property price, age, and more, before the simulator is able to ‘run the numbers’.
            </p>
            </div>
 

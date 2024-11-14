@@ -22,8 +22,8 @@ const FAQSection = () => {
       answer: `Your annual household income must not exceed £80,000 (£90,000 in London), and you must not currently own a property.`
     },
     {
-      question: "Is the calculator free to use?",
-      answer: `The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying calculator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®`
+      question: "Is the simulator free to use?",
+      answer: `The lifetime simulator is based on an EPSRC-UCL research funded project. The underlying simulator is developed by academics at UCL and Durham University and is free of charge. It is not for commercial use and does not provide financial advice. ®`
     },
     {
       question: "How is my tax calculated?",
@@ -40,6 +40,15 @@ const FAQSection = () => {
       question: "What are the model assumptions?",
       answer: (
         <div  style={{ width: '100%', textAlign: 'left' }}>
+          <p>
+          Please refer to this  
+          <span> </span> {/* This adds the space */}
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4996840" 
+            className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            target="_blank" 
+            rel="noopener noreferrer"> 
+            report
+          </a> for more information. </p>
           <p>• Interest rate on deposits/savings: 3%.</p>
           <p>• Rent paid for Shared Ownership: For the first year it is 2.75% of the initial value of the home. After that it grows with the assumed inflation rate.</p>
           <p>• Service charge/House maintenance cost p.a.: 1%.</p>
@@ -51,20 +60,29 @@ const FAQSection = () => {
       )
     },
     {
-      question: "How does the calculator work?",
+      question: "How does the simulator work?",
       answer: (
         <>
           <p className="mb-4">
-            <strong>Full ownership:</strong> The calculator looks ahead to see when you'll have enough money to buy a home. 
+          Please refer to this  
+          <span> </span> {/* This adds the space */}
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4996840" 
+            className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            target="_blank" 
+            rel="noopener noreferrer"> 
+            report
+          </a> for more information. </p>
+          <p>
+            <strong>Full ownership:</strong> The simulator looks ahead to see when you'll have enough money to buy a home. 
             It figures out when you've saved up for a deposit (at least 5% of the home's price) and can get a mortgage for 
-            the rest. Once you own a home, the calculator assumes you'll use your savings to pay off your mortgage faster. 
+            the rest. Once you own a home, the simulator assumes you'll use your savings to pay off your mortgage faster. 
             It also calculates when you might finish paying off your mortgage completely. After that, it estimates how much 
             money you'll have saved up in a savings account by the time you retire, which it assumes will be at age 67.
           </p>
           <p>
-            <strong>Shared ownership:</strong> The calculator assesses affordability based on which the maximum share a household can buy is calculated. A minimum deposit of 5% of the share price is assumed. 
+            <strong>Shared ownership:</strong> The simulator assesses affordability based on which the maximum share a household can buy is calculated. A minimum deposit of 5% of the share price is assumed. 
             Also, the household should satisfy at the same time the mortgage constraints for the calculated share to be able to buy.
-            Once a shared owner, the calculator assumes the household uses all savings and matches it with additional borrowing at the 
+            Once a shared owner, the simulator assumes the household uses all savings and matches it with additional borrowing at the 
             95% loan-to-value ratio to buy the maximum additional shares that satisfy the affordability and mortgage constraints. 
             It also calculates when the household will staircase to 100%. Finally, it estimates how much money you'll have saved in a savings account by 
             the time the household retires, which it assumes will be at age 67.

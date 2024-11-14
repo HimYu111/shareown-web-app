@@ -92,7 +92,7 @@ function Results({ result }) {
       </div>
       <div className="prefooter-wrapper">
           <p className="grapics-note">
-          Please note that the calculations are based on a model designed by professors at University College London and Durham University and
+          Please note that the simulation is based on a model designed by professors at University College London and Durham University and
           do not provide financial advice. The model uses a range of assumptions, which can be found
           <Link to="/FAQs" className="ml-1 font-bold">here</Link>. The outputs are indicative and highly dependent on the model
           assumptions.

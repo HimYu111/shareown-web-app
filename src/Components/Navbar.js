@@ -16,7 +16,7 @@ function Navbar() {
         <Link to="/"><img className="img-logo" src={logo}  alt="logo"/></Link>
         </div>
        <div className="text-logo">
-        ShareOwn Calculator
+        ShareOwn Simulator
         </div>
 
 

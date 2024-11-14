@@ -10,8 +10,18 @@ function Blog() {
     <div className="h-full flex justify-center items-start translate-y-100 more-secion-wrapper">
       <div className="blog-wrapper"> 
         <p className="mb-7" style={{ paddingLeft: '30px' }}>
-          The lifetime calculator is based on an EPSRC-UCL research funded project. The underlying model is developed by academics at UCL and Durham University. It is not for commercial use and does not provide financial advice. ®
+          The lifetime simulator is based on an EPSRC-UCL research funded project. The underlying model is developed by academics at UCL and Durham University. It is not for commercial use and does not provide financial advice. ®
         </p>
+        <p className="mb-7" style={{ paddingLeft: '30px' }}>
+          Find out more about the simulator  
+          <span> </span> {/* This adds the space */}
+          <a href="https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4996840" 
+            className="text-blue-600 hover:text-blue-800 visited:text-purple-600"
+            target="_blank" 
+            rel="noopener noreferrer"> 
+            here
+          </a>. 
+          </p>
         <p className="mb-7" style={{ paddingLeft: '30px' }}>
           Find out more about shared ownership in our 
           <span> </span> {/* This adds the space */}
@@ -21,7 +31,6 @@ function Blog() {
             rel="noopener noreferrer"> 
             report
           </a>.
-          {/* Full stop added after the link */}
         </p>
       </div>
   </div>
