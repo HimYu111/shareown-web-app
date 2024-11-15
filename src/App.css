@@ -494,7 +494,18 @@ button#btn-up:hover, button#btn-down:hover {
 .results-1st-col p.font-bold,.results-2nd-col p.font-bold {
   font-size: 1.3em;
 }
+.results-2nd-col p.regular-text,
+.mortgage-2cols-wrapper p.regular-text,
+.lifetime-2ndcol p.regular-text {
+  font-size: inherit;
+}
 
+.results-2nd-col .results-sharedOwn .toggle-icon , .results-2nd-col .results-number .toggle-icon ,
+.staircasing-chartcol .results-sharedOwn .toggle-text-container .toggle-icon,
+.lifetime-2ndcol .results-sharedOwn .toggle-text-container  .toggle-icon,
+.mortgage-2cols-wrapper .results-sharedOwn .toggle-text-container  .toggle-icon {
+  font-size: 0.5em;
+}
 
 .results-fullOwn, .results-sharedOwn {
   font-size: 2rem;
@@ -503,6 +514,15 @@ button#btn-up:hover, button#btn-down:hover {
   border-bottom: 1px solid;
   font-weight: 700;
 }
+
+.staircasing-chartcol {
+  margin-top: 30px;
+}
+
+.staircasing-chartcol .results-sharedOwn .toggle-text-container {
+  justify-content: center;
+}
+
 
  .std-wrapper h1{
   font-size: 2.8rem;
@@ -732,7 +752,7 @@ button#btn-up:hover, button#btn-down:hover {
 
 .toggle-text-container {
   position: relative;
-  display: inline-block;
+  display: flex;
 }
 
 .regular-text {

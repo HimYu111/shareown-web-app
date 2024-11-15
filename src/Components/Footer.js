@@ -17,7 +17,7 @@ function Footer() {
 
   return (
     <div>
-      <footer className="bg-white rounded-lg shadow m-4 dark:bg-gray-800">
+      <footer className="bg-white rounded-lg shadow m-2 dark:bg-gray-800">
         <div className="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center justify-center">
           <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 text-center">
             © 2024 ShareOwn.info
