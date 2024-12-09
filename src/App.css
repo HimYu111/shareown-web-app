@@ -496,15 +496,25 @@ button#btn-up:hover, button#btn-down:hover {
 }
 .results-2nd-col p.regular-text,
 .mortgage-2cols-wrapper p.regular-text,
-.lifetime-2ndcol p.regular-text {
+.lifetime-2ndcol p.regular-text,
+.staircasing-explained .results-1st-col p.regular-text  {
   font-size: inherit;
 }
 
 .results-2nd-col .results-sharedOwn .toggle-icon , .results-2nd-col .results-number .toggle-icon ,
 .staircasing-chartcol .results-sharedOwn .toggle-text-container .toggle-icon,
 .lifetime-2ndcol .results-sharedOwn .toggle-text-container  .toggle-icon,
-.mortgage-2cols-wrapper .results-sharedOwn .toggle-text-container  .toggle-icon {
+.mortgage-2cols-wrapper .results-sharedOwn .toggle-text-container  .toggle-icon,
+.staircasing-explained .results-sharedOwn .toggle-text-container  .toggle-icon {
   font-size: 0.5em;
+}
+
+.staircasing-explained  .results-2cols .mb-3 .toggle-text-container  .toggle-icon {
+  font-size: 0.8em;
+}
+
+.staircasing-explained .results-2cols {
+  flex:inherit;
 }
 
 .results-fullOwn, .results-sharedOwn {
@@ -849,6 +859,10 @@ input.email-input {
 
   #btn-up, #btn-down {
     display: none;
+  }
+
+  .staircasing-explained .results-2cols {
+    flex: 0 0 80%;
   }
   
 }

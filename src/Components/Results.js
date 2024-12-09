@@ -1349,7 +1349,7 @@ const renderStairComp = () => {
     );
   }
   return (
-      <div className="results">
+      <div className="results staircasing-explained std-wrapper">
       <div className="text-white results-2cols">
         
         {/* Full Ownership */}
