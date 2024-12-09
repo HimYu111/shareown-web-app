@@ -892,7 +892,7 @@ const renderTwoColumnsText = () => {
             <p className="text-xl font-bold text-white">You cannot afford to staircase to 100% through Shared Ownership with the current inputs.</p>
             <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
           </div>
-        ) : (
+        ) : result.TO_housing > 0 ? (
           <div className="results-2nd-col std-2ndcol">
             <h2 className="results-sharedOwn font-bold">
               <ToggleText
@@ -900,7 +900,7 @@ const renderTwoColumnsText = () => {
                 toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
               />
             </h2>
-            <p className="font-bold">Minimum Deposit <div className="results-number">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</div></p>
+            <p className="font-bold">Minimum Deposit <div className="results-number">Not eligible</div></p>
             <p className="mb-6">
               {result.SO_share > 0.25
                 ? (<>You can afford to buy in <div className="results-number">
@@ -915,9 +915,31 @@ const renderTwoColumnsText = () => {
               regularText ="Monthly costs "
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
+            <p className="mb-6"><div className="results-number">Not eligible</div></p>
+          </div>
+        ) : (
+          <div className="results-2nd-col std-2ndcol">
+            <h2 className="results-sharedOwn font-bold">
+              <ToggleText
+                regularText="Shared Ownership"
+                toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+              />
+            </h2>
+            <p className="font-bold">Minimum Deposit <div className="results-number">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</div></p>
+            <p className="mb-6">
+              {result.SO_share > 0.25
+                ? (<>You can afford to buy in <div className="results-number">now</div></>)
+                : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
+            </p>
+            
+            <ToggleText
+              className="font-bold" 
+              regularText ="Monthly costs "
+              toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
+            />
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
           </div>
-        )}
+        ) }
       </div>
     </div>
   );
