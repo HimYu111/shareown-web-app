@@ -892,7 +892,7 @@ const renderTwoColumnsText = () => {
             <p className="text-xl font-bold text-white">You cannot afford to staircase to 100% through Shared Ownership with the current inputs.</p>
             <p>You can change above inputs, i.e. lower the price of the home, vary income, to see when you can afford full ownership.</p>
           </div>
-        ) : result.TO_housing > 0 ? (
+        ) : result.TO_housing > 0 && result.TO_time < 1 ? (
           <div className="results-2nd-col std-2ndcol">
             <h2 className="results-sharedOwn font-bold">
               <ToggleText
@@ -947,12 +947,18 @@ const renderTwoColumnsText = () => {
 
 const renderstaircasing = () => {
   if (result.TO_housing === 0 && result.SO_housing === 0) {
-    return <div className="text-center my-4"></div>
+    return <div className="text-center my-4"></div>;
   }
+
+  // Check for the condition where we want to return null
+  if (result.TO_time < 1) {
+    return null; // This will stop rendering the component if the condition is met
+  }
+
   return (
     <div className="text-white staircasing-wrapper std-wrapper">
       <h1 className="font-bold">Shared Ownership Staircasing</h1>
-      {result.income >= incomeThreshold  ? (
+      {result.income >= incomeThreshold ? (
         <div className="results-2nd-col std-2ndcol">
           <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
           <p className="text-xl font-bold text-white">
@@ -1001,6 +1007,7 @@ const renderstaircasing = () => {
     </div>
   );
 };
+
 
 
 
@@ -1063,7 +1070,7 @@ const renderlifetimeWealth = () => {
             <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
           </div>
         </div>
-      ) : result.income >= incomeThreshold  ? (
+      ) : result.income >= incomeThreshold  || result.TO_time < 1 ? (
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
             <h2 className="results-sharedOwn font-bold">
@@ -1216,7 +1223,7 @@ const rendermortgageRep = () => {
             </p>
           </div>
         </div>
-      ) : result.income >= incomeThreshold  ? (
+      ) : result.income >= incomeThreshold  || result.TO_time < 1 ? (
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
           <div className="mortgage-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
@@ -1343,20 +1350,21 @@ const renderScenariosExplained = () => {
 
 
 const renderStairComp = () => {
-  if (result.SO_housing === 0) {
-    return (
-      <div className="text-center my-4"></div>
-    );
+  // Check if both conditions are met
+  if (result.SO_housing === 0 || result.TO_time < 1) {
+    // Return null when the conditions are met, causing nothing to render
+    return null;
   }
+
   return (
-      <div className="results staircasing-explained std-wrapper">
+    <div className="results staircasing-explained std-wrapper">
       <div className="text-white results-2cols">
         
         {/* Full Ownership */}
         <div className="results-1st-col std-1stcol">
           <h2 className="results-sharedOwn font-bold">
             <ToggleText
-              regularText="With Staircasing"
+              regularText="Shared Ownership With Staircasing"
               toggleableText="Staircasing happens every time enough money is saved, accounting for transaction costs. 
               Savings are used to take an additional mortgage, and the maximum available share is brought."
             />
@@ -1392,7 +1400,7 @@ const renderStairComp = () => {
         </div>
 
         <div className="results-2nd-col std-2ndcol">
-        <h2 className="results-fullOwn font-bold">Without Staircasing</h2>
+        <h2 className="results-fullOwn font-bold">Shared Ownership Without Staircasing</h2>
           <div className="initial-share">
               <p className="font-bold">Initial Share</p>
               <p>You can afford to buy an initial share of</p>
