@@ -946,12 +946,7 @@ const renderTwoColumnsText = () => {
 };
 
 const renderstaircasing = () => {
-  if (result.TO_housing === 0 && result.SO_housing === 0) {
-    return <div className="text-center my-4"></div>;
-  }
-
-  // Check for the condition where we want to return null
-  if (result.TO_time < 1) {
+  if (result.TO_housing > 0 && result.TO_time < 1) {
     return null; // This will stop rendering the component if the condition is met
   }
 
@@ -1351,7 +1346,7 @@ const renderScenariosExplained = () => {
 
 const renderStairComp = () => {
   // Check if both conditions are met
-  if (result.SO_housing === 0 || result.TO_time < 1) {
+  if (result.TO_housing > 0 && result.TO_time < 1) {
     // Return null when the conditions are met, causing nothing to render
     return null;
   }
@@ -1466,8 +1461,8 @@ return (
       {renderstaircasing()}
       {renderlifetimeWealth()}
       {rendermortgageRep()}
-      {renderScenariosExplained()}
       {renderStairComp()}
+      {renderScenariosExplained()}
     </div>
   </div>
 </div>
