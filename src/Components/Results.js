@@ -1200,6 +1200,8 @@ const rendermortgageRep = () => {
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
       {result.TO_housing === 0 ? (
+        <div className="text-white mortgage-wrapper std-wrapper">
+        <div><h1 className="font-bold">Mortgage Repayment</h1></div>
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
           <div className="mortgage-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
@@ -1218,7 +1220,10 @@ const rendermortgageRep = () => {
             </p>
           </div>
         </div>
+        </div>
       ) : result.income >= incomeThreshold  || result.TO_time < 1 ? (
+        <div className="text-white mortgage-wrapper std-wrapper">
+        <div><h1 className="font-bold">Mortgage Repayment</h1></div>
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
           <div className="mortgage-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
@@ -1239,7 +1244,10 @@ const rendermortgageRep = () => {
             </p>
           </div>
         </div>
+        </div>
       ) : result.SO_housing === 0 ? (
+        <div className="text-white mortgage-wrapper std-wrapper">
+        <div><h1 className="font-bold">Mortgage Repayment</h1></div>
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
           <div className="mortgage-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
@@ -1258,6 +1266,7 @@ const rendermortgageRep = () => {
             <p className="text-xl font-bold text-white">
               You cannot afford to staircase to 100% through Shared Ownership with the current inputs.
             </p>
+          </div>
           </div>
         </div>
       ) : (
@@ -1320,7 +1329,7 @@ const renderScenariosExplained = () => {
               <h2 className="results-fullOwn">Full Ownership</h2>
               <p>
                 Full ownership means buying a home outright by making a deposit of at least 5% of the property’s value and 
-                financing the rest with a mortgage. The maximum mortgage you can secure is limited to 4.5 times your 
+                financing the rest with a mortgage. The maximum mortgage you can secure is limited to 6 times your 
                 total annual gross income.
               </p>
               <p>
@@ -1392,6 +1401,9 @@ const renderStairComp = () => {
               {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
               (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
             </p>
+          <div>
+              <p>You will own 100% (with staircasing)</p>
+          </div>
         </div>
 
         <div className="results-2nd-col std-2ndcol">
@@ -1424,6 +1436,9 @@ const renderStairComp = () => {
               {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
               (<div className="results-number mb-3">{result.NS_mortgage_finish ? formatNumber(result.NS_mortgage_finish.toFixed(0)) : "0"}</div>)}
             </p>
+            <div>
+              <p>You will own {result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}% (initial share only, without staircasing)</p>
+          </div>
         </div>
       </div>
     </div>
