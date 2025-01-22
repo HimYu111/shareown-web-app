@@ -71,6 +71,9 @@ function Results({ result }) {
   if (!result) {
     return <p></p>
   }
+  result.TO_housing = Math.max(0, result?.TO_housing ?? 0);
+  result.SO_housing = Math.max(0, result?.SO_housing ?? 0);
+
   const parseAndFormatData = (data) => {
     if (!data) return [];
     return JSON.parse(data).map(value => {
@@ -85,7 +88,7 @@ function Results({ result }) {
       }
       return value;
     });
-  };
+  }; 
 
   const parseNumericList = (str) => {
     console.log('Type of str:', typeof str);  // Log the type of the input
@@ -254,7 +257,7 @@ function Results({ result }) {
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold && (result.TO_housing === 0 || result.TO_time > 0)? [{
           label: 'Shared Ownership',
           data: [...mortgagedata.map(item => parseFloat(item))],
           borderColor: '#2d67b3',
@@ -356,7 +359,7 @@ function Results({ result }) {
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 && result.income < incomeThreshold  && !allBtZeros ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold && (result.TO_housing === 0 || result.TO_time > 0)? [{
           label: 'SO',
           data: net_wealth_bt_list.map(item => parseFloat(item)),
           borderColor: '#2d67b3',
@@ -451,7 +454,7 @@ function Results({ result }) {
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
+        ...((result.SO_housing > 0 && result.income < incomeThreshold && (result.TO_housing === 0 || result.TO_time > 0)) ? [{
           label: 'Shared Ownership',
           data: [...SO_wealthdata.map(item => parseFloat(item))],
           borderColor: '#2d67b3',
@@ -554,7 +557,7 @@ function Results({ result }) {
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(hasSOData ? [{
+        ...(hasSOData && result.SO_housing > 0 && result.income < incomeThreshold && (result.TO_housing === 0 || result.TO_time > 0) ? [{
           label: 'SO',
           data: net_wealth_cc_list.map(item => parseFloat(item)),
           borderColor: '#478194',
@@ -646,7 +649,7 @@ function Results({ result }) {
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold && (result.TO_housing === 0 || result.TO_time > 0) ? [{
           label: 'Shared Ownership',
           data: [...SO_housedata.map(item => parseFloat(item))],
           borderColor: '#2d67b3',
@@ -732,7 +735,7 @@ function Results({ result }) {
           borderWidth: 1,
           fill: false,
         }] : []),
-        ...(result.SO_housing > 0 && result.income < incomeThreshold  ? [{
+        ...(result.SO_housing > 0 && result.income < incomeThreshold && (result.TO_housing === 0 || result.TO_time > 0)? [{
           label: 'SO',
           data: net_wealth_cd_list.map(item => parseFloat(item)),
           borderColor: '#478194',
@@ -946,13 +949,16 @@ const renderTwoColumnsText = () => {
 };
 
 const renderstaircasing = () => {
-  if (result.TO_housing > 0 && result.TO_time < 1) {
-    return null; // This will stop rendering the component if the condition is met
+  // If both SO_housing and TO_housing are 0, do not render
+  if (result.SO_housing === 0 && result.TO_housing === 0) {
+    return null;
   }
 
   return (
     <div className="text-white staircasing-wrapper std-wrapper">
       <h1 className="font-bold">Shared Ownership Staircasing</h1>
+
+      {/* If income is too high for Shared Ownership */}
       {result.income >= incomeThreshold ? (
         <div className="results-2nd-col std-2ndcol">
           <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
@@ -960,7 +966,7 @@ const renderstaircasing = () => {
             You do not qualify for Shared Ownership with your current income.
           </p>
         </div>
-      ) : result.SO_housing === 0 ? (
+      ) : result.SO_housing === 0 ? ( // If SO_housing is 0, show this message
         <div className="results-2nd-col std-2ndcol">
           <h2 className="results-sharedOwn font-bold">Shared Ownership</h2>
           <p className="text-xl font-bold text-white">
@@ -1002,6 +1008,7 @@ const renderstaircasing = () => {
     </div>
   );
 };
+
 
 
 
@@ -1356,6 +1363,11 @@ const renderScenariosExplained = () => {
 const renderStairComp = () => {
   // Check if both conditions are met
   if (result.TO_housing > 0 && result.TO_time < 1) {
+    // Return null when the conditions are met, causing nothing to render
+    return null;
+  }
+
+  if (result.TO_housing === 0 && result.SO_housing === 0) {
     // Return null when the conditions are met, causing nothing to render
     return null;
   }
