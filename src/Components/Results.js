@@ -881,7 +881,7 @@ const renderTwoColumnsText = () => {
               />
             </h2>
             <p className="text-xl font-bold text-white">
-              You do not qualify for Shared Ownership with your current income.
+              You do not qualify for Shared Ownership with your current income. 
             </p>
           </div>
         ) : result.SO_housing === 0 ? (
@@ -1199,133 +1199,148 @@ const rendermortgageRep = () => {
   const isMobileScreen = () => {
     return window.innerWidth < 500;
   };
+
+  const renderFullOwnershipColumn = () => {
+    if (result.TO_housing === 0) {
+      return (
+        <div className="mortgage-1stcol std-1stcol">
+          <h2 className="results-fullOwn">Full Ownership</h2>
+          <p>You cannot afford full ownership. You can change above inputs, i.e., lower the price of the home, vary income, to see when you can afford full ownership.</p>
+        </div>
+      );
+    }
+
+    if (result.TO_last_mortgage > 0) {
+      return (
+        <div className="mortgage-1stcol std-1stcol">
+          <h2 className="results-fullOwn">Full Ownership</h2>
+          <p className="font-bold mb-3">
+            At retirement your outstanding mortgage balance will be{" "}
+            {result.TO_last_mortgage < 1 ? (
+              <div className="results-number">£0</div>
+            ) : (
+              <div className="results-number mb-3">
+                £{result.TO_last_mortgage ? formatNumber(result.TO_last_mortgage.toFixed(0)) : "0"}
+              </div>
+            )}
+          </p>
+        </div>
+      );
+    }
+
+    return (
+      <div className="mortgage-1stcol std-1stcol">
+        <h2 className="results-fullOwn">Full Ownership</h2>
+        <p className="font-bold mb-3">You will be mortgage free {result.TO_finish < 1 ? '' : 'by the age of'}
+          <ToggleText
+            className="font-bold" 
+            regularText=" "
+            toggleableText="Assuming you use all your savings to make prepayments."
+          />
+          {result.TO_finish < 1 ? (<div className="results-number">now</div>) : 
+          (<div className="results-number mb-3">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
+        </p>
+      </div>
+    );
+  };
+
+  const renderSharedOwnershipColumn = () => {
+    // Check if the user does not qualify for Shared Ownership
+    if (result.income >= incomeThreshold || (result.TO_time < 1 && result.TO_housing > 0)) {
+      return (
+        <div className="mortgage-2ndcol std-2ndcol">
+          <h2 className="results-sharedOwn">Shared Ownership</h2>
+          <p className="text-xl font-bold text-white">
+            You do not qualify for Shared Ownership with your current income. hurrrr
+          </p>
+        </div>
+      );
+    }
+
+    if (result.SO_last_mortgage > 0) {
+      return (
+        <div className="mortgage-2ndcol std-2ndcol">
+          <h2 className="results-fullOwn">Shared Ownership</h2>
+          <p className="font-bold mb-3">
+            At retirement your outstanding mortgage balance will be{" "}
+            {result.SO_last_mortgage < 1 ? (
+              <div className="results-number">£0</div>
+            ) : (
+              <div className="results-number mb-3">
+                £{result.SO_last_mortgage ? formatNumber(result.SO_last_mortgage.toFixed(0)) : "0"}
+              </div>
+            )}
+          </p>
+        </div>
+      );
+    }
+
+    if (result.SO_housing === 0) {
+      return (
+        <div className="mortgage-2ndcol std-2ndcol">
+          <h2 className="results-sharedOwn">Shared Ownership</h2>
+          <p className="font-bold">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
+            <ToggleText
+              className="font-bold" 
+              regularText=" "
+              toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
+            />
+            {result.SO_mortgage_finish < 1 ? (<div className="results-number mb-3">now</div>) : 
+            (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
+          </p>
+        </div>
+      );
+    }
+
+    // Default case for Shared Ownership
+    return (
+      <div className="mortgage-2ndcol std-2ndcol">
+        <h2 className="results-sharedOwn font-bold">
+          <ToggleText
+            regularText="Shared Ownership"
+            toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
+          />
+        </h2>               
+        <p className="font-bold mb-3">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
+          <ToggleText
+            className="font-bold" 
+            regularText=" "
+            toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
+          />
+          {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
+          (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
+        </p>
+      </div>
+    );
+  };
+
   if (result.TO_housing === 0 && result.SO_housing === 0) {
     return (
       <div className="text-center my-4"></div>
     );
   }
+
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
-      {result.TO_housing === 0 ? (
-        <div className="text-white mortgage-wrapper std-wrapper">
+      <div className="text-white mortgage-wrapper std-wrapper">
         <div><h1 className="font-bold">Mortgage Repayment</h1></div>
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
-          <div className="mortgage-1stcol std-1stcol">
-            <h2 className="results-fullOwn">Full Ownership</h2>
-            <p>You cannot afford full ownership. You can change above inputs, i.e., lower the price of the home, vary income, to see when you can afford full ownership.</p>
-          </div>
-          <div className="mortgage-2ndcol std-2ndcol">
-            <h2 className="results-sharedOwn">Shared Ownership</h2>
-            <p className="font-bold">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
-              <ToggleText
-                className="font-bold" 
-                regularText =" "
-                toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
-              />
-              {result.SO_mortgage_finish < 1 ? (<div className="results-number mb-3">now</div>) : 
-              (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
-            </p>
-          </div>
+          {renderFullOwnershipColumn()}
+          {renderSharedOwnershipColumn()}
         </div>
-        </div>
-      ) : result.income >= incomeThreshold  || result.TO_time < 1 ? (
-        <div className="text-white mortgage-wrapper std-wrapper">
-        <div><h1 className="font-bold">Mortgage Repayment</h1></div>
-        <div className="mortgage-2cols-wrapper std-2cols-wrapper">
-          <div className="mortgage-1stcol std-1stcol">
-            <h2 className="results-fullOwn">Full Ownership</h2>
-            <p className="font-bold">You will be mortgage free {result.TO_finish < 1 ? '' : 'by the age of'}
-              <ToggleText
-                className="font-bold" 
-                regularText =" "
-                toggleableText="Assuming you use all your savings to make prepayments."
-              />
-              {result.TO_finish < 1 ? (<div className="results-number">now</div>) : 
-              (<div className="results-number mb-3">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
-            </p>
-          </div>
-          <div className="mortgage-2ndcol std-2ndcol">
-            <h2 className="results-sharedOwn">Shared Ownership</h2>
-            <p className="text-xl font-bold text-white">
-              You do not qualify for Shared Ownership with your current income.
-            </p>
-          </div>
-        </div>
-        </div>
-      ) : result.SO_housing === 0 ? (
-        <div className="text-white mortgage-wrapper std-wrapper">
-        <div><h1 className="font-bold">Mortgage Repayment</h1></div>
-        <div className="mortgage-2cols-wrapper std-2cols-wrapper">
-          <div className="mortgage-1stcol std-1stcol">
-            <h2 className="results-fullOwn">Full Ownership</h2>
-            <p className="font-bold">You will be mortgage free {result.TO_finish < 1 ? '' : 'by the age of'}
-              <ToggleText
-                className="font-bold" 
-                regularText =" "
-                toggleableText="Assuming you use all your savings to make prepayments."
-              />
-              {result.TO_finish < 1 ? (<div className="results-number">now</div>) : 
-              (<div className="results-number mb-3">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
-            </p>
-          </div>
-          <div className="mortgage-2ndcol std-2ndcol">
-            <h2 className="results-sharedOwn">Shared Ownership</h2>
-            <p className="text-xl font-bold text-white">
-              You cannot afford to staircase to 100% through Shared Ownership with the current inputs.
-            </p>
-          </div>
-          </div>
-        </div>
-      ) : (
-        <div className="text-white mortgage-wrapper std-wrapper">
-          <div><h1 className="font-bold">Mortgage Repayment</h1></div>
-          <div className="mortgage-2cols-wrapper std-2cols-wrapper">
-            <div className="mortgage-1stcol std-1stcol">
-              <h2 className="results-fullOwn">Full Ownership</h2>
-              <p className="font-bold mb-3">You will be mortgage free {result.TO_finish < 1 ? '' : 'by the age of'}
-                <ToggleText
-                  className="font-bold" 
-                  regularText =" "
-                  toggleableText="Assuming you use all your savings to make prepayments."
-                />
-                {result.TO_finish < 1 ? (<div className="results-number">now</div>) : 
-                (<div className="results-number mb-3">{result.TO_finish ? formatNumber(result.TO_finish.toFixed(0)) : "0"}</div>)}
-              </p>
-            </div>
-            <div className="mortgage-2ndcol std-2ndcol">
-              <h2 className="results-sharedOwn font-bold">
-                <ToggleText
-                  regularText="Shared Ownership"
-                  toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
-                />
-              </h2>               
-            <p className="font-bold mb-3">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
-                <ToggleText
-                  className="font-bold" 
-                  regularText =" "
-                  toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
-                />
-                {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
-                (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
-              </p>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
       {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
-          <div id="loan" className="mb-2"  >
-            {isMobileScreen() ? (
-              <div>{renderloanchartmob()}</div>
-            ) : (
-              <div>{renderloanchart()}</div>
-            )}
+          <div id="loan" className="mb-2">
+            {isMobileScreen() ? renderloanchartmob() : renderloanchart()}
           </div>
         </div>
       )}
     </div>
   );
-}
+};
+
+
 
 const renderScenariosExplained = () => {
   return (
@@ -1404,15 +1419,22 @@ const renderStairComp = () => {
                   toggleableText="Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs."
               />
           <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
-          <p className="font-bold mb-3">You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
-              <ToggleText
-                className="font-bold" 
-                regularText =" "
-                toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
-              />
-              {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
-              (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
-            </p>
+          <p className="font-bold mb-3">
+            {result.SO_last_mortgage > 0 ? (
+              "You will not pay off your mortgage by retirement."
+            ) : (
+              <>
+                You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
+                <ToggleText
+                  className="font-bold" 
+                  regularText =" "
+                  toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
+                />
+                {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
+                (<div className="results-number mb-3">{result.SO_mortgage_finish ? formatNumber(result.SO_mortgage_finish.toFixed(0)) : "0"}</div>)}
+              </>
+            )}
+          </p>
           <div>
               <p>You will own 100% (with staircasing)</p>
           </div>
@@ -1439,15 +1461,22 @@ const renderStairComp = () => {
                   toggleableText="Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs."
               />
           <p className=""><div className="results-number">£{result.NS_housing ? formatNumber(result.NS_housing.toFixed(0)) : '0'}</div></p>
-          <p className="font-bold mb-3">You will be mortgage free {result.NS_mortgage_finish < 1 ? '' : 'by the age of'}
-              <ToggleText
-                className="font-bold" 
-                regularText =" "
-                toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
-              />
-              {result.SO_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
-              (<div className="results-number mb-3">{result.NS_mortgage_finish ? formatNumber(result.NS_mortgage_finish.toFixed(0)) : "0"}</div>)}
-            </p>
+          <p className="font-bold mb-3">
+            {result.SO_last_mortgage > 0 ? (
+              "You will not pay off your mortgage by retirement."
+            ) : (
+              <>
+                You will be mortgage free {result.NS_mortgage_finish < 1 ? '' : 'by the age of'}
+                <ToggleText
+                  className="font-bold" 
+                  regularText =" "
+                  toggleableText="Assuming all savings are used to make repayments. For further model assumptions check the FAQs."
+                />
+                {result.NS_mortgage_finish < 1 ? (<div className="results-number">now</div>) : 
+                (<div className="results-number mb-3">{result.NS_mortgage_finish ? formatNumber(result.NS_mortgage_finish.toFixed(0)) : "0"}</div>)}
+              </>
+            )}
+          </p>
             <div>
               <p>You will own {result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}% (initial share only, without staircasing)</p>
           </div>
@@ -1456,7 +1485,6 @@ const renderStairComp = () => {
     </div>
   );
 };
-
 
 console.log("TO_age", result.TO_age);
 console.log("TO_time", result.TO_time);
@@ -1476,6 +1504,8 @@ console.log("SO_mortgage", result.SO_mortgage);
 console.log("SO_share", result.SO_share);
 console.log("NS_savings", result.NS_savings);
 console.log("NS_housing", result.NS_housing);
+console.log("SO_last_mortgage", result.SO_last_mortgage);
+console.log("TO_last_mortgage", result.TO_last_mortgage);
 console.log("Postcode", result.postcode);
 
 
