@@ -903,22 +903,9 @@ const renderTwoColumnsText = () => {
                 toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
               />
             </h2>
-            <p className="font-bold">Minimum Deposit <div className="results-number">Not eligible</div></p>
-            <p className="mb-6">
-              {result.SO_share > 0.25
-                ? (<>You can afford to buy in <div className="results-number">
-                  <ToggleText
-                    regularText="Not eligible"
-                    toggleableText="Since you can afford this property under Full Ownership, you are not eligible for it under Shared Ownership according to the eligibility criteria for government funded Shared Ownership. Please check with a mortgage broker to explore further outcomes."
-                  /></div></>)
-                : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
-            </p>
-            <ToggleText
-              className="font-bold" 
-              regularText ="Monthly costs "
-              toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
-            />
-            <p className="mb-6"><div className="results-number">Not eligible</div></p>
+            <p className="font-bold">With the current inputs it looks like you qualify outright for full ownership, which makes you not eligible for shared ownership under the current affordability guidelines. However, if you, i.e. reduce your deposit or increase expenditures you might qualify for shared ownership.</p>
+
+
           </div>
         ) : (
           <div className="results-2nd-col std-2ndcol">
@@ -950,7 +937,7 @@ const renderTwoColumnsText = () => {
 
 const renderstaircasing = () => {
   // If both SO_housing and TO_housing are 0, do not render
-  if (result.SO_housing === 0 && result.TO_housing === 0) {
+  if ((result.SO_housing === 0 && result.TO_housing === 0) || (result.income >= incomeThreshold  || result.TO_time < 1)) {
     return null;
   }
 
@@ -979,8 +966,8 @@ const renderstaircasing = () => {
           <div className="staircasing-2cols-wrapper std-2cols-wrapper">
             <div className="staircasing-combinedcol std-1stcol">
               <div className="initial-share">
-                <p className="font-bold">Initial Share</p>
-                <p>You can afford to buy an initial share of</p>
+                <p className="font-bold">Maximum Initial Share</p>
+                <p>You can afford to buy an maximum initial share of</p>
                 <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
                 <p>at the age of</p>
                 <p><span className="results-number mb-3">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
@@ -1075,12 +1062,7 @@ const renderlifetimeWealth = () => {
       ) : result.income >= incomeThreshold  || result.TO_time < 1 ? (
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
-            <h2 className="results-sharedOwn font-bold">
-                <ToggleText
-                  regularText="Shared Ownership"
-                  toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
-              />
-            </h2>            
+            <h2 className="results-fullOwn">Full Ownership</h2>            
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
@@ -1251,7 +1233,7 @@ const rendermortgageRep = () => {
         <div className="mortgage-2ndcol std-2ndcol">
           <h2 className="results-sharedOwn">Shared Ownership</h2>
           <p className="text-xl font-bold text-white">
-            You do not qualify for Shared Ownership with your current income. hurrrr
+            You do not qualify for Shared Ownership with your current income.
           </p>
         </div>
       );
@@ -1401,8 +1383,8 @@ const renderStairComp = () => {
             />
           </h2>
           <div className="initial-share">
-              <p className="font-bold">Initial Share</p>
-              <p>You can afford to buy an initial share of</p>
+              <p className="font-bold">Maximum Initial Share</p>
+              <p>You can afford to buy an maximum initial share of</p>
               <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
               <p>at the age of</p>
               <p><span className="results-number mb-3">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
@@ -1443,8 +1425,8 @@ const renderStairComp = () => {
         <div className="results-2nd-col std-2ndcol">
         <h2 className="results-fullOwn font-bold">Shared Ownership Without Staircasing</h2>
           <div className="initial-share">
-              <p className="font-bold">Initial Share</p>
-              <p>You can afford to buy an initial share of</p>
+              <p className="font-bold">Maximum Initial Share</p>
+              <p>You can afford to buy an maximum initial share of</p>
               <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
               <p>at the age of</p>
               <p><span className="results-number mb-3">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
