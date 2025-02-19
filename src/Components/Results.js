@@ -937,7 +937,7 @@ const renderTwoColumnsText = () => {
 
 const renderstaircasing = () => {
   // If both SO_housing and TO_housing are 0, do not render
-  if ((result.SO_housing === 0 && result.TO_housing === 0) || (result.income >= incomeThreshold  || result.TO_time < 1)) {
+  if ((result.SO_housing === 0 && result.TO_housing === 0) || (result.income >= incomeThreshold  || (result.TO_time < 1 && result.TO_housing > 0))) {
     return null;
   }
 
