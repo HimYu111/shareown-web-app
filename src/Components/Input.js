@@ -417,7 +417,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              What is the gross annual income of your household?
+              What is the gross annual income (from all sources, including benefits) of your household?
             </label>
             <input
               id="income"
@@ -476,7 +476,7 @@ const ageRef = useRef(null);
           </div>
           <div className="mb-4">
             <label className="block text-black mb-2">
-              How much in savings does your household have?
+              How much would your household like to put down as a deposit on a mortgage?
             </label>
             <input
               id="savings"
