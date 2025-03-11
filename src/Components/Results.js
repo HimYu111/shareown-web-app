@@ -441,6 +441,8 @@ function Results({ result }) {
       </div>
     );
   };
+
+  
   
   const rendercompchart = () => {
     const data = {
@@ -870,6 +872,8 @@ const renderTwoColumnsText = () => {
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
+            <p className="text-l font-bold"> Initial Share: 100%
+            </p>
           </div>
         )}
         {result.income >= incomeThreshold  ? (
@@ -903,9 +907,23 @@ const renderTwoColumnsText = () => {
                 toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
               />
             </h2>
-            <p className="font-bold">With the current inputs it looks like you qualify outright for full ownership, which makes you not eligible for shared ownership under the current affordability guidelines. However, if you, i.e. reduce your deposit or increase expenditures you might qualify for shared ownership.</p>
-
-
+            <p className="font-bold mb-6">You might not be eligible for Shared Ownership since you can buy a comparable property outright.</p>
+            <p className="font-bold">Minimum Deposit <div className="results-number">Not eligible</div></p>
+            <p className="mb-6">
+              {result.SO_share > 0.25
+                ? (<>You can afford to buy in <div className="results-number">
+                  <ToggleText
+                    regularText="Not eligible"
+                    toggleableText="Since you can afford this property under Full Ownership, you are not eligible for it under Shared Ownership according to the eligibility criteria for government funded Shared Ownership. Please check with a mortgage broker to explore further outcomes."
+                  /></div></>)
+                : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
+            </p>
+            <ToggleText
+              className="font-bold" 
+              regularText ="Monthly costs "
+              toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
+            />
+            <p className="mb-6"><div className="results-number">Not eligible</div></p>
           </div>
         ) : (
           <div className="results-2nd-col std-2ndcol">
@@ -920,16 +938,17 @@ const renderTwoColumnsText = () => {
               {result.SO_share > 0.25
                 ? (<>You can afford to buy in <div className="results-number">now</div></>)
                 : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
-            </p>
-            
+            </p> 
             <ToggleText
               className="font-bold" 
               regularText ="Monthly costs "
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
+            <p className="text-l font-bold"> Initial Share: {result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%
+            </p>
           </div>
-        ) }
+        )}
       </div>
     </div>
   );
@@ -937,7 +956,7 @@ const renderTwoColumnsText = () => {
 
 const renderstaircasing = () => {
   // If both SO_housing and TO_housing are 0, do not render
-  if ((result.SO_housing === 0 && result.TO_housing === 0) || (result.income >= incomeThreshold  || result.TO_time < 1)) {
+  if ((result.SO_housing === 0 && result.TO_housing === 0) || (result.SO_staircase_finish === 0)|| (result.income >= incomeThreshold  || (result.TO_time < 1 && result.TO_housing > 0))) {
     return null;
   }
 
@@ -997,6 +1016,65 @@ const renderstaircasing = () => {
 };
 
 
+const renderOwnType = () => {
+  // Ensure that formatNumber function exists and is imported or defined.
+  const formatNumber = (num) => {
+    // Assuming you want to add commas for thousands.
+    return new Intl.NumberFormat().format(num);
+  };
+
+  return (
+    <div className="text-white lifetime-wrapper std-wrapper">
+      <div>
+        <h1 className="font-bold">
+          <ToggleText
+            className="font-bold" 
+            regularText="Own vs Rent "
+            toggleableText="Shows the current value of future savings and future changes to house prices, i.e. housing wealth up until retirement."
+          />
+        </h1>
+      </div>
+
+      <div className="lifetime-2cols-wrapper std-2cols-wrapper">
+        <div className="lifetime-1stcol std-1stcol">
+          <h2 className="results-fullOwn">Own</h2>
+          
+          <p className="font-bold">Savings</p>
+          <p>
+            <div className="results-number">
+              <div><span>FO: £{result?.TO_liquid ? formatNumber(result.TO_liquid) : '0'}</span></div>
+              <span>SO: £{result?.SO_liquid ? formatNumber(result.SO_liquid) : '0'}</span>
+            </div>
+          </p>
+
+          <p className="font-bold">Housing wealth</p>
+          <p><div className="results-number">£{result?.house_price ? formatNumber(result.house_price) : '0'}</div></p>
+          
+          <p className="font-bold">Outstanding loan balance</p>
+          <p>
+            <div className="results-number">
+              <div><span>FO: £{result?.TO_last_mortgage ? formatNumber(result.TO_last_mortgage) : '0'}</span></div>
+              <span>SO: £{result?.SO_last_mortgage ? formatNumber(result.SO_last_mortgage) : '0'}</span>
+            </div>
+          </p>
+        </div>
+
+        <div className="lifetime-2ndcol std-2ndcol">
+          <h2 className="results-sharedOwn font-bold">Rent</h2>
+          
+          <p className="font-bold">Savings</p>
+          <p><div className="results-number">£{result?.rent_saving ? formatNumber(result.rent_saving) : '0'}</div></p>
+          
+          <p className="font-bold">Housing wealth</p>
+          <p><div className="results-number">£{formatNumber(0)}</div></p>
+          
+          <p className="font-bold">Outstanding loan balance</p>
+          <p><div className="results-number">£{formatNumber(0)}</div></p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 
 
@@ -1025,12 +1103,16 @@ const renderlifetimeWealth = () => {
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
+            <p className="font-bold">Ownership</p>
+            <p className=""><div className="results-number">0%</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
               toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
             />
             <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
+            <p className="font-bold">Loan balance at retirement</p>
+            <p className=""><div className="results-number">£{result.TO_last_mortgage  ? formatNumber(result.TO_last_mortgage.toFixed(0)) : '0'}</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Housing wealth "
@@ -1045,12 +1127,30 @@ const renderlifetimeWealth = () => {
                 toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
               />
             </h2>            
+            <p className="font-bold">Ownership</p>
+              <p className="">
+                <div className="results-number">
+                  {(() => {
+                    try {
+                      const array = JSON.parse(result.net_wealth_cd_by_age_range); // Parse the array
+                      const lastValue = array[array.length - 1] || 0; // Get last value
+                      const housePrice = parseFloat(result.house_price) || 1; // Convert house price to number, avoid division by zero
+                      return `${Math.min(((lastValue / housePrice) * 100).toFixed(0), 100)}%`; // Ensure the percentage doesn't exceed 100%
+                    } catch (error) {
+                      console.error("Error parsing net_wealth_cd_by_age_range:", error);
+                      return "N/A"; // Handle errors
+                    }
+                  })()}
+                </div>
+              </p>
             <ToggleText
               className="font-bold" 
-              regularText ="Savings "
+              regularText="Savings "
               toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
             />
             <p className=""><div className="results-number">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'}</div> </p>
+            <p className="font-bold">Loan balance at retirement</p>
+            <p className=""><div className="results-number">£{result.SO_last_mortgage  ? formatNumber(result.SO_last_mortgage.toFixed(0)) : '0'}</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Housing wealth "
@@ -1062,13 +1162,17 @@ const renderlifetimeWealth = () => {
       ) : result.income >= incomeThreshold  || result.TO_time < 1 ? (
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
-            <h2 className="results-fullOwn">Full Ownership</h2>            
+            <h2 className="results-fullOwn">Full Ownership</h2>         
+            <p className="font-bold">Ownership</p>
+            <p className=""><div className="results-number">100%</div> </p>   
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
               toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
             />
             <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
+            <p className="font-bold">Loan balance at retirement</p>
+            <p className=""><div className="results-number">£{result.TO_last_mortgage  ? formatNumber(result.TO_last_mortgage.toFixed(0)) : '0'}</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Housing wealth "
@@ -1092,12 +1196,16 @@ const renderlifetimeWealth = () => {
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
+            <p className="font-bold">Ownership</p>
+            <p className=""><div className="results-number">100%</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
               toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
             />
             <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
+            <p className="font-bold">Loan balance at retirement</p>
+            <p className=""><div className="results-number">£{result.TO_last_mortgage  ? formatNumber(result.TO_last_mortgage.toFixed(0)) : '0'}</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Housing wealth "
@@ -1116,12 +1224,16 @@ const renderlifetimeWealth = () => {
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
+            <p className="font-bold">Ownership</p>
+            <p className=""><div className="results-number">100%</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
               toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
             />
             <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
+            <p className="font-bold">Loan balance at retirement</p>
+            <p className=""><div className="results-number">£{result.TO_last_mortgage  ? formatNumber(result.TO_last_mortgage.toFixed(0)) : '0'}</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Housing wealth "
@@ -1136,12 +1248,30 @@ const renderlifetimeWealth = () => {
                 toggleableText="With staircasing. Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check FAQs."
               />
             </h2>             
+            <p className="font-bold">Ownership</p>
+              <p className="">
+                <div className="results-number">
+                  {(() => {
+                    try {
+                      const array = JSON.parse(result.net_wealth_cd_by_age_range); // Parse the array
+                      const lastValue = array[array.length - 1] || 0; // Get last value
+                      const housePrice = parseFloat(result.house_price) || 1; // Convert house price to number, avoid division by zero
+                      return `${Math.min(((lastValue / housePrice) * 100).toFixed(0), 100)}%`; // Ensure the percentage doesn't exceed 100%
+                    } catch (error) {
+                      console.error("Error parsing net_wealth_cd_by_age_range:", error);
+                      return "N/A"; // Handle errors
+                    }
+                  })()}
+                </div>
+              </p>
             <ToggleText
               className="font-bold" 
               regularText ="Savings "
               toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
             />
             <p className=""><div className="results-number">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'}</div> </p>
+            <p className="font-bold">Loan balance at retirement</p>
+            <p className=""><div className="results-number">£{result.SO_last_mortgage  ? formatNumber(result.SO_last_mortgage.toFixed(0)) : '0'}</div> </p>
             <ToggleText
               className="font-bold" 
               regularText ="Housing wealth "
@@ -1176,6 +1306,12 @@ const renderlifetimeWealth = () => {
     </div>
   );
 }
+
+
+
+
+
+
 
 const rendermortgageRep = () => {
   const isMobileScreen = () => {
@@ -1244,7 +1380,7 @@ const rendermortgageRep = () => {
         <div className="mortgage-2ndcol std-2ndcol">
           <h2 className="results-fullOwn">Shared Ownership</h2>
           <p className="font-bold mb-3">
-            At retirement your outstanding mortgage balance will be{" "}
+            At retirement you have an outstanding loan balance of {" "}
             {result.SO_last_mortgage < 1 ? (
               <div className="results-number">£0</div>
             ) : (
@@ -1369,6 +1505,16 @@ const renderStairComp = () => {
     return null;
   }
 
+  if  (result.SO_staircase_finish === 0) {
+    // Return null when the conditions are met, causing nothing to render
+    return null;
+  }
+  
+  if  (result.income >= incomeThreshold) {
+    // Return null when the conditions are met, causing nothing to render
+    return null;
+  }
+
   return (
     <div className="results staircasing-explained std-wrapper">
       <div className="text-white results-2cols">
@@ -1403,7 +1549,10 @@ const renderStairComp = () => {
           <p className=""><div className="results-number">£{result.SO_housing ? formatNumber(result.SO_housing.toFixed(0)) : '0'}</div></p>
           <p className="font-bold mb-3">
             {result.SO_last_mortgage > 0 ? (
-              "You will not pay off your mortgage by retirement."
+              <>
+                At retirement you have an outstanding loan balance of
+                <div className="results-number">£{result.SO_last_mortgage ? formatNumber(result.SO_last_mortgage.toFixed(0)) : '0'}</div>
+              </>
             ) : (
               <>
                 You will be mortgage free {result.SO_mortgage_finish < 1 ? '' : 'by the age of'}
@@ -1417,11 +1566,10 @@ const renderStairComp = () => {
               </>
             )}
           </p>
-          <div>
-              <p>You will own 100% (with staircasing)</p>
-          </div>
-        </div>
+          <p className="font-bold mb-3">You will own</p>
+          <p><span className="results-number text-3xl font-bold mb-3">100%</span></p>
 
+        </div>
         <div className="results-2nd-col std-2ndcol">
         <h2 className="results-fullOwn font-bold">Shared Ownership Without Staircasing</h2>
           <div className="initial-share">
@@ -1489,6 +1637,10 @@ console.log("NS_housing", result.NS_housing);
 console.log("SO_last_mortgage", result.SO_last_mortgage);
 console.log("TO_last_mortgage", result.TO_last_mortgage);
 console.log("Postcode", result.postcode);
+if (!result.share_stairgraph) {
+  console.warn("BH is undefined or null!");
+}
+console.log("BH (Raw Value):", result.share_stairgraph);
 
 
 
@@ -1499,6 +1651,7 @@ return (
       {renderTwoColumnsText()}
       {renderstaircasing()}
       {renderlifetimeWealth()}
+      {renderOwnType()}
       {rendermortgageRep()}
       {renderStairComp()}
       {renderScenariosExplained()}

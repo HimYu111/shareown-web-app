@@ -56,6 +56,8 @@ const FAQSection = () => {
           <p>• Affordability constraint: We account for the income affordability constraint associated with Shared Ownership following Homes England guidelines.</p>
           <p>• Minimum initial share for Shared Ownership: 25%.</p>
           <p>• Staircasing fees for Shared Ownership: £1,000.</p>
+          <p>• All figures are adjusted for inflation and expressed in current GBP values.</p>
+          
         </div>
       )
     },
@@ -74,18 +76,18 @@ const FAQSection = () => {
           </a> for more information. </p>
           <p>
             <strong>Full ownership:</strong> The simulator looks ahead to see when you'll have enough money to buy a home. 
-            It figures out when you've saved up for a deposit (at least 5% of the home's price) and can get a mortgage for 
-            the rest. Once you own a home, the simulator assumes you'll use your savings to pay off your mortgage faster. 
-            It also calculates when you might finish paying off your mortgage completely. After that, it estimates how much 
-            money you'll have saved up in a savings account by the time you retire, which it assumes will be at age 67.
+            It figures out when you've saved up for a deposit (at least 5% of the home's price) and can get a mortgage for the rest. 
+            Once you own a home, the simulator assumes you'll use your savings to pay off your mortgage faster. 
+            It also calculates when you might finish paying off your mortgage completely. 
+            After that, it estimates how much money you'll have saved up in a savings account by the time you retire, which it assumes will be at age 67.
           </p>
           <p>
-            <strong>Shared ownership:</strong> The simulator assesses affordability based on which the maximum share a household can buy is calculated. A minimum deposit of 5% of the share price is assumed. 
-            Also, the household should satisfy at the same time the mortgage constraints for the calculated share to be able to buy.
-            Once a shared owner, the simulator assumes the household uses all savings and matches it with additional borrowing at the 
-            95% loan-to-value ratio to buy the maximum additional shares that satisfy the affordability and mortgage constraints. 
-            It also calculates when the household will staircase to 100%. Finally, it estimates how much money you'll have saved in a savings account by 
-            the time the household retires, which it assumes will be at age 67.
+            <strong>Shared ownership:</strong> The simulator assesses affordability based on which the maximum share a household can buy is calculated. 
+            A minimum deposit of 5% of the share price is assumed. 
+            Also, the household should satisfy at the same time the mortgage constraints for the calculated share to be able to buy. 
+            Once a shared owner, the simulator assumes the household uses all savings and matches it with additional borrowing at the 95% loan-to-value ratio to buy the maximum additional shares that satisfy the affordability and mortgage constraints. 
+            It also calculates when the household will staircase to 100%. 
+            Finally, it estimates how much money you'll have saved in a savings account by the time the household retires, which it assumes will be at age 67.
           </p>
         </>
       )
