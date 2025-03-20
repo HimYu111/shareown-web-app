@@ -1064,14 +1064,14 @@ const renderOwnType = () => {
                 <span>
                   FO:{" "}
                   {result?.TO_housing > 0
-                    ? `£${formatNumber(result.TO_liquid || 0)}`
+                    ? `£${formatNumber(result.TO_housing || 0)}`
                     : "Not Available"}
                 </span>
               </div>
               <span>
                 SO:{" "}
                 {result?.SO_housing > 0
-                  ? `£${formatNumber(result.house_price || 0)}`
+                  ? `£${formatNumber(result.SO_housing  || 0)}`
                   : "Not Available"}
               </span>
             </div>
@@ -1320,7 +1320,7 @@ const renderlifetimeWealth = () => {
           </div>
         </div>
       )}
-      {(result.TO_liquid > 0 || result.SO_liquid > 0) && (
+      {((result.TO_liquid > 0 && result.TO_housing > 0)|| result.SO_liquid > 0) && (
         <div className="charts">
           <div id="comp" className="mb-2"  >  
           {isMobileScreen() ? (
