@@ -908,22 +908,21 @@ const renderTwoColumnsText = () => {
               />
             </h2>
             <p className="font-bold mb-6">You might not be eligible for Shared Ownership since you can buy a comparable property outright.</p>
-            <p className="font-bold">Minimum Deposit <div className="results-number">Not eligible</div></p>
+
+            <p className="font-bold">Minimum Deposit <div className="results-number">£{result.SO_deposit ? formatNumber(result.SO_deposit.toFixed(0)) : 'N/A'}</div></p>
             <p className="mb-6">
               {result.SO_share > 0.25
-                ? (<>You can afford to buy in <div className="results-number">
-                  <ToggleText
-                    regularText="Not eligible"
-                    toggleableText="Since you can afford this property under Full Ownership, you are not eligible for it under Shared Ownership according to the eligibility criteria for government funded Shared Ownership. Please check with a mortgage broker to explore further outcomes."
-                  /></div></>)
+                ? (<>You can afford to buy in <div className="results-number">now</div></>)
                 : (<>You can afford to buy in <div className="results-number">{result.SO_time ? formatNumber(result.SO_time.toFixed(0)) : "0"} years</div></>)}
-            </p>
+            </p> 
             <ToggleText
               className="font-bold" 
               regularText ="Monthly costs "
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
-            <p className="mb-6"><div className="results-number">Not eligible</div></p>
+            <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
+            <p className="text-l font-bold"> Initial Share: {result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%
+            </p>
           </div>
         ) : (
           <div className="results-2nd-col std-2ndcol">
@@ -1017,11 +1016,7 @@ const renderstaircasing = () => {
 
 
 const renderOwnType = () => {
-  // Ensure that formatNumber function exists and is imported or defined.
-  const formatNumber = (num) => {
-    // Assuming you want to add commas for thousands.
-    return new Intl.NumberFormat().format(num);
-  };
+  const formatNumber = (num) => new Intl.NumberFormat().format(num);
 
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
@@ -1036,45 +1031,104 @@ const renderOwnType = () => {
       </div>
 
       <div className="lifetime-2cols-wrapper std-2cols-wrapper">
+        {/* Column 1: Own */}
         <div className="lifetime-1stcol std-1stcol">
-          <h2 className="results-fullOwn">Own</h2>
-          
-          <p className="font-bold">Savings</p>
-          <p>
-            <div className="results-number">
-              <div><span>FO: £{result?.TO_liquid ? formatNumber(result.TO_liquid) : '0'}</span></div>
-              <span>SO: £{result?.SO_liquid ? formatNumber(result.SO_liquid) : '0'}</span>
-            </div>
-          </p>
+          <div className="section-title">
+            <h2 className="results-fullOwn">Own</h2>
+          </div>
 
-          <p className="font-bold">Housing wealth</p>
-          <p><div className="results-number">£{result?.house_price ? formatNumber(result.house_price) : '0'}</div></p>
-          
-          <p className="font-bold">Outstanding loan balance</p>
-          <p>
+          <div className="subsection">
+            <p className="font-bold">Savings</p>
             <div className="results-number">
-              <div><span>FO: £{result?.TO_last_mortgage ? formatNumber(result.TO_last_mortgage) : '0'}</span></div>
-              <span>SO: £{result?.SO_last_mortgage ? formatNumber(result.SO_last_mortgage) : '0'}</span>
+              <div>
+                <span>
+                  FO:{" "}
+                  {result?.TO_housing > 0
+                    ? `£${formatNumber(result.TO_liquid || 0)}`
+                    : "Not Available"}
+                </span>
+              </div>
+              <span>
+                SO:{" "}
+                {result?.SO_housing > 0
+                  ? `£${formatNumber(result.SO_liquid || 0)}`
+                  : "Not Available"}
+              </span>
             </div>
-          </p>
+          </div>
+
+          <div className="subsection">
+            <p className="font-bold">Housing wealth</p>
+            <div className="results-number font-bold">
+              <div>
+                <span>
+                  FO:{" "}
+                  {result?.TO_housing > 0
+                    ? `£${formatNumber(result.TO_liquid || 0)}`
+                    : "Not Available"}
+                </span>
+              </div>
+              <span>
+                SO:{" "}
+                {result?.SO_housing > 0
+                  ? `£${formatNumber(result.house_price || 0)}`
+                  : "Not Available"}
+              </span>
+            </div>
+          </div>
+
+          <div className="subsection">
+            <p className="font-bold">Outstanding loan balance</p>
+            <div className="results-number">
+              <div>
+                <span>
+                  FO:{" "}
+                  {result?.TO_housing > 0
+                    ? `£${formatNumber(result.TO_last_mortgage || 0)}`
+                    : "Not Available"}
+                </span>
+              </div>
+              <span>
+                SO:{" "}
+                {result?.SO_housing > 0
+                  ? `£${formatNumber(result.SO_last_mortgage || 0)}`
+                  : "Not Available"}
+              </span>
+            </div>
+          </div>
         </div>
 
+        {/* Column 2: Rent */}
         <div className="lifetime-2ndcol std-2ndcol">
-          <h2 className="results-sharedOwn font-bold">Rent</h2>
-          
-          <p className="font-bold">Savings</p>
-          <p><div className="results-number">£{result?.rent_saving ? formatNumber(result.rent_saving) : '0'}</div></p>
-          
-          <p className="font-bold">Housing wealth</p>
-          <p><div className="results-number">£{formatNumber(0)}</div></p>
-          
-          <p className="font-bold">Outstanding loan balance</p>
-          <p><div className="results-number">£{formatNumber(0)}</div></p>
+          <div className="section-title">
+            <h2 className="results-sharedOwn font-bold">Rent</h2>
+          </div>
+
+          <div className="subsection">
+            <p className="font-bold">Savings</p>
+            <div className="results-number">
+              £{result?.rent_saving ? formatNumber(result.rent_saving) : "0"}
+            </div>
+            <span style={{ display: "block", height: "40px", visibility: "hidden" }}></span>
+          </div>
+
+          <div className="subsection">
+            <p className="font-bold">Housing wealth</p>
+            <div className="results-number">£{formatNumber(0)}</div>
+            <span style={{ display: "block", height: "40px", visibility: "hidden" }}></span>
+          </div>
+
+          <div className="subsection">
+            <p className="font-bold">Outstanding loan balance</p>
+            <div className="results-number">£{formatNumber(0)}</div>
+          </div>
         </div>
       </div>
     </div>
   );
 };
+
+
 
 
 
@@ -1103,23 +1157,8 @@ const renderlifetimeWealth = () => {
         <div className="lifetime-2cols-wrapper std-2cols-wrapper">
           <div className="lifetime-1stcol std-1stcol">
             <h2 className="results-fullOwn">Full Ownership</h2>
-            <p className="font-bold">Ownership</p>
-            <p className=""><div className="results-number">0%</div> </p>
-            <ToggleText
-              className="font-bold" 
-              regularText ="Savings "
-              toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
-            />
-            <p className=""><div className="results-number">£{result.TO_liquid ? formatNumber(result.TO_liquid.toFixed(0)) : '0'}</div> </p>
-            <p className="font-bold">Loan balance at retirement</p>
-            <p className=""><div className="results-number">£{result.TO_last_mortgage  ? formatNumber(result.TO_last_mortgage.toFixed(0)) : '0'}</div> </p>
-            <ToggleText
-              className="font-bold" 
-              regularText ="Housing wealth "
-              toggleableText="Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs."
-            />
-            <p>You cannot afford full ownership. You can change above inputs, i.e., lower the price of the home, vary income, to see when you can afford full ownership.</p>
-          </div>
+            <div className="results-number">Not Available</div>        
+            </div>
           <div className="lifetime-2ndcol std-2ndcol">
             <h2 className="results-sharedOwn font-bold">
               <ToggleText
@@ -1281,7 +1320,7 @@ const renderlifetimeWealth = () => {
           </div>
         </div>
       )}
-      {(result.TO_housing > 0 || result.SO_housing > 0) && (
+      {(result.TO_liquid > 0 || result.SO_liquid > 0) && (
         <div className="charts">
           <div id="comp" className="mb-2"  >  
           {isMobileScreen() ? (
@@ -1380,7 +1419,7 @@ const rendermortgageRep = () => {
         <div className="mortgage-2ndcol std-2ndcol">
           <h2 className="results-fullOwn">Shared Ownership</h2>
           <p className="font-bold mb-3">
-            At retirement you have an outstanding loan balance of {" "}
+            Outstanding loan{" "}
             {result.SO_last_mortgage < 1 ? (
               <div className="results-number">£0</div>
             ) : (
@@ -1532,8 +1571,10 @@ const renderStairComp = () => {
               <p className="font-bold">Maximum Initial Share</p>
               <p>You can afford to buy an maximum initial share of</p>
               <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
+              <span style={{ display: "block", height: "20px", visibility: "hidden" }}></span>
               <p>at the age of</p>
               <p><span className="results-number mb-3">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
+              <span style={{ display: "block", height: "20px", visibility: "hidden" }}></span>
           </div>
               <ToggleText
                   className="font-bold" 
@@ -1550,7 +1591,7 @@ const renderStairComp = () => {
           <p className="font-bold mb-3">
             {result.SO_last_mortgage > 0 ? (
               <>
-                At retirement you have an outstanding loan balance of
+                Outstanding loan
                 <div className="results-number">£{result.SO_last_mortgage ? formatNumber(result.SO_last_mortgage.toFixed(0)) : '0'}</div>
               </>
             ) : (
@@ -1576,8 +1617,10 @@ const renderStairComp = () => {
               <p className="font-bold">Maximum Initial Share</p>
               <p>You can afford to buy an maximum initial share of</p>
               <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
+              <span style={{ display: "block", height: "20px", visibility: "hidden" }}></span>
               <p>at the age of</p>
               <p><span className="results-number mb-3">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
+              <span style={{ display: "block", height: "20px", visibility: "hidden" }}></span>
           </div>
               <ToggleText
                   className="font-bold" 
@@ -1593,7 +1636,10 @@ const renderStairComp = () => {
           <p className=""><div className="results-number">£{result.NS_housing ? formatNumber(result.NS_housing.toFixed(0)) : '0'}</div></p>
           <p className="font-bold mb-3">
             {result.SO_last_mortgage > 0 ? (
-              "You will not pay off your mortgage by retirement."
+              <>
+                Outstanding loan
+                <div className="results-number">Yes</div>
+              </>
             ) : (
               <>
                 You will be mortgage free {result.NS_mortgage_finish < 1 ? '' : 'by the age of'}
