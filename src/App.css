@@ -450,6 +450,10 @@ button#btn-up:hover, button#btn-down:hover {
 
 }
 
+.results-container {
+  margin-top: 100px;
+}
+
 .results-2cols {
   display: flex;
   justify-content: center;
@@ -548,7 +552,7 @@ button#btn-up:hover, button#btn-down:hover {
 }
 
  .std-wrapper {
-  margin: 120px 0px 120px;
+  margin: 80px 0px 80px;
 
 }
 
@@ -843,6 +847,19 @@ h1.faq-header {
 
 input.email-input {
   color: black;
+}
+
+.results-container p {
+  font-weight: bold;
+  font-size: 1.3em;
+}
+
+p.regular-text.font-bold {
+  font-size: 1.3em;
+}
+
+.prestaircasing-header {
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width:1100px) {
