@@ -872,7 +872,7 @@ const renderTwoColumnsText = () => {
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
             <p className="mb-6"><div className="results-number">£{result.TO_mortgage >= 0 ? formatNumber(result.TO_mortgage.toFixed(0)) : '0'}</div></p>
-            <p className="text-l font-bold"> Initial Share: 100%
+            <p className="text-l font-bold"> Initial Share: <div className="results-number"> 100% </div>
             </p>
           </div>
         )}
@@ -921,7 +921,7 @@ const renderTwoColumnsText = () => {
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
-            <p className="text-l font-bold"> Initial Share: {result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%
+            <p className="text-l font-bold"> Initial Share: <div className="results-number"> {result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</div>
             </p>
           </div>
         ) : (
@@ -944,7 +944,7 @@ const renderTwoColumnsText = () => {
               toggleableText="Includes the mortgage payment. Assumes all savings are used to make repayments. For model assumptions check the FAQs."
             />
             <p className="mb-6"><div className="results-number">£{result.SO_mortgage ? formatNumber(result.SO_mortgage.toFixed(0)) : 'N/A'}</div></p>
-            <p className="text-l font-bold"> Initial Share: {result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%
+            <p className="text-l font-bold"> Initial Share: <div className="results-number">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</div>
             </p>
           </div>
         )}
@@ -984,7 +984,7 @@ const renderstaircasing = () => {
           <div className="staircasing-2cols-wrapper std-2cols-wrapper">
             <div className="staircasing-combinedcol std-1stcol">
               <div className="initial-share">
-                <p className="font-bold">Maximum Initial Share</p>
+                <p className="font-bold prestaircasing-header">Maximum Initial Share</p>
                 <p>You can afford to buy an maximum initial share of</p>
                 <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
                 <p>at the age of</p>
@@ -994,11 +994,11 @@ const renderstaircasing = () => {
             <div className="lifetime-2ndcol std-2ndcol">
               <div className="full-ownership">
                 <ToggleText
-                  className="font-bold" 
+                  className="font-bold prestaircasing-header" 
                   regularText ="100% Ownership"
                   toggleableText="Assumes all savings are used to buy additional shares using a mortgage. For model assumptions check the FAQs."
                 />
-                <p>Staircase to 100% by the age of</p>
+                <p>Staircase to <div className="results-number mb-3">100% </div>by the age of</p>
                 <p><span className="results-number mb-3">{result.SO_staircase_finish ? formatNumber(result.SO_staircase_finish.toFixed(0)) : '0'}</span></p>
               </div>
             </div>
@@ -1478,14 +1478,13 @@ const rendermortgageRep = () => {
   }
 
   return (
-    <div className="text-white lifetime-wrapper std-wrapper">
-      <div className="text-white mortgage-wrapper std-wrapper">
+    <div className="text-white mortgage-wrapper std-wrapper">
         <div><h1 className="font-bold">Mortgage Repayment</h1></div>
         <div className="mortgage-2cols-wrapper std-2cols-wrapper">
           {renderFullOwnershipColumn()}
           {renderSharedOwnershipColumn()}
         </div>
-      </div>
+
       {(result.TO_housing > 0 || result.SO_housing > 0) && (
         <div className="charts">
           <div id="loan" className="mb-2">
@@ -1692,7 +1691,7 @@ console.log("BH (Raw Value):", result.share_stairgraph);
 
 return (
 <div className="main-results-container">
-  <div id="results" className="bg-slate-800 py-20 text-white results-wrapper">
+  <div id="results" className="bg-slate-800 text-white results-wrapper">
     <div className="results-container">
       {renderTwoColumnsText()}
       {renderstaircasing()}
