@@ -72,19 +72,14 @@ function Intro() {
           <p className="main-col2-underheading">A comparison between full ownership and shared ownership.
           </p>
           <h4 className="text-2xl font-bold ">Pathways to home ownership</h4>
-          <p>See at what age you will be able to become a home owner, when you would fully own your home, the deposit needed and the costs associated with owning.
+          <p>See when you can buy a home, the deposit and the costs associated with owning. 
           </p>
           <h4 className="text-2xl font-bold ">Staircasing</h4>
-          <p>In the case of shared ownership, determine the timeline for buying additional shares.
+          <p>See a way to buy more shares as a pathway to full ownership
           </p>
           <h4 className="text-2xl font-bold ">Lifetime wealth</h4>
-          <p>Compare lifetime wealth, savings and housing wealth under shared ownership and full ownership.
+          <p>Compare savings and housing wealth under shared ownership and full ownership.
           </p>
-          <h4 className="text-2xl font-bold ">Mortgage debt</h4>
-          <p>Find out the outstanding mortgage debt under shared ownership and full ownership.
-          </p>
-
-
         </div>
 
         <div className="cols-last-sentance">        

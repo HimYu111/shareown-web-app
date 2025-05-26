@@ -20,7 +20,7 @@ function Footer() {
       <footer className="bg-white rounded-lg shadow m-2 dark:bg-gray-800">
         <div className="w-full mx-auto max-w-screen-xl p-4 flex flex-col items-center justify-center">
           <div className="flex items-center text-sm text-gray-500 dark:text-gray-400 text-center">
-            © 2024 ShareOwn.info
+            © 2025 ShareOwn.info
             <button onClick={openForm} className="ml-10 font-bold">Contact Us</button>
             <Link to="/TCs" className="ml-10 font-bold">T&Cs</Link>
             <Link to="/FAQs" className="ml-10 font-bold">FAQs</Link>

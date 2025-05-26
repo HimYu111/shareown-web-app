@@ -460,7 +460,7 @@ const ageRef = useRef(null);
           <div className="mb-4">
             <label className="block text-black mb-2">
               <ToggleText
-                regularText="How much does your household spend each month excluding housing and loans?"
+                regularText="What is your household's monthly expenditure excluding housing and loans?"
                 toggleableText="This means spending on food and drinks, council tax, utilities, travel and transport, communications and subscriptions, clothing, and other essentials."
               />
             </label>
