@@ -508,9 +508,10 @@ button#btn-up:hover, button#btn-down:hover {
 .results-2nd-col .results-sharedOwn .toggle-icon , .results-2nd-col .results-number .toggle-icon ,
 .staircasing-chartcol .results-sharedOwn .toggle-text-container .toggle-icon,
 .lifetime-2ndcol .results-sharedOwn .toggle-text-container  .toggle-icon,
+.lifetime-1stcol .section-title .results-fullOwn .toggle-text-container  .toggle-icon,
 .mortgage-2cols-wrapper .results-sharedOwn .toggle-text-container  .toggle-icon,
 .staircasing-explained .results-sharedOwn .toggle-text-container  .toggle-icon {
-  font-size: 0.5em;
+  font-size: 0.6em;
 }
 
 .staircasing-explained  .results-2cols .mb-3 .toggle-text-container  .toggle-icon {
@@ -854,12 +855,17 @@ input.email-input {
   font-size: 1.3em;
 }
 
-p.regular-text.font-bold {
+p.regular-text.font-bold,
+p.regular-text.non-header-text.font-bold {
   font-size: 1.3em;
 }
 
 .prestaircasing-header {
   margin-bottom: 20px;
+}
+
+p.regular-text.staircase-local.font-bold {
+    font-size: 1em;
 }
 
 @media screen and (max-width:1100px) {
