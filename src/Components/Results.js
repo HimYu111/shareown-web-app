@@ -1051,6 +1051,7 @@ const renderOwnType = () => {
           <div className="section-title">
             <h2 className="results-fullOwn font-bold">
               <ToggleText
+                className="staircase-local font-bold"
                 regularText="Own"
                 toggleableText={
                   <>
@@ -1612,13 +1613,13 @@ const renderStairComp = () => {
               <span style={{ display: "block", height: "20px", visibility: "hidden" }}></span>
           </div>
               <ToggleText
-                  className="font-bold" 
+                  className="non-header-text font-bold " 
                   regularText ="Savings "
                   toggleableText="Current value of future savings accumulated up until retirement age. For model assumptions check the FAQs."
               />
           <p className=""><div className="results-number">£{result.SO_liquid ? formatNumber(result.SO_liquid.toFixed(0)) : '0'}</div> </p>
               <ToggleText
-                  className="font-bold" 
+                  className="non-header-text font-bold" 
                   regularText ="Housing wealth "
                   toggleableText="Current value of future housing wealth accumulated up until retirement age. For model assumptions check the FAQs."
               />
