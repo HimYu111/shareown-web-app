@@ -849,30 +849,12 @@ return (
       {result.TO_housing === 0 ? (
         <div className="results-1st-col std-1stcol">
           <h2 className="results-fullOwn font-bold">Full Ownership</h2>
-          <p className="mb-4 text-xl text-white">
-            You are not eligible for Full&nbsp;
-            <span className="inline-flex items-center">
-              <span className="font-bold">Ownership</span>
-              <ToggleText
-                iconOnly
-                toggleableText={
-                  <>
-                    <p className="mt-2">
-                      The indication of the model is that you most likely would not be able to afford Full Ownership with the current inputs and the&nbsp;
-                      <Link to="/FAQs" className="text-blue-500 hover:underline">assumptions</Link> of the model.
-                    </p><br /><br />
-                    <p className="mt-2">
-                      You can also assess various scenarios by changing some of the above inputs, like the price of the home, the location, income, savings, etc. to assess when Shared Ownership or/and Full Ownership will become attainable.
-                    </p><br /><br />
-                    <p className="mt-2">
-                      Please note that even if the output indicated you might not be able to afford ownership at this point, it does not mean it is not affordable to you.
-                      You should consult with a professional such as a mortgage broker or a housing association to understand best whether you can buy a home.
-                    </p>
-                  </>
-                }
-              />
-            </span>
-          </p>
+              <div className="mb-4 text-l text-white">
+                <p>
+                  The indication of the model is that you most likely would not be able to afford Full Ownership with the current inputs and the&nbsp;
+                  <Link to="/FAQs" className="text-blue-500 hover:underline">assumptions</Link> of the model.
+                </p>
+              </div>
         </div>
         ) : (
           <div className="results-1st-col std-1stcol">
@@ -1001,7 +983,6 @@ const renderstaircasing = () => {
             <div className="staircasing-combinedcol std-1stcol">
               <div className="initial-share">
                 <p className="font-bold prestaircasing-header">Maximum Initial Share</p>
-                <p>You can afford to buy an maximum initial share of</p>
                 <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
                 <p>at the age of</p>
                 <p><span className="results-number mb-3">{result.SO_start_age ? formatNumber(result.SO_start_age.toFixed(0)) : '0'}</span></p>
@@ -1034,11 +1015,20 @@ const renderstaircasing = () => {
 const renderOwnType = () => {
   const formatNumber = (num) => new Intl.NumberFormat().format(num);
   const incomeThreshold = 80000; // Customize this value
-  const shouldHideSO = result.income >= incomeThreshold || result.TO_time < 1;
+  const shouldHideSO = result.income >= incomeThreshold;
 
   if (result.SO_housing === 0 && result.TO_housing === 0) {
     return null;
   }
+    let lastShare = 0;
+  try {
+    const housePrice = JSON.parse(result.staircasing_data); 
+    const rawLastShare = housePrice[housePrice.length - 1];
+    lastShare = Number(rawLastShare) || 0;
+    console.log("lastShare NI:", lastShare);
+  } catch (error) {
+    console.error("Error parsing staircasing_data:", error);
+    }
 
   return (
     <div className="text-white lifetime-wrapper std-wrapper">
@@ -1077,7 +1067,7 @@ const renderOwnType = () => {
                 SO:{" "}
                 {shouldHideSO
                   ? "Not Available"
-                  : result?.SO_housing > 0
+                  : lastShare> 0.25
                   ? `£${formatNumber(result.SO_liquid || 0)}`
                   : "Not Available"}
               </span>
@@ -1205,10 +1195,9 @@ const renderlifetimeWealth = () => {
                 <div className="results-number">
                   {(() => {
                     try {
-                      const array = JSON.parse(result.net_wealth_cd_by_age_range); // Parse the array
-                      const lastValue = array[array.length - 1] || 0; // Get last value
-                      const housePrice = parseFloat(result.house_price) || 1; // Convert house price to number, avoid division by zero
-                      return `${Math.min(((lastValue / housePrice) * 100).toFixed(0), 100)}%`; // Ensure the percentage doesn't exceed 100%
+                      const housePrice = JSON.parse(result.staircasing_data); 
+                      const lastShare = housePrice[housePrice.length - 1] || 0;
+                      return `${Math.min(((lastShare) * 100).toFixed(0), 100)}%`; 
                     } catch (error) {
                       console.error("Error parsing net_wealth_cd_by_age_range:", error);
                       return "N/A"; // Handle errors
@@ -1379,11 +1368,6 @@ const renderlifetimeWealth = () => {
     </div>
   );
 }
-
-
-
-
-
 
 
 const rendermortgageRep = () => {
@@ -1568,26 +1552,32 @@ const renderScenariosExplained = () => {
 
 
 const renderStairComp = () => {
-  // Check if both conditions are met
+  let lastShare = 0;
+  try {
+    const housePrice = JSON.parse(result.staircasing_data); 
+    const rawLastShare = housePrice[housePrice.length - 1];
+    lastShare = Number(rawLastShare) || 0;
+    console.log("lastShare NI:", lastShare);
+  } catch (error) {
+    console.error("Error parsing staircasing_data:", error);
+    }
+
   if (result.TO_housing > 0 && result.TO_time < 1) {
-    // Return null when the conditions are met, causing nothing to render
     return null;
   }
 
   if (result.TO_housing === 0 && result.SO_housing === 0) {
-    // Return null when the conditions are met, causing nothing to render
     return null;
   }
 
-  if  (result.SO_staircase_finish === 0) {
-    // Return null when the conditions are met, causing nothing to render
+  if (lastShare < 0.25) {
+    return null;
+  }
+
+  if (result.income >= incomeThreshold) {
     return null;
   }
   
-  if  (result.income >= incomeThreshold) {
-    // Return null when the conditions are met, causing nothing to render
-    return null;
-  }
 
   return (
     <div className="results staircasing-explained std-wrapper">
@@ -1604,7 +1594,6 @@ const renderStairComp = () => {
           </h2>
           <div className="initial-share">
               <p className="font-bold">Maximum Initial Share</p>
-              <p>You can afford to buy an maximum initial share of</p>
               <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
               <span style={{ display: "block", height: "20px", visibility: "hidden" }}></span>
               <p>at the age of</p>
@@ -1643,14 +1632,20 @@ const renderStairComp = () => {
             )}
           </p>
           <p className="font-bold mb-3">You will own</p>
-          <p><span className="results-number text-3xl font-bold mb-3">100%</span></p>
-
+          
+            <p>
+              <span className="results-number text-3xl font-bold mb-3">
+                {`${(lastShare * 100).toFixed(0)}%`}
+              </span>
+            </p>
         </div>
+
+
+        
         <div className="results-2nd-col std-2ndcol">
         <h2 className="results-fullOwn font-bold">Shared Ownership Without Staircasing</h2>
           <div className="initial-share">
               <p className="font-bold">Maximum Initial Share</p>
-              <p>You can afford to buy an maximum initial share of</p>
               <p><span className="results-number mb-3">{result.SO_share ? formatNumber(result.SO_share.toFixed(0)) : '0'}%</span></p>
               <span style={{ display: "block", height: "20px", visibility: "hidden" }}></span>
               <p>at the age of</p>
