@@ -52,9 +52,9 @@ const ToggleText = ({ className, regularText, toggleableText }) => {
     document.removeEventListener('mousedown', handleClickOutside);
   }
 
-  return (
-    <div className="toggle-text-container">
-      <p className={`regular-text ${className}`}>{regularText}</p>
+/*  return (
+    <span className="toggle-text-container testnv">
+      <p className={`regular-text ${className}`}>{regularText}
       <span className="toggle-icon" onClick={toggleVisibility}>
         <sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
       </span>
@@ -63,7 +63,21 @@ const ToggleText = ({ className, regularText, toggleableText }) => {
           <p>{toggleableText}</p>
         </div>
       )}
-    </div>
+      </p>
+    </span>
+  );*/
+  return (
+
+      <p className= {`toggle-text-container testnv regular-text ${className}`}>{regularText}
+      <span className="toggle-icon" onClick={toggleVisibility}>
+        <sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
+      </span>
+      {isVisible && (
+        <div className="toggleable-text" ref={tooltipRef}>
+          <p>{toggleableText}</p>
+        </div>
+      )}
+      </p>
   );
 }
 

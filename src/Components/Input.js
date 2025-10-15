@@ -29,7 +29,7 @@ const ToggleText = ({ className, regularText, toggleableText }) => {
 
   return (
     <div className="toggle-text-container">
-      <p className={`regular-text ${className}`}>{regularText}</p>
+      <p className={`regular-text ${className}`}>{regularText}
       <span className="toggle-icon" onClick={toggleVisibility}>
         <sup><FontAwesomeIcon icon={faCircleQuestion} /></sup>
       </span>
@@ -38,6 +38,7 @@ const ToggleText = ({ className, regularText, toggleableText }) => {
           <p>{toggleableText}</p>
         </div>
       )}
+      </p>
     </div>
   );
 }
@@ -372,7 +373,7 @@ const ageRef = useRef(null);
               ))}
             </select>
           </div>
-          <div className="mb-4">
+          <div className="additional-margin15">
             <label className="block text-black mb-2">
               Are you a first-time buyer?
             </label>
@@ -460,7 +461,7 @@ const ageRef = useRef(null);
           <div className="mb-4">
             <label className="block text-black mb-2">
               <ToggleText
-                regularText="What is your household's monthly expenditure excluding housing and loans?"
+                regularText="What is your household's monthly expenditure excluding housing and loans?  "
                 toggleableText="This means spending on food and drinks, council tax, utilities, travel and transport, communications and subscriptions, clothing, and other essentials."
               />
             </label>
