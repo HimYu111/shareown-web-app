@@ -553,7 +553,7 @@ button#btn-up:hover, button#btn-down:hover {
 }
 
  .std-wrapper {
-  margin: 80px 0px 80px;
+  margin: 40px 0px 40px;
 
 }
 
@@ -866,6 +866,11 @@ p.regular-text.non-header-text.font-bold {
 
 p.regular-text.staircase-local.font-bold {
     font-size: 1em;
+}
+
+.additional-margin15 {
+  margin-bottom:1.5rem;
+  flex: 1 0 100%;
 }
 
 @media screen and (max-width:1100px) {
