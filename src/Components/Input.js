@@ -144,7 +144,7 @@ function Input({ setResult }) {
             console.log(`${key}: ${postData[key]} (Type: ${typeof postData[key]})`);
         });
 
-        const response = await axios.post("https://shareown-backend.onrender.com/predict", postData);
+        const response = await axios.post("https://shareown-backend-hz0b.onrender.com/predict", postData);
         setResult(response.data);
         setScrollToResults(true);
     } catch (error) {
